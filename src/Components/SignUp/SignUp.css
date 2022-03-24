@@ -1,0 +1,28 @@
+.SignUpform{
+    direction: rtl;
+    font-family: "BYekan";
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SignUpform_form{
+    width:400px;
+    background: #fff;    
+    border: 1px solid #ccc;
+    padding-right:25px;
+    padding-left:20px;
+    padding-top: 20px;
+    box-shadow: 5px 4px 20px rgba(0, 0, 0, 0.4);
+    border-radius: 5px; 
+}
+.loading-signup {
+    height: 30px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
