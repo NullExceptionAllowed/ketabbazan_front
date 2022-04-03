@@ -1,34 +1,35 @@
-// import React from "react";
-// import "./Header.css";
-// import { useHistory } from "react-router-dom";
-// import Button from "@mui/material/Button";
+import React from 'react';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
-// const HomeHeader = () => {
-//   return (
-//     <div className="desktop_navbar__signup">
-//       <Button
-//         variant="contained"
-//         style={{
-//           backgroundColor: "blue",
-//           marginLeft: "10px",
-//           fontWeight: 800,
-//         }}
-//       >
-//         ثبت نام
-//       </Button>
-//       <Button
-//         variant="contained"
-//         style={{
-//           color: "blue",
-//           border: `2px solid `,
-//           backgroundColor: "#fff",
-//           fontWeight: 800,
-//         }}
-//       >
-//         ورود
-//       </Button>
-//     </div>
-//   );
-// };
-
-// export default HomeHeader;
+const Navem = () => {
+    return (
+        <Box sx={{ flexGrow: 2,direction:"ltr" }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              News
+            </Typography>
+            <Button color="inherit">Login</Button>
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
+     );
+}
+ 
+export default Navem;
