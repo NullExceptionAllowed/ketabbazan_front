@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import book from "../../assets/Image/book.jpg";
 import { fontSize } from "@mui/system";
-
+import { Link } from "react-router-dom";
 const showbook = () => {
   const Img = styled("img")({
     margin: "auto",
@@ -16,17 +16,34 @@ const showbook = () => {
     maxHeight: "100%",
   });
   return (
-    <div style={{ direction: "rtl", display: "flex", marginRight: "5.5%" }}>
-      <Grid item container>
+    <div
+      style={{
+        direction: "rtl",
+        display: "flex",
+        marginRight: "50px",
+        marginLeft: "30px",
+        marginBottom: "50px",
+      }}
+    >
+      <Grid
+        item
+        container
+        rowSpacing={1}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      >
         <Paper
+          to="/login"
+          component={Link}
           sx={{
             direction: "rtl",
             p: 2,
             maxWidth: 180,
             flexGrow: 1,
+            textDecoration:"none",
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -71,6 +88,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -115,6 +133,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -159,6 +178,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -203,6 +223,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -247,6 +268,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -291,6 +313,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -335,6 +358,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -379,6 +403,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -423,6 +448,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
@@ -467,6 +493,7 @@ const showbook = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
             marginTop: "50px",
+            marginRight: "20px",
           }}
         >
           <Grid container spacing={2} sx={{ marginLeft: "40px" }}>
