@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/Image/logo.png";
-import Home from "../../assets/Image/home3.jpg";
-import Showbook from "../Showbook/showbook";
 import Box from "@mui/material/Box";
 import ArticleIcon from "@mui/icons-material/Article";
 import DrawerComp from "./DrawerCopm";
@@ -43,6 +41,7 @@ const Nav = () => {
     <Box sx={{ flexGrow: 1, direction: "rtl" }}>
       <AppBar
         sx={{ backgroundColor: "#fff", height: "63px", direction: "rtl" }}
+        position="static"
       >
         <Toolbar>
           {isMatch ? (
@@ -152,28 +151,6 @@ const Nav = () => {
           )}
         </Toolbar>
       </AppBar>
-      <img
-        className="home_img"
-        src={Home}
-        alt="homeimg"
-        style={{
-          height: "600px",
-          width: "100%",
-          marginTop: "60px",
-        }}
-      />
-      <Typography
-        variant="h5"
-        style={{
-          fontWeight: 800,
-          color: "#1565C0",
-          textAlign: "center",
-          marginTop: "50px",
-        }}
-      >
-        جدیدترین کتاب ها
-      </Typography>
-      <Showbook />
     </Box>
   );
 };
