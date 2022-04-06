@@ -41,7 +41,7 @@ const Nav = () => {
     <Box sx={{ flexGrow: 1, direction: "rtl" }}>
       <AppBar
         sx={{ backgroundColor: "#fff", height: "63px", direction: "rtl" }}
-        position="static"
+        position="fixed"
       >
         <Toolbar>
           {isMatch ? (

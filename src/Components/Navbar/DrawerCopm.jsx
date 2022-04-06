@@ -18,7 +18,7 @@ const DrawerComp = () => {
   const [open, setopen] = useState(false);
   return (
     <div style={{ direction: "rtl", display: "flex" }}>
-      <Drawer open={open} onClose={() => setopen(false)}>
+      <Drawer  open={open} onClose={() => setopen(false)}>
         <List style={{ direction: "rtl", marginLeft: "150px" }}>
           <ListItem button to="/login" component={Link}>
             <ListItemIcon>

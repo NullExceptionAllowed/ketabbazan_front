@@ -1,0 +1,20 @@
+.why-section{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 96px;
+}
+ .Work_Paper{ 
+    height: 440px;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.445) 0px 2px 10px;
+    background-color: red;
+    
+}
+.workinfo_img{
+    height: 250px;
+    width: 80%;
+}
