@@ -1,0 +1,10 @@
+.showbook_paper{
+    width: calc((100vw ) / 5);
+    height: 300px;
+}
+
+@media (max-width: 600px) {
+    .showbook_paper{
+        width: calc((100vw) / 3);
+    }
+}

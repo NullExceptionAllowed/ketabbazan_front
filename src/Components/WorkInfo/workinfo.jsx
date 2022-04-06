@@ -37,23 +37,10 @@ const Workinfo = () => {
       >
         چرا کتاب بازان؟
       </Typography>
-      {/* <Grid item container spacing={12}>
-
-        <Grid item xs={3}>
-          <Paper className="Work_Paper" style={{backgroundColor:"red"}}></Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className="Work_Paper" style={{backgroundColor:"red"}}></Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className="Work_Paper" style={{backgroundColor:"red"}}></Paper>
-        </Grid>
-      </Grid> */}
-
       <Box sx={{ width: "100%" }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={0.75}></Grid>
-          <Grid item xs={3.5} >
+        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item sm={0.75} xs={0} ></Grid>
+          <Grid  className="workinfo_grid" item sm={3.5} xs={12} >
             <Paper
               className="Work_Paper"
               style={{ boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px" }}
@@ -63,7 +50,7 @@ const Workinfo = () => {
                 src={Readbookimage}
                 alt="Readbook"
               />
-              <div style={{ marginRight:"20px",marginLeft:"20px"}}>
+              <div className="workinfo_title" >
                 <h2 style={{ color: "#1565C0", marginTop: "10px" }}>
                   مطالعه کتاب
                 </h2>
@@ -74,7 +61,9 @@ const Workinfo = () => {
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={3.5}>
+
+
+          <Grid  className="workinfo_grid" item sm={3.5} xs={12}>
             <Paper
               className="Work_Paper"
               style={{ boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px" }}
@@ -84,7 +73,7 @@ const Workinfo = () => {
                 src={Makequestion}
                 alt="Loginpicture"
               />
-              <div style={{ marginRight:"20px",marginLeft:"20px"}}>
+              <div className="workinfo_title" >
                 <h2 style={{ color: "#1565C0", marginTop: "10px" }}>
                   طراحی کوییز
                 </h2>
@@ -94,7 +83,8 @@ const Workinfo = () => {
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={3.5}>
+
+          <Grid className="workinfo_grid" item sm={3.5} xs={12}>
             <Paper
               className="Work_Paper"
               style={{ boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px" }}
@@ -104,7 +94,7 @@ const Workinfo = () => {
                 src={Makearticle}
                 alt="Loginpicture"
               />
-              <div style={{ marginRight:"20px",marginLeft:"20px"}}>
+              <div className="workinfo_title" >
                 <h2 style={{ color: "#1565C0", marginTop: "10px" }}>
                     مقاله گذاشتن        
                 </h2>
@@ -114,7 +104,8 @@ const Workinfo = () => {
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={0.75}></Grid>
+
+          <Grid item sm={0.75} xs={0}></Grid>
         </Grid>
       </Box>
     </div>
