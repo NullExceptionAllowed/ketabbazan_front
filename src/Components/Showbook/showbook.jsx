@@ -5,13 +5,14 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
-import book from "../../assets/Image/book.jpg";
-import { fontSize } from "@mui/system";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { baseUrl } from "../../Variable";
 import axios from "axios";
 import "./showbook.css";
+import Slider from "react-slick";
+import SimpleSlider from "../emtehani/emtehani";
+
 
 const Showbook = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -32,6 +33,14 @@ const Showbook = () => {
     maxWidth: "100%",
     maxHeight: "100%",
   });
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   return (
     <div className="showbook_fa" style={{ direction: "rtl" }}>
@@ -70,14 +79,14 @@ const Showbook = () => {
           <Typography
             style={{
               fontSize: "20px",
-              textDecoration:"none"
+              textDecoration: "none",
             }}
-            to={`/Showbookall`} component={Link}
+            to={`/Showbookall`}
+            component={Link}
           >
             مشاهده همه
           </Typography>
         </Grid>
-
       </Grid>
 
       {apiLoading && (
@@ -102,8 +111,6 @@ const Showbook = () => {
         <div
           style={{
             direction: "rtl",
-            display: "flex",
-            justifyContent: "center",
             marginBottom: "50px",
           }}
         >
@@ -115,66 +122,66 @@ const Showbook = () => {
             columnSpacing={{ xs: 1, sm: 1, md: 2 }}
           >
             {bookinfo.map((info, index) => (
-              <Paper
-                className="showbook_paper"
-                key={index}
-                to={`/profile/${index}`}
-                component={Link}
-                sx={{
-                  direction: "rtl",
-                }}
-                style={{
-                  marginRight: "20px",
-                  marginTop: "30px",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
-                }}
-              >
-                <ButtonBase style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    alt="complex1"
-                    className="showbook_img"
-                    src={info.image_url}
-                    style={{
-                      marginTop: "20px",
-                      height: "150px",
-                      width: "120px",
-                    }}
-                  />
-                </ButtonBase>
+                <Grid
+                  className="showbook_paper"
+                  key={index}
+                  to={`/profile/${index}`}
+                  component={Link}
+                  sx={{
+                    direction: "rtl",
+                  }}
+                  style={{
+                    marginRight: "20px",
+                    marginTop: "30px",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      alt="complex1"
+                      className="showbook_img"
+                      src={info.image_url}
+                      style={{
+                        marginTop: "20px",
+                        height: "150px",
+                        width: "120px",
+                      }}
+                    />
+                  </div>
 
-                <div
-                  className="showbook_name"
-                  variant="subtitle1"
-                  component="div"
-                >
-                  {info.name}
-                </div>
-                <div
-                  variant="body2"
-                  gutterBottom
-                  style={{ color: "#757C86", fontSize: "13px" }}
-                  className="showbook_author"
-                >
-                  {info.author}
-                </div>
+                  <div
+                    className="showbook_name"
+                    variant="subtitle1"
+                    component="div"
+                  >
+                    {info.name}
+                  </div>
+                  <div
+                    variant="body2"
+                    gutterBottom
+                    style={{ color: "#757C86", fontSize: "13px" }}
+                    className="showbook_author"
+                  >
+                    {info.author}
+                  </div>
 
-                <div
-                  variant="body2"
-                  gutterBottom
-                  style={{ color: "#4DB200" }}
-                  className="showbook_price"
-                >
-                  {info.price} ریال
-                </div>
-              </Paper>
+                  <div
+                    variant="body2"
+                    gutterBottom
+                    style={{ color: "#4DB200" }}
+                    className="showbook_price"
+                  >
+                    {info.price} ریال
+                  </div>
+                </Grid>
             ))}
           </Grid>
         </div>
       )}
+      <SimpleSlider/>
     </div>
   );
 };

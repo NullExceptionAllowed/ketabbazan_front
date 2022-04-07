@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Typical from "react-typical";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -45,7 +46,7 @@ const Header = () => {
           placeholder="چه کتابی میخوای؟"
           inputProps={{ "aria-label": "search google maps" }}
         />
-        <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+        <IconButton to={`/Showbookall`} component={Link} type="submit" sx={{ p: "10px" }} aria-label="search">
           <SearchIcon style={{ color: "#1565C0" }} />
         </IconButton>
       </Paper>

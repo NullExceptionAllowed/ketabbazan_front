@@ -81,7 +81,7 @@ const Showbook = () => {
             columnSpacing={{ xs: 1, sm: 1, md: 2 }}
           >
             {bookinfo.map((info, index) => (
-              <Paper
+              <Grid
                 className="showbookall_paper"
                 key={index}
                 to={`/profile/${index}`}
@@ -96,7 +96,6 @@ const Showbook = () => {
                   display: "flex",
                   alignItems: "center",
                   flexDirection: "column",
-                  boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
                 }}
               >
                 <ButtonBase style={{ display: "flex", alignItems: "center" }}>
@@ -116,6 +115,7 @@ const Showbook = () => {
                   className="showbookall_name"
                   variant="subtitle1"
                   component="div"
+                  style={{color:"black"}}
                 >
                   {info.name}
                 </div>
@@ -136,7 +136,7 @@ const Showbook = () => {
                 >
                   {info.price} ریال
                 </div>
-              </Paper>
+              </Grid>
             ))}
           </Grid>
         </div>

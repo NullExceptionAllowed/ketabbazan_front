@@ -6,6 +6,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { faIR } from "@mui/material/locale";
 import { BrowserRouter } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const theme = createTheme(
   {
