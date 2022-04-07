@@ -5,13 +5,12 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
-import book from "../../assets/Image/book.jpg";
-import { fontSize } from "@mui/system";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { baseUrl } from "../../Variable";
 import axios from "axios";
-import "./showbook.css";
+import Navbar from "../Navbar/Nav";
+import "./showbookall.css";
 
 const Showbook = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -19,7 +18,7 @@ const Showbook = () => {
   useEffect(() => {
     setApiLoading(true);
     axios({
-      url: `${baseUrl}/read_book/newest_books`,
+      url: `${baseUrl}/read_book/all_books`,
     }).then((response) => {
       console.log(response.data);
       setbookinfo(response.data);
@@ -34,52 +33,19 @@ const Showbook = () => {
   });
 
   return (
-    <div className="showbook_fa" style={{ direction: "rtl" }}>
-      {/* <Grid item container> */}
-      {/* <Grid item sx={8}></Grid>
-        <Grid item sx={3}>
-          <Typography to={`/Showbookall`} component={Link}>
-            مشاهده همه
-          </Typography>
-        </Grid>
-      </Grid>
+    <div className="showbookall_fa">
+      <Navbar />
       <Typography
         variant="h5"
         style={{
           fontWeight: 800,
           color: "#1565C0",
           textAlign: "center",
-          marginTop: "50px",
+          marginTop: "100px",
         }}
       >
-        جدیدترین کتاب ها
-      </Typography> */}
-      <Grid item container>
-        <Grid item xs={10.5}>
-          <Typography
-            style={{
-              marginRight: "90px",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          >
-            جدیدترین کتاب ها
-          </Typography>
-        </Grid>
-        <Grid item xs={1.5}>
-          <Typography
-            style={{
-              fontSize: "20px",
-              textDecoration:"none"
-            }}
-            to={`/Showbookall`} component={Link}
-          >
-            مشاهده همه
-          </Typography>
-        </Grid>
-
-      </Grid>
-
+        همه کتاب ها
+      </Typography>
       {apiLoading && (
         <div
           style={{
@@ -116,7 +82,7 @@ const Showbook = () => {
           >
             {bookinfo.map((info, index) => (
               <Paper
-                className="showbook_paper"
+                className="showbookall_paper"
                 key={index}
                 to={`/profile/${index}`}
                 component={Link}
@@ -125,7 +91,7 @@ const Showbook = () => {
                 }}
                 style={{
                   marginRight: "20px",
-                  marginTop: "30px",
+                  marginTop: "40px",
                   textDecoration: "none",
                   display: "flex",
                   alignItems: "center",
@@ -136,7 +102,7 @@ const Showbook = () => {
                 <ButtonBase style={{ display: "flex", alignItems: "center" }}>
                   <img
                     alt="complex1"
-                    className="showbook_img"
+                    className="showbookall_img"
                     src={info.image_url}
                     style={{
                       marginTop: "20px",
@@ -147,7 +113,7 @@ const Showbook = () => {
                 </ButtonBase>
 
                 <div
-                  className="showbook_name"
+                  className="showbookall_name"
                   variant="subtitle1"
                   component="div"
                 >
@@ -157,7 +123,7 @@ const Showbook = () => {
                   variant="body2"
                   gutterBottom
                   style={{ color: "#757C86", fontSize: "13px" }}
-                  className="showbook_author"
+                  className="showbookall_author"
                 >
                   {info.author}
                 </div>
@@ -166,7 +132,7 @@ const Showbook = () => {
                   variant="body2"
                   gutterBottom
                   style={{ color: "#4DB200" }}
-                  className="showbook_price"
+                  className="showbookall_price"
                 >
                   {info.price} ریال
                 </div>

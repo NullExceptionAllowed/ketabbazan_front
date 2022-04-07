@@ -50,7 +50,13 @@ const Nav = () => {
                 item
                 xs={11}
                 sx={{ flexGrow: 1 }}
-                style={{ display: "flex", alignItems: "center" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                }}
+                to={`/`}
+                component={Link}
               >
                 <img
                   className="SignUpform_img"
@@ -72,7 +78,7 @@ const Nav = () => {
                   کتاب بازان
                 </Typography>
               </Grid>
-              <DrawerComp/>
+              <DrawerComp />
             </>
           ) : (
             <>
@@ -87,7 +93,13 @@ const Nav = () => {
                   md={2.5}
                   sm={3.5}
                   sx={{ flexGrow: 1 }}
-                  style={{ display: "flex", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
+                  }}
+                  to={`/`}
+                  component={Link}
                 >
                   <img
                     className="SignUpform_img"
