@@ -18,15 +18,13 @@ const Showbook = () => {
   const [bookinfo, setbookinfo] = useState([]);
   useEffect(() => {
     setApiLoading(true);
-    fetch(`${baseUrl}/read_book/newest_books`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setbookinfo(data);
-        setApiLoading(false);
-      });
+    axios({
+      url: `${baseUrl}/read_book/newest_books`,
+    }).then((response) => {
+      console.log(response.data);
+      setbookinfo(response.data);
+      setApiLoading(false);
+    });
   }, []);
   const Img = styled("img")({
     margin: "auto",
@@ -34,13 +32,11 @@ const Showbook = () => {
     maxWidth: "100%",
     maxHeight: "100%",
   });
-  for (let i = 0; i < bookinfo.length; i++) {
-    console.log(bookinfo[i]);
-    console.log("*");
-  }
+
 
   return (
-    <div>
+    <div className="showbook_fa">
+      
       <Typography
         variant="h5"
         style={{
@@ -84,20 +80,20 @@ const Showbook = () => {
             container
             rowSpacing={1}
             sx={{ display: "flex", justifyContent: "center" }}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            columnSpacing={{ xs: 1, sm: 1, md: 2 }}
           >
             {bookinfo.map((info, index) => (
               <Paper
                 className="showbook_paper"
                 key={index}
-                to="/login"
+                to={`/profile/${index}`}
                 component={Link}
                 sx={{
                   direction: "rtl",
                 }}
                 style={{
                   marginRight: "20px",
-                  marginTop: "50px",
+                  marginTop: "40px",
                   textDecoration: "none",
                   display: "flex",
                   alignItems: "center",
@@ -106,36 +102,39 @@ const Showbook = () => {
                 }}
               >
                 <ButtonBase style={{ display: "flex", alignItems: "center" }}>
-                  <Img
-                    alt="complex"
+                  <img
+                    alt="complex1"
+                    className="showbook_img"
                     src={info.image_url}
                     style={{
-                      height: "150px",
-                      width: "100px",
-                      marginRight: "25px",
+                      display:"inline-block",
                       marginTop: "20px",
+                      height: "150px",
+                      width: "100px"
                     }}
                   />
                 </ButtonBase>
 
-                <Typography gutterBottom variant="subtitle1" component="div">
+                <div className="showbook_name"  variant="subtitle1" component="div">
                   {info.name}
-                </Typography>
-                <Typography
+                </div>
+                <div
                   variant="body2"
                   gutterBottom
                   style={{ color: "#757C86", fontSize: "13px" }}
+                  className="showbook_author" 
                 >
                   {info.author}
-                </Typography>
+                </div>
 
-                <Typography
+                <div
                   variant="body2"
                   gutterBottom
-                  style={{ color: "#4DB200", fontSize: "17px" }}
+                  style={{color: "#4DB200"}}
+                  className="showbook_price" 
                 >
                   {info.price} ریال
-                </Typography>
+                </div>
               </Paper>
             ))}
           </Grid>

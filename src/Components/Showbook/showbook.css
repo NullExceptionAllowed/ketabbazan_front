@@ -1,10 +1,81 @@
+.showbook_fa{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'BYekan' !important;    
+}
 .showbook_paper{
-    width: calc((100vw ) / 5);
-    height: 300px;
+    width: calc((100vw ) / 6);
+    height: 295px;
+    margin-right: "20px";
+}
+.showbook_img{
+    height: "150px";
+    width: "100px";
+}
+.showbook_name{
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+.showbook_author{
+    text-align: center;
+    color: "#757C86";
+    font-size: 13px; 
+    margin-top: 5px;
+}
+.showbook_price{
+    text-align: center;
+    color: "#4DB200";
+
+    font-size: "17px"; 
+    margin-top: 5px;
 }
 
+@media (max-width: 900px ) and (min-width:600px) {
+    .showbook_paper{
+        width: calc((100vw) / 4);
+        height: 300px;
+    }
+    .showbook_name{
+        font-size: 15px;
+        margin-top: 15px;
+    }
+    .showbook_author{
+        font-size: 12px; 
+        margin-top: 4px;
+    }
+    .showbook_price{
+        font-size: "16px"; 
+        margin-top: 4px;
+    }
+
+}
+@media (max-width: 1000px ) and (min-width:900px) {
+    .showbook_paper{
+        width: calc((100vw) / 5);
+    }
+
+}
 @media (max-width: 600px) {
     .showbook_paper{
         width: calc((100vw) / 3);
+    }
+}
+@media (max-width: 400px) {
+    .showbook_name{
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .showbook_author{
+        font-size: 9px; 
+        margin-top: 2px;
+    }
+    .showbook_price{
+        font-size: "13px"; 
+        margin-top: 2px;
+    }
+    .showbook_paper{
+        height: 296px;
     }
 }

@@ -1,30 +1,26 @@
 import React, { useState, useEffect } from "react";
+import {
+  Link,
+  NavLink,
+  Redirect,
+  Route,
+  useHistory,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { baseUrl } from "../../Variable";
+
 
 const Profile = () => {
   const [nickname, setnickname] = useState("");
   const token = "JWT" + localStorage.getItem("token");
-  console.log(token);
-
-  useEffect(() => {
-    fetch(`${baseUrl}/accounts/profile/`, {
-      crossDomain: true,
-      method: "POST",
-      mode: "cors",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (response) => {
-        var data = await response.json();
-        console.log(data);
-      })
-  }, []);
+  const params = useParams();
+  const index = params.index;
+  console.log(index);
 
   return (
     <div>
-      <h2 style={{textAlign:"center"}}>خوش آمدی</h2>
+      <h2 style={{ textAlign: "center" }}>خوش آمدی</h2>
     </div>
   );
 };

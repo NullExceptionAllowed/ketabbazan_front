@@ -22,6 +22,7 @@ import { InputAdornment } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
+import book from "../../assets/Image/book.jpg";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -100,7 +101,7 @@ const Login = ({ history }) => {
           console.log(response.data);
           localStorage.setItem("token", response.data.token);
           setTimeout(() => {
-            history.replace("/profile");
+            history.replace("/profile/:index");
           }, 2000);
         }
       } catch (ex) {
