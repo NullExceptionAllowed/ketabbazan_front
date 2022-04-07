@@ -38,9 +38,9 @@ const Workinfo = () => {
         چرا کتاب بازان؟
       </Typography>
       <Box sx={{ width: "100%" }}>
-        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid sx={{ display: "flex", justifyContent: "center" }} container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item sm={0.75} xs={0} ></Grid>
-          <Grid  className="workinfo_grid" item sm={3.5} xs={12} >
+          <Grid  className="workinfo_grid" item sm={3.5} xs={11} >
             <Paper
               className="Work_Paper"
               style={{ boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px" }}
@@ -63,7 +63,7 @@ const Workinfo = () => {
           </Grid>
 
 
-          <Grid  className="workinfo_grid" item sm={3.5} xs={12}>
+          <Grid  className="workinfo_grid" item sm={3.5} xs={11}>
             <Paper
               className="Work_Paper"
               style={{ boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px" }}
@@ -84,7 +84,7 @@ const Workinfo = () => {
             </Paper>
           </Grid>
 
-          <Grid className="workinfo_grid" item sm={3.5} xs={12}>
+          <Grid className="workinfo_grid" item sm={3.5} xs={11}>
             <Paper
               className="Work_Paper"
               style={{ boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px" }}

@@ -83,12 +83,12 @@ const Showbook = () => {
             item
             container
             rowSpacing={1}
-            sx={{display:"flex", justifyContent:"center"}}
+            sx={{ display: "flex", justifyContent: "center" }}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             {bookinfo.map((info, index) => (
               <Paper
-              className="showbook_paper"
+                className="showbook_paper"
                 key={index}
                 to="/login"
                 component={Link}
@@ -113,7 +113,7 @@ const Showbook = () => {
                       height: "150px",
                       width: "100px",
                       marginRight: "25px",
-                      marginTop:"20px"
+                      marginTop: "20px",
                     }}
                   />
                 </ButtonBase>
