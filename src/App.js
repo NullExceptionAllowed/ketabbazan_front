@@ -15,9 +15,9 @@ const App = () => {
         <Route path="/" exact component={Homepage} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup"  component={SignUp} />
-        <Route path="/profile"  component={Profile} />
+        <Route path="/profile"  component={Profile} /> */}
         <Route path="/Showbookall"  component={Showbookall} />
-        <Route path="/Showbookinfo/:id"  component={Showinfo} />
+        <Route path="/showbookinfo/:id"  component={Showinfo} />
       </Switch>
   );
 };

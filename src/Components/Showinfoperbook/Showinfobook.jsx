@@ -17,13 +17,13 @@ const Showinfo = () => {
   const [bookinfo, setbookinfo] = useState([]);
   const params = useParams();
   const id = params.id;
-  console.log(id);
+
   useEffect(() => {
     setApiLoading(true);
     const id = params.id;
-    console.log(id);
     axios.get(`${baseUrl}/read_book/info/${id}`).then((response) => {
       setbookinfo(response.data.book_info);
+      console.log(response.data.book_info);
       setApiLoading(false);
     });
   }, []);

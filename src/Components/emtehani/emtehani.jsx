@@ -44,8 +44,8 @@ export default function SimpleSlider() {
         columnSpacing={{ xs: 1, sm: 1, md: 2 }}
       >
         <Swiper
-          slidesPerView={6}
-          spaceBetween={-30}
+          spaceBetween={2}
+          slidesPerView={7}
           pagination={{
             clickable: true,
           }}
@@ -54,7 +54,10 @@ export default function SimpleSlider() {
         >
           {bookinfo.map((info, index) => (
             <SwiperSlide key={index}>
-              <Link to={`/Showbookinfo/${info.id}`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/showbookinfo/${info.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <Grid
                   key={index}
                   className="showbook_paper"
@@ -62,7 +65,7 @@ export default function SimpleSlider() {
                     direction: "rtl",
                   }}
                   style={{
-                    marginRight: "20px",
+                    marginRight: "0px",
                     marginTop: "30px",
                     textDecoration: "none",
                     display: "flex",

@@ -84,7 +84,7 @@ const Showbook = () => {
               <Grid
                 className="showbookall_paper"
                 key={index}
-                to={`/Showbookinfo/${info.id}`}
+                to={`/showbookinfo/${info.id}`}
                 component={Link}
                 sx={{
                   direction: "rtl",
