@@ -5,7 +5,7 @@
     font-family: 'BYekan' !important;    
 }
 .showbook_paper{
-    width: calc((100vw ) / 6);
+    width: calc((100vw ) / 7);
     height: 295px;
     margin-right: "20px";
 }
@@ -18,12 +18,14 @@
     text-align: center;
     margin-top: 20px;
     color: black;
+    text-decoration: none;
 }
 .showbook_author{
     text-align: center;
     color: "#757C86";
     font-size: 13px; 
     margin-top: 5px;
+    text-decoration: none;
 }
 .showbook_price{
     text-align: center;
@@ -31,6 +33,7 @@
 
     font-size: "17px"; 
     margin-top: 5px;
+    text-decoration: none;
 }
 
 @media (max-width: 900px ) and (min-width:600px) {

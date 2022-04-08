@@ -5,6 +5,7 @@ import SignUp from "./Components/SignUp/SignUp";
 import Profile from "./Components/Profile/Profile";
 import Homepage from './Components/Homepage/Homepage';
 import Showbookall from "./Components/Showbookall/Showbookall";
+import Showinfo from "./Components/Showinfoperbook/Showinfobook";
 
 
 
@@ -14,8 +15,9 @@ const App = () => {
         <Route path="/" exact component={Homepage} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup"  component={SignUp} />
-        <Route path="/profile/:index"  component={Profile} />
+        <Route path="/profile"  component={Profile} />
         <Route path="/Showbookall"  component={Showbookall} />
+        <Route path="/Showbookinfo/:id"  component={Showinfo} />
       </Switch>
   );
 };

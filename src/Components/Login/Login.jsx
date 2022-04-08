@@ -101,7 +101,7 @@ const Login = ({ history }) => {
           console.log(response.data);
           localStorage.setItem("token", response.data.token);
           setTimeout(() => {
-            history.replace("/profile/:index");
+            history.replace("/profile");
           }, 2000);
         }
       } catch (ex) {

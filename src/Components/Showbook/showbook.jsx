@@ -125,13 +125,13 @@ const Showbook = () => {
                 <Grid
                   className="showbook_paper"
                   key={index}
-                  to={`/profile/${index}`}
+                  to={`/Showbookinfo/${info.id}`}
                   component={Link}
                   sx={{
                     direction: "rtl",
                   }}
                   style={{
-                    marginRight: "20px",
+                    marginRight: "5px",
                     marginTop: "30px",
                     textDecoration: "none",
                     display: "flex",

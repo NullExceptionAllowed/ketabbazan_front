@@ -84,18 +84,18 @@ const Showbook = () => {
               <Grid
                 className="showbookall_paper"
                 key={index}
-                to={`/profile/${index}`}
+                to={`/Showbookinfo/${info.id}`}
                 component={Link}
                 sx={{
                   direction: "rtl",
                 }}
                 style={{
-                  marginRight: "20px",
+                  marginRight: "5px",
                   marginTop: "40px",
                   textDecoration: "none",
                   display: "flex",
                   alignItems: "center",
-                  flexDirection: "column",
+                  flexDirection: "column",                  
                 }}
               >
                 <ButtonBase style={{ display: "flex", alignItems: "center" }}>
