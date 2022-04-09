@@ -5,7 +5,7 @@
     font-family: 'BYekan' !important;    
 }
 .showbookall_paper{
-    width: calc((90vw ) / 7);
+    width: calc((100vw ) / 7);
     height: 295px;
     margin-right: "20px";
 }
@@ -14,7 +14,7 @@
     width: "100px";
 }
 .showbookall_name{
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
     margin-top: 20px;
 }
@@ -34,7 +34,7 @@
 
 @media (max-width: 900px ) and (min-width:600px) {
     .showbookall_paper{
-        width: calc((90vw) / 4);
+        width: calc((100vw) / 4);
         height: 300px;
     }
     .showbookall_name{
@@ -53,7 +53,7 @@
 }
 @media (max-width: 1000px ) and (min-width:900px) {
     .showbookall_paper{
-        width: calc((90vw) / 5);
+        width: calc((100vw) / 5);
     }
 
 }

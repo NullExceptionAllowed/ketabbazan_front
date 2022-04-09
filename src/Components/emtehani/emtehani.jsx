@@ -45,7 +45,7 @@ export default function SimpleSlider() {
       >
         <Swiper
           spaceBetween={2}
-          slidesPerView={7}
+          slidesPerView={6}
           pagination={{
             clickable: true,
           }}
@@ -71,6 +71,7 @@ export default function SimpleSlider() {
                     display: "flex",
                     alignItems: "center",
                     flexDirection: "column",
+                    height:"340px"
                   }}
                 >
                   <div style={{ display: "flex", justifyContent: "center" }}>
@@ -95,7 +96,6 @@ export default function SimpleSlider() {
                   </div>
                   <div
                     variant="body2"
-                    gutterBottom
                     style={{ color: "#757C86", fontSize: "13px" }}
                     className="showbook_author"
                   >
@@ -104,7 +104,6 @@ export default function SimpleSlider() {
 
                   <div
                     variant="body2"
-                    gutterBottom
                     style={{ color: "#4DB200", direction: "rtl" }}
                     className="showbook_price"
                   >

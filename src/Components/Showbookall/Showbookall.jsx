@@ -121,7 +121,6 @@ const Showbook = () => {
                 </div>
                 <div
                   variant="body2"
-                  gutterBottom
                   style={{ color: "#757C86", fontSize: "13px" }}
                   className="showbookall_author"
                 >
@@ -130,7 +129,6 @@ const Showbook = () => {
 
                 <div
                   variant="body2"
-                  gutterBottom
                   style={{ color: "#4DB200" }}
                   className="showbookall_price"
                 >
