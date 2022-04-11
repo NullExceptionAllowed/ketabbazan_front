@@ -112,7 +112,7 @@ const Showbook = () => {
                 }}
                 style={{
                   marginRight: "5px",
-                  marginTop: "30px",
+                  marginTop: "10px",
                   textDecoration: "none",
                   display: "flex",
                   alignItems: "center",
@@ -147,13 +147,6 @@ const Showbook = () => {
                   {info.author}
                 </div>
 
-                <div
-                  variant="body2"
-                  style={{ color: "#4DB200" }}
-                  className="showbook_price"
-                >
-                  {info.price} ریال
-                </div>
               </Grid>
             ))}
           </Grid>

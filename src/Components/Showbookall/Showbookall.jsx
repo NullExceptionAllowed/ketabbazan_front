@@ -126,13 +126,6 @@ const Showbook = () => {
                   {info.author}
                 </div>
 
-                <div
-                  variant="body2"
-                  style={{ color: "#4DB200" }}
-                  className="showbookall_price"
-                >
-                  {info.price} ریال
-                </div>
               </Grid>
             ))}
           </Grid>

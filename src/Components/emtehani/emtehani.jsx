@@ -102,13 +102,6 @@ export default function SimpleSlider() {
                     {info.author}
                   </div>
 
-                  <div
-                    variant="body2"
-                    style={{ color: "#4DB200", direction: "rtl" }}
-                    className="showbook_price"
-                  >
-                    {info.price + " " + "ریال"}
-                  </div>
                 </Grid>
               </Link>
             </SwiperSlide>

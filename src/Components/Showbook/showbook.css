@@ -6,7 +6,7 @@
 }
 .showbook_paper{
     width: calc((90vw   ) / 7);
-    height: 295px;
+    height: 272px;
 }
 .showbook_img{
     height: "150px";
@@ -38,7 +38,7 @@
 @media (max-width: 900px ) and (min-width:600px) {
     .showbook_paper{
         width: calc((90vw) / 4);
-        height: 300px;
+        height: 280px;
     }
     .showbook_name{
         font-size: 15px;
@@ -63,11 +63,13 @@
 @media (max-width: 600px) {
     .showbook_paper{
         width: calc((90vw) / 3);
+        height: 270px;
     }
 }
 @media (max-width: 400px) {
     .showbook_paper{
         width: calc((110vw) / 3);
+        height: 210px;
     }
     .showbook_name{
         font-size: 12px;
