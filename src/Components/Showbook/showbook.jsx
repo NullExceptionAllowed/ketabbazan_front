@@ -13,7 +13,6 @@ import "./showbook.css";
 import Slider from "react-slick";
 import SimpleSlider from "../emtehani/emtehani";
 
-
 const Showbook = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
@@ -44,25 +43,6 @@ const Showbook = () => {
 
   return (
     <div className="showbook_fa" style={{ direction: "rtl" }}>
-      {/* <Grid item container> */}
-      {/* <Grid item sx={8}></Grid>
-        <Grid item sx={3}>
-          <Typography to={`/Showbookall`} component={Link}>
-            مشاهده همه
-          </Typography>
-        </Grid>
-      </Grid>
-      <Typography
-        variant="h5"
-        style={{
-          fontWeight: 800,
-          color: "#1565C0",
-          textAlign: "center",
-          marginTop: "50px",
-        }}
-      >
-        جدیدترین کتاب ها
-      </Typography> */}
       <Grid item container>
         <Grid item xs={10.5}>
           <Typography
@@ -88,7 +68,6 @@ const Showbook = () => {
           </Typography>
         </Grid>
       </Grid>
-
       {apiLoading && (
         <div
           style={{
@@ -115,71 +94,72 @@ const Showbook = () => {
           }}
         >
           <Grid
-            item
             container
-            rowSpacing={1}
-            sx={{ display: "flex", justifyContent: "center" }}
-            columnSpacing={{ xs: 1, sm: 1, md: 2 }}
+            item
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
           >
             {bookinfo.map((info, index) => (
-                <Grid
-                  className="showbook_paper"
-                  key={index}
-                  to={`/Showbookinfo/${info.id}`}
-                  component={Link}
-                  sx={{
-                    direction: "rtl",
-                  }}
-                  style={{
-                    marginRight: "5px",
-                    marginTop: "30px",
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: "column",
-                  }}
+              <Grid
+                className="showbook_paper"
+                key={index}
+                to={`/Showbookinfo/${info.id}`}
+                component={Link}
+                sx={{
+                  direction: "rtl",
+                }}
+                style={{
+                  marginRight: "5px",
+                  marginTop: "30px",
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img
+                    alt="complex1"
+                    className="showbook_img"
+                    src={info.image_url}
+                    style={{
+                      marginTop: "20px",
+                      height: "150px",
+                      width: "120px",
+                    }}
+                  />
+                </div>
+
+                <div
+                  className="showbook_name"
+                  variant="subtitle1"
+                  component="div"
                 >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      alt="complex1"
-                      className="showbook_img"
-                      src={info.image_url}
-                      style={{
-                        marginTop: "20px",
-                        height: "150px",
-                        width: "120px",
-                      }}
-                    />
-                  </div>
+                  {info.name}
+                </div>
+                <div
+                  variant="body2"
+                  style={{ color: "#757C86", fontSize: "13px" }}
+                  className="showbook_author"
+                >
+                  {info.author}
+                </div>
 
-                  <div
-                    className="showbook_name"
-                    variant="subtitle1"
-                    component="div"
-                  >
-                    {info.name}
-                  </div>
-                  <div
-                    variant="body2"
-                    style={{ color: "#757C86", fontSize: "13px" }}
-                    className="showbook_author"
-                  >
-                    {info.author}
-                  </div>
-
-                  <div
-                    variant="body2"
-                    style={{ color: "#4DB200" }}
-                    className="showbook_price"
-                  >
-                    {info.price} ریال
-                  </div>
-                </Grid>
+                <div
+                  variant="body2"
+                  style={{ color: "#4DB200" }}
+                  className="showbook_price"
+                >
+                  {info.price} ریال
+                </div>
+              </Grid>
             ))}
           </Grid>
         </div>
       )}
-      <SimpleSlider/>
+      <SimpleSlider />
     </div>
   );
 };

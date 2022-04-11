@@ -5,7 +5,7 @@
     font-family: 'BYekan' !important;    
 }
 .showbookall_paper{
-    width: calc((100vw ) / 7);
+    width: calc((90vw ) / 7);
     height: 295px;
     margin-right: "20px";
 }
@@ -34,7 +34,7 @@
 
 @media (max-width: 900px ) and (min-width:600px) {
     .showbookall_paper{
-        width: calc((100vw) / 4);
+        width: calc((90vw) / 4);
         height: 300px;
     }
     .showbookall_name{
@@ -59,12 +59,12 @@
 }
 @media (max-width: 600px) {
     .showbookall_paper{
-        width: calc((100vw) / 3);
+        width: calc((90vw) / 3);
     }
 }
 @media (max-width: 400px) {
     .showbookall_paper{
-        width: calc((100vw) / 3);
+        width: calc((110vw) / 3);
     }
     .showbookall_name{
         font-size: 12px;

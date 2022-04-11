@@ -31,7 +31,7 @@ const Showbook = () => {
     maxWidth: "100%",
     maxHeight: "100%",
   });
-
+  console.log(bookinfo.length);
   return (
     <div className="showbookall_fa">
       <Navbar />
@@ -76,10 +76,9 @@ const Showbook = () => {
           <Grid
             item
             container
-            rowSpacing={1}
             sx={{ display: "flex", justifyContent: "center" }}
-            columnSpacing={{ xs: 1, sm: 1, md: 2 }}
           >
+            
             {bookinfo.map((info, index) => (
               <Grid
                 className="showbookall_paper"
