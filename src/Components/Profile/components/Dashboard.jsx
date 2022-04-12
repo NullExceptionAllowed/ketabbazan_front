@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
 import "../Profile.css"; 
 import Box from '@mui/material/Box';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
@@ -11,6 +11,19 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Dashboard = () =>
 {
+   const [username,setusername]=usestate("");
+
+   const getItem =  ()  => {
+
+      axios.get('http://127.0.0.1:8000/profile/info/').then((res)=> {
+
+         console.log(res.data.username);
+         setusername(res.data.username);
+      })
+
+   }
+
+   useEffect(()=>get_info(),[])
     return(
     <div>
     <div className="section">
@@ -21,8 +34,9 @@ const Dashboard = () =>
     <div
 style={{direction:"rtl"  ,  paddingRight:"20px", float:"right"}}
 >
+
    <AccountBoxIcon style={{float: "right"}}/>
-      <p style={{float: "right" , marginRight:"7px", fontWeight:"bold"}}>نام مستعار:  </p>           
+      <p style={{float: "right" , marginRight:"7px", fontWeight:"bold"}}>{username}  </p>           
       </div>
 
       <div
