@@ -13,7 +13,7 @@ const Dashboard = () => {
    const [username, setusername] = useState("");
    
 
-   let token = localStorage.getItem('token');
+   let token = "Token" + localStorage.getItem('token');
    console.log(token);
 
    axios.get('http://127.0.0.1:8000/profile/info/',{
