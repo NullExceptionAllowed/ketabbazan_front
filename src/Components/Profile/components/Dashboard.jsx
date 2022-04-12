@@ -11,7 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Dashboard = () =>
 {
-   const [username,setusername]=usestate("");
+   const [username,setusername]=useState("");
 
    const getItem =  ()  => {
 
@@ -23,7 +23,7 @@ const Dashboard = () =>
 
    }
 
-   useEffect(()=>get_info(),[])
+   
     return(
     <div>
     <div className="section">
