@@ -11,11 +11,16 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Dashboard = () => {
    const [username, setusername] = useState("");
+   const [token, setToken] = useState();
 
+   setToken = localStorage.getItem('token');
+   console.log(token);
 
-
-   axios.get('http://127.0.0.1:8000/profile/info/').then((res) => {
-
+   axios.get('http://127.0.0.1:8000/profile/info/',{
+      headers: {
+        'Content-Type': 'application/json ' ,
+        'Authorization': token
+      }}).then((res) => {
       console.log(res.data.username);
       setusername(res.data.username);
    })
