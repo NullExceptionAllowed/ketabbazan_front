@@ -76,7 +76,7 @@ const Showbook = () => {
           <Grid
             item
             container
-            sx={{ display: "flex", justifyContent: "center" }}
+            sx={{ display: "flex", justifyContent: "center", flexWrap:"wrap" }}
           >
             
             {bookinfo.map((info, index) => (
@@ -89,7 +89,6 @@ const Showbook = () => {
                   direction: "rtl",
                 }}
                 style={{
-                  marginRight: "5px",
                   marginTop: "40px",
                   textDecoration: "none",
                   display: "flex",

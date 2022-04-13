@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import {
   Link,
   NavLink,
@@ -18,6 +18,7 @@ import Typography from "@mui/material/Typography";
 import Navbar from "../Navbar/Nav";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
+import PdfViewer from './../PdfViewer/PdfViewer';
 
 const Img = styled("img")({
   margin: "auto",
@@ -26,24 +27,33 @@ const Img = styled("img")({
   maxHeight: "100%",
 });
 
+const book_id = createContext();
+
 const Showinfo = () => {
+
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
   const params = useParams();
   const id = params.id;
   const [value, setValue] = React.useState(2);
 
+
   useEffect(() => {
     setApiLoading(true);
-    const id = params.id;
     axios.get(`${baseUrl}/read_book/info/${id}`).then((response) => {
       setbookinfo(response.data.book_info);
       console.log(response.data.book_info);
       setApiLoading(false);
     });
   }, []);
+  
+  <book_id.Provider value={id}>
+        <PdfViewer/>
+  </book_id.Provider>
+  
   return (
     <div style={{ direction: "rtl" }}>
+      
       <Navbar />
       <Grid
         sx={{
@@ -83,7 +93,7 @@ const Showinfo = () => {
                     {"دانلود و خرید کتاب" + " " + bookinfo.name}
                   </Typography>
                   <Typography style={{ marginTop: "10%", color: "#666681" }}>
-                    {"نویسنده:" + " " + "فاطمه عسکری"}
+                    {"نویسنده:" + " " + bookinfo.author}
                   </Typography>
 
                   <Typography style={{ marginTop: "2px", color: "#666681" }}>
@@ -105,7 +115,7 @@ const Showinfo = () => {
                     </span>
                   </div>
                 </Grid>
-                <Grid   xs={3}>
+                <Grid  item xs={3}>
                   <Typography style={{textAlign:"center", fontSize:"20px"}}>{bookinfo.price} ریال</Typography>
                   <Grid
                     item
@@ -134,6 +144,8 @@ const Showinfo = () => {
                         borderRadius: "32px",
                         height: "45px",
                       }}
+                      to={"/ReadPdf/"+params.id}
+                      component={Link}
                     >
                       مطالعه کتاب
                     </Button>
@@ -160,3 +172,4 @@ const Showinfo = () => {
 };
 
 export default Showinfo;
+export {book_id};

@@ -11,46 +11,49 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="Homepage_container">
-      <img
-        className="home_img"
-        src={Home}
-        alt="homeimg"
-        style={{
-          height: "600px",
-          width: "100%",
-        }}
-      />
-      <h2 className="home_title">
-        <Typical
-          steps={["کتاب بازان",
-        6000]}
-          loop={Infinity}
-          wrapper="p"
+      <div className="Homepage_container" >
+        <img
+          className="home_img"
+          src={Home}
+          alt="homeimg"
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
         />
-      </h2>
-      <div className="home_info">کتابخوانی،مقاله گذاشتن و طراحی کوییز با کتاب بازان</div>
-      <div className="home_info1">بهترین کتاب ها رو از اینجا بگیر</div>
-      <Paper
-        component="form"
-        sx={{
-          p: "2px 4px",
-          display: "flex",
-          alignItems: "center",
-          borderRadius: "32px",
-        }}
-        className="home-banner__start-btn"
-      >
-        <InputBase
-          sx={{ ml: 1, flex: 1, padding: "16px" }}
-          placeholder="چه کتابی میخوای؟"
-          inputProps={{ "aria-label": "search google maps" }}
-        />
-        <IconButton to={`/Showbookall`} component={Link} type="submit" sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon style={{ color: "#1565C0" }} />
-        </IconButton>
-      </Paper>
-    </div>
+        <h2 className="home_title">
+          <Typical steps={["کتاب بازان", 6000]} loop={Infinity} wrapper="p" />
+        </h2>
+        <div className="home_info">
+          کتابخوانی،مقاله گذاشتن و طراحی کوییز با کتاب بازان
+        </div>
+        <div className="home_info1">بهترین کتاب ها رو از اینجا بگیر</div>
+        <Paper
+          component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            borderRadius: "32px",
+          }}
+          className="home-banner__start-btn"
+        >
+          <InputBase
+            sx={{ ml: 1, flex: 1, padding: "16px" }}
+            placeholder="چه کتابی میخوای؟"
+            inputProps={{ "aria-label": "search google maps" }}
+          />
+          <IconButton
+            to={`/Showbookall`}
+            component={Link}
+            type="submit"
+            sx={{ p: "10px" }}
+            aria-label="search"
+          >
+            <SearchIcon style={{ color: "#1565C0" }} />
+          </IconButton>
+        </Paper>
+      </div>
   );
 };
 

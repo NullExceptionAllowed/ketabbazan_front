@@ -6,6 +6,7 @@ import Profile from "./Components/Profile/Profile";
 import Homepage from './Components/Homepage/Homepage';
 import Showbookall from "./Components/Showbookall/Showbookall";
 import Showinfo from "./Components/Showinfoperbook/Showinfobook";
+import PdfViewer from "./Components/PdfViewer/PdfViewer";
 
 
 
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/profile"  component={Profile} /> 
         <Route path="/Showbookall"  component={Showbookall} />
         <Route path="/showbookinfo/:id"  component={Showinfo} />
+        <Route path="/ReadPdf/:id"  component={PdfViewer} />
       </Switch>
   );
 };

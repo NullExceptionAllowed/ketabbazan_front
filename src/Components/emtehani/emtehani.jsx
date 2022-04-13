@@ -55,7 +55,9 @@ export default function SimpleSlider() {
           {bookinfo.map((info, index) => (
             <SwiperSlide key={index}>
               <Link
-                to={`/showbookinfo/${info.id}`}
+                to ={{
+                  pathname: `/showbookinfo/${info.id}`, 
+                 }}
                 style={{ textDecoration: "none" }}
               >
                 <Grid
@@ -101,7 +103,6 @@ export default function SimpleSlider() {
                   >
                     {info.author}
                   </div>
-
                 </Grid>
               </Link>
             </SwiperSlide>
