@@ -42,32 +42,33 @@ const Showbook = () => {
   };
 
   return (
-    <div className="showbook_fa" style={{ direction: "rtl" }}>
-      <Grid item container>
-        <Grid item xs={10.5}>
-          <Typography
-            style={{
-              marginRight: "90px",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          >
-            جدیدترین کتاب ها
-          </Typography>
-        </Grid>
-        <Grid item xs={1.5}>
-          <Typography
-            style={{
-              fontSize: "20px",
-              textDecoration: "none",
-            }}
-            to={`/showbookall`}
-            component={Link}
-          >
-            مشاهده همه
-          </Typography>
-        </Grid>
-      </Grid>
+    <div
+      className="showbook_fa"
+      style={{
+        direction: "rtl",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{
+          direction: "rtl",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <h2 style={{ textAlign: "center", color: "#1565C0" }}>
+          جدیدترین کتاب ها
+        </h2>
+        <Link
+          to={`/showbookall`}
+          style={{ textAlign: "center", textDecoration: "none", marginTop:"5px" }}
+        >
+          مشاهده همه{" "}
+        </Link>
+      </div>
       {apiLoading && (
         <div
           style={{
@@ -97,9 +98,10 @@ const Showbook = () => {
             container
             item
             sx={{
+              marginTop:"10px",
               display: "flex",
               justifyContent: "center",
-              flexWrap:"wrap"
+              flexWrap: "wrap",
             }}
           >
             {bookinfo.map((info, index) => (
@@ -117,7 +119,6 @@ const Showbook = () => {
                   display: "flex",
                   alignItems: "center",
                   flexDirection: "column",
-
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -147,7 +148,6 @@ const Showbook = () => {
                 >
                   {info.author}
                 </div>
-
               </Grid>
             ))}
           </Grid>
