@@ -28,87 +28,123 @@ export default function SimpleSlider() {
 
   SwiperCore.use([Navigation, Pagination]);
   return (
-    <div
-      style={{
-        direction: "rtl",
-        display: "flex",
-        justifyContent: "center",
-        marginBottom: "50px",
-      }}
-    >
-      <Grid
-        item
-        container
-        rowSpacing={1}
-        sx={{ display: "flex", justifyContent: "center" }}
-        columnSpacing={{ xs: 1, sm: 1, md: 2 }}
+    <div>
+      <div
+        style={{
+          direction: "rtl",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
       >
-        <Swiper
-          spaceBetween={2}
-          slidesPerView={6}
-          pagination={{
-            clickable: true,
+        <h2 style={{ textAlign: "center", color: "#1565C0" }}>
+          جدیدترین کتاب ها
+        </h2>
+        <Link
+          to={`/showbookall`}
+          style={{
+            textAlign: "center",
+            textDecoration: "none",
+            marginTop: "5px",
           }}
-          modules={[Pagination]}
-          className="mySwiper"
         >
-          {bookinfo.map((info, index) => (
-            <SwiperSlide key={index}>
-              <Link
-                to ={{
-                  pathname: `/showbookinfo/${info.id}`, 
-                 }}
-                style={{ textDecoration: "none" }}
-              >
-                <Grid
-                  key={index}
-                  className="showbook_paper"
-                  sx={{
-                    direction: "rtl",
+          مشاهده همه{" "}
+        </Link>
+      </div>
+      <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <div style={{ width: "100%" }}>
+          <Swiper
+            breakpoints={{
+              // when window width is >= 640px
+              1500: {
+                slidesPerView: 9,
+                spaceBetween:0
+              },
+              // when window width is >= 768px
+              1200: {
+                slidesPerView: 8,
+                spaceBetween:0
+              },
+              900: {
+                slidesPerView: 6,
+                spaceBetween:0
+              },
+              600: {
+                slidesPerView: 4,
+                spaceBetween:0
+              },
+              500: {
+                slidesPerView: 3,
+                spaceBetween:0
+              },
+              0: {
+                slidesPerView: 2,
+                spaceBetween:0
+              },
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination]}
+          >
+            {bookinfo.map((info, index) => (
+              <SwiperSlide key={index}>
+                <Link
+                  to={{
+                    pathname: `/showbookinfo/${info.id}`,
                   }}
-                  style={{
-                    marginRight: "0px",
-                    marginTop: "30px",
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    height:"340px"
-                  }}
+                  style={{ textDecoration: "none" }}
                 >
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <img
-                      alt="complex1"
-                      className="showbook_img"
-                      src={info.image_url}
-                      style={{
-                        marginTop: "20px",
-                        height: "150px",
-                        width: "120px",
-                      }}
-                    />
-                  </div>
+                  <Grid
+                    key={index}
+                    className="showbook_paper"
+                    sx={{
+                      direction: "rtl",
+                    }}
+                    style={{
+                      marginRight: "0px",
+                      marginTop: "30px",
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      height: "340px",
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <img
+                        alt="complex1"
+                        className="showbook_img"
+                        src={info.image_url}
+                        style={{
+                          marginTop: "20px",
+                          height: "150px",
+                          width: "120px",
+                        }}
+                      />
+                    </div>
 
-                  <div
-                    className="showbook_name"
-                    variant="subtitle1"
-                    component="div"
-                  >
-                    {info.name}
-                  </div>
-                  <div
-                    variant="body2"
-                    style={{ color: "#757C86", fontSize: "13px" }}
-                    className="showbook_author"
-                  >
-                    {info.author}
-                  </div>
-                </Grid>
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Grid>
+                    <div
+                      className="showbook_name"
+                      variant="subtitle1"
+                      component="div"
+                    >
+                      {info.name}
+                    </div>
+                    <div
+                      variant="body2"
+                      style={{ color: "#757C86", fontSize: "13px" }}
+                      className="showbook_author"
+                    >
+                      {info.author}
+                    </div>
+                  </Grid>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
     </div>
   );
 }
