@@ -57,12 +57,12 @@ export default function SimpleSlider() {
             breakpoints={{
               // when window width is >= 640px
               1500: {
-                slidesPerView: 9,
+                slidesPerView: 10,
                 spaceBetween:0
               },
               // when window width is >= 768px
               1200: {
-                slidesPerView: 8,
+                slidesPerView: 9,
                 spaceBetween:0
               },
               900: {

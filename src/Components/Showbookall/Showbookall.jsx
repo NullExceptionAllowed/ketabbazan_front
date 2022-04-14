@@ -12,19 +12,45 @@ import axios from "axios";
 import Navbar from "../Navbar/Nav";
 import "./showbookall.css";
 import Skeleton from "@mui/material/Skeleton";
+import {
+  NavLink,
+  Redirect,
+  Route,
+  useHistory,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 
 const Showbook = () => {
+  const location = useLocation();
+  const search = location.search;
+  console.log(search);
+  const searchUrlParam = new URLSearchParams(search).get("q");
+  const[a,seta]=useState('');
+  //seta(searchUrlParam );
+  console.log(searchUrlParam);
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
   useEffect(() => {
-    setApiLoading(true);
-    axios({
-      url: `${baseUrl}/read_book/all_books`,
-    }).then((response) => {
-      console.log(response.data);
-      setbookinfo(response.data);
-      setApiLoading(false);
-    });
+    if (searchUrlParam === null) {
+      setApiLoading(true);
+      axios({
+        url: `${baseUrl}/read_book/all_books`,
+      }).then((response) => {
+        console.log(response.data);
+        setbookinfo(response.data);
+        setApiLoading(false);
+      });
+    }
+    else{
+      axios({
+        url: `${baseUrl}/search/?q=${searchUrlParam}`,
+      }).then((response) => {
+        console.log(response.data);
+        setbookinfo(response.data);
+        setApiLoading(false);
+      });
+    }
   }, []);
   const Img = styled("img")({
     margin: "auto",

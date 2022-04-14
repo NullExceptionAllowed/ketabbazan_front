@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,10 +13,23 @@ import Logo from "../../assets/Image/logo.png";
 import Box from "@mui/material/Box";
 import ArticleIcon from "@mui/icons-material/Article";
 import DrawerComp from "./DrawerCopm";
+import SearchIcon from "@mui/icons-material/Search";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
 
 const Nav = () => {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMatch = useMediaQuery(theme.breakpoints.down(600));
+  const checkpx = useMediaQuery(theme.breakpoints.down(780));
+  const handlesubmit = async (event) => {
+    event.preventDefault();
+  };
+  const [search, setsearchname] = useState("");
+  const Setsearch = (event) => {
+    setsearchname(event.target.value);
+  };
   const MenuButton = ({ Icon, text, linkTo }) => {
     return (
       <div style={{ marginBottom: "5 px" }}>
@@ -89,9 +102,9 @@ const Nav = () => {
               >
                 <Grid
                   item
-                  lg={2}
+                  lg={1.7}
                   md={2.5}
-                  sm={3.5}
+                  sm={3}
                   sx={{ flexGrow: 1 }}
                   style={{
                     display: "flex",
@@ -121,14 +134,44 @@ const Nav = () => {
                     کتاب بازان
                   </Typography>
                 </Grid>
-                <Grid item lg={2} md={2} sm={2.5}>
-                  <MenuButton
-                    Icon={ArticleIcon}
-                    text="مقاله بذار"
-                    linkTo="/signup"
-                  />
+                <Grid item lg={6} md={5} sm={4}>
+                  <Box
+                    component="form"
+                    style={{ fontFamily: "BYekan" }}
+                    onSubmit={handlesubmit}
+                  >
+                    <Paper
+                      sx={{
+                        height: "45px",
+                        p: "2px 4px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "8px",
+                        backgroundColor: "#EBECF0",
+                        display: { md: "flex", sm: "none" },
+                      }}
+                    >
+                      <InputBase
+                        sx={{ ml: 1, flex: 1, padding: "16px" }}
+                        placeholder="جستجوی کتاب و نویسنده"
+                        inputProps={{ "aria-label": "search google maps" }}
+                        value={search}
+                        onChange={Setsearch}
+                      />
+                      <IconButton
+                        to={`/Showbookall/search/?q=${search}`}
+                        component={Link}
+                        type="submit"
+                        sx={{ p: "10px" }}
+                        aria-label="search"
+                      >
+                        <SearchIcon style={{ color: "gray" }} />
+                      </IconButton>
+                    </Paper>
+                  </Box>
                 </Grid>
-                <Grid item lg={6} md={5} sm={2}></Grid>
+                <Grid item lg={2} md={2} sm={1}></Grid>
                 <Grid item lg={2} md={2.5} sm={4}>
                   <Button
                     variant="contained"

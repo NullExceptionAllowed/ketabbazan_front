@@ -18,7 +18,7 @@ import Typography from "@mui/material/Typography";
 import Navbar from "../Navbar/Nav";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
-import PdfViewer from './../PdfViewer/PdfViewer';
+import PdfViewer from "./../PdfViewer/PdfViewer";
 
 const Img = styled("img")({
   margin: "auto",
@@ -30,13 +30,16 @@ const Img = styled("img")({
 const book_id = createContext();
 
 const Showinfo = () => {
-
-  const [apiLoading, setApiLoading] = useState(false);
-  const [bookinfo, setbookinfo] = useState([]);
+  //var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5";
   const params = useParams();
+  var url_string = "http://localhost:3000/Showbookall";
+  var url = new URL(url_string);
+  var c = url.searchParams.get("q");
+  console.log(c);
+  const [apiLoading, setApiLoading] = useState(false);
+  const [bookinfo, setbookinfo] = useState([]);  
   const id = params.id;
   const [value, setValue] = React.useState(2);
-
 
   useEffect(() => {
     setApiLoading(true);
@@ -46,14 +49,13 @@ const Showinfo = () => {
       setApiLoading(false);
     });
   }, []);
-  
+
   <book_id.Provider value={id}>
-        <PdfViewer/>
-  </book_id.Provider>
-  
+    <PdfViewer />
+  </book_id.Provider>;
+
   return (
     <div style={{ direction: "rtl" }}>
-      
       <Navbar />
       <Grid
         sx={{
@@ -115,8 +117,10 @@ const Showinfo = () => {
                     </span>
                   </div>
                 </Grid>
-                <Grid  item xs={3}>
-                  <Typography style={{textAlign:"center", fontSize:"20px"}}>{bookinfo.price} ریال</Typography>
+                <Grid item xs={3}>
+                  <Typography style={{ textAlign: "center", fontSize: "20px" }}>
+                    {bookinfo.price} ریال
+                  </Typography>
                   <Grid
                     item
                     style={{
@@ -138,20 +142,20 @@ const Showinfo = () => {
                     </Button>
 
                     <Button
-                    variant="outlined"
+                      variant="outlined"
                       style={{
                         width: "290.6px",
                         borderRadius: "32px",
                         height: "45px",
                       }}
-                      to={"/ReadPdf/"+params.id}
+                      to={"/ReadPdf/" + params.id}
                       component={Link}
                     >
                       مطالعه کتاب
                     </Button>
 
                     <Button
-                    variant="outlined"
+                      variant="outlined"
                       style={{
                         width: "290.6px",
                         borderRadius: "32px",
@@ -172,4 +176,4 @@ const Showinfo = () => {
 };
 
 export default Showinfo;
-export {book_id};
+export { book_id };

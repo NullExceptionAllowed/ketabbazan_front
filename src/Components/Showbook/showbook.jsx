@@ -128,8 +128,6 @@ const Showbook = () => {
                     src={info.image_url}
                     style={{
                       marginTop: "20px",
-                      height: "150px",
-                      width: "120px",
                     }}
                   />
                 </div>
