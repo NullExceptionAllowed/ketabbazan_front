@@ -28,7 +28,7 @@ const Showbook = () => {
   const searchUrlParam = new URLSearchParams(search).get("q");
   console.log(searchUrlParam);
   const [apiLoading, setApiLoading] = useState(false);
-  const [bookinfo, setbookinfo] = useState([]);  
+  const [bookinfo, setbookinfo] = useState([]);
   useEffect(() => {
     console.log("**");
     if (searchUrlParam === null) {
@@ -40,8 +40,7 @@ const Showbook = () => {
         setbookinfo(response.data);
         setApiLoading(false);
       });
-    }
-    else{
+    } else {
       setApiLoading(true);
       axios({
         url: `${baseUrl}/search/?q=${searchUrlParam}`,
@@ -60,137 +59,164 @@ const Showbook = () => {
     maxHeight: "100%",
   });
   console.log(bookinfo.length);
+
+  let numbook = bookinfo.length;
   return (
     <div className="showbookall_fa">
       <Navbar />
-      <Typography
-        variant="h5"
-        style={{
-          fontWeight: 800,
-          color: "#1565C0",
-          textAlign: "center",
-          marginTop: "100px",
-        }}
-      >
-        همه کتاب ها
-      </Typography>
-      {apiLoading && (
-        <div
-          style={{
-            direction: "rtl",
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "50px",
-          }}
-        >
-          <Grid
-            item
-            container
-            sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+      <div style={{ marginTop: "70px" }}>
+        {apiLoading && (
+          <div
+            style={{
+              direction: "rtl",
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "50px",
+            }}
           >
-            {Array.from(Array(22)).map((_, index) => (
-              <Grid
-                key={index}
-                sx={{
-                  direction: "rtl",
-                }}
-                style={{
-                  width: "155px",
-                  height: "202px",
-                  marginRight: "10px",
-                  marginTop: "40px",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <Skeleton variant="rectangular" width="120px" height="150px" />
-                <div
-                  className="showbookall_name"
-                  variant="subtitle1"
-                  component="div"
-                  style={{ color: "black" }}
+            <Grid
+              item
+              container
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              {Array.from(Array(22)).map((_, index) => (
+                <Grid
+                  key={index}
+                  sx={{
+                    direction: "rtl",
+                  }}
+                  style={{
+                    width: "155px",
+                    height: "202px",
+                    marginRight: "10px",
+                    marginTop: "40px",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
                 >
-                  <Skeleton variant="rectangular" width="100px" height="12px" />
-                </div>
-
-                <div
-                  variant="body2"
-                  style={{ color: "#757C86", fontSize: "13px" }}
-                  className="showbookall_author"
-                >
-                  <Skeleton variant="rectangular" width="80px" height="12px" />
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      )}
-      {!apiLoading && (
-        <div
-          style={{
-            direction: "rtl",
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "50px",
-          }}
-        >
-          <Grid
-            item
-            container
-            sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
-          >
-            {bookinfo.map((info, index) => (
-              <Grid
-                className="showbookall_paper"
-                key={index}
-                to={`/showbookinfo/${info.id}`}
-                component={Link}
-                sx={{
-                  direction: "rtl",
-                }}
-                style={{
-                  marginTop: "40px",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <ButtonBase style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    alt="complex1"
-                    className="showbookall_img"
-                    src={info.image_url}
-                    style={{
-                      marginTop: "20px",
-                      height: "150px",
-                      width: "120px",
-                    }}
+                  <Skeleton
+                    variant="rectangular"
+                    width="120px"
+                    height="150px"
                   />
-                </ButtonBase>
+                  <div
+                    className="showbookall_name"
+                    variant="subtitle1"
+                    component="div"
+                    style={{ color: "black" }}
+                  >
+                    <Skeleton
+                      variant="rectangular"
+                      width="100px"
+                      height="12px"
+                    />
+                  </div>
 
-                <div
-                  className="showbookall_name"
-                  variant="subtitle1"
-                  component="div"
-                  style={{ color: "black" }}
+                  <div
+                    variant="body2"
+                    style={{ color: "#757C86", fontSize: "13px" }}
+                    className="showbookall_author"
+                  >
+                    <Skeleton
+                      variant="rectangular"
+                      width="80px"
+                      height="12px"
+                    />
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        )}
+        {numbook === 0 && (
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                height: "70vh",
+                alignItems: "center",
+                fontSize: "20px",
+              }}
+            >
+              با فیلتر های انتخابی شما کتابی یافت نشد
+            </div>
+        )}
+        {!apiLoading && (
+          <div
+            style={{
+              direction: "rtl",
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "50px",
+            }}
+          >
+            <Grid
+              item
+              container
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              {bookinfo.map((info, index) => (
+                <Grid
+                  className="showbookall_paper"
+                  key={index}
+                  to={`/showbookinfo/${info.id}`}
+                  component={Link}
+                  sx={{
+                    direction: "rtl",
+                  }}
+                  style={{
+                    marginTop: "40px",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
                 >
-                  {info.name}
-                </div>
-                <div
-                  variant="body2"
-                  style={{ color: "#757C86", fontSize: "13px" }}
-                  className="showbookall_author"
-                >
-                  {info.author}
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      )}
+                  <ButtonBase style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      alt="complex1"
+                      className="showbookall_img"
+                      src={info.image_url}
+                      style={{
+                        marginTop: "20px",
+                        height: "150px",
+                        width: "120px",
+                      }}
+                    />
+                  </ButtonBase>
+
+                  <div
+                    className="showbookall_name"
+                    variant="subtitle1"
+                    component="div"
+                    style={{ color: "black" }}
+                  >
+                    {info.name}
+                  </div>
+                  <div
+                    variant="body2"
+                    style={{ color: "#757C86", fontSize: "13px" }}
+                    className="showbookall_author"
+                  >
+                    {info.author}
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

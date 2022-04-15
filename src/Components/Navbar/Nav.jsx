@@ -36,6 +36,7 @@ const Nav = () => {
   let showbox = null;
   if (openSearchBar && checkpx) {
     showbox = <SearchBar />;
+    console.log("*");
   }
   const [search, setsearchname] = useState("");
   const Setsearch = (event) => {
@@ -79,34 +80,43 @@ const Nav = () => {
                   alignItems: "center",
                   textDecoration: "none",
                 }}
-                to={`/`}
-                component={Link}
               >
-                <img
-                  className="SignUpform_img"
-                  src={Logo}
-                  alt="Signuppicture"
+                <Grid
+                  item
                   style={{
-                    height: "62px",
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
                   }}
-                />
-                <Typography
-                  variant="h5"
-                  component="p"
-                  style={{
-                    fontWeight: 900,
-                    color: "#000",
-                    marginRight: "10px",
-                  }}
+                  to={`/`}
+                  component={Link}
                 >
-                  کتاب بازان
-                </Typography>
+                  <img
+                    className="SignUpform_img"
+                    src={Logo}
+                    alt="Signuppicture"
+                    style={{
+                      height: "62px",
+                    }}
+                  />
+                  <Typography
+                    variant="h5"
+                    component="p"
+                    style={{
+                      fontWeight: 900,
+                      color: "#000",
+                      marginRight: "10px",
+                    }}
+                  >
+                    کتاب بازان
+                  </Typography>
+                </Grid>
                 <IconButton
                   style={{
                     color: "#1565C0",
                     display: "flex",
                     justifyContent: "center",
-                    marginRight:"2.5%"
+                    marginRight: "5%",
                   }}
                   onClick={handleSearch}
                 >
