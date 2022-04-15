@@ -61,6 +61,7 @@ const Showbook = () => {
   console.log(bookinfo.length);
 
   let numbook = bookinfo.length;
+
   return (
     <div className="showbookall_fa">
       <Navbar />
@@ -134,8 +135,7 @@ const Showbook = () => {
             </Grid>
           </div>
         )}
-        {numbook === 0 && (
-
+        {numbook === 0  && !apiLoading && (
             <div
               style={{
                 display: "flex",
