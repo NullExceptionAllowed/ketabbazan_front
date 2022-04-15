@@ -8,7 +8,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import Logo from "../../assets/Image/logo.png";
 import Box from "@mui/material/Box";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -23,8 +23,10 @@ const Nav = () => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down(600));
   const checkpx = useMediaQuery(theme.breakpoints.down(780));
+  const history = useHistory();
   const handlesubmit = async (event) => {
     event.preventDefault();
+    history.replace(`/Book/search/?q=${search}`);
   };
   const [search, setsearchname] = useState("");
   const Setsearch = (event) => {
@@ -160,8 +162,6 @@ const Nav = () => {
                         onChange={Setsearch}
                       />
                       <IconButton
-                        to={`/Showbookall/search/?q=${search}`}
-                        component={Link}
                         type="submit"
                         sx={{ p: "10px" }}
                         aria-label="search"

@@ -11,6 +11,7 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
+import ReactLoading from "react-loading";
 
 export default function SimpleSlider() {
   const [apiLoading, setApiLoading] = useState(false);
@@ -41,7 +42,7 @@ export default function SimpleSlider() {
           جدیدترین کتاب ها
         </h2>
         <Link
-          to={`/showbookall`}
+          to={`/Book`}
           style={{
             textAlign: "center",
             textDecoration: "none",
@@ -50,101 +51,129 @@ export default function SimpleSlider() {
         >
           مشاهده همه{" "}
         </Link>
-      </div>
-      <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-        <div style={{ width: "100%" }}>
-          <Swiper
-            breakpoints={{
-              // when window width is >= 640px
-              1500: {
-                slidesPerView: 10,
-                spaceBetween:0
-              },
-              // when window width is >= 768px
-              1200: {
-                slidesPerView: 9,
-                spaceBetween:0
-              },
-              900: {
-                slidesPerView: 6,
-                spaceBetween:0
-              },
-              600: {
-                slidesPerView: 4,
-                spaceBetween:0
-              },
-              500: {
-                slidesPerView: 3,
-                spaceBetween:0
-              },
-              0: {
-                slidesPerView: 2,
-                spaceBetween:0
-              },
+        {apiLoading && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "auto",
+              marginTop: 96,
+              marginBottom: 96,
             }}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[Pagination]}
           >
-            {bookinfo.map((info, index) => (
-              <SwiperSlide key={index}>
-                <Link
-                  to={{
-                    pathname: `/showbookinfo/${info.id}`,
-                  }}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Grid
-                    key={index}
-                    className="showbook_paper"
-                    sx={{
-                      direction: "rtl",
-                    }}
-                    style={{
-                      marginRight: "0px",
-                      marginTop: "30px",
-                      textDecoration: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      flexDirection: "column",
-                      height: "340px",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "center" }}>
-                      <img
-                        alt="complex1"
-                        className="showbook_img"
-                        src={info.image_url}
-                        style={{
-                          marginTop: "20px",
-                          height: "150px",
-                          width: "120px",
-                        }}
-                      />
-                    </div>
-
-                    <div
-                      className="showbook_name"
-                      variant="subtitle1"
-                      component="div"
-                    >
-                      {info.name}
-                    </div>
-                    <div
-                      variant="body2"
-                      style={{ color: "#757C86", fontSize: "13px" }}
-                      className="showbook_author"
-                    >
-                      {info.author}
-                    </div>
-                  </Grid>
-                </Link>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+            <ReactLoading
+              type="spinningBubbles"
+              color={"#1565C0"}
+              height={100}
+              width={100}
+            />
+          </div>
+        )}
       </div>
+      {!apiLoading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ width: "100%" }}>
+            <Swiper
+              breakpoints={{
+                // when window width is >= 640px
+                1500: {
+                  slidesPerView: 10,
+                  spaceBetween: 0,
+                },
+                // when window width is >= 768px
+                1200: {
+                  slidesPerView: 8,
+                  spaceBetween: 0,
+                },
+                900: {
+                  slidesPerView: 6,
+                  spaceBetween: 0,
+                },
+                600: {
+                  slidesPerView: 4,
+                  spaceBetween: 0,
+                },
+                500: {
+                  slidesPerView: 3,
+                  spaceBetween: 0,
+                },
+                0: {
+                  slidesPerView: 2,
+                  spaceBetween: 0,
+                },
+              }}
+              pagination={{
+                clickable: true,
+              }}
+              modules={[Pagination]}
+            >
+              {bookinfo.map((info, index) => (
+                <SwiperSlide key={index}>
+                  <Link
+                    to={{
+                      pathname: `/showbookinfo/${info.id}`,
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Grid
+                      key={index}
+                      className="showbook_paper"
+                      sx={{
+                        direction: "rtl",
+                      }}
+                      style={{
+                        marginRight: "0px",
+                        marginTop: "30px",
+                        textDecoration: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        flexDirection: "column",
+                        height: "340px",
+                      }}
+                    >
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <img
+                          alt="complex1"
+                          className="showbook_img"
+                          src={info.image_url}
+                          style={{
+                            marginTop: "20px",
+                            height: "150px",
+                            width: "120px",
+                          }}
+                        />
+                      </div>
+
+                      <div
+                        className="showbook_name"
+                        variant="subtitle1"
+                        component="div"
+                      >
+                        {info.name}
+                      </div>
+                      <div
+                        variant="body2"
+                        style={{ color: "#757C86", fontSize: "13px" }}
+                        className="showbook_author"
+                      >
+                        {info.author}
+                      </div>
+                    </Grid>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

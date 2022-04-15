@@ -1,0 +1,89 @@
+.showbook_fa{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'BYekan' !important;    
+}
+.showbook_paper{
+    width: 155px;
+    height: 272px;
+}
+.showbook_img{
+    height: 150px;
+    width: 120px;
+}
+.showbook_name{
+    font-size: 15px;
+    text-align: center;
+    margin-top: 20px;
+    color: black;
+    text-decoration: none;
+}
+.showbook_author{
+    text-align: center;
+    color: "#757C86";
+    font-size: 13px; 
+    margin-top: 5px;
+    text-decoration: none;
+}
+.showbook_price{
+    text-align: center;
+    color: "#4DB200";
+
+    font-size: "17px"; 
+    margin-top: 5px;
+    text-decoration: none;
+}
+
+@media (max-width: 900px ) and (min-width:600px) {
+    .showbook_paper{
+        /* width: calc((90vw) / 4); */
+        height: 280px;
+    }
+    .showbook_name{
+        font-size: 15px;
+        margin-top: 15px;
+    }
+    .showbook_author{
+        font-size: 12px; 
+        margin-top: 4px;
+    }
+    .showbook_price{
+        font-size: "16px"; 
+        margin-top: 4px;
+    }
+
+}
+@media (max-width: 1000px ) and (min-width:900px) {
+    .showbook_paper{
+        /* width: calc((100vw) / 5); */
+    }
+
+}
+@media (max-width: 600px) {
+    .showbook_paper{
+        /* width: calc((90vw) / 3); */
+        height: 270px;
+    }
+}
+@media (max-width: 400px) {
+    .showbook_paper{
+        /* width: calc((110vw) / 3); */
+        height: 210px;
+    }
+    .showbook_name{
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .showbook_author{
+        font-size: 9px; 
+        margin-top: 2px;
+    }
+    .showbook_price{
+        font-size: "13px"; 
+        margin-top: 2px;
+    }
+    .showbook_paper{
+        height: 296px;
+    }
+}

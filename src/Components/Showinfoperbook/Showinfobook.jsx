@@ -30,14 +30,9 @@ const Img = styled("img")({
 const book_id = createContext();
 
 const Showinfo = () => {
-  //var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5";
-  const params = useParams();
-  var url_string = "http://localhost:3000/Showbookall";
-  var url = new URL(url_string);
-  var c = url.searchParams.get("q");
-  console.log(c);
   const [apiLoading, setApiLoading] = useState(false);
-  const [bookinfo, setbookinfo] = useState([]);  
+  const [bookinfo, setbookinfo] = useState([]);
+  const params = useParams();
   const id = params.id;
   const [value, setValue] = React.useState(2);
 
