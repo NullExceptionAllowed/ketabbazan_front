@@ -9,7 +9,7 @@
     text-align: center;
     margin-bottom: 76px;
     direction: rtl;
-    margin-top:63px;
+    margin-top:57px;
 }
 .home_img{
     width: 100%;
@@ -45,7 +45,6 @@
     margin-top: 20px;
     font-size: 24px;
 }
-
 @media (max-width: 600px) {
     .home-banner__start-btn{
         width: 400px;

@@ -12,6 +12,7 @@ import axios from "axios";
 import { baseUrl } from "../../Variable";
 import ButtonBase from "@mui/material/ButtonBase";
 import { styled } from "@mui/material/styles";
+import Navbar2 from '../Navbar/Nav2';
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -19,6 +20,7 @@ import Navbar from "../Navbar/Nav";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import PdfViewer from "./../PdfViewer/PdfViewer";
+import showToast from "../../Service/toastservice";
 
 const Img = styled("img")({
   margin: "auto",
@@ -35,6 +37,7 @@ const Showinfo = () => {
   const params = useParams();
   const id = params.id;
   const [value, setValue] = React.useState(2);
+  const [to, setto] = React.useState(null);
 
   useEffect(() => {
     setApiLoading(true);
@@ -45,13 +48,37 @@ const Showinfo = () => {
     });
   }, []);
 
-  <book_id.Provider value={id}>
-    <PdfViewer />
-  </book_id.Provider>;
+  const handleLoginForReadPdf = () =>{
+
+    let flag = localStorage.getItem("token")
+
+    if(flag === null){      
+      setto("/showbookinfo/"+params.id)
+      return to;
+    }
+    else{
+      setto("/ReadPdf/"+params.id)
+      return to;
+    }
+}
+
+    let temp = null;
+    let flag = localStorage.getItem('token');
+    if (flag === null) {
+        temp = (
+            <Navbar/>
+        );
+    }
+    else{
+        console.log(flag)
+        temp = (
+            <Navbar2/>
+        );
+    }
 
   return (
     <div style={{ direction: "rtl" }}>
-      <Navbar />
+      {temp}
       <Grid
         sx={{
           direction: "rtl",
@@ -143,7 +170,7 @@ const Showinfo = () => {
                         borderRadius: "32px",
                         height: "45px",
                       }}
-                      to={"/ReadPdf/" + params.id}
+                      to={handleLoginForReadPdf}
                       component={Link}
                     >
                       مطالعه کتاب

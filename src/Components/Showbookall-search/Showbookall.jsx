@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
+import Navbar2 from '../Navbar/Nav2';
 import { baseUrl } from "../../Variable";
 import axios from "axios";
 import Navbar from "../Navbar/Nav";
@@ -22,6 +23,21 @@ import {
 } from "react-router-dom";
 
 const Showbook = () => {
+
+  let temp = null;
+    let flag = localStorage.getItem('token');
+    if (flag === null) {
+        temp = (
+            <Navbar/>
+        );
+    }
+    else{
+        console.log(flag)
+        temp = (
+            <Navbar2/>
+        );
+    }
+
   const location = useLocation();
   const search = location.search;
   console.log(search);
@@ -62,10 +78,12 @@ const Showbook = () => {
 
   let numbook = bookinfo.length;
 
+
+
   return (
     <div className="showbookall_fa">
-      <Navbar />
-      <div style={{ marginTop: "70px" }}>
+      {temp}
+      <div style={{ marginTop: "6%" }}>
         {apiLoading && (
           <div
             style={{
