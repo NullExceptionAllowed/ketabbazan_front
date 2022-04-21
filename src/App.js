@@ -7,8 +7,7 @@ import Homepage from './Components/Homepage/Homepage';
 import Book from "./Components/Showbookall-search/Showbookall";
 import Showinfo from "./Components/Showinfoperbook/Showinfobook";
 import PdfViewer from "./Components/PdfViewer/PdfViewer";
-
-
+import Article from './Components/Writearticle/article';
 
 const App = () => {
   return (
@@ -20,6 +19,7 @@ const App = () => {
         <Route path="/Book"  component={Book} />
         <Route path="/showbookinfo/:id"  component={Showinfo} />
         <Route path="/ReadPdf/:id"  component={PdfViewer} />
+        <Route path="/article/:id"  component={Article} />
       </Switch>
   );
 };
