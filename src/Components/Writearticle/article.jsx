@@ -20,6 +20,10 @@ import "@ckeditor/ckeditor5-build-classic/build/translations/ar";
 import SendIcon from "@mui/icons-material/Send";
 //  import TextPartLanguage from "@ckeditor/ckeditor5-language/src/textpartlanguage";
 import Box from "@mui/material/Box";
+import showToast from "../../Service/toastservice";
+import { baseUrl } from "../../Variable";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -31,9 +35,9 @@ const Article = () => {
   const [writearticle, setwritearticle] = useState("");
   const [file, setFile] = useState(article);
   const [changeImage, setChangeImage] = useState(false);
-  const [binaryFile, setBinaryFile] = useState(null);
-  const[titlearticle,settitlearticle]=useState("");
-  const[summary,setsummary]=useState("");
+  const [postimage, setpostimage] = useState(null);
+  const [titlearticle, settitlearticle] = useState("");
+  const [summary, setsummary] = useState("");
   const [aftersubmit, setaftersubmit] = useState(false);
 
   let errors = [];
@@ -43,11 +47,10 @@ const Article = () => {
     errors.titlearticle = "عنوان مقاله را حتما باید وارد کنی";
     check = false;
   }
-  if(!summary){
+  if (!summary) {
     errors.summary = "باید یک پیش نمایش از مقاله را وارد کنی";
     check = false;
-  }
-  else if(summary.length<30){
+  } else if (summary.length < 30) {
     errors.summary = "پیش نمایش باید حداقل 30 کلمه باشد.";
     check = false;
   }
@@ -55,22 +58,71 @@ const Article = () => {
   const handlesubmit = async (event) => {
     event.preventDefault();
     setaftersubmit(true);
+    const formdata = new FormData();
+    formdata.append("title", titlearticle);
+    formdata.append("summary", summary);
+    formdata.append("book", "1");
+    formdata.append("image", postimage.image[0]);
+    const articlefield = {
+      title: titlearticle,
+      summary: summary,
+      book: "1",
+    };
+    console.log(JSON.stringify(formdata));
+    const token = "Token " + localStorage.getItem("token");
+    console.log(token);
+    if (check) {
+      try {
+        const response = await axios.post(
+          `${baseUrl}/write_article/create_article/`,
+          formdata,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          }
+        );
+        console.log(response.status + "*");
+        console.log(response.data);
+        if (response.status === 200) {
+          showToast("success", "با موفقیت مقاله را گذاشتی");
+          console.log(response.data);
+          setTimeout(() => {}, 2000);
+        }
+      } catch (ex) {
+        console.log(ex);
+        showToast("error", "مشکلی پیش آمده است");
+      }
+    }
   };
-  const SetTitleArticle=(event)=>{
+  const SetTitleArticle = (event) => {
     settitlearticle(event.target.value);
   };
-  const SetSummary=(event)=>{
+  const SetSummary = (event) => {
     setsummary(event.target.value);
   };
-  const isMatch = useMediaQuery(theme.breakpoints.down(1000));
+  const isMatch = useMediaQuery(theme.breakpoints.down(1100));
+  const checkpx = useMediaQuery(theme.breakpoints.down(900));
+
+  let dis = 0;
+  if (!isMatch) {
+    dis = 9;
+  }
+  if (isMatch && !checkpx) {
+    dis = 6;
+  } else {
+    dis = 2;
+  }
   console.log(isMatch);
   const handleChange = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
     setChangeImage(true);
-
     let picture = e.target.files[0];
-
-    setBinaryFile(picture);
+    console.log(e.target.files[0]);
+    setpostimage({
+      image: e.target.files,
+    });
   };
 
   const SetwriteArticle = (event, editor) => {
@@ -103,10 +155,14 @@ const Article = () => {
               style={{ fontFamily: "BYekan" }}
               onSubmit={handlesubmit}
             >
-              <Grid container spacing={isMatch ? 6 : 9}>
+              <Grid
+                container
+                columnSpacing={isMatch && !checkpx ? 6 : checkpx ? 2 : 9}
+                rowSpacing={1}
+              >
                 <Grid
                   style={{
-                    marginTop: "8vh",
+                    marginTop: "5vh",
                     display: "flex",
                     flexDirection: "column",
                   }}
@@ -167,73 +223,145 @@ const Article = () => {
                     />
                   </div>
                 </Grid>
-                <Grid
-                  style={{
-                    marginTop: "8vh",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                  item
-                  md={4}
-                >
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Button
-                      variant="contained"
-                      style={{
-                        color: "#1565C0",
-                        border: "2px solid #1565C0",
-                        backgroundColor: "#fff",
-                        fontWeight: 800,
-                        width: "118px",
-                        marginRight: "calc(100% - 118px)",
-                        marginTop: "-10vh",
-                        marginBottom: "4vh",
-                      }}
-                      type="submit"
-                    >
-                      <SendIcon style={{ marginLeft: 8, fontSize: "small" }} />
-                      ارسال مقاله
-                    </Button>
-                    <Typography
-                      style={{ color: "#949494", marginBottom: "1vh" }}
-                    >
-                      تصویر مقاله
-                    </Typography>
-                    <img
-                      src={file}
-                      alt="imgarticle"
-                      style={{
-                        height: "60%",
-                        width: "100%",
-                        borderRadius: "5px",
-                      }}
-                    />
-                    <div style={{ display: "flex", flexDirection: "row" }}>
+                {!checkpx ? (
+                  <Grid
+                    style={{
+                      marginTop: "8vh",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                    item
+                    md={4}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
                       <Button
                         variant="contained"
-                        component="label"
-                        sx={{
-                          color: "white",
-                          width: "100px",
-                          mt: 2,
+                        style={{
+                          color: "#1565C0",
+                          border: "2px solid #1565C0",
+                          backgroundColor: "#fff",
+                          fontWeight: 800,
+                          width: "118px",
+                          marginRight: "calc(100% - 118px)",
+                          marginTop: "-13vh",
+                          marginBottom: "4vh",
                         }}
+                        type="submit"
                       >
-                        <p style={{ fontSize: "0.8rem" }}>انتخاب عکس</p>
-                        <input
-                          type="file"
-                          hidden
-                          onChange={handleChange}
-                          accept=".jpg,.jpeg,.png"
+                        <SendIcon
+                          style={{ marginLeft: 8, fontSize: "small" }}
                         />
+                        ارسال مقاله
                       </Button>
+                      <Typography
+                        style={{ color: "#949494", marginBottom: "1vh" }}
+                      >
+                        تصویر مقاله
+                      </Typography>
+                      <img
+                        src={file}
+                        alt="imgarticle"
+                        style={{
+                          height: "30vh",
+                          width: "100%",
+                          borderRadius: "5px",
+                        }}
+                      />
+                      <div style={{ display: "flex", flexDirection: "row" }}>
+                        <Button
+                          variant="contained"
+                          component="label"
+                          sx={{
+                            color: "white",
+                            width: "100px",
+                            mt: 2,
+                          }}
+                        >
+                          <p style={{ fontSize: "0.8rem" }}>انتخاب عکس</p>
+                          <input
+                            type="file"
+                            hidden
+                            onChange={handleChange}
+                            accept=".jpg,.jpeg,.png"
+                          />
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </Grid>
+                  </Grid>
+                ) : (
+                  <>
+                    <Grid
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                      item
+                      xs={12}
+                    >
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <img
+                          src={file}
+                          alt="imgarticle"
+                          style={{
+                            height: "30vh",
+                            width: "100%",
+                            borderRadius: "5px",
+                          }}
+                        />
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Button
+                            variant="contained"
+                            component="label"
+                            sx={{
+                              color: "white",
+                              width: "100px",
+                              mt: 1,
+                            }}
+                          >
+                            <p style={{ fontSize: "0.8rem" }}>انتخاب عکس</p>
+                            <input
+                              type="file"
+                              hidden
+                              onChange={handleChange}
+                              accept=".jpg,.jpeg,.png"
+                            />
+                          </Button>
+                        </div>
+                        <Button
+                        variant="contained"
+                        style={{
+                          color: "#1565C0",
+                          border: "2px solid #1565C0",
+                          backgroundColor: "#fff",
+                          fontWeight: 800,
+                          marginBottom: "4vh",
+                          marginTop:"4vh"
+                        }}
+                        fullWidth
+                        type="submit"
+                      >
+                        <SendIcon
+                          style={{ marginLeft: 8, fontSize: "small" }}
+                        />
+                        ارسال مقاله
+                      </Button>
+                      </div>
+                    </Grid>
+                  </>
+
+                )}                                
               </Grid>
             </Box>
           </Grid>
         </CacheProvider>
       </Grid>
+      <ToastContainer />
     </div>
   );
 };
