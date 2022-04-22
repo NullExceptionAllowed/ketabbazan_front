@@ -12,18 +12,5 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script src="../build/ckeditor.js"></script>
-    <script src="../build/translations/de.js"></script>
-    <script>
-      ClassicEditor.create(document.querySelector("#editor"), {
-        language: "de",
-      })
-        .then((editor) => {
-          window.editor = editor;
-        })
-        .catch((err) => {
-          console.error(err.stack);
-        });
-    </script>
   </body>
 </html>
