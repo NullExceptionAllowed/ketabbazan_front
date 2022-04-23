@@ -24,6 +24,7 @@ import showToast from "../../Service/toastservice";
 import { baseUrl } from "../../Variable";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
+//import ReactHtmlParser from 'react-html-parser';
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -39,7 +40,9 @@ const Article = () => {
   const [titlearticle, settitlearticle] = useState("");
   const [summary, setsummary] = useState("");
   const [aftersubmit, setaftersubmit] = useState(false);
+  const[addwritearticle,setaddwritearticle]=useState("");
 
+  console.log(addwritearticle+"*");
   let errors = [];
   let check = true;
 
@@ -63,6 +66,7 @@ const Article = () => {
     formdata.append("summary", summary);
     formdata.append("book", "1");
     formdata.append("image", postimage.image[0]);
+    formdata.append("body", writearticle);
     const articlefield = {
       title: titlearticle,
       summary: summary,
@@ -105,15 +109,6 @@ const Article = () => {
   const isMatch = useMediaQuery(theme.breakpoints.down(1100));
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
 
-  let dis = 0;
-  if (!isMatch) {
-    dis = 9;
-  }
-  if (isMatch && !checkpx) {
-    dis = 6;
-  } else {
-    dis = 2;
-  }
   console.log(isMatch);
   const handleChange = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
@@ -128,7 +123,7 @@ const Article = () => {
   const SetwriteArticle = (event, editor) => {
     const data = editor.getData();
     setwritearticle(data);
-    console.log(writearticle);
+     console.log(writearticle);
   };
   return (
     <div style={{ direction: "rtl" }}>
@@ -218,7 +213,7 @@ const Article = () => {
                     <CKEditor
                       editor={ClassicEditor}
                       onChange={SetwriteArticle}
-                      value={writearticle}
+                      data={addwritearticle}
                       config={{}}
                     />
                   </div>
