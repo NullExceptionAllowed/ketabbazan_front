@@ -16,7 +16,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import "./article.css";
 import article from "../../assets/Image/article.png";
-import "@ckeditor/ckeditor5-build-classic/build/translations/ar";
+import "@ckeditor/ckeditor5-build-classic/build/translations/fa";
 import SendIcon from "@mui/icons-material/Send";
 //  import TextPartLanguage from "@ckeditor/ckeditor5-language/src/textpartlanguage";
 import Box from "@mui/material/Box";
@@ -214,7 +214,7 @@ const Article = () => {
                       editor={ClassicEditor}
                       onChange={SetwriteArticle}
                       data={addwritearticle}
-                      config={{}}
+                      config={{language:'fa'}}
                     />
                   </div>
                 </Grid>
