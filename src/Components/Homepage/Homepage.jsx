@@ -15,13 +15,6 @@ const Homepage = () => {
       <Header />
       <Workinfo />
       <Showbook />
-      <Grid
-        style={{ display: "flex", justifyContent: "center", direction: "rtl" }}
-        to={"/article/:id"}
-        component={Link}
-      >
-        <div>مقاله</div>
-      </Grid>
     </div>
   );
 };
