@@ -10,6 +10,7 @@ import AddPhoto from "./Tools/AddPhoto.jsx";
 import { Link } from "react-router-dom";
 import Navbar from '../Navbar/Nav';
 import Navbar2 from '../Navbar/Nav2';
+import ChangeNav from './../Navbar/changeNav';
 
 
 const Profile = () => {
@@ -17,19 +18,6 @@ const Profile = () => {
   // const token = "JWT" + localStorage.getItem("token");
   // console.log(token);
 
-	let temp = null;
-  let f = localStorage.getItem('token');
-  if (f === null) {
-      temp = (
-          <Navbar/>
-      );
-  }
-  else{
-      console.log(flag)
-      temp = (
-          <Navbar2/>
-      );
-  }
 
   const handleEdit = () => {
     setFlag(1);
@@ -60,7 +48,7 @@ const Profile = () => {
   return (
     <div>
       <div className="profile_container">
-        {temp}
+        <ChangeNav/>
         <aside className="profile_container_aside">
           <div className="profile_container_asideTop">
             <div className="profile_image">

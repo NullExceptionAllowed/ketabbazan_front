@@ -25,6 +25,7 @@ import { baseUrl } from "../../Variable";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 //import ReactHtmlParser from 'react-html-parser';
+import {Link,useParams,} from "react-router-dom";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -41,6 +42,8 @@ const Article = () => {
   const [summary, setsummary] = useState("");
   const [aftersubmit, setaftersubmit] = useState(false);
   const[addwritearticle,setaddwritearticle]=useState("");
+  const params = useParams();
+  const id = params.id;
 
   console.log(addwritearticle+"*");
   let errors = [];
@@ -64,13 +67,13 @@ const Article = () => {
     const formdata = new FormData();
     formdata.append("title", titlearticle);
     formdata.append("summary", summary);
-    formdata.append("book", "1");
+    formdata.append("book", id);
     formdata.append("image", postimage.image[0]);
     formdata.append("body", writearticle);
     const articlefield = {
       title: titlearticle,
       summary: summary,
-      book: "1",
+      book: id,
     };
     console.log(JSON.stringify(formdata));
     const token = "Token " + localStorage.getItem("token");

@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-import { baseUrl } from "../../Variable";
 import axios from "axios";
-import Paper from "@mui/material/Paper";
+import "swiper/swiper.min.css";
+import "swiper/swiper-bundle.min.css";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../Variable";
+import ReactLoading from "react-loading";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
-import ReactLoading from "react-loading";
+import SwiperCore, { Navigation, Pagination } from "swiper";
 
 export default function SimpleSlider() {
   const [apiLoading, setApiLoading] = useState(false);
@@ -117,7 +115,7 @@ export default function SimpleSlider() {
                 <SwiperSlide key={index}>
                   <Link
                     to={{
-                      pathname: `/showbookinfo/${info.id}`,
+                      pathname: `/bookinfo/${info.id}`,
                     }}
                     style={{ textDecoration: "none" }}
                   >

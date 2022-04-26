@@ -21,23 +21,11 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
+import ChangeNav from './../Navbar/changeNav';
+
+
 
 const Showbook = () => {
-
-  let temp = null;
-    let flag = localStorage.getItem('token');
-    if (flag === null) {
-        temp = (
-            <Navbar/>
-        );
-    }
-    else{
-        console.log(flag)
-        temp = (
-            <Navbar2/>
-        );
-    }
-
   const location = useLocation();
   const search = location.search;
   console.log(search);
@@ -78,11 +66,9 @@ const Showbook = () => {
 
   let numbook = bookinfo.length;
 
-
-
   return (
     <div className="showbookall_fa">
-      {temp}
+      <ChangeNav/>
       <div style={{ marginTop: "6%" }}>
         {apiLoading && (
           <div

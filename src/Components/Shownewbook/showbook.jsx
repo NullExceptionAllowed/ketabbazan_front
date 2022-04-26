@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import ButtonBase from "@mui/material/ButtonBase";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { baseUrl } from "../../Variable";
 import axios from "axios";
 import "./showbook.css";
-import Slider from "react-slick";
 import SimpleSlider from "../emtehani/emtehani";
 
 const Showbook = () => {
@@ -108,7 +103,7 @@ const Showbook = () => {
               <Grid
                 className="showbook_paper"
                 key={index}
-                to={`/Showbookinfo/${info.id}`}
+                to={`/bookinfo/${info.id}`}
                 component={Link}
                 sx={{
                   direction: "rtl",
