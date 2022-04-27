@@ -25,7 +25,10 @@ import { baseUrl } from "../../Variable";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 //import ReactHtmlParser from 'react-html-parser';
-import {Link,useParams,} from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
+import ChangeNav from "./../Navbar/changeNav";
+import ReactLoading from "react-loading";
+import Stack from "@mui/material/Stack";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -41,11 +44,14 @@ const Article = () => {
   const [titlearticle, settitlearticle] = useState("");
   const [summary, setsummary] = useState("");
   const [aftersubmit, setaftersubmit] = useState(false);
-  const[addwritearticle,setaddwritearticle]=useState("");
+  const [addwritearticle, setaddwritearticle] = useState("");
+  const [loading, setloading] = useState(false);
+  const history = useHistory();
+
   const params = useParams();
   const id = params.id;
 
-  console.log(addwritearticle+"*");
+  console.log(addwritearticle + "*");
   let errors = [];
   let check = true;
 
@@ -79,6 +85,7 @@ const Article = () => {
     const token = "Token " + localStorage.getItem("token");
     console.log(token);
     if (check) {
+      setloading(true);
       try {
         const response = await axios.post(
           `${baseUrl}/write_article/create_article/`,
@@ -93,11 +100,15 @@ const Article = () => {
         console.log(response.status + "*");
         console.log(response.data);
         if (response.status === 200) {
+          setloading(false);
           showToast("success", "با موفقیت مقاله را گذاشتی");
           console.log(response.data);
-          setTimeout(() => {}, 2000);
+          setTimeout(() => {
+            history.replace(`/bookinfo/${id}`);
+          }, 2000);
         }
       } catch (ex) {
+        setloading(false);
         console.log(ex);
         showToast("error", "مشکلی پیش آمده است");
       }
@@ -126,11 +137,11 @@ const Article = () => {
   const SetwriteArticle = (event, editor) => {
     const data = editor.getData();
     setwritearticle(data);
-     console.log(writearticle);
+    console.log(writearticle);
   };
   return (
     <div style={{ direction: "rtl" }}>
-      <Navbar />
+      <ChangeNav />
       <Grid
         style={{
           marginTop: "80px",
@@ -217,7 +228,7 @@ const Article = () => {
                       editor={ClassicEditor}
                       onChange={SetwriteArticle}
                       data={addwritearticle}
-                      config={{language:'fa'}}
+                      config={{ language: "fa" }}
                     />
                   </div>
                 </Grid>
@@ -246,10 +257,19 @@ const Article = () => {
                         }}
                         type="submit"
                       >
-                        <SendIcon
-                          style={{ marginLeft: 8, fontSize: "small" }}
-                        />
-                        ارسال مقاله
+                        {!loading && (
+                          <Stack direction="row" alignItems="center" gap={1}>
+                            <SendIcon style={{ fontSize: "small" }} />
+                            ارسال مقاله
+                          </Stack>
+                        )}
+                        {loading && (
+                          <ReactLoading
+                            type="bubbles"
+                            color="#1565C0"
+                            className="loading-login"
+                          />
+                        )}
                       </Button>
                       <Typography
                         style={{ color: "#949494", marginBottom: "1vh" }}
@@ -332,28 +352,36 @@ const Article = () => {
                           </Button>
                         </div>
                         <Button
-                        variant="contained"
-                        style={{
-                          color: "#1565C0",
-                          border: "2px solid #1565C0",
-                          backgroundColor: "#fff",
-                          fontWeight: 800,
-                          marginBottom: "4vh",
-                          marginTop:"4vh"
-                        }}
-                        fullWidth
-                        type="submit"
-                      >
-                        <SendIcon
-                          style={{ marginLeft: 8, fontSize: "small" }}
-                        />
-                        ارسال مقاله
-                      </Button>
+                          variant="contained"
+                          style={{
+                            color: "#1565C0",
+                            border: "2px solid #1565C0",
+                            backgroundColor: "#fff",
+                            fontWeight: 800,
+                            marginBottom: "4vh",
+                            marginTop: "4vh",
+                          }}
+                          fullWidth
+                          type="submit"
+                        >
+                          {!loading && (
+                            <Stack direction="row" alignItems="center" gap={1}>
+                              <SendIcon style={{ fontSize: "small" }} />
+                              ارسال مقاله
+                            </Stack>
+                          )}
+                          {loading && (
+                            <ReactLoading
+                              type="bubbles"
+                              color="#1565C0"
+                              className="loading-login"
+                            />
+                          )}
+                        </Button>
                       </div>
                     </Grid>
                   </>
-
-                )}                                
+                )}
               </Grid>
             </Box>
           </Grid>
