@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Nav";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
@@ -46,12 +46,19 @@ const Article = () => {
   const [aftersubmit, setaftersubmit] = useState(false);
   const [addwritearticle, setaddwritearticle] = useState("");
   const [loading, setloading] = useState(false);
+  const [bookname, setbookname] = useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/read_book/info/${id}`).then((response) => {
+      setbookname(response.data.book_info.name);
+      console.log(response.data.book_info.name);
+    });
+  }, []);
 
   const params = useParams();
   const id = params.id;
 
-  console.log(addwritearticle + "*");
   let errors = [];
   let check = true;
 
@@ -65,7 +72,11 @@ const Article = () => {
   } else if (summary.length < 30) {
     errors.summary = "پیش نمایش باید حداقل 30 کلمه باشد.";
     check = false;
+  } else if (summary.length > 85) {
+    errors.summary = "پیش نمایش نباید بیش تر از 85 کلمه باشد.";
+    check = false;
   }
+  console.log(summary.length);
 
   const handlesubmit = async (event) => {
     event.preventDefault();
@@ -156,7 +167,8 @@ const Article = () => {
               ارسال مقاله جدید
             </Typography>
             <Typography style={{ color: "#949494" }}>
-              از طریق تکمیل این فرم میتوانید مقاله ای درباره کتاب قاسم بنویسید.
+              از طریق تکمیل این فرم میتوانید مقاله ای درباره کتاب{" "}
+              <span style={{ fontWeight: "bold" }}>{bookname}</span> بنویسید.
             </Typography>
             <Box
               component="form"
