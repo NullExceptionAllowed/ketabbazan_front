@@ -8,6 +8,7 @@ import Book from "./Components/Showbookall-search/Showbookall";
 import PdfViewer from "./Components/PdfViewer/PdfViewer";
 import BookInfo from './Components/Showinfoperbook/bookInfo';
 import Article from './Components/Writearticle/article';
+import ArticleInfo from "./Components/ShowinfoPerarticle/Articleinfo";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/bookinfo/:id"  component={BookInfo} />
         <Route path="/ReadPdf/:id"  component={PdfViewer} />
         <Route path="/article/:id"  component={Article} />
+        <Route path="/articleinfo/:id"  component={ArticleInfo} />
       </Switch>
   );
 };

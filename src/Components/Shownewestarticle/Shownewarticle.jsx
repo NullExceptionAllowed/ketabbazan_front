@@ -97,6 +97,8 @@ const ShownewArticle = () => {
               <Paper
                 key={index}
                 className="shownewarticle-Paper"
+                to={`/articleinfo/${info.id}`}
+                component={Link}
                 sx={{
                   direction: "rtl",
                 }}
@@ -111,7 +113,13 @@ const ShownewArticle = () => {
                   borderRadius: "5px",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", position:"relative" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    position: "relative",
+                  }}
+                >
                   <img
                     alt="complex1"
                     src={info.image}
@@ -121,7 +129,6 @@ const ShownewArticle = () => {
                     }}
                     className="shownewarticle-img"
                   />
-                  <div className="aa">من</div>
                 </div>
                 <div
                   style={{
@@ -140,6 +147,7 @@ const ShownewArticle = () => {
                     color: "#757C86",
                     fontSize: "15px",
                   }}
+                  className="showarticle-summary"
                 >
                   {info.summary}
                 </div>
@@ -152,8 +160,7 @@ const ShownewArticle = () => {
                     marginBottom: "10px",
                   }}
                 >
-                  <div style={{ flex: 1, marginRight: "10px" }}>
-                  </div>
+                  <div style={{ flex: 1, marginRight: "10px" }}></div>
                   <Avatar
                     alt="Remy Sharp"
                     src={image}
@@ -163,7 +170,7 @@ const ShownewArticle = () => {
                     style={{
                       marginRight: "5px",
                       fontSize: "13px",
-                      color: "#1565C0",
+                      color: "#0057D9",
                     }}
                   >
                     {info.owner}

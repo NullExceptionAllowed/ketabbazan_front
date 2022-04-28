@@ -24,7 +24,7 @@ import showToast from "../../Service/toastservice";
 import { baseUrl } from "../../Variable";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
-//import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 import { Link, useParams, useHistory } from "react-router-dom";
 import ChangeNav from "./../Navbar/changeNav";
 import ReactLoading from "react-loading";
@@ -36,6 +36,7 @@ const cacheRtl = createCache({
 });
 
 const Article = () => {
+  const parse = require('html-react-parser');
   const theme = useTheme();
   const [writearticle, setwritearticle] = useState("");
   const [file, setFile] = useState(article);
@@ -242,6 +243,7 @@ const Article = () => {
                       data={addwritearticle}
                       config={{ language: "fa" }}
                     />
+                    {/* <div>{parse(writearticle)}</div> */}
                   </div>
                 </Grid>
                 {!checkpx ? (
