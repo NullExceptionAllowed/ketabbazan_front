@@ -329,15 +329,23 @@ const Article = () => {
                       xs={12}
                     >
                       <div style={{ display: "flex", flexDirection: "column" }}>
-                        <img
-                          src={file}
-                          alt="imgarticle"
+                        <div
                           style={{
-                            height: "30vh",
-                            width: "100%",
-                            borderRadius: "5px",
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
                           }}
-                        />
+                        >
+                          <img
+                            src={file}
+                            alt="imgarticle"
+                            style={{
+                              height: "30vh",
+                              width: "300px",
+                              borderRadius: "5px",
+                            }}
+                          />
+                        </div>
                         <div
                           style={{
                             display: "flex",

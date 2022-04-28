@@ -38,7 +38,7 @@ const Showbook = () => {
     if (searchUrlParam === null) {
       setApiLoading(true);
       axios({
-        url: `${baseUrl}/read_book/all_books`,
+        url: `${baseUrl}/read_book/all_books/`,
       }).then((response) => {
         console.log(response.data);
         setbookinfo(response.data);

@@ -97,6 +97,7 @@ const Showbook = () => {
               display: "flex",
               justifyContent: "center",
               flexWrap: "wrap",
+
             }}
           >
             {bookinfo.map((info, index) => (

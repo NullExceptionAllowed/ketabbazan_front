@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import PersonIcon from "@mui/icons-material/Person";
 import Stack from "@mui/material/Stack";
+import "./showarticle.css";
 
 const ShownewArticle = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -88,12 +89,14 @@ const ShownewArticle = () => {
               marginTop: "10px",
               display: "flex",
               flexWrap: "wrap",
+              marginRight:"10px",
+              marginLeft:"10px"
             }}
-            spacing={2}
           >
             {articleinfo.map((info, index) => (
               <Paper
                 key={index}
+                className="shownewarticle-Paper"
                 sx={{
                   direction: "rtl",
                 }}
@@ -102,10 +105,8 @@ const ShownewArticle = () => {
                   textDecoration: "none",
                   display: "flex",
                   flexDirection: "column",
-                  marginRight:"10px",
-                  marginLeft:"10px",
-                  height: "357px",
-                  width: "290px",
+                  marginRight: "10px",
+                  marginLeft: "10px",                  
                   backgroundColor: "white",
                   borderRadius: "5px",
                 }}
@@ -115,14 +116,13 @@ const ShownewArticle = () => {
                     alt="complex1"
                     src={info.image}
                     style={{
-                      width: "290px",
-                      height: "190px",
+                      width:"100%",
                       borderRadius: "5px 5px 0px 0px",
                     }}
+                    className="shownewarticle-img"
                   />
                 </div>
                 <div
-                  variant="body2"
                   style={{
                     fontSize: "16px",
                     fontWeight: "bold",
@@ -148,12 +148,11 @@ const ShownewArticle = () => {
                     color: "#1565C0",
                     marginTop: "15px",
                     textAlign: "left",
+                    marginLeft:"10px",
+                    marginBottom:"10px"
                   }}
                 >
-                  <Stack style={{marginRight:"170px"}} direction="row" alignItems="left" gap={0}>
-                    <PersonIcon />
-                    {info.owner}
-                  </Stack>
+                  {info.owner}
                 </div>
               </Paper>
             ))}
