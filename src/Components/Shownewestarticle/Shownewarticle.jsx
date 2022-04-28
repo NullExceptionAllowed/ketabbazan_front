@@ -7,9 +7,10 @@ import { baseUrl } from "../../Variable";
 import axios from "axios";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
-import PersonIcon from "@mui/icons-material/Person";
-import Stack from "@mui/material/Stack";
 import "./showarticle.css";
+import Avatar from "@mui/material/Avatar";
+import image from "../../assets/Image/image.png";
+
 
 const ShownewArticle = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -26,7 +27,6 @@ const ShownewArticle = () => {
 
   return (
     <div
-      className="showbook_fa"
       style={{
         direction: "rtl",
         display: "flex",
@@ -89,8 +89,8 @@ const ShownewArticle = () => {
               marginTop: "10px",
               display: "flex",
               flexWrap: "wrap",
-              marginRight:"10px",
-              marginLeft:"10px"
+              marginRight: "10px",
+              marginLeft: "10px",
             }}
           >
             {articleinfo.map((info, index) => (
@@ -106,21 +106,22 @@ const ShownewArticle = () => {
                   display: "flex",
                   flexDirection: "column",
                   marginRight: "10px",
-                  marginLeft: "10px",                  
+                  marginLeft: "10px",
                   backgroundColor: "white",
                   borderRadius: "5px",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: "flex", alignItems: "center", position:"relative" }}>
                   <img
                     alt="complex1"
                     src={info.image}
                     style={{
-                      width:"100%",
+                      width: "100%",
                       borderRadius: "5px 5px 0px 0px",
                     }}
                     className="shownewarticle-img"
                   />
+                  <div className="aa">من</div>
                 </div>
                 <div
                   style={{
@@ -137,6 +138,7 @@ const ShownewArticle = () => {
                     marginRight: "10px",
                     marginLeft: "10px",
                     color: "#757C86",
+                    fontSize: "15px",
                   }}
                 >
                   {info.summary}
@@ -144,15 +146,28 @@ const ShownewArticle = () => {
                 <Divider style={{ marginTop: "20px" }} />
                 <div
                   style={{
-                    fontSize: "15px",
-                    color: "#1565C0",
+                    display: "flex",
                     marginTop: "15px",
-                    textAlign: "left",
-                    marginLeft:"10px",
-                    marginBottom:"10px"
+                    marginLeft: "10px",
+                    marginBottom: "10px",
                   }}
                 >
-                  {info.owner}
+                  <div style={{ flex: 1, marginRight: "10px" }}>
+                  </div>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={image}
+                    sx={{ width: 20, height: 20 }}
+                  />
+                  <span
+                    style={{
+                      marginRight: "5px",
+                      fontSize: "13px",
+                      color: "#1565C0",
+                    }}
+                  >
+                    {info.owner}
+                  </span>
                 </div>
               </Paper>
             ))}

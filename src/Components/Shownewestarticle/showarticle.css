@@ -4,11 +4,16 @@
 }
 .shownewarticle-img{
 height: 190px;
+object-fit: cover;
+}
+.aa{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 }
 
-
-
-@media (min-width:1450px) {
+@media (min-width:1350px) {
     .shownewarticle-Paper{
         width: calc((90vw) / 5);
     }
