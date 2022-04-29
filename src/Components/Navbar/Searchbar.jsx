@@ -18,8 +18,8 @@ export default function SearchBar() {
   const history = useHistory();
 
   const handleSearch = (event) => {
-    console.log(`/Book/search/?q=${search}`);
-    history.push(`/Book/search/?q=${search}`);
+    console.log(`/Searchbook/?q=${search}`);
+    history.push(`/Searchbook/?q=${search}`);
     event.preventDefault();
   };
 

@@ -4,11 +4,13 @@ import { Route, Switch } from "react-router-dom";
 import SignUp from "./Components/SignUp/SignUp";
 import Profile from "./Components/Profile/Profile";
 import Homepage from './Components/Homepage/Homepage';
-import Book from "./Components/Showbookall-search/Showbookall";
+import Book from "./Components/Showbookall/Showbookall";
 import PdfViewer from "./Components/PdfViewer/PdfViewer";
 import BookInfo from './Components/Showinfoperbook/bookInfo';
 import Article from './Components/Writearticle/article';
 import ArticleInfo from "./Components/ShowinfoPerarticle/Articleinfo";
+import Searchbook from "./Components/Searchbook/Searchbook";
+
 
 const App = () => {
   return (
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/ReadPdf/:id"  component={PdfViewer} />
         <Route path="/article/:id"  component={Article} />
         <Route path="/articleinfo/:id"  component={ArticleInfo} />
+        <Route path="/Searchbook"  component={Searchbook} />
       </Switch>
   );
 };

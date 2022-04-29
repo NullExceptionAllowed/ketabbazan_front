@@ -28,7 +28,7 @@ const Nav = () => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const handlesubmit = async (event) => {
     event.preventDefault();
-    history.replace(`/Book/search/?q=${search}`);
+    history.replace(`/Searchbook/?q=${search}`);
   };
   const handleSearch = () => {
     setOpenSearchBar(!openSearchBar);
