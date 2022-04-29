@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
-import Navbar2 from '../Navbar/Nav2';
+import Navbar2 from "../Navbar/Nav2";
 import { baseUrl } from "../../Variable";
 import axios from "axios";
 import Navbar from "../Navbar/Nav";
@@ -21,8 +21,8 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import ChangeNav from './../Navbar/changeNav';
-
+import ChangeNav from "./../Navbar/changeNav";
+import Pagination from "@mui/material/Pagination";
 
 
 const Showbook = () => {
@@ -33,12 +33,14 @@ const Showbook = () => {
   console.log(searchUrlParam);
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
+  const [pagenum, setpagenum] = useState(1);
+  const history = useHistory();
   useEffect(() => {
     console.log("**");
     if (searchUrlParam === null) {
       setApiLoading(true);
       axios({
-        url: `${baseUrl}/read_book/all_books/`,
+        url: `${baseUrl}/read_book/all_books/${pagenum}`,
       }).then((response) => {
         console.log(response.data);
         setbookinfo(response.data);
@@ -55,7 +57,7 @@ const Showbook = () => {
         setApiLoading(false);
       });
     }
-  }, [search]);
+  }, [pagenum, search]);
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -64,11 +66,16 @@ const Showbook = () => {
   });
   console.log(bookinfo.length);
 
+  const handlePagination = (event) => {
+    setpagenum(event.target.textContent);
+    console.log(event.target.textContent + "***");
+    history.replace(`/Book/${event.target.textContent}`);
+  };
   let numbook = bookinfo.length;
 
   return (
     <div className="showbookall_fa">
-      <ChangeNav/>
+      <ChangeNav />
       <div style={{ marginTop: "6%" }}>
         {apiLoading && (
           <div
@@ -139,18 +146,18 @@ const Showbook = () => {
             </Grid>
           </div>
         )}
-        {numbook === 0  && !apiLoading && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                height: "70vh",
-                alignItems: "center",
-                fontSize: "20px",
-              }}
-            >
-              با فیلتر های انتخابی شما کتابی یافت نشد
-            </div>
+        {numbook === 0 && !apiLoading && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              height: "70vh",
+              alignItems: "center",
+              fontSize: "20px",
+            }}
+          >
+            با فیلتر های انتخابی شما کتابی یافت نشد
+          </div>
         )}
         {!apiLoading && (
           <div
@@ -221,6 +228,19 @@ const Showbook = () => {
           </div>
         )}
       </div>
+      {searchUrlParam === null ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Pagination
+            count={3}
+            style={{ marginTop: "-30px", marginBottom: "30px" }}
+            variant="outlined"
+            color="primary"
+            onChange={handlePagination}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
