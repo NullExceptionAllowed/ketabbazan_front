@@ -22,7 +22,7 @@ const Searchbook = () => {
   const search = location.search;
   // console.log(search);
   const searchUrlParam = new URLSearchParams(search).get("q");
-
+  const searchUrlParamPage = new URLSearchParams(search).get("page");
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
   const [pagenum2, setpagenum2] = useState(1);
@@ -31,6 +31,11 @@ const Searchbook = () => {
   const history = useHistory();
   useEffect(() => {
     setApiLoading(true);
+
+    if (!searchUrlParamPage) {
+      setpagenum2(1)
+    }
+
     axios({
       url: `${baseUrl}/search/?q=${searchUrlParam}&page=page_count`,
     }).then((response) => {
@@ -38,11 +43,11 @@ const Searchbook = () => {
       console.log(response.data);
     });
     axios({
-      url: `${baseUrl}/search/?q=${searchUrlParam}&page=${pagenum2}`,
+      url: searchUrlParamPage ? `${baseUrl}/search/?q=${searchUrlParam}&page=${pagenum2}` : `${baseUrl}/search/?q=${searchUrlParam}`,
     }).then((response) => {
       setbookinfo(response.data);
       setApiLoading(false);
-      
+
     });
   }, [search]);
 

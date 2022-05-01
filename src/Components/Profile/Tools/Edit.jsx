@@ -133,6 +133,7 @@ const user = {
    {
       console.log(month);
       console.log(day);
+      localStorage.setItem("fullname",fullName);
       axios.post(
       `${baseUrl}/profile/info/`,
       JSON.stringify(user),
