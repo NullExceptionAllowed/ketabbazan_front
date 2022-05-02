@@ -90,11 +90,10 @@ const Emti = () => {
 
   const handleLoginForReadPdf = () => {
     if (flag === null) {
-      setto("/bookinfo/" + params.id);
-      return to;
-    } else {
-      setto("/ReadPdf/" + params.id);
-      return to;
+      setOpen(true);
+    }
+    else{
+    history.push(`/ReadPdf/${id}`)
     }
   };
 
@@ -255,11 +254,11 @@ const Emti = () => {
                     width: "200px",
                     height: "40px",
                   }}
-                  to={handleLoginForReadPdf}
-                  component={Link}
+                  onClick={handleLoginForReadPdf}
                 >
                   مطالعه کتاب
                 </Button>
+                <ShowDialog close={handleClose} open={open} />
               </Grid>
 
               <Grid>
