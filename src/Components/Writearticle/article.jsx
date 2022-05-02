@@ -24,7 +24,7 @@ import showToast from "../../Service/toastservice";
 import { baseUrl } from "../../Variable";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 import { Link, useParams, useHistory } from "react-router-dom";
 import ChangeNav from "./../Navbar/changeNav";
 import ReactLoading from "react-loading";
@@ -36,7 +36,7 @@ const cacheRtl = createCache({
 });
 
 const Article = () => {
-  const parse = require('html-react-parser');
+  const parse = require("html-react-parser");
   const theme = useTheme();
   const [writearticle, setwritearticle] = useState("");
   const [file, setFile] = useState(article);
@@ -77,6 +77,10 @@ const Article = () => {
     errors.summary = "پیش نمایش نباید بیش تر از 85 کلمه باشد.";
     check = false;
   }
+  if (writearticle.length < 100) {
+    errors.writearticle = "مقدار نوشته شده بسیار کم است.";
+    check = false;
+  }
   console.log(summary.length);
 
   const handlesubmit = async (event) => {
@@ -86,7 +90,9 @@ const Article = () => {
     formdata.append("title", titlearticle);
     formdata.append("summary", summary);
     formdata.append("book", id);
-    formdata.append("image", postimage.image[0]);
+    if (postimage !== null) {
+      formdata.append("image", postimage.image[0]);
+    }
     formdata.append("body", writearticle);
     const articlefield = {
       title: titlearticle,
@@ -136,21 +142,23 @@ const Article = () => {
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
 
   console.log(isMatch);
+
   const handleChange = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
     setChangeImage(true);
-    let picture = e.target.files[0];
     console.log(e.target.files[0]);
     setpostimage({
       image: e.target.files,
     });
+    // console.log(postimage.image[0]);
   };
-
   const SetwriteArticle = (event, editor) => {
     const data = editor.getData();
     setwritearticle(data);
     console.log(writearticle);
+    console.log(writearticle.length);
   };
+
   return (
     <div style={{ direction: "rtl" }}>
       <ChangeNav />
@@ -243,7 +251,11 @@ const Article = () => {
                       data={addwritearticle}
                       config={{ language: "fa" }}
                     />
-                    {/* <div>{parse(writearticle)}</div> */}
+                    {aftersubmit ? (
+                      <p style={{ color: "rgb(211,47,47)", fontSize: "12.5px", marginRight:"15px" }}>
+                        {errors.writearticle}
+                      </p>
+                    ) : null}
                   </div>
                 </Grid>
                 {!checkpx ? (

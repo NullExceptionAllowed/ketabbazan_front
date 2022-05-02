@@ -32,6 +32,7 @@ const Nav = () => {
   };
   const handleSearch = () => {
     setOpenSearchBar(!openSearchBar);
+    console.log(openSearchBar+"2222");
   };
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
@@ -40,7 +41,7 @@ const Nav = () => {
   let showbox = null;
   if (openSearchBar && checkpx) {
     showbox = <SearchBar open={openSearchBar} close={handleSearchBarClose}/>;
-    console.log("*");
+    console.log(openSearchBar);
   }
   const [search, setsearchname] = useState("");
   const Setsearch = (event) => {
