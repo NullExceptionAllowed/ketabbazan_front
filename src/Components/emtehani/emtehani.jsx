@@ -89,15 +89,15 @@ export default function SimpleSlider() {
                   slidesPerView: 8,
                   spaceBetween: 0,
                 },
-                900: {
+                800: {
                   slidesPerView: 6,
                   spaceBetween: 0,
                 },
-                600: {
+                550: {
                   slidesPerView: 4,
                   spaceBetween: 0,
                 },
-                500: {
+                400: {
                   slidesPerView: 3,
                   spaceBetween: 0,
                 },
