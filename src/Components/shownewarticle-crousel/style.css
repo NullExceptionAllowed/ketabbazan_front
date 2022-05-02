@@ -1,6 +1,33 @@
+/* .shownewarticlecro-Paper{
+    width: calc((90vw) / 4);
+    height: auto
+} */
 .shownewarticlecro-img{
 height: 190px;
 object-fit: cover;
-
 }
 
+/* @media (min-width:1350px) {
+    .shownewarticlecro-Paper{
+        width: calc((90vw) / 5);
+    }
+}
+@media (max-width: 1200px ) and (min-width:900px) {
+    .shownewarticlecro-Paper{
+        width: calc((90vw) / 3);
+    }
+}
+
+@media (max-width: 900px ) and (min-width:600px) {
+    .shownewarticlecro-Paper{
+        width: calc((90vw) / 2);
+
+    }
+}
+
+@media (max-width: 600px){
+    .shownewarticlecro-Paper{
+        width: 95vw;
+    }
+}
+ */

@@ -15,12 +15,13 @@ import { useHistory } from "react-router-dom";
 import ShowDialog from "./ShowDialog";
 import { ToastContainer } from "react-toastify";
 import showToast from "../../Service/toastservice";
+import { BookLoader } from "react-awesome-loaders";
 
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
 
- const handleClose = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
@@ -79,27 +80,24 @@ const Emti = () => {
     fontSize: 23,
     color: "#0052cc",
   };
-  let flag = localStorage.getItem("token");  
+  let flag = localStorage.getItem("token");
   const handleLoginForReadPdf = () => {
     if (flag === null) {
       setOpen(true);
-    }
-    else{
-    history.push(`/ReadPdf/${id}`)
+    } else {
+      history.push(`/ReadPdf/${id}`);
     }
   };
 
   const handlearticlecanwrite = () => {
-    let nic=localStorage.getItem("nickname");
-    console.log(nic+"445");
+    let nic = localStorage.getItem("nickname");
+    console.log(nic + "445");
     if (flag === null) {
       setOpen(true);
-    }
-    else if(nic===null){
+    } else if (nic === null) {
       showToast("error", "اطلاعات پروفایل کامل نیست.");
-    }
-     else {  
-        history.push(`/article/${id}`);
+    } else {
+      history.push(`/article/${id}`);
     }
   };
 
@@ -121,252 +119,276 @@ const Emti = () => {
   return (
     <div dir="rtl">
       <ChangeNav />
+      {apiLoading && (
+        <div
+          style={{
+            display: "flex",
+            height: "100vh",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <BookLoader
+            background={"linear-gradient(135deg, #6066FA, #4645F6)"}
+            desktopSize={"100px"}
+            mobileSize={"80px"}
+            textColor={"#4645F6"}
+          />
+        </div>
+      )}
+      {!apiLoading && (
+        <Grid lg={10} xs={10} container item spacing={2} style={s1}>
+          <Grid item lg={3} xs={12}>
+            <Paper style={p1} elevation={1}>
+              <center>
+                <Grid>
+                  <img
+                    alt="complex"
+                    src={bookinfo.image_url}
+                    style={imgstyle}
+                  />
+                </Grid>
 
-      <Grid lg={10} xs={10} container item spacing={2} style={s1}>
-        <Grid item lg={3} xs={12}>
-          <Paper style={p1} elevation={1}>
-            <center>
+                <Grid>
+                  <Typography
+                    style={{ margin: "20px auto auto auto", fontSize: 14 }}
+                  >
+                    امتیاز شما به این محصول !؟
+                  </Typography>
+                </Grid>
+
+                <Grid>
+                  <Rating
+                    style={{ direction: "ltr", top: "10px" }}
+                    size="large"
+                    name="no-value"
+                    precision={1}
+                    value={null}
+                  />
+                </Grid>
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <CreateIcon style={{ margin: "auto -40px auto auto" }} />
+                    }
+                    variant="outlined"
+                    onClick={handlearticlecanwrite}
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      borderRadius: "10px",
+                      margin: "25px auto auto auto",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                  >
+                    نوشتن مقاله
+                  </Button>
+                  <ShowDialog close={handleClose} open={open} />
+                </Grid>
+              </center>
+            </Paper>
+          </Grid>
+
+          <Grid item lg={6} xs={12}>
+            <Paper style={p2} elevation={1}>
               <Grid>
-                <img alt="complex" src={bookinfo.image_url} style={imgstyle} />
+                <Typography style={typo2}>{bookinfo.name}</Typography>
               </Grid>
 
               <Grid>
+                <Typography style={typo3}>
+                  امتیاز محصول : 4.5 از 5{" "}
+                  <span style={{ color: "#0052cc" }}>
+                    ( 52 نفر امتیاز داده است )
+                  </span>
+                </Typography>
+              </Grid>
+
+              <Grid>
+                <Typography style={typo0}>مشخصات کتاب :</Typography>
+              </Grid>
+
+              <Grid>
+                <Typography style={typo5}>
+                  {"دسته بندی : " + bookinfo.genre_name}
+                </Typography>
+              </Grid>
+
+              <Grid>
+                <Typography style={typo4}>
+                  {"نویسنده : " + bookinfo.author}
+                </Typography>
+              </Grid>
+
+              <Grid>
+                <Typography style={typo5}>
+                  {"انتشارات : " + bookinfo.publisher}
+                </Typography>
+              </Grid>
+
+              <Grid>
+                <Typography style={typo6}>خلاصه کتاب :</Typography>
+              </Grid>
+
+              <Grid xs={10}>
                 <Typography
-                  style={{ margin: "20px auto auto auto", fontSize: 14 }}
+                  style={{
+                    margin: "10px 30px auto auto",
+                    overflow: "Hidden",
+                    whiteSpace: "normal",
+                    textOverflow: "ellipsis",
+                    fontSize: 14,
+                    width: "350px",
+                    direction: "rtl",
+                    height: "70px",
+                    border: "1px solid #ffffff",
+                  }}
                 >
-                  امتیاز شما به این محصول !؟
+                  {bookinfo.summary}
                 </Typography>
               </Grid>
+            </Paper>
+          </Grid>
 
-              <Grid>
-                <Rating
-                  style={{ direction: "ltr", top: "10px" }}
-                  size="large"
-                  name="no-value"
-                  precision={1}
-                  value={null}
-                />
-              </Grid>
+          <Grid item lg={3} xs={12}>
+            <Paper style={p3} elevation={1}>
+              <center>
+                <Grid>
+                  <Button
+                    startIcon={
+                      <PictureAsPdfIcon
+                        style={{ margin: "auto -65px auto auto" }}
+                      />
+                    }
+                    variant="outlined"
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      margin: "20px auto auto auto",
+                      borderRadius: "10px",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                    onClick={handleLoginForReadPdf}
+                  >
+                    مطالعه کتاب
+                  </Button>
+                  <ShowDialog close={handleClose} open={open} />
+                </Grid>
 
-              <Grid>
-                <Button
-                  startIcon={
-                    <CreateIcon style={{ margin: "auto -40px auto auto" }} />
-                  }
-                  variant="outlined"
-                  onClick={handlearticlecanwrite}
-                  style={{
-                    backgroundColor: "CAE5F3",
-                    borderRadius: "10px",
-                    margin: "25px auto auto auto",
-                    fontWeight: 800,
-                    width: "200px",
-                    height: "40px",
-                  }}
-                >
-                  نوشتن مقاله
-                </Button>
-                <ShowDialog close={handleClose} open={open} />
-              </Grid>
-            </center>
-          </Paper>
+                <Grid>
+                  <Typography
+                    style={{ margin: "60px auto auto auto", fontSize: 14 }}
+                  >
+                    آیا کتاب را خوانده اید !؟
+                  </Typography>
+                </Grid>
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <MarkChatReadIcon
+                        style={{ margin: "auto -65px auto auto" }}
+                      />
+                    }
+                    variant="outlined"
+                    component={Link}
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      margin: "10px auto auto auto",
+                      borderRadius: "10px",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                  >
+                    خوانده ام
+                  </Button>
+                </Grid>
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <AutoStoriesIcon
+                        style={{ margin: "auto -50px auto auto" }}
+                      />
+                    }
+                    variant="outlined"
+                    component={Link}
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      margin: "7px auto auto auto",
+                      borderRadius: "10px",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                  >
+                    در حال خواندنم
+                  </Button>
+                </Grid>
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <MenuBookIcon
+                        style={{ margin: "auto -65px auto auto" }}
+                      />
+                    }
+                    variant="outlined"
+                    component={Link}
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      margin: "7px auto auto auto",
+                      borderRadius: "10px",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                  >
+                    نخوانده ام
+                  </Button>
+                </Grid>
+
+                <Grid>
+                  <Typography style={typo8}>قیمت محصول:</Typography>
+                </Grid>
+
+                <Grid>
+                  <Typography style={typo9}>
+                    {bookinfo.price}{" "}
+                    <span style={{ fontSize: "10" }}> تومان</span>
+                  </Typography>
+                </Grid>
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <AddShoppingCartIcon
+                        style={{ margin: "auto -40px auto auto" }}
+                      />
+                    }
+                    variant="contained"
+                    component={Link}
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      margin: "7px auto auto auto",
+                      borderRadius: "10px",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                  >
+                    افزودن به سبد خرید
+                  </Button>
+                </Grid>
+              </center>
+            </Paper>
+          </Grid>
         </Grid>
-
-        <Grid item lg={6} xs={12}>
-          <Paper style={p2} elevation={1}>
-            <Grid>
-              <Typography style={typo2}>{bookinfo.name}</Typography>
-            </Grid>
-
-            <Grid>
-              <Typography style={typo3}>
-                امتیاز محصول : 4.5 از 5{" "}
-                <span style={{ color: "#0052cc" }}>
-                  ( 52 نفر امتیاز داده است )
-                </span>
-              </Typography>
-            </Grid>
-
-            <Grid>
-              <Typography style={typo0}>مشخصات کتاب :</Typography>
-            </Grid>
-
-            <Grid>
-              <Typography style={typo5}>
-                {"دسته بندی : " + bookinfo.genre_name}
-              </Typography>
-            </Grid>
-
-            <Grid>
-              <Typography style={typo4}>
-                {"نویسنده : " + bookinfo.author}
-              </Typography>
-            </Grid>
-
-            <Grid>
-              <Typography style={typo5}>
-                {"انتشارات : " + bookinfo.publisher}
-              </Typography>
-            </Grid>
-
-            <Grid>
-              <Typography style={typo6}>خلاصه کتاب :</Typography>
-            </Grid>
-
-            <Grid xs={10}>
-              <Typography
-                style={{
-                  margin: "10px 30px auto auto",
-                  overflow: "Hidden",
-                  whiteSpace: "normal",
-                  textOverflow: "ellipsis",
-                  fontSize: 14,
-                  width: "350px",
-                  direction: "rtl",
-                  height: "70px",
-                  border: "1px solid #ffffff",
-                }}
-              >
-                {bookinfo.summary}
-              </Typography>
-            </Grid>
-          </Paper>
-        </Grid>
-
-        <Grid item lg={3} xs={12}>
-          <Paper style={p3} elevation={1}>
-            <center>
-              <Grid>
-                <Button
-                  startIcon={
-                    <PictureAsPdfIcon
-                      style={{ margin: "auto -65px auto auto" }}
-                    />
-                  }
-                  variant="outlined"
-                  style={{
-                    backgroundColor: "CAE5F3",
-                    margin: "20px auto auto auto",
-                    borderRadius: "10px",
-                    fontWeight: 800,
-                    width: "200px",
-                    height: "40px",
-                  }}
-                  onClick={handleLoginForReadPdf}
-                >
-                  مطالعه کتاب
-                </Button>
-                <ShowDialog close={handleClose} open={open} />
-              </Grid>
-
-              <Grid>
-                <Typography
-                  style={{ margin: "60px auto auto auto", fontSize: 14 }}
-                >
-                  آیا کتاب را خوانده اید !؟
-                </Typography>
-              </Grid>
-
-              <Grid>
-                <Button
-                  startIcon={
-                    <MarkChatReadIcon
-                      style={{ margin: "auto -65px auto auto" }}
-                    />
-                  }
-                  variant="outlined"
-                  component={Link}
-                  style={{
-                    backgroundColor: "CAE5F3",
-                    margin: "10px auto auto auto",
-                    borderRadius: "10px",
-                    fontWeight: 800,
-                    width: "200px",
-                    height: "40px",
-                  }}
-                >
-                  خوانده ام
-                </Button>
-              </Grid>
-
-              <Grid>
-                <Button
-                  startIcon={
-                    <AutoStoriesIcon
-                      style={{ margin: "auto -50px auto auto" }}
-                    />
-                  }
-                  variant="outlined"
-                  component={Link}
-                  style={{
-                    backgroundColor: "CAE5F3",
-                    margin: "7px auto auto auto",
-                    borderRadius: "10px",
-                    fontWeight: 800,
-                    width: "200px",
-                    height: "40px",
-                  }}
-                >
-                  در حال خواندنم
-                </Button>
-              </Grid>
-
-              <Grid>
-                <Button
-                  startIcon={
-                    <MenuBookIcon style={{ margin: "auto -65px auto auto" }} />
-                  }
-                  variant="outlined"
-                  component={Link}
-                  style={{
-                    backgroundColor: "CAE5F3",
-                    margin: "7px auto auto auto",
-                    borderRadius: "10px",
-                    fontWeight: 800,
-                    width: "200px",
-                    height: "40px",
-                  }}
-                >
-                  نخوانده ام
-                </Button>
-              </Grid>
-
-              <Grid>
-                <Typography style={typo8}>قیمت محصول:</Typography>
-              </Grid>
-
-              <Grid>
-                <Typography style={typo9}>
-                  {bookinfo.price}{" "}
-                  <span style={{ fontSize: "10" }}> تومان</span>
-                </Typography>
-              </Grid>
-
-              <Grid>
-                <Button
-                  startIcon={
-                    <AddShoppingCartIcon
-                      style={{ margin: "auto -40px auto auto" }}
-                    />
-                  }
-                  variant="contained"
-                  component={Link}
-                  style={{
-                    backgroundColor: "CAE5F3",
-                    margin: "7px auto auto auto",
-                    borderRadius: "10px",
-                    fontWeight: 800,
-                    width: "200px",
-                    height: "40px",
-                  }}
-                >
-                  افزودن به سبد خرید
-                </Button>
-              </Grid>
-            </center>
-          </Paper>
-        </Grid>
-      </Grid>
+      )}
       <ToastContainer />
     </div>
   );
