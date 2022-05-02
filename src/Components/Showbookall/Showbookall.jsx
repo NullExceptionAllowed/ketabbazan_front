@@ -173,6 +173,8 @@ const Showbook = () => {
                           marginTop: "20px",
                           height: "150px",
                           width: "120px",
+                          boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
+                          borderRadius:"2px"
                         }}
                       />
                     </ButtonBase>
