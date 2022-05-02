@@ -9,14 +9,14 @@ import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import ShownewArticle from "../Shownewestarticle/Shownewarticle";
 import ShownewArcrousel from "../shownewarticle-crousel/shownewarcrousel";
-
+import SimpleSlider from "../emtehani/emtehani";
 const Homepage = () => {
   return (
     <div>
       <ChangeNav />
       <Header />
       <Workinfo />
-      <Showbook />
+      <SimpleSlider />
       <ShownewArticle/>
       <ShownewArcrousel/>
     </div>
