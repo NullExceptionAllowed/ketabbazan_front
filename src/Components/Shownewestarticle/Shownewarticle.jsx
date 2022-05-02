@@ -121,7 +121,7 @@ const ShownewArticle = () => {
                   }}
                 >
                   <img
-                    alt="complex1"
+                    alt="img"
                     src={info.image}
                     style={{
                       width: "100%",

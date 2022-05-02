@@ -18,6 +18,7 @@ const Homepage = () => {
       <Workinfo />
       <Showbook />
       <ShownewArticle/>
+      <ShownewArcrousel/>
     </div>
   );
 };
