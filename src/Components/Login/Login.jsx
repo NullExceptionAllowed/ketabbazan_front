@@ -101,6 +101,9 @@ const Login = ({ history }) => {
           showToast("success", "با موفقیت وارد شدی");
           console.log(response.data);
           localStorage.setItem("token", response.data.token);
+          if(response.data.nickname!==null){
+          localStorage.setItem("nickname", response.data.nickname);
+          }
           setTimeout(() => {
             history.replace("/");
           }, 2000);

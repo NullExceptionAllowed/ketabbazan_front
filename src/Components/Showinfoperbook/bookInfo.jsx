@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Grid, Hidden, Paper, Typography } from "@mui/material";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../Variable";
@@ -10,18 +10,11 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import Alert from "@mui/material/Alert";
 import ChangeNav from "./../Navbar/changeNav";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import ShowDialog from "./ShowDialog";
+import { ToastContainer } from "react-toastify";
+import showToast from "../../Service/toastservice";
 
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
@@ -86,8 +79,7 @@ const Emti = () => {
     fontSize: 23,
     color: "#0052cc",
   };
-  let flag = localStorage.getItem("token");
-
+  let flag = localStorage.getItem("token");  
   const handleLoginForReadPdf = () => {
     if (flag === null) {
       setOpen(true);
@@ -98,10 +90,16 @@ const Emti = () => {
   };
 
   const handlearticlecanwrite = () => {
+    let nic=localStorage.getItem("nickname");
+    console.log(nic+"445");
     if (flag === null) {
       setOpen(true);
-    } else {
-      history.push(`/article/${id}`);
+    }
+    else if(nic===null){
+      showToast("error", "اطلاعات پروفایل کامل نیست.");
+    }
+     else {  
+        history.push(`/article/${id}`);
     }
   };
 
@@ -369,6 +367,7 @@ const Emti = () => {
           </Paper>
         </Grid>
       </Grid>
+      <ToastContainer />
     </div>
   );
 };
