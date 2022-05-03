@@ -7,7 +7,7 @@ import ChangeNav from "./../Navbar/changeNav";
 import image from "../../assets/Image/image.png";
 import "./Articleinfo.css";
 import Avatar from "@mui/material/Avatar";
-import { BookLoader } from "react-awesome-loaders";
+import ReactLoading from "react-loading";
 
 const ArticleInfo = () => {
   const params = useParams();
@@ -29,17 +29,23 @@ const ArticleInfo = () => {
   return (
     <div style={{ direction: "rtl" }}>
       <ChangeNav />
+      {apiLoading && (
+        <div
+          style={{
+            display: "flex",
+            height: "100vh",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ReactLoading
+            type="bars"
+            color="#1565C0"
+            height={'20%'} width={'10%'}
+          />
+        </div>
+      )}
       <div className="Artcleinfo-head" style={{ marginTop: "85px" }}>
-        {apiLoading && (
-          <div style={{display:"flex",height:"100vh", justifyContent:"center", alignItems:"center"}}>
-            <BookLoader
-              background={"linear-gradient(135deg, #6066FA, #4645F6)"}
-              desktopSize={"100px"}
-              mobileSize={"80px"}
-              textColor={"#4645F6"}
-            />
-          </div>
-        )}
         {!apiLoading && (
           <>
             <div style={{ display: "flex" }}>

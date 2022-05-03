@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import ShowDialog from "./ShowDialog";
 import { ToastContainer } from "react-toastify";
 import showToast from "../../Service/toastservice";
-import { BookLoader } from "react-awesome-loaders";
+import ReactLoading from "react-loading";
 
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
@@ -128,11 +128,11 @@ const Emti = () => {
             alignItems: "center",
           }}
         >
-          <BookLoader
-            background={"linear-gradient(135deg, #6066FA, #4645F6)"}
-            desktopSize={"100px"}
-            mobileSize={"80px"}
-            textColor={"#4645F6"}
+          <ReactLoading
+            type="bars"
+            color="#1565C0"
+            height={"20%"}
+            width={"10%"}
           />
         </div>
       )}

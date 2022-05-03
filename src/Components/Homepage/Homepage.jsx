@@ -17,7 +17,6 @@ const Homepage = () => {
       <Header />
       <Workinfo />
       <SimpleSlider />
-      <ShownewArticle/>
       <ShownewArcrousel/>
     </div>
   );

@@ -47,7 +47,7 @@ const ShownewArticle = () => {
           جدیدترین مقاله ها
         </h2>
         <Link
-          to={`/Book`}
+          to={`/Showallarticle`}
           style={{
             textAlign: "center",
             textDecoration: "none",

@@ -12,6 +12,7 @@ import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import "./style.css";
+import { Calculate } from "@mui/icons-material";
 
 const ShownewArcrousel = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -25,6 +26,16 @@ const ShownewArcrousel = () => {
       setApiLoading(false);
     });
   }, []);
+
+  const [dimensions, setDimensions] = React.useState({
+    width: window.innerWidth,
+  });
+  React.useEffect(() => {
+      setDimensions({
+        width: window.innerWidth,
+      });
+    console.log(dimensions.width+"@@")
+  },[dimensions]);
   SwiperCore.use([Navigation, Pagination]);
   return (
     <div>
@@ -40,7 +51,7 @@ const ShownewArcrousel = () => {
           جدیدترین مقاله ها
         </h2>
         <Link
-          to={`/Book`}
+          to={`/Showallarticle`}
           style={{
             textAlign: "center",
             textDecoration: "none",
@@ -82,38 +93,43 @@ const ShownewArcrousel = () => {
               marginTop: "20px",
               direction: "rtl",
               display: "flex",
-              justifyContent:"center"
+              justifyContent: "center",
             }}
           >
             <Swiper
-              breakpoints={{
-                // when window width is >= 640px
-                1500: {
-                  slidesPerView: 5,
-                  spaceBetween: 0,
-                },
-                // when window width is >= 768px
-                1200: {
-                  slidesPerView: 4,
-                  spaceBetween: 10,
-                },
-                900: {
-                  slidesPerView: 3,
-                  spaceBetween: 0,
-                },
-                600: {
-                  slidesPerView: 2,
-                  spaceBetween: 0,
-                },
-                500: {
-                  slidesPerView: 2,
-                  spaceBetween: 0,
-                },
-                0: {
-                  slidesPerView: 1,
-                  spaceBetween: 0,
-                },
-              }}
+              spaceBetween={0}
+              slidesPerView={(dimensions.width-70)/293}
+
+              // breakpoints={{
+              //   800: {
+              //     slidesPerView: 2.5,
+              //     spaceBetween: 0,
+              //   },
+              //   850: {
+              //     slidesPerView: 2.8,
+              //     spaceBetween: 0,
+              //   },
+              //   923: {
+              //     slidesPerView: 3,
+              //     spaceBetween: 0,
+              //   },
+              //   1000: {
+              //     slidesPerView: 3.3,
+              //     spaceBetween: 0,
+              //   },
+              //   1100: {
+              //     slidesPerView: 3.5,
+              //     spaceBetween: 0,
+              //   },
+              //   1220: {
+              //     slidesPerView: 4,
+              //     spaceBetween: 0,
+              //   },
+              //   1400: {
+              //     slidesPerView: 5,
+              //     spaceBetween: 0,
+              //   },
+              // }}
               pagination={{
                 clickable: true,
               }}
@@ -130,8 +146,6 @@ const ShownewArcrousel = () => {
                     <Paper
                       key={index}
                       className="shownewarticlecro-Paper"
-                      to={`/articleinfo/${info.id}`}
-                      component={Link}
                       sx={{
                         direction: "rtl",
                       }}

@@ -10,6 +10,7 @@ import BookInfo from './Components/Showinfoperbook/bookInfo';
 import Article from './Components/Writearticle/article';
 import ArticleInfo from "./Components/ShowinfoPerarticle/Articleinfo";
 import Searchbook from "./Components/Searchbook/Searchbook";
+import ShowAllarticle from './Components/ShowAllarticle/ShowAllarticle';
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/article/:id"  component={Article} />
         <Route path="/articleinfo/:id"  component={ArticleInfo} />
         <Route path="/Searchbook"  component={Searchbook} />
+        <Route path="/Showallarticle"  component={ShowAllarticle} />
       </Switch>
   );
 };
