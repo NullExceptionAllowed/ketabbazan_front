@@ -73,10 +73,7 @@ const Article = () => {
   } else if (summary.length < 30) {
     errors.summary = "پیش نمایش باید حداقل 30 کلمه باشد.";
     check = false;
-  } else if (summary.length > 85) {
-    errors.summary = "پیش نمایش نباید بیش تر از 85 کلمه باشد.";
-    check = false;
-  }
+  } 
   if (writearticle.length < 100) {
     errors.writearticle = "مقدار نوشته شده بسیار کم است.";
     check = false;

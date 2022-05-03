@@ -194,6 +194,9 @@ const ShownewArcrousel = () => {
                           marginLeft: "10px",
                           color: "#757C86",
                           fontSize: "15px",
+                          overflow: "Hidden",
+                          whiteSpace: "normal",
+                          textOverflow: "ellipsis",
                         }}
                         className="showarticlecro-summary"
                       >
