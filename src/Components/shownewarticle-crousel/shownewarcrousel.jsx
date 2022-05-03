@@ -38,7 +38,7 @@ const ShownewArcrousel = () => {
   },[dimensions]);
   SwiperCore.use([Navigation, Pagination]);
   return (
-    <div>
+    <div style={{marginTop:"60px"}}>
       <div
         style={{
           direction: "rtl",

@@ -56,7 +56,7 @@ export default function SimpleSlider() {
               justifyContent: "center",
               padding: "auto",
               marginTop: 96,
-              marginBottom: 96,
+              marginBottom: 26,
             }}
           >
             <ReactLoading
