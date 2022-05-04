@@ -89,47 +89,23 @@ const ShownewArcrousel = () => {
         >
           <div
             style={{
-              width: "100%",
+              width: "97%",
               marginTop: "20px",
               direction: "rtl",
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "center",          
             }}
           >
             <Swiper
               spaceBetween={0}
-              slidesPerView={(dimensions.width-70)/293}
+              slidesPerView={(((dimensions.width)*(97/100))-70)/293}
 
-              // breakpoints={{
-              //   800: {
-              //     slidesPerView: 2.5,
-              //     spaceBetween: 0,
-              //   },
-              //   850: {
-              //     slidesPerView: 2.8,
-              //     spaceBetween: 0,
-              //   },
-              //   923: {
-              //     slidesPerView: 3,
-              //     spaceBetween: 0,
-              //   },
-              //   1000: {
-              //     slidesPerView: 3.3,
-              //     spaceBetween: 0,
-              //   },
-              //   1100: {
-              //     slidesPerView: 3.5,
-              //     spaceBetween: 0,
-              //   },
-              //   1220: {
-              //     slidesPerView: 4,
-              //     spaceBetween: 0,
-              //   },
-              //   1400: {
-              //     slidesPerView: 5,
-              //     spaceBetween: 0,
-              //   },
-              // }}
+              breakpoints={{
+                // 1220: {
+                //   slidesPerView: (dimensions.width-110)/293,
+                //   spaceBetween: 10,
+                // },
+              }}
               pagination={{
                 clickable: true,
               }}
