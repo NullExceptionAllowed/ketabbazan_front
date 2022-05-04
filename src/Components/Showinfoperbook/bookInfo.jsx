@@ -16,7 +16,8 @@ import ShowDialog from "./ShowDialog";
 import { ToastContainer } from "react-toastify";
 import showToast from "../../Service/toastservice";
 import ReactLoading from "react-loading";
-
+import SimilarBooks from "../similarBooks/similarBooks";
+import CommentApp from "../Comment/CommentApp";
 
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
@@ -73,14 +74,14 @@ const Emti = () => {
     fontSize: 20,
   };
   let typo8 = {
-    margin: "55px auto auto auto",
+    margin: "45px auto auto auto",
     fontSize: 14,
   };
   let typo9 = {
-    //margin: "0px 660px auto auto",
     fontSize: 23,
     color: "#0052cc",
   };
+
   let flag = localStorage.getItem("token");
   const handleLoginForReadPdf = () => {
     if (flag === null) {
@@ -103,10 +104,14 @@ const Emti = () => {
   };
 
   const [apiLoading, setApiLoading] = useState(false);
+  const token = "Token " + localStorage.getItem('token');
   const [bookinfo, setbookinfo] = useState([]);
+  const [rateinfo, setrateinfo] = useState([]);
   const params = useParams();
   const id = params.id;
   const [to, setto] = React.useState(null);
+  const [rate, setrate] = React.useState();
+  const [userrate, setuserrate] = React.useState();
 
   useEffect(() => {
     setApiLoading(true);
@@ -115,7 +120,42 @@ const Emti = () => {
       console.log(response.data.book_info);
       setApiLoading(false);
     });
+  }, [id]);
+
+  useEffect(() => {
+    setApiLoading(true);
+    axios.get(`${baseUrl}/rate/getrate/?id=${id}`).then((response) => {
+    setrateinfo(response.data.rateinfo);
+    console.log(response.data.rateinfo);
+    setApiLoading(false);
+    });
   }, []);
+
+  function round(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+  }
+
+  const handleRating = () => {
+      const rating = {
+          book: id,
+          rate: rate
+      };
+      axios.post("http://98522148.pythonanywhere.com/rate/",
+      JSON.stringify(rating),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "امتیازت با موفقیت ثبت شد");
+          }
+      })
+  }
 
   return (
     <div dir="rtl">
@@ -164,17 +204,18 @@ const Emti = () => {
                     size="large"
                     name="no-value"
                     precision={1}
-                    value={null}
+                    value={rate}
+                    onChange={(event,newrate) => {setrate(newrate)}}
                   />
                 </Grid>
 
                 <Grid>
                   <Button
-                    startIcon={
-                      <CreateIcon style={{ margin: "auto -40px auto auto" }} />
-                    }
+                    // startIcon={
+                    //   <CreateIcon style={{ margin: "auto -40px auto auto" }} />
+                    // }
                     variant="outlined"
-                    onClick={handlearticlecanwrite}
+                    onClick={handleRating}
                     style={{
                       backgroundColor: "CAE5F3",
                       borderRadius: "10px",
@@ -184,10 +225,11 @@ const Emti = () => {
                       height: "40px",
                     }}
                   >
-                    نوشتن مقاله
+                    ثبت امتیاز
                   </Button>
                   <ShowDialog close={handleClose} open={open} />
                 </Grid>
+
               </center>
             </Paper>
           </Grid>
@@ -200,10 +242,7 @@ const Emti = () => {
 
               <Grid>
                 <Typography style={typo3}>
-                  امتیاز محصول : 4.5 از 5{" "}
-                  <span style={{ color: "#0052cc" }}>
-                    ( 52 نفر امتیاز داده است )
-                  </span>
+                    امتیاز محصول : {round(rateinfo.avg,1)} از 5 <span style={{color:"#0052cc"}}>( {rateinfo.count} نفر امتیاز داده است )</span>
                 </Typography>
               </Grid>
 
@@ -275,6 +314,27 @@ const Emti = () => {
                     onClick={handleLoginForReadPdf}
                   >
                     مطالعه کتاب
+                  </Button>
+                  <ShowDialog close={handleClose} open={open} />
+                </Grid>
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <CreateIcon style={{ margin: "auto -65px auto auto" }} />
+                    }
+                    variant="outlined"
+                    onClick={handlearticlecanwrite}
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      borderRadius: "10px",
+                      margin: "5px auto auto auto",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                  >
+                    نوشتن مقاله
                   </Button>
                   <ShowDialog close={handleClose} open={open} />
                 </Grid>
@@ -391,6 +451,11 @@ const Emti = () => {
         </Grid>
       )}
       <ToastContainer />
+      <br/>
+      <br/>
+      <br/>
+
+      <CommentApp/>
     </div>
   );
 };
