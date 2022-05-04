@@ -178,6 +178,7 @@ const ArticleInfo = () => {
                     style={{
                       height: "250px",
                       width: "100%",
+                      marginTop:"1%"
                     }}
                   />
                   <h3
