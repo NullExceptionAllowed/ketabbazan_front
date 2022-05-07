@@ -43,7 +43,7 @@ const Edit = () => {
   const [month , setMonth] = useState("");
   const [year , setYear] = useState("");
   const [birthday , setBirthday]=useState("");
-  
+  const a =0;
 
 
 
