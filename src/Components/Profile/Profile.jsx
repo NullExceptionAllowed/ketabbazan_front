@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "./Profile.css";
-//import Box from '@mui/material/Box';
+
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { editableInputTypes } from "@testing-library/user-event/dist/utils";
 import Dashboard from "./Tools/Dashboard.jsx";
@@ -15,8 +15,6 @@ import ChangeNav from './../Navbar/changeNav';
 
 const Profile = () => {
   const [flag, setFlag] = useState(0);
-  // const token = "JWT" + localStorage.getItem("token");
-  // console.log(token);
 
 
   const handleEdit = () => {
@@ -47,37 +45,11 @@ const Profile = () => {
 
   return (
     <div>
-      <div className="profile_container">
-        <Navbar2/>
-        <aside className="profile_container_aside">
-          <div className="profile_container_asideTop">
-            <div className="profile_image">
-              <img src="./img/logo.png" />
-            </div>
+      
+      <Navbar2/>
+        
 
-          </div>
-          <div className="profile_container_asidebottom">
-            <ul style={{ direction: "rtl", marginTop: "27PX " }}>
-              <li onClick={handleDashboard}>داشبورد</li>
-              <li onClick={handleEdit} > ویرایش حساب کاربری</li>
-              <li >ویرایش تنظیمات حساب کاربری </li>
-              <li>تغییر رمز عبور </li>
-              <li>کیف پول </li>
-              <li> کتاب های خریداری شده من</li>
-              <li>کتاب های مورد علاقه من </li>
-              <li onClick={handlePhoto}>افزودن عکس</li>
-              <li >
-                <Link id="profile_styleli" to="/" onClick={handleExit}>
-                  خروج از حساب کاربری
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </aside>
-
-        {show}
-
-      </div>
+      <Edit />
 
     </div>
   );

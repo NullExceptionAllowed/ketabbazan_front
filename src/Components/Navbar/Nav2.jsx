@@ -19,10 +19,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchBar from "./Searchbar";
-import { width } from "@mui/system";
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Menu from '@mui/material/Menu';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+
+
+const options = ['داشبورد', 'ویرایش اطلاعات', 'خروج از حساب'];
 
 const Nav = () => {
   const theme = useTheme();
@@ -30,8 +38,22 @@ const Nav = () => {
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
   const history = useHistory();
   const [openSearchBar, setOpenSearchBar] = useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleExit = () => {
+    localStorage.clear();
+    setAnchorEl(null);
+  }
+
   const handlesubmit = async (event) => {
     event.preventDefault();
     history.replace(`/Searchbook/?q=${search}`);
@@ -42,6 +64,9 @@ const Nav = () => {
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
   };
+  let paperstyle = {
+    margin:"50px auto auto 100px"
+  }
   let avatarstyle = {
     backgroundColor: "#679aea",
     margin: "auto auto auto 20px",
@@ -148,17 +173,44 @@ const Nav = () => {
                   <SearchIcon></SearchIcon>
                 </IconButton>
               </Grid>
-              <Button style={arrowstyle} ><ArrowDropDownIcon /></Button>
+
+              <Button 
+                style={arrowstyle} 
+                id="demo-positioned-button"
+                aria-controls={open ? 'demo-positioned-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              >
+                <ArrowDropDownIcon />
+              </Button>
+
+              <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    style={{direction:"rtl", margin: "30px auto auto auto"}}
+                    anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                  >
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
+                    <MenuItem component={Link} to="/login" onClick={handleClose}>ورود</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleExit}>خروج</MenuItem>
+              </Menu>
+
               <Avatar
-                component={Link}
-                to={"/profile"}
                 style={avatarstyle}
                 sx={{ width: 46, height: 46 }}
               >
               </Avatar>
-              {/* <Grid > */}
-                    
-                  {/* </Grid> */}
             </>
           ) : (
             <>
@@ -257,19 +309,47 @@ const Nav = () => {
                 
 
                 <Grid item lg={2} md={2.5} sm={4}>
-                <Button style={arrowstyle2} ><ArrowDropDownIcon /></Button>
+
+                  <Button 
+                    style={arrowstyle2}
+                    id="demo-positioned-button"
+                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    >
+                    <ArrowDropDownIcon />
+                  </Button>
+
+                  <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    style={{direction:"rtl", margin: "30px auto auto auto"}}
+                    anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                  >
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
+                    <MenuItem component={Link} to="/login" onClick={handleClose}>ورود</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleExit}>خروج</MenuItem>
+                  </Menu>
+
+
                   <Avatar
-                    component={Link}
-                    to={"/profile"}
                     style={avatarstyle2}
                     sx={{ width: 46, height: 46 }}
                   >
                   </Avatar>
                   
-                  
                 </Grid>
-
-                
 
               </Grid>
             </>

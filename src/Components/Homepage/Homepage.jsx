@@ -13,7 +13,7 @@ import SimpleSlider from "../emtehani/emtehani";
 const Homepage = () => {
   return (
     <div>
-      <ChangeNav />
+      <Navbar2 />
       <Header />
       <Workinfo />
       <SimpleSlider />
