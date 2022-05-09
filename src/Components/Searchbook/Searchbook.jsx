@@ -16,6 +16,11 @@ import {
 } from "react-router-dom";
 import ChangeNav from "./../Navbar/changeNav";
 import Pagination from "@mui/material/Pagination";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  direction: "rtl",
+});
 
 const Searchbook = () => {
   const location = useLocation();
@@ -33,7 +38,7 @@ const Searchbook = () => {
     setApiLoading(true);
 
     if (!searchUrlParamPage) {
-      setpagenum2(1)
+      setpagenum2(1);
     }
 
     axios({
@@ -43,11 +48,12 @@ const Searchbook = () => {
       console.log(response.data);
     });
     axios({
-      url: searchUrlParamPage ? `${baseUrl}/search/?q=${searchUrlParam}&page=${pagenum2}` : `${baseUrl}/search/?q=${searchUrlParam}`,
+      url: searchUrlParamPage
+        ? `${baseUrl}/search/?q=${searchUrlParam}&page=${pagenum2}`
+        : `${baseUrl}/search/?q=${searchUrlParam}`,
     }).then((response) => {
       setbookinfo(response.data);
       setApiLoading(false);
-
     });
   }, [search]);
 
@@ -194,7 +200,7 @@ const Searchbook = () => {
                           height: "150px",
                           width: "120px",
                           boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
-                          borderRadius:"2px"
+                          borderRadius: "2px",
                         }}
                       />
                     </ButtonBase>
@@ -223,18 +229,20 @@ const Searchbook = () => {
       </div>
       {numpage2 > 1 ? (
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Pagination
-            count={numpage2}
-            style={{
-              marginTop: "-30px",
-              marginBottom: "30px",
-              padding: "10px 80px",
-            }}
-            page={pagenum2}
-            variant="outlined"
-            color="primary"
-            onChange={handlePagination2}
-          />
+          <ThemeProvider theme={theme}>
+            <Pagination
+              count={numpage2}
+              style={{
+                marginTop: "-30px",
+                marginBottom: "30px",
+                padding: "10px 80px",
+              }}
+              page={pagenum2}
+              variant="outlined"
+              color="primary"
+              onChange={handlePagination2}
+            />
+          </ThemeProvider>
         </div>
       ) : (
         <></>
