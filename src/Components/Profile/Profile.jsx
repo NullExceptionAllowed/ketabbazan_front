@@ -48,7 +48,7 @@ const Profile = () => {
   return (
     <div>
       <div className="profile_container">
-        <ChangeNav/>
+        <Navbar2/>
         <aside className="profile_container_aside">
           <div className="profile_container_asideTop">
             <div className="profile_image">

@@ -20,7 +20,9 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchBar from "./Searchbar";
+import { width } from "@mui/system";
 
 const Nav = () => {
   const theme = useTheme();
@@ -28,6 +30,8 @@ const Nav = () => {
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
   const history = useHistory();
   const [openSearchBar, setOpenSearchBar] = useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
   const handlesubmit = async (event) => {
     event.preventDefault();
     history.replace(`/Searchbook/?q=${search}`);
@@ -40,8 +44,20 @@ const Nav = () => {
   };
   let avatarstyle = {
     backgroundColor: "#679aea",
-    margin: "auto auto auto 30px",
+    margin: "auto auto auto 20px",
   };
+  let avatarstyle2 = {
+    backgroundColor: "#679aea",
+    margin: "-40px auto auto 30px",
+  };
+  let arrowstyle = {
+    borderRadius: "200px",
+  }
+  let arrowstyle2 = {
+    margin: "auto 75px auto -50px",
+    borderRadius: "200px",
+    width: "20px"
+  }
   let showbox = null;
   if (openSearchBar && checkpx) {
     showbox = <SearchBar open={openSearchBar} close={handleSearchBarClose}/>;
@@ -132,14 +148,17 @@ const Nav = () => {
                   <SearchIcon></SearchIcon>
                 </IconButton>
               </Grid>
+              <Button style={arrowstyle} ><ArrowDropDownIcon /></Button>
               <Avatar
                 component={Link}
                 to={"/profile"}
                 style={avatarstyle}
                 sx={{ width: 46, height: 46 }}
               >
-                <AccountCircleIcon />
               </Avatar>
+              {/* <Grid > */}
+                    
+                  {/* </Grid> */}
             </>
           ) : (
             <>
@@ -234,16 +253,24 @@ const Nav = () => {
                   </>
                 )}
                 <Grid item lg={2} md={2} sm={3}></Grid>
+
+                
+
                 <Grid item lg={2} md={2.5} sm={4}>
+                <Button style={arrowstyle2} ><ArrowDropDownIcon /></Button>
                   <Avatar
                     component={Link}
                     to={"/profile"}
-                    style={avatarstyle}
+                    style={avatarstyle2}
                     sx={{ width: 46, height: 46 }}
                   >
-                    <AccountCircleIcon />
                   </Avatar>
+                  
+                  
                 </Grid>
+
+                
+
               </Grid>
             </>
           )}
