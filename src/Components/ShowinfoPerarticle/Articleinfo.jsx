@@ -64,7 +64,6 @@ const ArticleInfo = () => {
         <div
           style={{
             display: "flex",
-            boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
             marginTop: "85px",
             marginBottom: "20px",
           }}
