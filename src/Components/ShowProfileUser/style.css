@@ -1,0 +1,12 @@
+.ShowProfile_contain{
+   margin-right: 2%; 
+   margin-left: 1.5%;
+}
+.ShowProfile_bio{
+    font-size: 15px;
+}
+@media (max-width:760px) {
+    .ShowProfile_bio{
+        font-size: 13px;
+    }
+}

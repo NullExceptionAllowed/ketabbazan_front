@@ -16,7 +16,7 @@ const ShowAllarticle = () => {
   const [articleinfo, setarticleinfo] = useState([]);
   useEffect(() => {
     setApiLoading(true);
-    axios.get(`${baseUrl}/write_article/newest_articles/`).then((response) => {
+    axios.get(`${baseUrl}/write_article/`).then((response) => {
       console.log(response.data);
       setarticleinfo(response.data);
       setApiLoading(false);
@@ -31,7 +31,7 @@ const ShowAllarticle = () => {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-          marginTop: "70px",
+          marginTop: "100px",
         }}
       >
         <div

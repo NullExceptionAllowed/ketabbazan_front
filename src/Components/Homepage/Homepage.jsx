@@ -19,7 +19,7 @@ const Homepage = () => {
       <Header />
       <Workinfo />
       <SimpleSlider />
-      <ShownewArcrousel/>
+      <ShownewArcrousel />
     </div>
   );
 };

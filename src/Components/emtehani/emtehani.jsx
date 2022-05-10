@@ -14,6 +14,7 @@ import SwiperCore, { Navigation, Pagination } from "swiper";
 export default function SimpleSlider() {
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
+
   useEffect(() => {
     setApiLoading(true);
     axios({
@@ -24,6 +25,13 @@ export default function SimpleSlider() {
       setApiLoading(false);
     });
   }, []);
+
+  const MouseOver = (event) => {
+    event.target.style.color = "#30C7CE";
+  };
+  const MouseOut = (event) => {
+    event.target.style.color = "black";
+  };
 
   SwiperCore.use([Navigation, Pagination]);
   return (
@@ -147,7 +155,7 @@ export default function SimpleSlider() {
                             height: "150px",
                             width: "120px",
                             boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
-                            borderRadius:"2px"
+                            borderRadius: "2px",
                           }}
                         />
                       </div>
@@ -156,6 +164,8 @@ export default function SimpleSlider() {
                         className="showbook_name"
                         variant="subtitle1"
                         component="div"
+                        onMouseOver={MouseOver}
+                        onMouseOut={MouseOut}
                       >
                         {info.name}
                       </div>

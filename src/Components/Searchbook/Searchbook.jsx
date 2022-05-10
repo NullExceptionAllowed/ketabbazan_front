@@ -33,6 +33,13 @@ const Searchbook = () => {
   const [pagenum2, setpagenum2] = useState(1);
   const [numpage2, setnumpage2] = useState(1);
 
+  const MouseOver = (event) => {
+    event.target.style.color = "#30C7CE";
+  };
+  const MouseOut = (event) => {
+    event.target.style.color = "black";
+  };
+
   const history = useHistory();
   useEffect(() => {
     setApiLoading(true);
@@ -67,7 +74,7 @@ const Searchbook = () => {
   let numbook = bookinfo.length;
 
   return (
-    <div className="showbookall_fa">
+    <div style={{direction:"rtl"}} className="showbookall_fa">
       <ChangeNav />
       <div style={{ marginTop: "6%" }}>
         {apiLoading && (
@@ -210,6 +217,8 @@ const Searchbook = () => {
                       variant="subtitle1"
                       component="div"
                       style={{ color: "black" }}
+                      onMouseOver={MouseOver}
+                      onMouseOut={MouseOut}
                     >
                       {info.name}
                     </div>

@@ -37,6 +37,13 @@ const Showbook = () => {
   const [pagenum, setpagenum] = useState(1);
   const [numpage, setnumpage] = useState(1);
 
+  const MouseOver = (event) => {
+    event.target.style.color = "#30C7CE";
+  };
+  const MouseOut = (event) => {
+    event.target.style.color = "black";
+  };
+
   const history = useHistory();
   useEffect(() => {
     setApiLoading(true);
@@ -68,7 +75,7 @@ const Showbook = () => {
   };
 
   return (
-    <div className="showbookall_fa">
+    <div style={{direction:"rtl"}} className="showbookall_fa">
       <ChangeNav />
       <CacheProvider value={cacheRtl}>
         <div style={{ marginTop: "6%" }}>
@@ -199,6 +206,8 @@ const Showbook = () => {
                         variant="subtitle1"
                         component="div"
                         style={{ color: "black" }}
+                        onMouseOver={MouseOver}
+                        onMouseOut={MouseOut}
                       >
                         {info.name}
                       </div>
