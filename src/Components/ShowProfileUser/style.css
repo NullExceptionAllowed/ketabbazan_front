@@ -5,6 +5,9 @@
 .ShowProfile_bio{
     font-size: 15px;
 }
+.ShowProfile_back{
+    /* background-image:url("../../assets/Image/backgr.png"); */
+}
 @media (max-width:760px) {
     .ShowProfile_bio{
         font-size: 13px;

@@ -7,7 +7,6 @@ import Workinfo from "../WorkInfo/workinfo";
 import ChangeNav from "../Navbar/changeNav";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import ShownewArticle from "../Shownewestarticle/Shownewarticle";
 import ShownewArcrousel from "../shownewarticle-crousel/shownewarcrousel";
 import SimpleSlider from "../emtehani/emtehani";
 import Login from "../Login/Login";
