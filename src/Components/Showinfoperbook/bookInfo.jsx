@@ -29,6 +29,7 @@ const Emti = () => {
 
   let s1 = {
     margin: "100px auto auto auto",
+    direction: "rtl"
   };
   let p1 = {
     height: "500px",

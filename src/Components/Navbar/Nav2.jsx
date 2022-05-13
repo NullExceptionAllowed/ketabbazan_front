@@ -28,6 +28,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Menu from '@mui/material/Menu';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
 const options = ['داشبورد', 'ویرایش اطلاعات', 'خروج از حساب'];
@@ -182,7 +183,7 @@ const Nav = () => {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
               >
-                <ArrowDropDownIcon />
+                <KeyboardArrowDownIcon />
               </Button>
 
               <Menu
@@ -202,7 +203,7 @@ const Nav = () => {
                       }}
                   >
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
-                    <MenuItem component={Link} to="/login" onClick={handleClose}>ورود</MenuItem>
+                    <MenuItem component={Link} to="/login" onClick={handleClose}>داشبورد</MenuItem>
                     <MenuItem component={Link} to="/" onClick={handleExit}>خروج</MenuItem>
               </Menu>
 
@@ -318,7 +319,7 @@ const Nav = () => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                     >
-                    <ArrowDropDownIcon />
+                    <KeyboardArrowDownIcon />
                   </Button>
 
                   <Menu
@@ -338,7 +339,7 @@ const Nav = () => {
                       }}
                   >
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
-                    <MenuItem component={Link} to="/login" onClick={handleClose}>ورود</MenuItem>
+                    <MenuItem component={Link} to="/login" onClick={handleClose}>داشبورد</MenuItem>
                     <MenuItem component={Link} to="/" onClick={handleExit}>خروج</MenuItem>
                   </Menu>
 
