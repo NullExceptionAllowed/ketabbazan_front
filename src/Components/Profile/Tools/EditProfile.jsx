@@ -37,7 +37,7 @@ const EditProfile = () => {
 
 
     return ( 
-        <div>
+        <center>
             <Grid lg={10} xs={10} container>
                 
                 <CacheProvider value={cacheRtl}>
@@ -65,8 +65,7 @@ const EditProfile = () => {
                             }
                         >
                             <Avatar
-                                sx={{ width: 65, height: 65 }} 
-                                alt="Remy Sharp"
+                                sx={{ width: 70, height: 70 }} 
                                 src="photo_2022-05-11_13-23-36.jpg"
                                 style={{margin:"20px 50px auto auto"}}
                             />
@@ -109,7 +108,7 @@ const EditProfile = () => {
                 </CacheProvider>
             </Grid>
             
-        </div>
+        </center>
      );
 }
  

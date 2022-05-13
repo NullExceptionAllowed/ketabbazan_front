@@ -47,6 +47,10 @@ const Profile = () => {
     setFlag(0);
   }
 
+  const handleExit = () => {
+    localStorage.clear();
+  }
+
   let show = null;
   if (flag === 0) {
     show = <EditProfile />;
@@ -95,7 +99,7 @@ const Profile = () => {
                 <ListItemIcon>
                   <ArticleIcon />
                 </ListItemIcon>
-                <Typography style={{fontSize:"18px"}} inset> مقاله های من </Typography>
+                <Typography style={{fontSize:"18px"}} inset> مقاله‌های من </Typography>
               </MenuItem>
 
               <Divider />
@@ -109,7 +113,7 @@ const Profile = () => {
 
               <Divider />
 
-              <MenuItem >
+              <MenuItem component={Link} to="/" onClick={handleExit}>
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>

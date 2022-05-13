@@ -203,8 +203,12 @@ const Nav = () => {
                       }}
                   >
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
-                    <MenuItem component={Link} to="/login" onClick={handleClose}>داشبورد</MenuItem>
-                    <MenuItem component={Link} to="/" onClick={handleExit}>خروج</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleExit} >
+                      <Typography style={{color:"red"}}>خروج از حساب</Typography>
+                    </MenuItem>
               </Menu>
 
               <Avatar
@@ -213,7 +217,7 @@ const Nav = () => {
               >
               </Avatar>
             </>
-          ) : (
+          ) : ( 
             <>
               <Grid
                 container
@@ -339,8 +343,10 @@ const Nav = () => {
                       }}
                   >
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
-                    <MenuItem component={Link} to="/login" onClick={handleClose}>داشبورد</MenuItem>
-                    <MenuItem component={Link} to="/" onClick={handleExit}>خروج</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleExit}>خروج از حساب</MenuItem>
                   </Menu>
 
 
