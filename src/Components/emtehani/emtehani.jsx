@@ -82,6 +82,8 @@ export default function SimpleSlider() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            marginRight:"5%",
+            marginLeft:"5%"
           }}
         >
           <div style={{ width: "100%" }}>
@@ -97,15 +99,29 @@ export default function SimpleSlider() {
                   slidesPerView: 8,
                   spaceBetween: 0,
                 },
-                800: {
+                1000: {
                   slidesPerView: 6,
                   spaceBetween: 0,
                 },
-                550: {
+                800: {
+                  slidesPerView: 5,
+                  spaceBetween: 0,
+                },
+
+                600: {
                   slidesPerView: 4,
                   spaceBetween: 0,
                 },
+
+                560: {
+                  slidesPerView: 3,
+                  spaceBetween: 0,
+                },
                 400: {
+                  slidesPerView: 2,
+                  spaceBetween: 0,
+                },
+                470: {
                   slidesPerView: 3,
                   spaceBetween: 0,
                 },

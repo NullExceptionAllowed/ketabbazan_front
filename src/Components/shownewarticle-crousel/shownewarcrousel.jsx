@@ -78,6 +78,8 @@ const ShownewArcrousel = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            marginRight:"5%",
+            marginLeft:"5%"
           }}
         >
           <div
@@ -91,7 +93,7 @@ const ShownewArcrousel = () => {
           >
             <Swiper
               spaceBetween={0}
-              slidesPerView={(width * (97 / 100) - 70) / 293}
+              slidesPerView={(width * (87 / 100) - 70) / 293}
               pagination={{
                 clickable: true,
               }}

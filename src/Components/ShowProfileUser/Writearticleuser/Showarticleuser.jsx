@@ -11,62 +11,62 @@ import Grid from "@mui/material/Grid";
 import "./style.css";
 
 const Showarticleuser = () => {
-    const [apiLoading, setApiLoading] = useState(false);
-    const [articleinfo, setarticleinfo] = useState([]);
-    useEffect(() => {
-      setApiLoading(true);
-      axios.get(`${baseUrl}/write_article/`).then((response) => {
-        console.log(response.data);
-        setarticleinfo(response.data);
-        setApiLoading(false);
-      });
-    }, []);
-    return ( 
+  const [apiLoading, setApiLoading] = useState(false);
+  const [articleinfo, setarticleinfo] = useState([]);
+  useEffect(() => {
+    setApiLoading(true);
+    axios.get(`${baseUrl}/write_article/`).then((response) => {
+      console.log(response.data);
+      setarticleinfo(response.data);
+      setApiLoading(false);
+    });
+  }, []);
+  return (
+    <div
+      style={{
+        direction: "rtl",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
+      {apiLoading && (
         <div
-        style={{
-          direction: "rtl",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
-        {apiLoading && (
-          <div
-            style={{
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "auto",
+            marginTop: 96,
+            marginBottom: 96,
+          }}
+        >
+          <ReactLoading
+            type="spinningBubbles"
+            color={"#1565C0"}
+            height={100}
+            width={100}
+          />
+        </div>
+      )}
+      {!apiLoading && (
+        <div
+          style={{
+            direction: "rtl",
+            marginBottom: "50px",
+          }}
+        >
+          <Grid
+            container
+            item
+            sx={{
+              marginTop: "10px",
               display: "flex",
-              justifyContent: "center",
-              padding: "auto",
-              marginTop: 96,
-              marginBottom: 96,
+              flexWrap: "wrap",
+              marginRight:"-15px",
             }}
           >
-            <ReactLoading
-              type="spinningBubbles"
-              color={"#1565C0"}
-              height={100}
-              width={100}
-            />
-          </div>
-        )}
-        {!apiLoading && (
-          <div
-            style={{
-              direction: "rtl",
-              marginBottom: "50px",
-            }}
-          >
-            <Grid
-              container
-              item
-              sx={{
-                marginTop: "10px",
-                display: "flex",
-                flexWrap: "wrap",
-                marginRight: "10px",
-                marginLeft: "10px",
-              }}
-            >
-              {articleinfo.map((info, index) => (
+            {articleinfo.map((info, index) => (
+              <div style={{paddingRight:"15px"}}>
                 <Paper
                   key={index}
                   className="shownewarticle-Paper"
@@ -80,11 +80,10 @@ const Showarticleuser = () => {
                     textDecoration: "none",
                     display: "flex",
                     flexDirection: "column",
-                    marginRight: "10px",
-                    width:"280px",
+                    width: "280px",
                     backgroundColor: "white",
                     borderRadius: "5px",
-                    maxHeight:"350px"
+                    maxHeight: "350px",
                   }}
                 >
                   <div
@@ -154,12 +153,13 @@ const Showarticleuser = () => {
                     </span>
                   </div>
                 </Paper>
-              ))}
-            </Grid>
-          </div>
-        )}
-      </div>
-     );
-}
- 
+              </div>
+            ))}
+          </Grid>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default Showarticleuser;
