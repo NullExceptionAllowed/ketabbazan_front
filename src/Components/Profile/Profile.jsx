@@ -104,7 +104,7 @@ const Profile = () => {
 
               <Divider />
 
-              <MenuItem >
+              <MenuItem disabled>
                 <ListItemIcon>
                   <PaymentIcon/>
                 </ListItemIcon>
@@ -112,6 +112,17 @@ const Profile = () => {
               </MenuItem>
 
               <Divider />
+
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
 
               <MenuItem component={Link} to="/" onClick={handleExit}>
                 <ListItemIcon>

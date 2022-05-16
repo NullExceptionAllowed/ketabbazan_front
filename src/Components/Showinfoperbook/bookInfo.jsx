@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Button,MenuItem ,Grid, Paper, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../Variable";
 import Rating from "@mui/material/Rating";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CreateIcon from "@mui/icons-material/Create";
-import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ChangeNav from "./../Navbar/changeNav";
 import { useHistory } from "react-router-dom";
 import ShowDialog from "./ShowDialog";
 import { ToastContainer } from "react-toastify";
 import showToast from "../../Service/toastservice";
 import ReactLoading from "react-loading";
-import SimilarBooks from "../similarBooks/similarBooks";
 import CommentApp from "../Comment/CommentApp";
+import Menu from '@mui/material/Menu';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+
+const options = ['خوانده‌ام', 'در حال خواندنم', 'می‌خواهم بخوانم', 'رها کردم'];
 
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
@@ -75,7 +76,7 @@ const Emti = () => {
     fontSize: 20,
   };
   let typo8 = {
-    margin: "45px auto auto auto",
+    margin: "130px auto auto auto",
     fontSize: 14,
   };
   let typo9 = {
@@ -113,6 +114,16 @@ const Emti = () => {
   const [to, setto] = React.useState(null);
   const [rate, setrate] = React.useState();
   const [userrate, setuserrate] = React.useState();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const oopen = Boolean(anchorEl);
+
+  const handleCclick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCclose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     setApiLoading(true);
@@ -195,7 +206,7 @@ const Emti = () => {
                   <Typography
                     style={{ margin: "20px auto auto auto", fontSize: 14 }}
                   >
-                    امتیاز شما به این محصول !؟
+                   امتیاز شما به این محصول
                   </Typography>
                 </Grid>
 
@@ -344,74 +355,57 @@ const Emti = () => {
                   <Typography
                     style={{ margin: "60px auto auto auto", fontSize: 14 }}
                   >
-                    آیا کتاب را خوانده اید !؟
+                    وضعیت : بدون وضعیت
                   </Typography>
                 </Grid>
 
-                <Grid>
-                  <Button
-                    startIcon={
-                      <MarkChatReadIcon
-                        style={{ margin: "auto -65px auto auto" }}
-                      />
-                    }
-                    variant="outlined"
-                    component={Link}
-                    style={{
-                      backgroundColor: "CAE5F3",
-                      margin: "10px auto auto auto",
-                      borderRadius: "10px",
-                      fontWeight: 800,
-                      width: "200px",
-                      height: "40px",
-                    }}
-                  >
-                    خوانده ام
-                  </Button>
-                </Grid>
 
                 <Grid>
-                  <Button
-                    startIcon={
-                      <AutoStoriesIcon
-                        style={{ margin: "auto -50px auto auto" }}
-                      />
-                    }
-                    variant="outlined"
-                    component={Link}
-                    style={{
-                      backgroundColor: "CAE5F3",
-                      margin: "7px auto auto auto",
-                      borderRadius: "10px",
-                      fontWeight: 800,
-                      width: "200px",
-                      height: "40px",
-                    }}
-                  >
-                    در حال خواندنم
-                  </Button>
-                </Grid>
 
-                <Grid>
-                  <Button
+                  <Button 
                     startIcon={
-                      <MenuBookIcon
-                        style={{ margin: "auto -65px auto auto" }}
-                      />
+                      <KeyboardArrowDownIcon style={{ margin: "auto -60px auto auto" }} />
                     }
-                    variant="outlined"
-                    component={Link}
                     style={{
                       backgroundColor: "CAE5F3",
-                      margin: "7px auto auto auto",
                       borderRadius: "10px",
+                      margin: "5px auto auto auto",
                       fontWeight: 800,
                       width: "200px",
                       height: "40px",
                     }}
-                  >
-                    نخوانده ام
+                    variant="outlined"
+                    id="demo-positioned-button"
+                    aria-controls={oopen ? 'demo-positioned-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={oopen ? 'true' : undefined}
+                    onClick={handleCclick}
+                    >
+                      وضعیت کتاب
                   </Button>
+
+                  <Menu
+                        id="demo-positioned-menu"
+                        aria-labelledby="demo-positioned-button"
+                        anchorEl={anchorEl}
+                        open={oopen}
+                        onClose={handleCclose}
+                        style={{direction:"rtl", margin: "30px auto auto 33px"}}
+                        anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                          }}
+                        transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                          }}
+                      >
+                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>خوانده‌ام</MenuItem>
+                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>در حال خواندنم</MenuItem>
+                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>می‌خواهم بخوانم</MenuItem>
+                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>رها کردم</MenuItem>
+                  </Menu>
+
                 </Grid>
 
                 <Grid>
@@ -434,6 +428,7 @@ const Emti = () => {
                     }
                     variant="contained"
                     component={Link}
+                    disabled
                     style={{
                       backgroundColor: "CAE5F3",
                       margin: "7px auto auto auto",

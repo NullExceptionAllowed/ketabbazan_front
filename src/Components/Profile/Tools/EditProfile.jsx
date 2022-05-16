@@ -111,5 +111,5 @@ const EditProfile = () => {
         </center>
      );
 }
- 
+
 export default EditProfile;

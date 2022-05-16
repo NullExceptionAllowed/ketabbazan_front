@@ -31,8 +31,6 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
-const options = ['داشبورد', 'ویرایش اطلاعات', 'خروج از حساب'];
-
 const Nav = () => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down(600));
@@ -71,6 +69,7 @@ const Nav = () => {
   let avatarstyle = {
     backgroundColor: "#679aea",
     margin: "auto auto auto 20px",
+    
   };
   let avatarstyle2 = {
     backgroundColor: "#679aea",
@@ -175,7 +174,7 @@ const Nav = () => {
                 </IconButton>
               </Grid>
 
-              <Button 
+              {/* <Button 
                 style={arrowstyle} 
                 id="demo-positioned-button"
                 aria-controls={open ? 'demo-positioned-menu' : undefined}
@@ -184,7 +183,18 @@ const Nav = () => {
                 onClick={handleClick}
               >
                 <KeyboardArrowDownIcon />
-              </Button>
+              </Button> */}
+
+              <Avatar
+                style={{backgroundColor: "#679aea",margin: "auto auto auto 20px", cursor:'pointer'}}
+                sx={{ width: 46, height: 46 }}
+                id="demo-positioned-button"
+                aria-controls={open ? 'demo-positioned-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              >
+              </Avatar>
 
               <Menu
                     id="demo-positioned-menu"
@@ -211,11 +221,7 @@ const Nav = () => {
                     </MenuItem>
               </Menu>
 
-              <Avatar
-                style={avatarstyle}
-                sx={{ width: 46, height: 46 }}
-              >
-              </Avatar>
+              
             </>
           ) : ( 
             <>
@@ -315,7 +321,7 @@ const Nav = () => {
 
                 <Grid item lg={2} md={2.5} sm={4}>
 
-                  <Button 
+                  {/* <Button 
                     style={arrowstyle2}
                     id="demo-positioned-button"
                     aria-controls={open ? 'demo-positioned-menu' : undefined}
@@ -324,7 +330,19 @@ const Nav = () => {
                     onClick={handleClick}
                     >
                     <KeyboardArrowDownIcon />
-                  </Button>
+                  </Button> */}
+
+                  <Avatar
+                    style={{backgroundColor: "#679aea",margin: "auto auto auto 20px", cursor:'pointer'}}
+                    sx={{ width: 46, height: 46 }}
+                    id="demo-positioned-button"
+                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    
+                  >
+                  </Avatar>
 
                   <Menu
                     id="demo-positioned-menu"
@@ -332,7 +350,7 @@ const Nav = () => {
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
-                    style={{direction:"rtl", margin: "30px auto auto auto"}}
+                    style={{direction:"rtl", margin: "40px auto auto 20px"}}
                     anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'left',
@@ -346,15 +364,10 @@ const Nav = () => {
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
-                    <MenuItem component={Link} to="/" onClick={handleExit}>خروج از حساب</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleExit}>
+                      <Typography style={{color:"red"}}>خروج از حساب</Typography>
+                    </MenuItem>
                   </Menu>
-
-
-                  <Avatar
-                    style={avatarstyle2}
-                    sx={{ width: 46, height: 46 }}
-                  >
-                  </Avatar>
                   
                 </Grid>
 
