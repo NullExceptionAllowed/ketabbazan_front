@@ -24,6 +24,7 @@ import { Typography, Grid, Stack, Paper, Divider } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import AddIcon from '@mui/icons-material/Add';
 import Badge from '@mui/material/Badge';
+import { baseUrl } from "../../../Variable";
 import CreateIcon from "@mui/icons-material/Create";
 import { borderRadius } from "@mui/system";
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -37,6 +38,71 @@ const EditProfile = () => {
         stylisPlugins: [prefixer, rtlPlugin],
     });
 
+    const [nickName, setnickName] = useState("");
+    const [bio, setBio] = useState("");
+    const [fullName, setfullName] = useState("");
+
+    useEffect(() => { intialize() }, []);
+
+    let token = "Token " + localStorage.getItem('token');
+
+    const intialize = () => {
+        axios.get(`${baseUrl}/profile/info/`, {
+          headers: {
+            'Content-Type': 'application/json ',
+            'Authorization': token
+          }
+        }).then((res) => {
+    
+          console.log(res.data);
+          setnickName(res.data.nickname);
+          setfullName(res.data.profile.fullname);
+          setBio(res.data.profile.bio);
+        })
+    }
+
+    const sethandlerFullName = (e) =>
+    {
+        setfullName(e.target.value);
+    }
+
+    const sethandlerNickName = (event) =>
+    {
+        setnickName(event.target.value);
+    }
+
+    const sethandlerBio = (e) =>
+    {
+        setBio(e.target.value);
+    }
+
+    const user = {
+        nickname : nickName ,
+        fullname :fullName,
+        gender : "M" ,
+        born_date : "1380" + "-" + "2" + "-" + "5" ,
+        bio : bio
+    }
+
+    const handleSubmit = () =>
+    {
+     if(nickName!==""){
+      localStorage.setItem("nickname", nickName); 
+     }   
+      axios.post(
+      `${baseUrl}/profile/info/`,
+      JSON.stringify(user),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': token
+        }
+      }
+    ) .then((res) => {
+       console.log(res.status);           
+     })  
+    }
+
 
     return ( 
         <center>
@@ -45,17 +111,18 @@ const EditProfile = () => {
                 <CacheProvider value={cacheRtl}>
                 
                 <Stack direction="column" spacing={2}>
-                    <Grid item >
+                    {/* <Grid item >
                         <Typography style={{fontSize:20, margin: "auto 50px auto auto"}}>ویرایش حساب کاربری</Typography>
-                    </Grid>
+                    </Grid> */}
 
                     <Grid item>
 
-                        <Paper elevation={1} style={{ margin:"20px 50px auto auto",width:"550px", height:"140px"}}>
+                        <Paper className="Editprofile_divider" elevation={0} style={{backgroundColor:"rgb(225, 228, 228)",margin:"auto 50px auto auto",width:"550px", height:"140px"}}>
                         
-                            <Divider className="Editprofile_divider" style={{backgroundColor:"lightBlue",margin:"auto auto auto auto"}} textAlign="right">
+                            {/* <Divider className="Editprofile_divider" style={{backgroundColor:"lightBlue",margin:"auto auto auto auto"}} textAlign="right"> */}
                                
                                 <Badge
+                                    
                                     overlap="circular"
                                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                                     badgeContent={
@@ -63,9 +130,9 @@ const EditProfile = () => {
                                     }
                                 >
                                     <Avatar
-                                        sx={{ width: 70, height: 70 }} 
-                                        src="photo_2022-05-11_13-23-36.jpg"
-                                        style={{margin:"auto auto auto auto"}}
+                                        sx={{ width: 100, height: 100 }} 
+                                       
+                                        style={{margin:"20px auto auto auto"}}
                                     />
 
                                 </Badge>
@@ -80,15 +147,15 @@ const EditProfile = () => {
                                 </Avatar>
                                 
                                 <AddIcon style={{color:"white",margin:"-80px auto auto 50px",backgroundColor:"#679aea", borderRadius:"100%"}}/> */}
-                            </Divider>
+                            {/* </Divider> */}
 
-                            <Grid dir="rtl">
+                            {/* <Grid dir="rtl">
                                 <Typography style={{margin:"20px auto auto auto"}}>
                                     <span style={{color:"#000000"}}>{"ایمیل: "}</span>
                                     samad@gmail.com
                                 </Typography>
                                 
-                            </Grid>  
+                            </Grid>   */}
 
                         </Paper>
                         
@@ -121,23 +188,44 @@ const EditProfile = () => {
                     </Grid>
 
                     <Grid item >
-                        <TextField style={{margin:"20px 50px auto auto", width:"250px"}} size="small" id="outlined-basic" label="نام و نام خانوادگی" variant="outlined" />
-                        <TextField style={{margin:"20px 50px auto auto", width:"250px"}} size="small" id="outlined-basic" label="نام مستعار" variant="outlined" />
+                        <TextField 
+                        onChange={(e) => (sethandlerFullName(e))} 
+                        style={{margin:"20px 50px auto auto", width:"250px"}} 
+                        size="small" 
+                        id="outlined-basic" 
+                        label="نام و نام خانوادگی" 
+                        variant="outlined"
+                        value={fullName} />
+
+                        <TextField 
+                        onChange={(e) => (sethandlerNickName(e))}
+                        style={{margin:"20px 50px auto auto", width:"250px"}} 
+                        size="small" 
+                        id="outlined-basic" 
+                        label="نام مستعار" 
+                        variant="outlined" 
+                        value={nickName}/>
                     </Grid>
 
-                    {/* <Grid item>
-                        <TextField style={{margin:"20px 50px auto auto", width:"550px"}} size="small" id="outlined-basic" label="ایمیل" variant="outlined" />  
-                    </Grid> */}
+                    <Grid item>
+                        <TextField 
+                        style={{margin:"20px 50px auto auto", width:"550px"}} 
+                        size="small" 
+                        id="outlined-basic" 
+                        label="ایمیل" 
+                        variant="outlined" 
+                        />  
+                    </Grid>
 
                     <Grid>
                         <TextField
+                            onChange={sethandlerBio}
                             variant="outlined"
                             id="outlined-basic"
                             label="بیوگرافی"
                             multiline
                             rows={3}
-                            
-
+                            value={bio}
                             style={{
                            width: "550px", margin:"20px 50px auto auto"
                             , directin: "rtl !important"
@@ -147,7 +235,7 @@ const EditProfile = () => {
                     </Grid>
 
                     <Grid>
-                        <Button variant="contained" style={{margin:"20px 50px auto auto"}}>ویرایش اطلاعات</Button>
+                        <Button onClick={handleSubmit} variant="contained" style={{margin:"15px 50px auto auto"}}>ویرایش اطلاعات</Button>
                     </Grid>
                 </Stack>
                 

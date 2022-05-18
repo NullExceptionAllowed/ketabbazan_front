@@ -23,6 +23,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
 import PaymentIcon from '@mui/icons-material/Payment';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SyncLockIcon from '@mui/icons-material/SyncLock';
 import Edit from "./Tools/Edit.jsx";
 
 
@@ -43,6 +44,14 @@ const Profile = () => {
 
   const [flag, setFlag] = useState(0);
 
+  const [Focus, setFocus] = useState();
+
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
+
   const handleEdit = () => {
     setFlag(0);
   }
@@ -50,6 +59,8 @@ const Profile = () => {
   const handleExit = () => {
     localStorage.clear();
   }
+
+  
 
   let show = null;
   if (flag === 0) {
@@ -77,44 +88,51 @@ const Profile = () => {
 
             <MenuList dense dir="rtl" onClick={handleEdit}>
               
-              <MenuItem >
+              <MenuItem selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)} >
                 <ListItemIcon>
-                  <CreateIcon />
+                  <CreateIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset> ویرایش پروفایل </Typography>
               </MenuItem>
 
               <Divider />
 
-              <MenuItem >
+              <MenuItem selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
                 <ListItemIcon>
-                  < MenuBookIcon />
+                  < MenuBookIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset> وضعیت کتاب‌های من</Typography>
               </MenuItem>
 
               <Divider />
 
-              <MenuItem >
+              <MenuItem selected={selectedIndex === 2} onClick={(event) => handleListItemClick(event, 2)}>
                 <ListItemIcon>
-                  <ArticleIcon />
+                  <ArticleIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset> مقاله‌های من </Typography>
               </MenuItem>
 
               <Divider />
 
-              <MenuItem disabled>
+              <MenuItem disabled selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3)}>
                 <ListItemIcon>
-                  <PaymentIcon/>
+                  <PaymentIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset> شارژ کیف پول </Typography>
               </MenuItem>
 
               <Divider />
 
-              <br></br>
-              <br></br>
+              <MenuItem disabled selected={selectedIndex === 4} onClick={(event) => handleListItemClick(event, 4)}>
+                <ListItemIcon>
+                  < SyncLockIcon style={{color:"#679aea"}}/>
+                </ListItemIcon>
+                <Typography style={{fontSize:"18px"}} inset>تغییر رمز عبور</Typography>
+              </MenuItem>
+
+              <Divider />
+              
               <br></br>
               <br></br>
               <br></br>
@@ -126,7 +144,7 @@ const Profile = () => {
 
               <MenuItem component={Link} to="/" onClick={handleExit}>
                 <ListItemIcon>
-                  <LogoutIcon />
+                  <LogoutIcon style={{color:"red"}} />
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px", color:"red"}} inset>خروج از حساب</Typography>
               </MenuItem>
