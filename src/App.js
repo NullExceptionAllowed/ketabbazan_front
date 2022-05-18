@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/articleinfo/:id"  component={ArticleInfo} />
         <Route path="/Searchbook"  component={Searchbook} />
         <Route path="/Showallarticle"  component={ShowAllarticle} />
-        <Route path="/ShowProfileuser"  component={ShowProfileuser} />
+        <Route path="/ShowProfileuser/:id"  component={ShowProfileuser} />
       </Switch>
   );
 };

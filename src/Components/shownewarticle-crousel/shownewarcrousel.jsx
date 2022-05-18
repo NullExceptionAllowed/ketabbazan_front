@@ -190,7 +190,7 @@ const ShownewArcrousel = () => {
                           color: "#0057D9",
                           textDecoration: "none",
                         }}
-                        to={`/ShowProfileuser`}
+                        to={`/ShowProfileuser/${info.owner_id}`}
                       >
                         {info.owner}
                       </Link>

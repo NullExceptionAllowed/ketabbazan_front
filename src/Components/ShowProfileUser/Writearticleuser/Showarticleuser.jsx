@@ -10,7 +10,8 @@ import image from "../../../assets/Image/image.png";
 import Grid from "@mui/material/Grid";
 import "./style.css";
 
-const Showarticleuser = () => {
+const Showarticleuser = ({articleuser}) => {
+  
   const [apiLoading, setApiLoading] = useState(false);
   const [articleinfo, setarticleinfo] = useState([]);
   useEffect(() => {
@@ -65,7 +66,7 @@ const Showarticleuser = () => {
               marginRight:"-15px",
             }}
           >
-            {articleinfo.map((info, index) => (
+            {articleuser.map((info, index) => (
               <div style={{paddingRight:"15px"}}>
                 <Paper
                   key={index}
@@ -149,7 +150,7 @@ const Showarticleuser = () => {
                         color: "#0057D9",
                       }}
                     >
-                      فاطمه عسکری
+                      {info.owner}
                     </span>
                   </div>
                 </Paper>
