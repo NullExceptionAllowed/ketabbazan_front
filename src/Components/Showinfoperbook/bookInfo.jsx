@@ -18,8 +18,6 @@ import Menu from '@mui/material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
-const options = ['خوانده‌ام', 'در حال خواندنم', 'می‌خواهم بخوانم', 'رها کردم'];
-
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
