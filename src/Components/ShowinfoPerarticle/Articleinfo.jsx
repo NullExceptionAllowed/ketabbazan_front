@@ -33,6 +33,12 @@ const ArticleInfo = () => {
       setApiLoading(false);
     });
   }, []);
+  useEffect(() => {
+    document.body.style.background="#F5F5F5";
+    return()=>{
+      document.body.style.background="white";
+    };
+  },[]);
   const Img = styled("img")({
     margin: "auto",
     display: "block",

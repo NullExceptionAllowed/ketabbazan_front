@@ -37,6 +37,13 @@ const Showbook = () => {
   const [pagenum, setpagenum] = useState(1);
   const [numpage, setnumpage] = useState(1);
 
+  useEffect(() => {
+    document.body.style.background="#F5F5F5";
+    return()=>{
+      document.body.style.background="white";
+    };
+  },[]);
+
   const MouseOver = (event) => {
     event.target.style.color = "#30C7CE";
   };

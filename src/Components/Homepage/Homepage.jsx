@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Navbar from "../Navbar/Nav";
 import Navbar2 from "../Navbar/Nav2";
 import Header from "../Header/Header";
@@ -12,6 +12,12 @@ import SimpleSlider from "../emtehani/emtehani";
 import Login from "../Login/Login";
 
 const Homepage = () => {
+  useEffect(() => {
+    document.body.style.background="#F5F5F5";
+    return()=>{
+      document.body.style.background="white";
+    };
+  },[]);
   return (
     <div>
       <ChangeNav />
