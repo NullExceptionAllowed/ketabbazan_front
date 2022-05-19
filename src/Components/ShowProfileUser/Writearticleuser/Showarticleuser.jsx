@@ -9,9 +9,10 @@ import Avatar from "@mui/material/Avatar";
 import image from "../../../assets/Image/image.png";
 import Grid from "@mui/material/Grid";
 import "./style.css";
+import Profileimg from "../../../assets/Image/me.jpg";
+import { width } from "@mui/system";
 
-const Showarticleuser = ({articleuser}) => {
-  
+const Showarticleuser = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const [articleinfo, setarticleinfo] = useState([]);
   useEffect(() => {
@@ -26,9 +27,6 @@ const Showarticleuser = ({articleuser}) => {
     <div
       style={{
         direction: "rtl",
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
       }}
     >
       {apiLoading && (
@@ -54,109 +52,108 @@ const Showarticleuser = ({articleuser}) => {
           style={{
             direction: "rtl",
             marginBottom: "50px",
+            marginTop: "1%",
+            justifyContent: "center",
+            width: "100%",
           }}
         >
-          <Grid
-            container
-            item
-            sx={{
-              marginTop: "10px",
-              display: "flex",
-              flexWrap: "wrap",
-              marginRight:"-15px",
-            }}
+          <div
+            className="showarticleuser_fa"
+            style={{ display: "flex", flexDirection: "column" }}
           >
-            {articleuser.map((info, index) => (
-              <div style={{paddingRight:"15px"}}>
-                <Paper
-                  key={index}
-                  className="shownewarticle-Paper"
+            {articleinfo.map((info, index) => (
+              <div>
+                <Grid
                   to={`/articleinfo/${info.id}`}
                   component={Link}
-                  sx={{
-                    direction: "rtl",
-                  }}
-                  style={{
-                    marginTop: "10px",
-                    textDecoration: "none",
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "280px",
-                    backgroundColor: "white",
-                    borderRadius: "5px",
-                    maxHeight: "350px",
-                  }}
+                  style={{ marginTop: "2%", display: "flex",textDecoration:"none" }}
+                  key={index}
                 >
                   <div
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      position: "relative",
+                      flexDirection: "row",
+                      height: "150px",
                     }}
                   >
                     <img
-                      alt="img"
                       src={info.image}
+                      alt="img"
                       style={{
-                        width: "100%",
-                        borderRadius: "5px 5px 0px 0px",
+                        width: "140px",
+                        height: "100%",
+                        borderRadius: "2px",
                       }}
-                      className="shownewarticle-img"
                     />
+                    <div>
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          marginRight: "10px",
+                          color: "black",
+                        }}
+                      >
+                        {info.title}
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "2%",
+                          marginRight: "10px",
+                          color: "#757C86",
+                          fontSize: "14px",
+                          overflow: "Hidden",
+                          whiteSpace: "normal",
+                          textOverflow: "ellipsis",
+                          width: "80%",
+                          height: "28%",
+                        }}
+                      >
+                        {info.summary}
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "1%",
+                          marginRight: "10px",
+                          color: "#757C86",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {"تاریخ مقاله:" + info.created_jalali}
+                      </div>
+                      <div
+                        style={{
+                          marginRight: "10px",
+                          marginTop: "2.5%",
+                          display: "flex",
+                        }}
+                      >
+                        <Avatar
+                          alt="Remy Sharp"
+                          src={Profileimg}
+                          sx={{ width: 20, height: 20 }}
+                        />
+                        <Link
+                          style={{
+                            marginRight: "5px",
+                            fontSize: "13px",
+                            color: "#0057D9",
+                            textDecoration: "none",
+                          }}
+                          to={`/ShowProfileuser/${info.owner_id}`}
+                        >
+                          فاطمه عسکری
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "bold",
-                      marginTop: "20px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    {info.title}
-                  </div>
-                  <div
-                    style={{
-                      marginRight: "10px",
-                      marginLeft: "10px",
-                      color: "#757C86",
-                      fontSize: "15px",
-                      overflow: "Hidden",
-                      whiteSpace: "normal",
-                      textOverflow: "ellipsis",
-                    }}
-                    className="showarticle-summary"
-                  >
-                    {info.summary}
-                  </div>
-                  <Divider style={{ marginTop: "20px" }} />
-                  <div
-                    style={{
-                      display: "flex",
-                      marginTop: "15px",
-                      marginLeft: "10px",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    <div style={{ flex: 1, marginRight: "10px" }}></div>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={image}
-                      sx={{ width: 20, height: 20 }}
-                    />
-                    <span
-                      style={{
-                        marginRight: "5px",
-                        fontSize: "13px",
-                        color: "#0057D9",
-                      }}
-                    >
-                      {info.owner}
-                    </span>
-                  </div>
-                </Paper>
+                </Grid>
+                <Divider
+                  style={{ color: "red", width: "100%", marginTop: "2%" }}
+                />
               </div>
             ))}
-          </Grid>
+          </div>
         </div>
       )}
     </div>
