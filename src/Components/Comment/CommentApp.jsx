@@ -14,6 +14,8 @@ const CommentApp = () => {
   const [getComments, setComments] = useState([]);
   const [getComment, setComment] = useState("");
   const [bookId, setBookid] = useState(0);
+  const [replys,setReplys] = useState([]);
+  const [reply, setReply] = useState("");
  
  const params = useParams();
  const idid = params.id;
@@ -22,7 +24,7 @@ const CommentApp = () => {
 
   
 
-  useEffect(() => { intialize()   } , [reload,idid]);
+  useEffect(() => { intialize(); console.log(context.refresh)   } , [reload, context.refresh ,idid]);
 
   
  
