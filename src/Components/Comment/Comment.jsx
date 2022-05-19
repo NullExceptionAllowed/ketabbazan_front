@@ -15,6 +15,8 @@ import { ShowerSharp } from "@mui/icons-material";
 import axios from "axios";
 import { baseUrl } from "../../Variable";
 import SimpleContext from "./SimpleContext";
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
 
 
@@ -33,10 +35,10 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
     const [reply, setReply] = useState("");
     const [id, setId] = useState("");
     const [flag, setFlag] = useState("0");
-    const [refresh, setRefresh] = useState("0");
+    const [refreshl, setRefresh] = useState("0");
     useEffect(() => {
         Show();
-    }, [refresh]);
+    }, [refreshl]);
 
 
 
@@ -45,13 +47,13 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
         setFlag(1);
 
         setReply(e.target.value);
-        
+
 
 
     }
 
     const addNewReply = () => {
-        setRefresh(Math. random());
+        setRefresh(Math.random());
         setFlag(0);
         setReply("");
 
@@ -75,7 +77,7 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
 
 
         })
-        
+
     }
 
 
@@ -102,7 +104,7 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
         <SimpleContext.Provider
             value={{
 
-                refresh: refresh
+                refresh: refreshl
             }}
         >
             <div>
@@ -120,7 +122,7 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
                         <Grid container>
                             <Grid item xs={0.5} ></Grid>
                             <Grid item xs={11} >
-                                <TextareaAutosize onChange={handleSetReply}
+                                <TextareaAutosize style={{border:"1px solid white"}} onChange={handleSetReply}
                                     style={{
                                         fontFamily: "Byekan ", fontSize: "15px", resize: "vertical", width: "100%   ", height: "45px"
                                         ,
@@ -133,30 +135,68 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
                                 />
                                 {Show()}
 
-                                {replys.map(replyexa => (
 
-                                    <div>
-                                        <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src="./imgInComment/bill.jpg" />
-                                        <a style={{ position: "relative", top: "-33px", right: "47px" }}>{replyexa.user}</a>
+                                {/* <Grid style={{direction:"rtl" }} item xs={0} >
+                                     </Grid> */}
+
+                                <Grid item xs={12} >
+
+                                    {replys.map(replyexa => (
+                                        <div>
+
+                                            
+
+                                                <Box
+                                                    sx={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        //width: 'fit-content',
+                                                        borderRight: (theme) => `3px solid blue` ,
+                                                       // borderRadius: 1,
+                                                       // bgcolor: 'background.paper',
+                                                        color: 'text.secondary',
+                                                        '& svg': {
+                                                            m: 1.5,
+                                                        },
+                                                        '& hr': {
+                                                            mx: 0.5,
+                                                        },
+                                                    }}
+                                                    style={{marginTop:"7px"}}
+                                                >
+                                                    <div style={{ marginRight: "5px" }}>
+
+                                                    <Divider orientation="vertical" variant="middle" flexItem />
 
 
-                                        <p style={{ position: "relative", top: "-10px", right: "5px" }}>{replyexa.reply_text}</p>
-                                    </div>
-
-                                ))}
+                                                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src="./imgInComment/bill.jpg" />
+                                                    <a style={{ position: "relative", top: "-33px", right: "47px" }}>{replyexa.user}</a>
 
 
+                                                    <p style={{ position: "relative", top: "-10px", right: "5px" }}>{replyexa.reply_text}</p>
 
+
+                                                    </div>
+                                        </Box>
+                                        
+                                               
+                                        </div>
+                                    ))}
                             </Grid>
-                            <Grid item xs={0.5} ></Grid>
+
+
+
+
                         </Grid>
-
-
+                        <Grid item xs={0.5} ></Grid>
                     </Grid>
-                    <Grid item xs={2}></Grid>
+
+
                 </Grid>
-            </div>
-        </SimpleContext.Provider>
+                <Grid item xs={2}></Grid>
+            </Grid>
+        </div>
+        </SimpleContext.Provider >
 
 
 
