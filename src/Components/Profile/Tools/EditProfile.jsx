@@ -11,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
+import showToast from "E:/Tahlil_Tarahi/courses/react/ketab/ketabbazan_front/src/Service/toastservice.jsx";
 import axios from "axios";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -42,6 +43,9 @@ const EditProfile = () => {
     const [bio, setBio] = useState("");
     const [fullName, setfullName] = useState("");
 
+    const [userrEmail, setuserrEmail] = useState();
+    const temp = "";
+
     useEffect(() => { intialize() }, []);
 
     let token = "Token " + localStorage.getItem('token');
@@ -54,10 +58,10 @@ const EditProfile = () => {
           }
         }).then((res) => {
     
-          console.log(res.data);
           setnickName(res.data.nickname);
           setfullName(res.data.profile.fullname);
           setBio(res.data.profile.bio);
+          setuserrEmail(res.data.email)
         })
     }
 
@@ -99,7 +103,11 @@ const EditProfile = () => {
         }
       }
     ) .then((res) => {
-       console.log(res.status);           
+
+       console.log(res.status); 
+       if(res.status===200){
+        showToast("success", "اطلاعات با موفقیت ذخیره شد");
+      }          
      })  
     }
 
@@ -209,11 +217,16 @@ const EditProfile = () => {
 
                     <Grid item>
                         <TextField 
+                        InputProps={{
+                            readOnly: true,
+                          }}
                         style={{margin:"20px 50px auto auto", width:"550px"}} 
                         size="small" 
-                        id="outlined-basic" 
-                        label="ایمیل" 
-                        variant="outlined" 
+                        id="outlined-read-only-input"
+                        label="ایمیل"
+                        defaultValue={"@gmail.com"}
+                        value={userrEmail}
+                        
                         />  
                     </Grid>
 

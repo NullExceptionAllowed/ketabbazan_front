@@ -2,22 +2,14 @@ import React, { useState } from "react";
 
 import "./Profile.css";
 
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import { editableInputTypes } from "@testing-library/user-event/dist/utils";
-import Dashboard from "./Tools/Dashboard.jsx";
 import EditProfile from "./Tools/EditProfile.jsx";
 import AddPhoto from "./Tools/AddPhoto.jsx";
 import { Link } from "react-router-dom";
-import Navbar from '../Navbar/Nav';
-import Navbar2 from '../Navbar/Nav2';
 import ChangeNav from './../Navbar/changeNav';
-import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Check from '@mui/icons-material/Check';
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -25,6 +17,11 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SyncLockIcon from '@mui/icons-material/SyncLock';
 import Edit from "./Tools/Edit.jsx";
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
 const Profile = () => {
@@ -44,23 +41,27 @@ const Profile = () => {
 
   const [flag, setFlag] = useState(0);
 
-  const [Focus, setFocus] = useState();
-
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
   };
 
-  const handleEdit = () => {
+  const handleEdit = (event, index) => {
     setFlag(0);
+    setSelectedIndex(index);
   }
 
   const handleExit = () => {
     localStorage.clear();
   }
 
-  
+  const test = (event, index) => {
+    setFlag(1);
+    setSelectedIndex(index);
+  }
 
   let show = null;
   if (flag === 0) {
@@ -86,63 +87,70 @@ const Profile = () => {
 
           <Paper style={p1} elevation={1}>
 
-            <MenuList dense dir="rtl" onClick={handleEdit}>
+            <MenuList dense dir="rtl">
               
-              <MenuItem selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)} >
+              <MenuItem style={{margin:"5px auto 10px auto"}} divider={true} selected={selectedIndex === 0} onClick={(event) => handleEdit(event, 0)} >
                 <ListItemIcon>
                   <CreateIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset> ویرایش پروفایل </Typography>
               </MenuItem>
 
-              <Divider />
 
-              <MenuItem selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
-                <ListItemIcon>
-                  < MenuBookIcon style={{color:"#679aea"}}/>
-                </ListItemIcon>
-                <Typography style={{fontSize:"18px"}} inset> وضعیت کتاب‌های من</Typography>
+              <MenuItem divider={true} style={{margin:"auto auto 10px auto"}} onClick={handleClick}>
+                  <ListItemIcon>
+                    < MenuBookIcon style={{color:"#679aea"}}/>
+                  </ListItemIcon>
+                  <Typography style={{fontSize:"18px"}} inset> وضعیت کتاب‌های من</Typography>
+                  {open ? <ExpandLess /> : <ExpandMore />}
               </MenuItem>
 
-              <Divider />
+                <Collapse dir="rtl" in={open} timeout="auto" unmountOnExit>
+                  <List component="div" >
+                    <ListItemButton >
+                      <Typography style={{fontSize:"16px"}} inset>خوانده‌ام</Typography>
+                    </ListItemButton>
 
-              <MenuItem selected={selectedIndex === 2} onClick={(event) => handleListItemClick(event, 2)}>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <Typography style={{fontSize:"16px"}} inset>در حال خواندنم</Typography>
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <Typography style={{fontSize:"16px"}} inset>می‌خواهم بخوانم</Typography>
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <Typography style={{fontSize:"16px"}} inset>رها کردم</Typography>
+                    </ListItemButton>
+                  </List>
+                </Collapse>
+              
+
+              <MenuItem divider={true} style={{margin:"auto auto 10px auto"}} selected={selectedIndex === 2} onClick={(event) => test(event, 2)}>
                 <ListItemIcon>
                   <ArticleIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset> مقاله‌های من </Typography>
               </MenuItem>
 
-              <Divider />
 
-              <MenuItem disabled selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3)}>
+              <MenuItem divider={true} style={{margin:"auto auto 10px auto"}} disabled selected={selectedIndex === 3} >
                 <ListItemIcon>
                   <PaymentIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset> شارژ کیف پول </Typography>
               </MenuItem>
+              
 
-              <Divider />
-
-              <MenuItem disabled selected={selectedIndex === 4} onClick={(event) => handleListItemClick(event, 4)}>
+              <MenuItem divider={true} style={{margin:"auto auto 10px auto"}} disabled selected={selectedIndex === 4}>
                 <ListItemIcon>
                   < SyncLockIcon style={{color:"#679aea"}}/>
                 </ListItemIcon>
                 <Typography style={{fontSize:"18px"}} inset>تغییر رمز عبور</Typography>
               </MenuItem>
 
-              <Divider />
-              
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
 
-              <MenuItem component={Link} to="/" onClick={handleExit}>
+              <MenuItem divider={true} style={{margin:"auto auto 10px auto"}} component={Link} to="/" onClick={handleExit}>
                 <ListItemIcon>
                   <LogoutIcon style={{color:"red"}} />
                 </ListItemIcon>

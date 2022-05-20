@@ -116,6 +116,8 @@ const Emti = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const oopen = Boolean(anchorEl);
 
+  const [vaziat, setvaziat] = React.useState("بدون وضعیت");
+
   const handleCclick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -151,7 +153,7 @@ const Emti = () => {
           book: id,
           rate: rate
       };
-      axios.post("http://98522148.pythonanywhere.com/rate/",
+      axios.post('http://derakhshan.pythonanywhere.com/rate/',
       JSON.stringify(rating),
       {
           headers: {
@@ -163,6 +165,98 @@ const Emti = () => {
           console.log(res.status)
           if(res.status===200){
             showToast("success", "امتیازت با موفقیت ثبت شد");
+          }
+      })
+  }
+
+
+  const handleHaveRead = () => {
+    setAnchorEl(null);
+    const haveRead = {
+      list_id : 1,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
+      JSON.stringify(haveRead),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          }
+          // if(res.status===400){
+          //   showToast("error", "قبلا وضعیت این کتاب را ثبت کرده‌اید");
+          // }
+      })
+  }
+
+  const handleImReading = () => {
+    setAnchorEl(null);
+    const reading = {
+      list_id : 2,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
+      JSON.stringify(reading),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          }
+      })
+  }
+
+  const handleGoingToRead = () => {
+    setAnchorEl(null);
+    const goingtoread = {
+      list_id : 3,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
+      JSON.stringify(goingtoread),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          }
+      })
+  }
+
+  const handleLeave = () => {
+    setAnchorEl(null);
+    const leave = {
+      list_id : 4,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
+      JSON.stringify(leave),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
           }
       })
   }
@@ -353,7 +447,7 @@ const Emti = () => {
                   <Typography
                     style={{ margin: "60px auto auto auto", fontSize: 14 }}
                   >
-                    وضعیت : بدون وضعیت
+                    وضعیت : {vaziat}
                   </Typography>
                 </Grid>
 
@@ -399,10 +493,10 @@ const Emti = () => {
                         horizontal: 'left',
                           }}
                       >
-                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>خوانده‌ام</MenuItem>
-                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>در حال خواندنم</MenuItem>
-                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>می‌خواهم بخوانم</MenuItem>
-                        <MenuItem component={Link} to="/profile" onClick={handleCclose}>رها کردم</MenuItem>
+                        <MenuItem onClick={handleHaveRead}>خوانده‌ام</MenuItem>
+                        <MenuItem onClick={handleImReading}>در حال خواندنم</MenuItem>
+                        <MenuItem onClick={handleGoingToRead}>می‌خواهم بخوانم</MenuItem>
+                        <MenuItem onClick={handleLeave}>رها کردم</MenuItem>
                   </Menu>
 
                 </Grid>
