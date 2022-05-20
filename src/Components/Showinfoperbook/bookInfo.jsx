@@ -118,7 +118,8 @@ const Emti = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const token = "Token " + localStorage.getItem("token");
   const [bookinfo, setbookinfo] = useState([]);
-  const [rateinfo, setrateinfo] = useState([]);
+  const [rateinfocount, setrateinfocount] = useState(null);
+  const [rateinfavg, setrateinfoavg] = useState(null);
   const params = useParams();
   const id = params.id;
   const [to, setto] = React.useState(null);
@@ -140,10 +141,14 @@ const Emti = () => {
 
   useEffect(() => {
     axios.get(`${baseUrl}/rate/getrate/?id=${id}`).then((response) => {
-      setrateinfo(response.data.rateinfo);
+      setrateinfocount(response.data.rateinfo.count);
+      setrateinfoavg(response.data.rateinfo.avg)
       console.log(response.data.rateinfo);
+      if(flag===null){
+        setApiLoading(false);
+      }
     });
-  }, [rateinfo]);
+  }, [rateinfocount]);
 
   useEffect(() => {
     if (flag !== null) {
@@ -160,10 +165,8 @@ const Emti = () => {
           setuserrate(response.data.rate.rate);
           setApiLoading(false);
         });
-    } else {
-      setApiLoading(false);
     }
-  }, [rateinfo]);
+  }, [rateinfocount]);
 
   function round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
@@ -194,11 +197,12 @@ const Emti = () => {
 
           if (res.status === 200) {
             const newinfo = {
-              count: rateinfo.count + 1,
+              count: rateinfocount + 1,
               avg:
-                (rateinfo.avg * rateinfo.count + rate) / (rateinfo.count + 1),
+                (rateinfavg * rateinfocount + rate) / (rateinfocount + 1),
             };
-            setrateinfo(newinfo);
+            setrateinfoavg(newinfo.avg);
+            setrateinfocount(newinfo.count);
             //setchangerate(true);
             showToast("success", "امتیازت با موفقیت ثبت شد");
           }
@@ -432,9 +436,9 @@ const Emti = () => {
 
               <Grid>
                 <Typography style={typo3}>
-                  امتیاز محصول : {round(rateinfo.avg, 1)} از 5{" "}
+                  امتیاز محصول : {round(rateinfavg, 1)} از 5{" "}
                   <span style={{ color: "#0052cc" }}>
-                    ( {rateinfo.count} نفر امتیاز داده است )
+                    ( {rateinfocount} نفر امتیاز داده است )
                   </span>
                 </Typography>
               </Grid>

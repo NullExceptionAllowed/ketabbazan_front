@@ -16,7 +16,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactLoading from "react-loading";
 import Readbook from "./ShowReadBook/ReadBook";
 
-
 const theme = createTheme({
   direction: "rtl",
 });
@@ -31,6 +30,7 @@ const ShowProfileuser = () => {
   const [infouser, setinfouser] = useState([]);
   const [articleuser, setarticleuser] = useState([]);
   const [bio, setbio] = useState();
+  const[readbookuser,setreadbookuser]=useState([]);
 
   useEffect(() => {
     setApiLoading(true);
@@ -38,6 +38,7 @@ const ShowProfileuser = () => {
       setbio(response.data.profile.profile.bio);
       setinfouser(response.data.profile);
       setarticleuser(response.data.user_articles);
+      setreadbookuser(response.data.read_books);
       console.log("@@@");
       console.log(response.data.user_articles);
       setApiLoading(false);
@@ -51,7 +52,7 @@ const ShowProfileuser = () => {
   };
 
   return (
-    <div style={{direction:"rtl"}}>
+    <div style={{ direction: "rtl" }}>
       <ChangeNav />
       {apiLoading && (
         <div
@@ -125,9 +126,14 @@ const ShowProfileuser = () => {
           {value === 0 && (
             <>
               <Showarticleuser articleuser={articleuser} />
+
             </>
           )}
-          {value === 1 && <><Readbook/></>}
+          {value === 1 && (
+            <>
+              <Readbook  readbookuser={readbookuser}/>
+            </>
+          )}
         </div>
       )}
     </div>

@@ -6,20 +6,12 @@ import ReactLoading from "react-loading";
 import { baseUrl } from "../../../Variable";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
+import Avatar from "@mui/material/Avatar";
+import Profileimg from "../../../assets/Image/me.jpg";
+import { DriveEta } from "@mui/icons-material";
+import Rating from "@mui/material/Rating";
 
-const Readbook = () => {
-  const [apiLoading, setApiLoading] = useState(false);
-  const [bookinfo, setbookinfo] = useState([]);
-  useEffect(() => {
-    setApiLoading(true);
-    axios({
-      url: `${baseUrl}/read_book/newest_books`,
-    }).then((response) => {
-      console.log(response.data);
-      setbookinfo(response.data);
-      setApiLoading(false);
-    });
-  }, []);
+const Readbook = ({ readbookuser }) => {
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -30,7 +22,7 @@ const Readbook = () => {
   return (
     <div
       style={{
-        direction: "rtl",
+        
       }}
     >
       <div
@@ -46,7 +38,7 @@ const Readbook = () => {
           className="showarticleuser_fa"
           style={{ display: "flex", flexDirection: "column" }}
         >
-          {bookinfo.map((info, index) => (
+          {readbookuser.map((info, index) => (
             <div>
               <Grid
                 style={{
@@ -54,9 +46,9 @@ const Readbook = () => {
                   display: "flex",
                   textDecoration: "none",
                 }}
-                component={Link}
                 key={index}
                 to={`/bookinfo/${info.id}`}
+                component={Link}
               >
                 <div
                   style={{
@@ -65,15 +57,17 @@ const Readbook = () => {
                     height: "150px",
                   }}
                 >
-                  <img
-                    src={info.image_url}
-                    alt="img"
-                    style={{
-                      width: "120px",
-                      height: "100%",
-                      borderRadius: "2px",
-                    }}
-                  />
+                  <div>
+                    <img
+                      src={info.image_url}
+                      alt="img"
+                      style={{
+                        width: "120px",
+                        height: "100%",
+                        borderRadius: "2px",
+                      }}
+                    />
+                  </div>
                   <div>
                     <Grid
                       style={{
@@ -87,20 +81,62 @@ const Readbook = () => {
                     </Grid>
 
                     <Grid
-                        style={{
-                          marginTop: "2%",
-                          marginRight: "10px",
-                          color: "#757C86",
-                          fontSize: "14px",
-                          overflow: "Hidden",
-                          whiteSpace: "normal",
-                          textOverflow: "ellipsis",
-                          width: "65%",
-                          height:"28%"
-                        }}
-                      >
-                        {info.summary}
-                      </Grid>
+                      style={{
+                        marginTop: "0.5%",
+                        fontSize: "13px",
+                        marginRight: "10px",
+                        color: "#757C86",
+                      }}
+                    >
+                      {"نویسنده: " + info.author}
+                    </Grid>
+
+                    <Grid
+                      style={{
+                        marginTop: "0.5%",
+                        fontSize: "13px",
+                        marginRight: "10px",
+                        color: "#757C86",
+                      }}
+                    >
+                      {" انتشارات:" + info.publisher}
+                    </Grid>
+
+                    <Grid
+                      style={{
+                        marginTop: "1%",
+                        marginRight: "10px",
+                        color: "#757C86",
+                        fontSize: "14px",
+                        overflow: "Hidden",
+                        whiteSpace: "normal",
+                        textOverflow: "ellipsis",
+                        width: "65%",
+                        height: "28%",
+                      }}
+                    >
+                      {info.summary}
+                    </Grid>
+
+                    <Grid
+                      style={{
+                        marginTop: "0.7%",
+                        marginRight: "10px",
+                      }}
+                    >
+                      <div style={{ display: "flex", direction: "rtl" }}>
+                        <span style={{ color: "#757C86", fontSize: "13px" }}>
+                          امتیاز:
+                        </span>
+                        <Rating
+                          name="read-only"
+                          value={Math.round(info.rate)}
+                          size={"small"}
+                          precision={0.1}
+                          readOnly
+                        />
+                      </div>
+                    </Grid>
                   </div>
                 </div>
               </Grid>
