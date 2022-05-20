@@ -64,7 +64,7 @@ const Comments = () => {
                     <Grid item xs={3}></Grid>
                     <Grid item xs={6} style={{
                         height: " auto", marginTop: "15px",
-                        backgroundColor: "#f0f5f5", paddingTop: "1px"
+                        backgroundColor: "rgb(251,251,251)", paddingTop: "1px"
                     }}>
 
                         {context.comments.length > 0 ? (
@@ -79,6 +79,7 @@ const Comments = () => {
                                     user={comment.user}
                                     comment_id={comment.id}
                                     replys = {comment.reply}
+                                    created_on = {comment.created_on}
                                 />
 
 

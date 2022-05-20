@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { styled } from '@mui/material/styles';
 
 import Container from '@mui/material/Container';
@@ -30,15 +30,15 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const Comment = ({ comment_text, user, comment_id, replys }) => {
+const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
     let token = "Token " + localStorage.getItem('token');
     const [reply, setReply] = useState("");
     const [id, setId] = useState("");
     const [flag, setFlag] = useState("0");
-    const [refreshl, setRefresh] = useState("0");
+    const context = useContext(SimpleContext);
     useEffect(() => {
-        Show();
-    }, [refreshl]);
+        Show(); console.log(context.refresh);
+    }, [context.refresh]);
 
 
 
@@ -53,9 +53,9 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
     }
 
     const addNewReply = () => {
-        setRefresh(Math.random());
-        setFlag(0);
-        setReply("");
+
+
+
 
         const Reply = {
             comment: comment_id,
@@ -77,9 +77,15 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
 
 
         })
+        setReply("");
+        context.setRefresh((Math.random() * 9999999) + 1);
+        setFlag(0);
+    }
+    const sethandler = () => {
+        setFlag(0);
+        context.setRefresh((Math.random() * 9999999) + 1);
 
     }
-
 
     const Show = () => {
         let show = null;
@@ -101,89 +107,91 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
     //onClick={context.handleCreateNewComment}
 
     return (
-        <SimpleContext.Provider
-            value={{
+        // <SimpleContext.Provider
+        //     value={{
 
-                refresh: refreshl
-            }}
-        >
-            <div>
-                <Grid container spacing={2}>
-                    <Grid item xs={0.3} ></Grid>
-                    <Grid item xs={11.4} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
-
-
-                        <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src="./imgInComment/bill.jpg" />
-                        <a style={{ position: "relative", top: "-33px", right: "47px" }}>{user}</a>
+        //         refresh: refreshl
+        //     }}
+        // >
+        <div>
+            <Grid container spacing={2}>
+                <Grid item xs={0.1} ></Grid>
+                <Grid item xs={11.6} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
 
 
-                        <p style={{ position: "relative", top: "-10px", right: "5px" }}>{comment_text}</p>
+                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={context.img} />
+                    
+                    <a style={{ position: "relative", top: "-45px", right: "47px" }}>{user}</a>
 
-                        <Grid container>
-                            <Grid item xs={0.5} ></Grid>
-                            <Grid item xs={11} >
-                                <TextareaAutosize style={{border:"1px solid white"}} onChange={handleSetReply}
-                                    style={{
-                                        fontFamily: "Byekan ", fontSize: "15px", resize: "vertical", width: "100%   ", height: "45px"
-                                        ,
-                                        padding: "10px 10px", marginTop: "5px"
-                                    }}
-                                    aria-label="minimum height"
-                                    value={reply}
-                                    placeholder="ریپلای"
+                    <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{created_on}</p>
+                    <p style={{ position: "relative", top: "-25px", right: "5px" }}>{comment_text}</p>
 
-                                />
-                                {Show()}
+                    <Grid container>
+                        <Grid item xs={0.5} ></Grid>
+
+                        <Grid item xs={11.0} style={{ marginRight: "5px" }}>
+                            <TextareaAutosize onChange={handleSetReply}
+                                style={{
+                                    fontFamily: "Byekan ", fontSize: "15px", resize: "vertical", width: "100%   ", height: "35px"
+                                    , lineHeight: "35px",
+                                    padding: "0px 10px", marginTop: "5px"
+                                }}
+                                aria-label="minimum height"
+                                value={reply}
+                                placeholder="ریپلای"
+
+                            />
+                            {Show()}
 
 
-                                {/* <Grid style={{direction:"rtl" }} item xs={0} >
-                                     </Grid> */}
+                            <Grid container >
+
 
                                 <Grid item xs={12} >
 
                                     {replys.map(replyexa => (
                                         <div>
 
-                                            
 
-                                                <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        //width: 'fit-content',
-                                                        borderRight: (theme) => `3px solid blue` ,
-                                                       // borderRadius: 1,
-                                                       // bgcolor: 'background.paper',
-                                                        color: 'text.secondary',
-                                                        '& svg': {
-                                                            m: 1.5,
-                                                        },
-                                                        '& hr': {
-                                                            mx: 0.5,
-                                                        },
-                                                    }}
-                                                    style={{marginTop:"7px"}}
-                                                >
-                                                    <div style={{ marginRight: "5px" }}>
+
+                                            <Box
+                                                sx={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    //width: 'fit-content',
+                                                    borderRight: (theme) => `3px solid blue`,
+                                                    // borderRadius: 1,
+                                                    // bgcolor: 'background.paper',
+                                                    // color: 'text.secondary',
+                                                    '& svg': {
+                                                        m: 1.5,
+                                                    },
+                                                    '& hr': {
+                                                        mx: 0.5,
+                                                    },
+                                                }}
+                                                style={{ marginTop: "7px" }}
+                                            >
+                                                <div style={{ marginRight: "5px" }}>
 
                                                     <Divider orientation="vertical" variant="middle" flexItem />
 
 
-                                                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src="./imgInComment/bill.jpg" />
-                                                    <a style={{ position: "relative", top: "-33px", right: "47px" }}>{replyexa.user}</a>
+                                                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={context.img} />
+                                                    <a style={{ position: "relative", top: "-45px", right: "47px" }}>{replyexa.user}</a>
+
+                                                    <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{created_on}</p>
+                                                    <p style={{ position: "relative", top: "-30px", right: "5px" }}>{replyexa.reply_text}</p>
 
 
-                                                    <p style={{ position: "relative", top: "-10px", right: "5px" }}>{replyexa.reply_text}</p>
+                                                </div>
+                                            </Box>
 
 
-                                                    </div>
-                                        </Box>
-                                        
-                                               
                                         </div>
                                     ))}
+                                </Grid>
                             </Grid>
-
 
 
 
@@ -193,10 +201,10 @@ const Comment = ({ comment_text, user, comment_id, replys }) => {
 
 
                 </Grid>
-                <Grid item xs={2}></Grid>
+                <Grid item xs={0.1}></Grid>
             </Grid>
         </div>
-        </SimpleContext.Provider >
+        // </SimpleContext.Provider >
 
 
 

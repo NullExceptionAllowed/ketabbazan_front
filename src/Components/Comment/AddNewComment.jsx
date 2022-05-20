@@ -84,8 +84,14 @@ const AddNewComment = () => {
                             placeholder="نظرت و اینجا بنویس"
 
                         />
+                        <Grid container >
+                        <Grid item xs={2.9 } md={7.7}></Grid>
+                        <Grid style={{ direction:"ltr"}} item xs={9} md={4.2}>
                         <Button onClick={context.handleCreateNewComment} variant="contained" 
-                        style={{ marginTop: "20px", marginRight: "82%" }}>ارسال دیدگاه </Button>
+                        style={{ marginTop: "20px"}}>ارسال دیدگاه </Button>
+                        </Grid>
+                        <Grid item xs={0.1} md={0.1}></Grid>
+                        </Grid>
                     </Paper>
                 </Grid>
                 <Grid item xs={3.55}></Grid>

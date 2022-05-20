@@ -16,15 +16,17 @@ const CommentApp = () => {
   const [bookId, setBookid] = useState(0);
   const [replys,setReplys] = useState([]);
   const [reply, setReply] = useState("");
- 
+  const [refresh , setRefresh] = useState("");
+
  const params = useParams();
  const idid = params.id;
  const [reload, setReload] = useState("0");
+ const [img , setImg] = useState("");
   const context = useContext(SimpleContext);
 
   
 
-  useEffect(() => { intialize(); console.log(context.refresh)   } , [reload, context.refresh ,idid]);
+  useEffect(() => { intialize(); console.log(refresh)   } , [reload, refresh ,idid]);
 
   
  
@@ -47,6 +49,17 @@ const CommentApp = () => {
      console.log(res.status);
      setComments(res.data.all_comments);
     })
+
+    axios.get(`derakhshan.pythonanywhere.com/profile/image/`, {
+      headers: {
+         'Content-Type': 'application/json ',
+         "Authorization": token
+       }
+    }).then((res) => {
+      setImg(res);
+     
+    })
+
   }
   
   
@@ -60,8 +73,8 @@ const CommentApp = () => {
     console.log(context.click);
 
     const comments = [...getComments];
-    setReload(Math. random());
-    
+    setReload(Math.floor(Math.random() * 9999999) + 1);
+    console.log(reload);
 
     const comment = {
 
@@ -100,9 +113,11 @@ const CommentApp = () => {
   return (
     <SimpleContext.Provider
       value={{
-        
+        img: img ,
+        refresh : refresh , 
         comments: getComments,
         comment: getComment,
+        setRefresh : setRefresh ,
         handleCreateNewComment: handleCreateNewComment,
         handleSetComment: handleSetComment
       }}
