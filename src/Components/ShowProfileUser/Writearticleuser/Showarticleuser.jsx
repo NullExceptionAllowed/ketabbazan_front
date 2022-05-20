@@ -89,7 +89,7 @@ const Showarticleuser = ({ articleuser }) => {
                           overflow: "Hidden",
                           whiteSpace: "normal",
                           textOverflow: "ellipsis",
-                          width: "80%",
+                          width: "65%",
                           height: "28%",
                         }}
                       >

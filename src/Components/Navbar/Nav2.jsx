@@ -19,8 +19,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchBar from "./Searchbar";
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Menu from '@mui/material/Menu';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 
 const Nav = () => {
   const theme = useTheme();
@@ -28,6 +37,22 @@ const Nav = () => {
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
   const history = useHistory();
   const [openSearchBar, setOpenSearchBar] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleExit = () => {
+    localStorage.clear();
+    setAnchorEl(null);
+  }
+
   const handlesubmit = async (event) => {
     event.preventDefault();
     history.replace(`/Searchbook/?q=${search}`);
@@ -38,10 +63,26 @@ const Nav = () => {
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
   };
+  let paperstyle = {
+    margin:"50px auto auto 100px"
+  }
   let avatarstyle = {
     backgroundColor: "#679aea",
-    margin: "auto auto auto 30px",
+    margin: "auto auto auto 20px",
+    
   };
+  let avatarstyle2 = {
+    backgroundColor: "#679aea",
+    margin: "-40px auto auto 30px",
+  };
+  let arrowstyle = {
+    borderRadius: "200px",
+  }
+  let arrowstyle2 = {
+    margin: "auto 75px auto -50px",
+    borderRadius: "200px",
+    width: "20px"
+  }
   let showbox = null;
   if (openSearchBar && checkpx) {
     showbox = <SearchBar open={openSearchBar} close={handleSearchBarClose}/>;
@@ -132,16 +173,57 @@ const Nav = () => {
                   <SearchIcon></SearchIcon>
                 </IconButton>
               </Grid>
-              <Avatar
-                component={Link}
-                to={"/profile"}
-                style={avatarstyle}
-                sx={{ width: 46, height: 46 }}
+
+              {/* <Button 
+                style={arrowstyle} 
+                id="demo-positioned-button"
+                aria-controls={open ? 'demo-positioned-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
               >
-                <AccountCircleIcon />
+                <KeyboardArrowDownIcon />
+              </Button> */}
+
+              <Avatar
+                style={{backgroundColor: "#679aea",margin: "auto auto auto 20px", cursor:'pointer'}}
+                sx={{ width: 46, height: 46 }}
+                id="demo-positioned-button"
+                aria-controls={open ? 'demo-positioned-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              >
               </Avatar>
+
+              <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    style={{direction:"rtl", margin: "30px auto auto auto"}}
+                    anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                  >
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleExit} >
+                      <Typography style={{color:"red"}}>خروج از حساب</Typography>
+                    </MenuItem>
+              </Menu>
+
+              
             </>
-          ) : (
+          ) : ( 
             <>
               <Grid
                 container
@@ -234,16 +316,61 @@ const Nav = () => {
                   </>
                 )}
                 <Grid item lg={2} md={2} sm={3}></Grid>
+
+                
+
                 <Grid item lg={2} md={2.5} sm={4}>
+
+                  {/* <Button 
+                    style={arrowstyle2}
+                    id="demo-positioned-button"
+                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    >
+                    <KeyboardArrowDownIcon />
+                  </Button> */}
+
                   <Avatar
-                    component={Link}
-                    to={"/profile"}
-                    style={avatarstyle}
+                    style={{backgroundColor: "#679aea",margin: "auto auto auto 20px", cursor:'pointer'}}
                     sx={{ width: 46, height: 46 }}
+                    id="demo-positioned-button"
+                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    
                   >
-                    <AccountCircleIcon />
                   </Avatar>
+
+                  <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    style={{direction:"rtl", margin: "40px auto auto 20px"}}
+                    anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                      }}
+                  >
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
+                    <MenuItem component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleExit}>
+                      <Typography style={{color:"red"}}>خروج از حساب</Typography>
+                    </MenuItem>
+                  </Menu>
+                  
                 </Grid>
+
               </Grid>
             </>
           )}

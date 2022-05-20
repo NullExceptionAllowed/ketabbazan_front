@@ -23,6 +23,9 @@ import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import {MenuItem } from "@mui/material";
+import Menu from '@mui/material/Menu';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const theme = createTheme({
   direction: "rtl",
@@ -83,7 +86,7 @@ const Emti = () => {
     fontSize: 20,
   };
   let typo8 = {
-    margin: "45px auto auto auto",
+    margin: "130px auto auto auto",
     fontSize: 14,
   };
   let typo9 = {
@@ -122,6 +125,10 @@ const Emti = () => {
   const [rate, setrate] = React.useState(0);
   const [userrate, setuserrate] = React.useState(null);
   const [changerate, setchangerate] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const oopen = Boolean(anchorEl);
+
+  const [vaziat, setvaziat] = React.useState("بدون وضعیت");
 
   useEffect(() => {
     setApiLoading(true);
@@ -153,9 +160,8 @@ const Emti = () => {
           setuserrate(response.data.rate.rate);
           setApiLoading(false);
         });
-    }
-    else{
-    setApiLoading(false);
+    } else {
+      setApiLoading(false);
     }
   }, [rateinfo]);
 
@@ -198,6 +204,106 @@ const Emti = () => {
           }
         });
     }
+  };
+
+
+
+  const handleHaveRead = () => {
+    setAnchorEl(null);
+    const haveRead = {
+      list_id : 1,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
+      JSON.stringify(haveRead),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          }
+          // if(res.status===400){
+          //   showToast("error", "قبلا وضعیت این کتاب را ثبت کرده‌اید");
+          // }
+      })
+  }
+
+  const handleImReading = () => {
+    setAnchorEl(null);
+    const reading = {
+      list_id : 2,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
+      JSON.stringify(reading),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          }
+      })
+  }
+
+  const handleGoingToRead = () => {
+    setAnchorEl(null);
+    const goingtoread = {
+      list_id : 3,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
+      JSON.stringify(goingtoread),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          }
+      })
+  }
+
+  const handleLeave = () => {
+    setAnchorEl(null);
+    const leave = {
+      list_id : 4,
+      book_id : id
+    };
+    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
+      JSON.stringify(leave),
+      {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": token
+          }
+      }
+      ).then((res) =>{
+          console.log(res.status)
+          if(res.status===200){
+            showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          }
+      })
+  }
+
+  const handleCclick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCclose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -430,71 +536,60 @@ const Emti = () => {
                   <Typography
                     style={{ margin: "60px auto auto auto", fontSize: 14 }}
                   >
-                    آیا کتاب را خوانده اید !؟
+                    وضعیت : {vaziat}
                   </Typography>
                 </Grid>
 
                 <Grid>
                   <Button
                     startIcon={
-                      <MarkChatReadIcon
-                        style={{ margin: "auto -65px auto auto" }}
+                      <KeyboardArrowDownIcon
+                        style={{ margin: "auto -60px auto auto" }}
                       />
                     }
-                    variant="outlined"
                     style={{
                       backgroundColor: "CAE5F3",
-                      margin: "10px auto auto auto",
                       borderRadius: "10px",
+                      margin: "5px auto auto auto",
                       fontWeight: 800,
                       width: "200px",
                       height: "40px",
                     }}
+                    variant="outlined"
+                    id="demo-positioned-button"
+                    aria-controls={oopen ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={oopen ? "true" : undefined}
+                    onClick={handleCclick}
                   >
-                    خوانده ام
+                    وضعیت کتاب
                   </Button>
-                </Grid>
 
-                <Grid>
-                  <Button
-                    startIcon={
-                      <AutoStoriesIcon
-                        style={{ margin: "auto -50px auto auto" }}
-                      />
-                    }
-                    variant="outlined"
-                    style={{
-                      backgroundColor: "CAE5F3",
-                      margin: "7px auto auto auto",
-                      borderRadius: "10px",
-                      fontWeight: 800,
-                      width: "200px",
-                      height: "40px",
+                  <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={oopen}
+                    onClose={handleCclose}
+                    style={{ direction: "rtl", margin: "30px auto auto 33px" }}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
                     }}
                   >
-                    در حال خواندنم
-                  </Button>
-                </Grid>
-
-                <Grid>
-                  <Button
-                    startIcon={
-                      <MenuBookIcon
-                        style={{ margin: "auto -65px auto auto" }}
-                      />
-                    }
-                    variant="outlined"
-                    style={{
-                      backgroundColor: "CAE5F3",
-                      margin: "7px auto auto auto",
-                      borderRadius: "10px",
-                      fontWeight: 800,
-                      width: "200px",
-                      height: "40px",
-                    }}
-                  >
-                    نخوانده ام
-                  </Button>
+                    <MenuItem onClick={handleHaveRead}>خوانده‌ام</MenuItem>
+                    <MenuItem onClick={handleImReading}>
+                      در حال خواندنم
+                    </MenuItem>
+                    <MenuItem onClick={handleGoingToRead}>
+                      می‌خواهم بخوانم
+                    </MenuItem>
+                    <MenuItem onClick={handleLeave}>رها کردم</MenuItem>
+                  </Menu>
                 </Grid>
 
                 <Grid>
