@@ -147,7 +147,6 @@ const Showbook = () => {
           </Grid>
         </div>
       )}
-      <SimpleSlider />
     </div>
   );
 };
