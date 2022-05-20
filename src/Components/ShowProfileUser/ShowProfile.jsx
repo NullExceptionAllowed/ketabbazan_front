@@ -13,6 +13,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ReactLoading from "react-loading";
 
 const theme = createTheme({
   direction: "rtl",
@@ -52,15 +53,21 @@ const ShowProfileuser = () => {
       <ChangeNav />
 
       {apiLoading && (
-        <div
-          style={{
-            marginTop: "90px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          loading
-        </div>
+                <div
+                style={{
+                  display: "flex",
+                  height: "100vh",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <ReactLoading
+                  type="bars"
+                  color="#1565C0"
+                  height={"20%"}
+                  width={"10%"}
+                />
+              </div>
       )}
       {!apiLoading && (
         <div
@@ -80,19 +87,16 @@ const ShowProfileuser = () => {
                 marginTop: "10px",
                 fontWeight: "bold",
                 fontSize: "19px",
-                width: "120px",
+                width: "140px",
               }}
             >
-              فاطمه عسکری
+             {infouser.nickname}
             </div>
             <div
               className="Showprofile_bio"
               style={{ marginTop: "0.5%", color: "#626462", fontSize: "15px" }}
             >
-              فاطمه عسکری هستم عاشق تکنولوژی و مطالعه کتاب، تو حوزه کتاب مشغول
-              به فعالیت هستم و بخش تکنولوژیه کارو سرو سامون میدم، اینجا میخوام
-              بهتون کلی مجموعه کتاب معرفی کنم که ازشون استفاده کنید چرا که راه
-              ...
+              {bio}
             </div>
           </center>
           <Box
@@ -119,7 +123,7 @@ const ShowProfileuser = () => {
 
           {value === 0 && (
             <>
-              <Showarticleuser />
+              <Showarticleuser articleuser={articleuser}/>
             </>
           )}
           {value === 1 && <>khoobi</>}

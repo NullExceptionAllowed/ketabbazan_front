@@ -78,8 +78,8 @@ const ShownewArcrousel = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginRight:"5%",
-            marginLeft:"5%"
+            marginRight: "5%",
+            marginLeft: "5%",
           }}
         >
           <div
@@ -148,7 +148,7 @@ const ShownewArcrousel = () => {
                           fontWeight: "bold",
                           marginTop: "20px",
                           marginRight: "10px",
-                          color:"black"
+                          color: "black",
                         }}
                       >
                         {info.title}
@@ -178,11 +178,13 @@ const ShownewArcrousel = () => {
                       }}
                     >
                       <div style={{ flex: 1, marginRight: "10px" }}></div>
-                      <Avatar
-                        alt="Remy Sharp"
-                        src={image}
-                        sx={{ width: 20, height: 20 }}
-                      />
+                      <Link to={`/ShowProfileuser/${info.owner_id}`}>
+                        <Avatar
+                          alt="Remy Sharp"
+                          src={image}
+                          sx={{ width: 20, height: 20 }}
+                        />
+                      </Link>
                       <Link
                         style={{
                           marginRight: "5px",

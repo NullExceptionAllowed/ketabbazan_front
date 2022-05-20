@@ -12,70 +12,44 @@ import "./style.css";
 import Profileimg from "../../../assets/Image/me.jpg";
 import { width } from "@mui/system";
 
-const Showarticleuser = () => {
-  const [apiLoading, setApiLoading] = useState(false);
-  const [articleinfo, setarticleinfo] = useState([]);
-  useEffect(() => {
-    setApiLoading(true);
-    axios.get(`${baseUrl}/write_article/`).then((response) => {
-      console.log(response.data);
-      setarticleinfo(response.data);
-      setApiLoading(false);
-    });
-  }, []);
+const Showarticleuser = ({ articleuser }) => {
   return (
     <div
       style={{
         direction: "rtl",
       }}
     >
-      {apiLoading && (
+      <div
+        style={{
+          direction: "rtl",
+          marginBottom: "50px",
+          marginTop: "1%",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
         <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "auto",
-            marginTop: 96,
-            marginBottom: 96,
-          }}
+          className="showarticleuser_fa"
+          style={{ display: "flex", flexDirection: "column" }}
         >
-          <ReactLoading
-            type="spinningBubbles"
-            color={"#1565C0"}
-            height={100}
-            width={100}
-          />
-        </div>
-      )}
-      {!apiLoading && (
-        <div
-          style={{
-            direction: "rtl",
-            marginBottom: "50px",
-            marginTop: "1%",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <div
-            className="showarticleuser_fa"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            {articleinfo.map((info, index) => (
-              <div>
-                <Grid
-                  to={`/articleinfo/${info.id}`}
-                  component={Link}
-                  style={{ marginTop: "2%", display: "flex",textDecoration:"none" }}
-                  key={index}
+          {articleuser.map((info, index) => (
+            <div>
+              <Grid
+                style={{
+                  marginTop: "2%",
+                  display: "flex",
+                  textDecoration: "none",
+                }}
+                key={index}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    height: "150px",
+                  }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      height: "150px",
-                    }}
-                  >
+                  <Link to={`/articleinfo/${info.id}`}>
                     <img
                       src={info.image}
                       alt="img"
@@ -85,8 +59,13 @@ const Showarticleuser = () => {
                         borderRadius: "2px",
                       }}
                     />
-                    <div>
-                      <div
+                  </Link>
+                  <div>
+                    <Link
+                      to={`/articleinfo/${info.id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Grid
                         style={{
                           fontSize: "16px",
                           fontWeight: "bold",
@@ -95,8 +74,13 @@ const Showarticleuser = () => {
                         }}
                       >
                         {info.title}
-                      </div>
-                      <div
+                      </Grid>
+                    </Link>
+                    <Link
+                      to={`/articleinfo/${info.id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Grid
                         style={{
                           marginTop: "2%",
                           marginRight: "10px",
@@ -110,8 +94,8 @@ const Showarticleuser = () => {
                         }}
                       >
                         {info.summary}
-                      </div>
-                      <div
+                      </Grid>
+                      <Grid
                         style={{
                           marginTop: "1%",
                           marginRight: "10px",
@@ -120,7 +104,12 @@ const Showarticleuser = () => {
                         }}
                       >
                         {"تاریخ مقاله:" + info.created_jalali}
-                      </div>
+                      </Grid>
+                    </Link>
+                    <Link
+                      to={`/ShowProfileuser/${info.owner_id}`}
+                      style={{ textDecoration: "none" }}
+                    >
                       <div
                         style={{
                           marginRight: "10px",
@@ -133,29 +122,27 @@ const Showarticleuser = () => {
                           src={Profileimg}
                           sx={{ width: 20, height: 20 }}
                         />
-                        <Link
+                        <div
                           style={{
                             marginRight: "5px",
                             fontSize: "13px",
                             color: "#0057D9",
-                            textDecoration: "none",
                           }}
-                          to={`/ShowProfileuser/${info.owner_id}`}
                         >
-                          فاطمه عسکری
-                        </Link>
+                          {info.owner}
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
-                </Grid>
-                <Divider
-                  style={{ color: "red", width: "100%", marginTop: "2%" }}
-                />
-              </div>
-            ))}
-          </div>
+                </div>
+              </Grid>
+              <Divider
+                style={{ color: "red", width: "100%", marginTop: "2%" }}
+              />
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };
