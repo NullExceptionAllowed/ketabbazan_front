@@ -21,7 +21,7 @@ import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { Typography, Grid, Stack, Paper, Divider } from "@mui/material";
+import { Typography, Grid, Stack, Paper, Divider,Input  } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import AddIcon from '@mui/icons-material/Add';
 import Badge from '@mui/material/Badge';
@@ -29,6 +29,8 @@ import { baseUrl } from "../../../Variable";
 import CreateIcon from "@mui/icons-material/Create";
 import { borderRadius } from "@mui/system";
 import ListItemIcon from '@mui/material/ListItemIcon';
+import IconButton from '@mui/material/IconButton';
+
 
 
 
@@ -46,7 +48,14 @@ const EditProfile = () => {
     const [userrEmail, setuserrEmail] = useState();
     const temp = "";
 
+    const [file, setFile] = useState();
+    const [changeImage, setChangeImage] = useState(false);
+    const [postimage, setpostimage] = useState(null);
+    const [aftersubmit, setaftersubmit] = useState(false);
+    const [apiLoading, setApiLoading] = useState(false);
+
     useEffect(() => { intialize() }, []);
+    //useEffect(() => {getProfileImage()}, [])
 
     let token = "Token " + localStorage.getItem('token');
 
@@ -64,6 +73,32 @@ const EditProfile = () => {
           setuserrEmail(res.data.email)
         })
     }
+
+
+    // const getProfileImage = () => {
+    
+    // axios.get(`${baseUrl}/profile/image/`, {
+    //     headers: {
+    //       'Content-Type': 'application/json ',
+    //       'Authorization': token
+    //     }
+    //   }).then((res) => {
+    //       console.log(res);
+    //       setFile(res);
+    //   })
+    // }
+
+    // async function status() {
+    //     const url = `${baseUrl}/profile/image/`
+    //     let response = await axios.get(`${baseUrl}/profile/info/`, {
+    //         headers: {
+    //           'Content-Type': 'application/json ',
+    //           'Authorization': token
+    //         }
+    //       })
+    //     return response.data;
+    //   }
+      //status().then((data) => setFile(data));
 
     const sethandlerFullName = (e) =>
     {
@@ -88,8 +123,50 @@ const EditProfile = () => {
         bio : bio
     }
 
+    const handleChange = (e) => {
+        setFile(URL.createObjectURL(e.target.files[0]));
+        setChangeImage(true);
+        console.log(e.target.files[0]);
+        setpostimage({
+          image: e.target.files,
+        });
+    };
+
+    // const handlesubmit2 = async (event) => {
+    //     event.preventDefault();
+    //     setaftersubmit(true);
+    //     const formdata = new FormData();
+    //     if (postimage !== null) {
+    //       formdata.append("image", postimage.image[0]);
+    //     }
+    //     console.log(JSON.stringify(formdata));
+    //     const token = "Token " + localStorage.getItem("token");
+    //     console.log(token);
+    //     if (true) {
+    //       try {
+    //         const response = await axios.post(
+    //           `${baseUrl}/profile/image/`,
+    //           formdata,
+    //           {
+    //             headers: {
+    //               "Content-Type": "application/json",
+    //               Authorization: token,
+    //             },
+    //           }
+    //         );
+        
+    //       }
+    //        catch (ex) {
+            
+    //         console.log(ex);
+            
+    //       }
+    //     }
+    //   };
+
     const handleSubmit = () =>
     {
+     //handlesubmit2();
      if(nickName!==""){
       localStorage.setItem("nickname", nickName); 
      }   
@@ -134,12 +211,26 @@ const EditProfile = () => {
                                     overlap="circular"
                                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                                     badgeContent={
-                                        <AddIcon style={{color:"white",margin:"auto auto auto auto",backgroundColor:"#679aea", borderRadius:"100%"}}/>
+                                        <IconButton 
+                                            variant="contained"
+                                            component="label"
+                                        >
+                                            <AddIcon 
+                                                style={{color:"white",margin:"auto auto auto auto",backgroundColor:"#679aea", borderRadius:"100%"}}
+                                            />
+                                                <input
+                                                type="file"
+                                                hidden
+                                                onChange={handleChange}
+                                                accept=".jpg,.jpeg,.png"
+                                            />
+                                        </IconButton>
+                                       
                                     }
                                 >
                                     <Avatar
                                         sx={{ width: 100, height: 100 }} 
-                                       
+                                        src={file}
                                         style={{margin:"20px auto auto auto"}}
                                     />
 
@@ -256,6 +347,8 @@ const EditProfile = () => {
             </Grid>
             
         </center>
+
+        
      );
 }
 
