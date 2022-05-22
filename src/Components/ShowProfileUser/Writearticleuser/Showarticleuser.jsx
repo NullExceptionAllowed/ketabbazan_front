@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import image from "../../../assets/Image/image.png";
 import Grid from "@mui/material/Grid";
 import "./style.css";
-import Profileimg from "../../../assets/Image/me.jpg";
+import Profileimg from "../../../assets/Image/image.png";
 import { width } from "@mui/system";
 
 const Showarticleuser = ({ articleuser }) => {
@@ -19,6 +19,18 @@ const Showarticleuser = ({ articleuser }) => {
         direction: "rtl",
       }}
     >
+      {articleuser.length === 0 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "50px",
+            fontSize: "19px",
+          }}
+        >
+          مقاله نوشته شده ای موجود نیست
+        </div>
+      )}
       <div
         style={{
           direction: "rtl",

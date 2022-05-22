@@ -23,9 +23,9 @@ import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import {MenuItem } from "@mui/material";
-import Menu from '@mui/material/Menu';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { MenuItem } from "@mui/material";
+import Menu from "@mui/material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const theme = createTheme({
   direction: "rtl",
@@ -127,6 +127,7 @@ const Emti = () => {
   const [userrate, setuserrate] = React.useState(null);
   const [changerate, setchangerate] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [conditionbook, setConditionbook] = useState("وضعیت کتاب");
   const oopen = Boolean(anchorEl);
 
   const [vaziat, setvaziat] = React.useState("بدون وضعیت");
@@ -137,14 +138,37 @@ const Emti = () => {
       setbookinfo(response.data.book_info);
       console.log(response.data.book_info);
     });
+
+    if (flag !== null) {
+      axios
+        .get(`${baseUrl}/lists/bookstatus/?book_id=${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        })
+        .then((response) => {
+          console.log("+++++^^^");
+          console.log(response.data.list_id);
+          if (response.data.list_id === 1) {
+            setConditionbook("خوانده ام");
+          } else if (response.data.list_id === 2) {
+            setConditionbook("در حال خواندنم");
+          } else if (response.data.list_id === 3) {
+            setConditionbook("می خواهم بخوانم");
+          } else if (response.data.list_id === 4) {
+            setConditionbook("رها کردم");
+          }
+        });
+    }
   }, [id]);
 
   useEffect(() => {
     axios.get(`${baseUrl}/rate/getrate/?id=${id}`).then((response) => {
       setrateinfocount(response.data.rateinfo.count);
-      setrateinfoavg(response.data.rateinfo.avg)
+      setrateinfoavg(response.data.rateinfo.avg);
       console.log(response.data.rateinfo);
-      if(flag===null){
+      if (flag === null) {
         setApiLoading(false);
       }
     });
@@ -198,8 +222,7 @@ const Emti = () => {
           if (res.status === 200) {
             const newinfo = {
               count: rateinfocount + 1,
-              avg:
-                (rateinfavg * rateinfocount + rate) / (rateinfocount + 1),
+              avg: (rateinfavg * rateinfocount + rate) / (rateinfocount + 1),
             };
             setrateinfoavg(newinfo.avg);
             setrateinfocount(newinfo.count);
@@ -210,100 +233,117 @@ const Emti = () => {
     }
   };
 
-
-
   const handleHaveRead = () => {
     setAnchorEl(null);
     const haveRead = {
-      list_id : 1,
-      book_id : id
+      list_id: 1,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
-      JSON.stringify(haveRead),
-      {
+    axios
+      .post(
+        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        JSON.stringify(haveRead),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-          // if(res.status===400){
-          //   showToast("error", "قبلا وضعیت این کتاب را ثبت کرده‌اید");
-          // }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("خوانده ام");
+        }
+        // if(res.status===400){
+        //   showToast("error", "قبلا وضعیت این کتاب را ثبت کرده‌اید");
+        // }
+      });
+  };
 
   const handleImReading = () => {
     setAnchorEl(null);
     const reading = {
-      list_id : 2,
-      book_id : id
+      list_id: 2,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
-      JSON.stringify(reading),
-      {
+    axios
+      .post(
+        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        JSON.stringify(reading),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("در حال خواندنم");
+        }
+      });
+  };
 
   const handleGoingToRead = () => {
     setAnchorEl(null);
     const goingtoread = {
-      list_id : 3,
-      book_id : id
+      list_id: 3,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
-      JSON.stringify(goingtoread),
-      {
+    axios
+      .post(
+        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        JSON.stringify(goingtoread),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("می خواهم بخوانم");
+        }
+      });
+  };
 
   const handleLeave = () => {
     setAnchorEl(null);
     const leave = {
-      list_id : 4,
-      book_id : id
+      list_id: 4,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/forceadd/",
-      JSON.stringify(leave),
-      {
+    axios
+      .post(
+        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        JSON.stringify(leave),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("رها کردم");
+        }
+      });
+  };
 
   const handleCclick = (event) => {
+    if(flag===null){
+      setOpen(true);
+    }
     setAnchorEl(event.currentTarget);
   };
   const handleCclose = () => {
@@ -540,7 +580,7 @@ const Emti = () => {
                   <Typography
                     style={{ margin: "60px auto auto auto", fontSize: 14 }}
                   >
-                    وضعیت : {vaziat}
+                    وضعیت کتاب:
                   </Typography>
                 </Grid>
 
@@ -566,34 +606,39 @@ const Emti = () => {
                     aria-expanded={oopen ? "true" : undefined}
                     onClick={handleCclick}
                   >
-                    وضعیت کتاب
+                    {conditionbook}
                   </Button>
-
-                  <Menu
-                    id="demo-positioned-menu"
-                    aria-labelledby="demo-positioned-button"
-                    anchorEl={anchorEl}
-                    open={oopen}
-                    onClose={handleCclose}
-                    style={{ direction: "rtl", margin: "30px auto auto 33px" }}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
-                  >
-                    <MenuItem onClick={handleHaveRead}>خوانده‌ام</MenuItem>
-                    <MenuItem onClick={handleImReading}>
-                      در حال خواندنم
-                    </MenuItem>
-                    <MenuItem onClick={handleGoingToRead}>
-                      می‌خواهم بخوانم
-                    </MenuItem>
-                    <MenuItem onClick={handleLeave}>رها کردم</MenuItem>
-                  </Menu>
+                  <ShowDialog close={handleClose} open={open} />
+                  {flag !== null && (
+                    <Menu
+                      id="demo-positioned-menu"
+                      aria-labelledby="demo-positioned-button"
+                      anchorEl={anchorEl}
+                      open={oopen}
+                      onClose={handleCclose}
+                      style={{
+                        direction: "rtl",
+                        margin: "30px auto auto 33px",
+                      }}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <MenuItem onClick={handleHaveRead}>خوانده‌ام</MenuItem>
+                      <MenuItem onClick={handleImReading}>
+                        در حال خواندنم
+                      </MenuItem>
+                      <MenuItem onClick={handleGoingToRead}>
+                        می‌خواهم بخوانم
+                      </MenuItem>
+                      <MenuItem onClick={handleLeave}>رها کردم</MenuItem>
+                    </Menu>
+                  )}
                 </Grid>
 
                 <Grid>
@@ -615,6 +660,7 @@ const Emti = () => {
                       />
                     }
                     variant="contained"
+                    disabled
                     style={{
                       backgroundColor: "CAE5F3",
                       margin: "7px auto auto auto",

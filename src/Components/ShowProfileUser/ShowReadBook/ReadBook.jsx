@@ -22,9 +22,21 @@ const Readbook = ({ readbookuser }) => {
   return (
     <div
       style={{
-        
+        direction: "rtl",
       }}
     >
+      {readbookuser.length === 0 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop:"50px",
+            fontSize:"19px"
+          }}
+        >
+          کتاب خوانده شده ای موجود نیست
+        </div>
+      )}
       <div
         style={{
           direction: "rtl",

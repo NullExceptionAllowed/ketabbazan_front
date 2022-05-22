@@ -7,13 +7,13 @@ import { baseUrl } from "../../../Variable";
 import axios from "axios";
 import ButtonBase from "@mui/material/ButtonBase";
 
-const ConditionBook = ({con}) => {
+const ConditionBook = ({ con }) => {
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
   const token = "Token " + localStorage.getItem("token");
   useEffect(() => {
     console.log("***");
-    console.log(con)
+    console.log(con);
     setApiLoading(true);
     axios
       .get(`${baseUrl}/lists/${con}/`, {
@@ -28,7 +28,7 @@ const ConditionBook = ({con}) => {
         setbookinfo(response.data.results);
         setApiLoading(false);
       });
-  }, []);
+  }, [con]);
 
   // useEffect(() => {
   //     setApiLoading(true);
@@ -46,7 +46,6 @@ const ConditionBook = ({con}) => {
     maxWidth: "100%",
     maxHeight: "100%",
   });
-
 
   const MouseOver = (event) => {
     event.target.style.color = "#30C7CE";
@@ -77,8 +76,8 @@ const ConditionBook = ({con}) => {
           style={{
             display: "flex",
             justifyContent: "center",
-            alignItems:"center",
-            height:"100vh"
+            alignItems: "center",
+            height: "100vh",
           }}
         >
           <ReactLoading
@@ -91,6 +90,18 @@ const ConditionBook = ({con}) => {
       )}
       {!apiLoading && (
         <>
+          {bookinfo.length === 0 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "50px",
+                fontSize: "19px",
+              }}
+            >
+              کتابی موجود نیست.
+            </div>
+          )}
           <div
             style={{
               direction: "rtl",

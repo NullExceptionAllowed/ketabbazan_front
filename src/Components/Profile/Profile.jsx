@@ -188,11 +188,12 @@ const Profile = () => {
                 style={{ margin: "auto auto 10px auto" }}
                 selected={selectedIndex === 2}
                 onClick={(event) => test(event, 2)}
+                disabled
               >
                 <ListItemIcon>
                   <ArticleIcon style={{ color: "#679aea" }} />
                 </ListItemIcon>
-                <Typography style={{ fontSize: "18px" }} inset>
+                <Typography style={{ fontSize: "18px" }}  inset>
                   {" "}
                   مقاله‌های من{" "}
                 </Typography>

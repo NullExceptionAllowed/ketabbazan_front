@@ -3,7 +3,7 @@ import ChangeNav from "./../Navbar/changeNav";
 import "./style.css";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
-import Profileimg from "../../assets/Image/me.jpg";
+import Profileimg from "../../assets/Image/image.png";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Showarticleuser from "./Writearticleuser/Showarticleuser";
 import { Link, useParams } from "react-router-dom";
