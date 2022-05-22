@@ -26,7 +26,7 @@ const CommentApp = () => {
 
   
 
-  useEffect(() => { intialize(); console.log(refresh)   } , [reload, refresh ,idid]);
+  useEffect(() => { intialize(); console.log(refresh)   } , [reload, refresh ,idid, getComments]);
 
   
  
@@ -48,6 +48,10 @@ const CommentApp = () => {
       
      console.log(res.status);
      setComments(res.data.all_comments);
+     
+     
+    
+
     })
 
     axios.get(`derakhshan.pythonanywhere.com/profile/image/`, {
@@ -59,6 +63,9 @@ const CommentApp = () => {
       setImg(res);
      
     })
+
+
+     
 
   }
   

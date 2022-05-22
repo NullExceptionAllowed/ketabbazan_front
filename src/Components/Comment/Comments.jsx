@@ -29,6 +29,8 @@ const Comments = () => {
         return show;
     }
 
+   
+
 
     let showHeader = () => {
         let show = null;
@@ -69,17 +71,22 @@ const Comments = () => {
 
                         {context.comments.length > 0 ? (
                             context.comments.map(comment => (
+                            
+                                
+                           
+                                   
+                                    
+                                      
+                              
+                            
 
 
-
-
-
-                                <Comment
-                                    comment_text={comment.comment_text}
-                                    user={comment.user}
-                                    comment_id={comment.id}
-                                    replys = {comment.reply}
-                                    created_on = {comment.created_on}
+                                < Comment
+                                    comment_text = { comment.comment_text }
+                                    user = { comment.user }
+                                    comment_id = { comment.id }
+                                    replys = { comment.reply }
+                                    created_on = { comment.created_on }
                                 />
 
 
@@ -91,7 +98,7 @@ const Comments = () => {
                             ))
 
                         ) : (
-                            nullShow()
+                        nullShow()
                         )}
 
                     </Grid>
