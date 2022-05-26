@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
-import showToast from "E:/Tahlil_Tarahi/courses/react/ketab/ketabbazan_front/src/Service/toastservice.jsx";
+import showToast from "../../../Service/toastservice";
 import axios from "axios";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -21,7 +21,7 @@ import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { Typography, Grid, Stack, Paper, Divider,Input  } from "@mui/material";
+import { Typography, Grid, Stack, Paper, Divider } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import AddIcon from '@mui/icons-material/Add';
 import Badge from '@mui/material/Badge';
@@ -30,7 +30,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import { borderRadius } from "@mui/system";
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
-
 
 
 
@@ -44,6 +43,7 @@ const EditProfile = () => {
     const [nickName, setnickName] = useState("");
     const [bio, setBio] = useState("");
     const [fullName, setfullName] = useState("");
+    const [username, setusername] = useState([]);
 
     const [userrEmail, setuserrEmail] = useState();
     const temp = "";
@@ -54,12 +54,17 @@ const EditProfile = () => {
     const [aftersubmit, setaftersubmit] = useState(false);
     const [apiLoading, setApiLoading] = useState(false);
 
+
+
+
     useEffect(() => { intialize() }, []);
-    //useEffect(() => {getProfileImage()}, [])
+    //useEffect(() => { getProfileImage() }, []);
 
     let token = "Token " + localStorage.getItem('token');
 
     const intialize = () => {
+        //getProfileImage();
+        
         axios.get(`${baseUrl}/profile/info/`, {
           headers: {
             'Content-Type': 'application/json ',
@@ -70,35 +75,34 @@ const EditProfile = () => {
           setnickName(res.data.nickname);
           setfullName(res.data.profile.fullname);
           setBio(res.data.profile.bio);
-          setuserrEmail(res.data.email)
+          setuserrEmail(res.data.email);
+          setusername(res.data.username);
         })
-    }
 
 
-    // const getProfileImage = () => {
-    
-    // axios.get(`${baseUrl}/profile/image/`, {
+    //     axios.get(`http://derakhshan.pythonanywhere.com/profile/getimage/?username=${username}`, {
     //     headers: {
     //       'Content-Type': 'application/json ',
     //       'Authorization': token
     //     }
     //   }).then((res) => {
-    //       console.log(res);
+    //       console.log(res);console.log(username);
+    //       setFile(res);
+    //   })
+    }
+
+    // const getProfileImage = () => {
+    
+    // axios.get(`http://derakhshan.pythonanywhere.com/profile/getimage/?username=${username}`, {
+    //     headers: {
+    //       'Content-Type': 'application/json ',
+    //       'Authorization': token
+    //     }
+    //   }).then((res) => {
+    //       console.log(res);console.log(username);
     //       setFile(res);
     //   })
     // }
-
-    // async function status() {
-    //     const url = `${baseUrl}/profile/image/`
-    //     let response = await axios.get(`${baseUrl}/profile/info/`, {
-    //         headers: {
-    //           'Content-Type': 'application/json ',
-    //           'Authorization': token
-    //         }
-    //       })
-    //     return response.data;
-    //   }
-      //status().then((data) => setFile(data));
 
     const sethandlerFullName = (e) =>
     {
@@ -115,14 +119,6 @@ const EditProfile = () => {
         setBio(e.target.value);
     }
 
-    const user = {
-        nickname : nickName ,
-        fullname :fullName,
-        gender : "M" ,
-        born_date : "1380" + "-" + "2" + "-" + "5" ,
-        bio : bio
-    }
-
     const handleChange = (e) => {
         setFile(URL.createObjectURL(e.target.files[0]));
         setChangeImage(true);
@@ -132,41 +128,16 @@ const EditProfile = () => {
         });
     };
 
-    // const handlesubmit2 = async (event) => {
-    //     event.preventDefault();
-    //     setaftersubmit(true);
-    //     const formdata = new FormData();
-    //     if (postimage !== null) {
-    //       formdata.append("image", postimage.image[0]);
-    //     }
-    //     console.log(JSON.stringify(formdata));
-    //     const token = "Token " + localStorage.getItem("token");
-    //     console.log(token);
-    //     if (true) {
-    //       try {
-    //         const response = await axios.post(
-    //           `${baseUrl}/profile/image/`,
-    //           formdata,
-    //           {
-    //             headers: {
-    //               "Content-Type": "application/json",
-    //               Authorization: token,
-    //             },
-    //           }
-    //         );
-        
-    //       }
-    //        catch (ex) {
-            
-    //         console.log(ex);
-            
-    //       }
-    //     }
-    //   };
+    const user = {
+        nickname : nickName ,
+        fullname :fullName,
+        gender : "M" ,
+        born_date : "1380" + "-" + "2" + "-" + "5" ,
+        bio : bio
+    }
 
     const handleSubmit = () =>
     {
-     //handlesubmit2();
      if(nickName!==""){
       localStorage.setItem("nickname", nickName); 
      }   
@@ -347,8 +318,6 @@ const EditProfile = () => {
             </Grid>
             
         </center>
-
-        
      );
 }
 

@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { Button,MenuItem ,Grid, Paper, Typography } from "@mui/material";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../Variable";
 import Rating from "@mui/material/Rating";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CreateIcon from "@mui/icons-material/Create";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ChangeNav from "./../Navbar/changeNav";
 import { useHistory } from "react-router-dom";
 import ShowDialog from "./ShowDialog";
 import { ToastContainer } from "react-toastify";
 import showToast from "../../Service/toastservice";
 import ReactLoading from "react-loading";
+import SimilarBooks from "../similarBooks/similarBooks";
 import CommentApp from "../Comment/CommentApp";
-import Menu from '@mui/material/Menu';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { prefixer } from "stylis";
+import rtlPlugin from "stylis-plugin-rtl";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import { MenuItem } from "@mui/material";
+import Menu from "@mui/material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+const theme = createTheme({
+  direction: "rtl",
+});
 
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
@@ -28,7 +41,6 @@ const Emti = () => {
 
   let s1 = {
     margin: "100px auto auto auto",
-    direction: "rtl"
   };
   let p1 = {
     height: "500px",
@@ -104,165 +116,242 @@ const Emti = () => {
   };
 
   const [apiLoading, setApiLoading] = useState(false);
-  const token = "Token " + localStorage.getItem('token');
+  const token = "Token " + localStorage.getItem("token");
   const [bookinfo, setbookinfo] = useState([]);
-  const [rateinfo, setrateinfo] = useState([]);
+  const [rateinfocount, setrateinfocount] = useState(null);
+  const [rateinfavg, setrateinfoavg] = useState(null);
   const params = useParams();
   const id = params.id;
   const [to, setto] = React.useState(null);
-  const [rate, setrate] = React.useState();
-  const [userrate, setuserrate] = React.useState();
-
+  const [rate, setrate] = React.useState(0);
+  const [userrate, setuserrate] = React.useState(null);
+  const [changerate, setchangerate] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [conditionbook, setConditionbook] = useState("وضعیت کتاب");
   const oopen = Boolean(anchorEl);
 
   const [vaziat, setvaziat] = React.useState("بدون وضعیت");
-
-  const handleCclick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCclose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     setApiLoading(true);
     axios.get(`${baseUrl}/read_book/info/${id}`).then((response) => {
       setbookinfo(response.data.book_info);
       console.log(response.data.book_info);
-      setApiLoading(false);
     });
+
+    if (flag !== null) {
+      axios
+        .get(`${baseUrl}/lists/bookstatus/?book_id=${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        })
+        .then((response) => {
+          console.log("+++++^^^");
+          console.log(response.data.list_id);
+          if (response.data.list_id === 1) {
+            setConditionbook("خوانده ام");
+          } else if (response.data.list_id === 2) {
+            setConditionbook("در حال خواندنم");
+          } else if (response.data.list_id === 3) {
+            setConditionbook("می خواهم بخوانم");
+          } else if (response.data.list_id === 4) {
+            setConditionbook("رها کردم");
+          }
+        });
+    }
   }, [id]);
 
   useEffect(() => {
-    setApiLoading(true);
     axios.get(`${baseUrl}/rate/getrate/?id=${id}`).then((response) => {
-    setrateinfo(response.data.rateinfo);
-    console.log(response.data.rateinfo);
-    setApiLoading(false);
+      setrateinfocount(response.data.rateinfo.count);
+      setrateinfoavg(response.data.rateinfo.avg);
+      console.log(response.data.rateinfo);
+      if (flag === null) {
+        setApiLoading(false);
+      }
     });
-  }, []);
+  }, [rateinfocount]);
+
+  useEffect(() => {
+    if (flag !== null) {
+      axios
+        .get(`${baseUrl}/rate/userrate/?book=${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        })
+        .then((response) => {
+          console.log("+++++");
+          console.log(response.data.rate.rate);
+          setuserrate(response.data.rate.rate);
+          setApiLoading(false);
+        });
+    }
+  }, [rateinfocount]);
 
   function round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;
   }
 
+  const SetRateuser = (event, newrate) => {
+    setrate(newrate);
+  };
+
   const handleRating = () => {
+    if (flag === null) {
+      setOpen(true);
+    } else {
       const rating = {
-          book: id,
-          rate: rate
+        book: id,
+        rate: rate,
       };
-      axios.post('http://derakhshan.pythonanywhere.com/rate/',
-      JSON.stringify(rating),
-      {
+      axios
+        .post(`${baseUrl}/rate/`, JSON.stringify(rating), {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        })
+        .then((res) => {
+          console.log(res.status);
+
+          if (res.status === 200) {
+            const newinfo = {
+              count: rateinfocount + 1,
+              avg: (rateinfavg * rateinfocount + rate) / (rateinfocount + 1),
+            };
+            setrateinfoavg(newinfo.avg);
+            setrateinfocount(newinfo.count);
+            //setchangerate(true);
             showToast("success", "امتیازت با موفقیت ثبت شد");
           }
-      })
-  }
-
+        });
+    }
+  };
 
   const handleHaveRead = () => {
     setAnchorEl(null);
     const haveRead = {
-      list_id : 1,
-      book_id : id
+      list_id: 1,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
-      JSON.stringify(haveRead),
-      {
+    axios
+      .post(
+        "http://94.101.185.252/lists/forceadd/",
+        JSON.stringify(haveRead),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-          // if(res.status===400){
-          //   showToast("error", "قبلا وضعیت این کتاب را ثبت کرده‌اید");
-          // }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("خوانده ام");
+        }
+        // if(res.status===400){
+        //   showToast("error", "قبلا وضعیت این کتاب را ثبت کرده‌اید");
+        // }
+      });
+  };
 
   const handleImReading = () => {
     setAnchorEl(null);
     const reading = {
-      list_id : 2,
-      book_id : id
+      list_id: 2,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
-      JSON.stringify(reading),
-      {
+    axios
+      .post(
+        "http://94.101.185.252/lists/forceadd/",
+        JSON.stringify(reading),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("در حال خواندنم");
+        }
+      });
+  };
 
   const handleGoingToRead = () => {
     setAnchorEl(null);
     const goingtoread = {
-      list_id : 3,
-      book_id : id
+      list_id: 3,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
-      JSON.stringify(goingtoread),
-      {
+    axios
+      .post(
+        "http://94.101.185.252/lists/forceadd/",
+        JSON.stringify(goingtoread),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("می خواهم بخوانم");
+        }
+      });
+  };
 
   const handleLeave = () => {
     setAnchorEl(null);
     const leave = {
-      list_id : 4,
-      book_id : id
+      list_id: 4,
+      book_id: id,
     };
-    axios.post("http://derakhshan.pythonanywhere.com/lists/add/",
-      JSON.stringify(leave),
-      {
+    axios
+      .post(
+        "http://94.101.185.252/lists/forceadd/",
+        JSON.stringify(leave),
+        {
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": token
-          }
-      }
-      ).then((res) =>{
-          console.log(res.status)
-          if(res.status===200){
-            showToast("success", "وضعیت شما با موفقیت ثبت شد");
-          }
-      })
-  }
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "وضعیت شما با موفقیت ثبت شد");
+          setConditionbook("رها کردم");
+        }
+      });
+  };
+
+  const handleCclick = (event) => {
+    if(flag===null){
+      setOpen(true);
+    }
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCclose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div dir="rtl">
+    <div style={{ direction: "rtl" }}>
       <ChangeNav />
       {apiLoading && (
         <div
@@ -293,47 +382,88 @@ const Emti = () => {
                     style={imgstyle}
                   />
                 </Grid>
+                {userrate === null && (
+                  <>
+                    <Grid>
+                      <Typography
+                        style={{ margin: "20px auto auto auto", fontSize: 14 }}
+                      >
+                        امتیاز شما به این محصول !؟
+                      </Typography>
+                    </Grid>
 
-                <Grid>
-                  <Typography
-                    style={{ margin: "20px auto auto auto", fontSize: 14 }}
-                  >
-                   امتیاز شما به این محصول
-                  </Typography>
-                </Grid>
+                    <Grid>
+                      <ThemeProvider theme={theme}>
+                        {flag !== null && (
+                          <Rating
+                            style={{ direction: "rtl", top: "10px" }}
+                            size="large"
+                            name="no-value"
+                            precision={1}
+                            value={rate}
+                            onChange={SetRateuser}
+                          />
+                        )}
+                        {flag === null && (
+                          <Rating
+                            style={{ direction: "rtl", top: "10px" }}
+                            size="large"
+                            name="no-value"
+                            value={rate}
+                            readOnly
+                            onChange={SetRateuser}
+                          />
+                        )}
+                      </ThemeProvider>
+                    </Grid>
 
-                <Grid>
-                  <Rating
-                    style={{ direction: "ltr", top: "10px" }}
-                    size="large"
-                    name="no-value"
-                    precision={1}
-                    value={rate}
-                    onChange={(event,newrate) => {setrate(newrate)}}
-                  />
-                </Grid>
+                    <Grid>
+                      <Button
+                        // startIcon={
+                        //   <CreateIcon style={{ margin: "auto -40px auto auto" }} />
+                        // }
+                        variant="outlined"
+                        onClick={handleRating}
+                        style={{
+                          backgroundColor: "CAE5F3",
+                          borderRadius: "10px",
+                          margin: "25px auto auto auto",
+                          fontWeight: 800,
+                          width: "200px",
+                          height: "40px",
+                        }}
+                      >
+                        ثبت امتیاز
+                      </Button>
+                      <ShowDialog close={handleClose} open={open} />
+                    </Grid>
+                  </>
+                )}
 
-                <Grid>
-                  <Button
-                    // startIcon={
-                    //   <CreateIcon style={{ margin: "auto -40px auto auto" }} />
-                    // }
-                    variant="outlined"
-                    onClick={handleRating}
-                    style={{
-                      backgroundColor: "CAE5F3",
-                      borderRadius: "10px",
-                      margin: "25px auto auto auto",
-                      fontWeight: 800,
-                      width: "200px",
-                      height: "40px",
-                    }}
-                  >
-                    ثبت امتیاز
-                  </Button>
-                  <ShowDialog close={handleClose} open={open} />
-                </Grid>
+                {userrate !== null && (
+                  <>
+                    <Grid style={{ marginTop: "15%" }}>
+                      <Typography
+                        style={{ margin: "20px auto auto auto", fontSize: 14 }}
+                      >
+                        امتیاز شما به این محصول:
+                      </Typography>
+                    </Grid>
 
+                    <Grid>
+                      <ThemeProvider theme={theme}>
+                        <Rating
+                          style={{ direction: "rtl", top: "10px" }}
+                          size="large"
+                          name="no-value"
+                          precision={1}
+                          value={userrate}
+                          readOnly
+                        />
+                      </ThemeProvider>
+                    </Grid>
+                  </>
+                )}
               </center>
             </Paper>
           </Grid>
@@ -346,7 +476,10 @@ const Emti = () => {
 
               <Grid>
                 <Typography style={typo3}>
-                    امتیاز محصول : {round(rateinfo.avg,1)} از 5 <span style={{color:"#0052cc"}}>( {rateinfo.count} نفر امتیاز داده است )</span>
+                  امتیاز محصول : {round(rateinfavg, 1)} از 5{" "}
+                  <span style={{ color: "#0052cc" }}>
+                    ( {rateinfocount} نفر امتیاز داده است )
+                  </span>
                 </Typography>
               </Grid>
 
@@ -376,7 +509,7 @@ const Emti = () => {
                 <Typography style={typo6}>خلاصه کتاب :</Typography>
               </Grid>
 
-              <Grid xs={10}>
+              <Grid item xs={10}>
                 <Typography
                   style={{
                     margin: "10px 30px auto auto",
@@ -447,16 +580,16 @@ const Emti = () => {
                   <Typography
                     style={{ margin: "60px auto auto auto", fontSize: 14 }}
                   >
-                    وضعیت : {vaziat}
+                    وضعیت کتاب:
                   </Typography>
                 </Grid>
 
-
                 <Grid>
-
-                  <Button 
+                  <Button
                     startIcon={
-                      <KeyboardArrowDownIcon style={{ margin: "auto -60px auto auto" }} />
+                      <KeyboardArrowDownIcon
+                        style={{ margin: "auto -60px auto auto" }}
+                      />
                     }
                     style={{
                       backgroundColor: "CAE5F3",
@@ -468,37 +601,44 @@ const Emti = () => {
                     }}
                     variant="outlined"
                     id="demo-positioned-button"
-                    aria-controls={oopen ? 'demo-positioned-menu' : undefined}
+                    aria-controls={oopen ? "demo-positioned-menu" : undefined}
                     aria-haspopup="true"
-                    aria-expanded={oopen ? 'true' : undefined}
+                    aria-expanded={oopen ? "true" : undefined}
                     onClick={handleCclick}
-                    >
-                      وضعیت کتاب
+                  >
+                    {conditionbook}
                   </Button>
-
-                  <Menu
-                        id="demo-positioned-menu"
-                        
-                        aria-labelledby="demo-positioned-button"
-                        anchorEl={anchorEl}
-                        open={oopen}
-                        onClose={handleCclose}
-                        style={{direction:"rtl", margin: "30px auto auto 33px"}}
-                        anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                          }}
-                        transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                          }}
-                      >
-                        <MenuItem onClick={handleHaveRead}>خوانده‌ام</MenuItem>
-                        <MenuItem onClick={handleImReading}>در حال خواندنم</MenuItem>
-                        <MenuItem onClick={handleGoingToRead}>می‌خواهم بخوانم</MenuItem>
-                        <MenuItem onClick={handleLeave}>رها کردم</MenuItem>
-                  </Menu>
-
+                  <ShowDialog close={handleClose} open={open} />
+                  {flag !== null && (
+                    <Menu
+                      id="demo-positioned-menu"
+                      aria-labelledby="demo-positioned-button"
+                      anchorEl={anchorEl}
+                      open={oopen}
+                      onClose={handleCclose}
+                      style={{
+                        direction: "rtl",
+                        margin: "30px auto auto 33px",
+                      }}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <MenuItem onClick={handleHaveRead}>خوانده‌ام</MenuItem>
+                      <MenuItem onClick={handleImReading}>
+                        در حال خواندنم
+                      </MenuItem>
+                      <MenuItem onClick={handleGoingToRead}>
+                        می‌خواهم بخوانم
+                      </MenuItem>
+                      <MenuItem onClick={handleLeave}>رها کردم</MenuItem>
+                    </Menu>
+                  )}
                 </Grid>
 
                 <Grid>
@@ -520,7 +660,6 @@ const Emti = () => {
                       />
                     }
                     variant="contained"
-                    component={Link}
                     disabled
                     style={{
                       backgroundColor: "CAE5F3",
@@ -539,12 +678,12 @@ const Emti = () => {
           </Grid>
         </Grid>
       )}
-      <ToastContainer />
-      <br/>
-      <br/>
-      <br/>
+      <ToastContainer rtl={true} />
+      <br />
+      <br />
+      <br />
 
-      <CommentApp/>
+      <CommentApp />
     </div>
   );
 };

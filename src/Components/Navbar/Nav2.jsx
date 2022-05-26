@@ -213,9 +213,9 @@ const Nav = () => {
                       }}
                   >
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
-                    <MenuItem component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
-                    <MenuItem component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
-                    <MenuItem component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
+                    <MenuItem disabled component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
+                    <MenuItem disabled component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
+                    <MenuItem disabled component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
                     <MenuItem component={Link} to="/" onClick={handleExit} >
                       <Typography style={{color:"red"}}>خروج از حساب</Typography>
                     </MenuItem>
@@ -361,9 +361,9 @@ const Nav = () => {
                       }}
                   >
                     <MenuItem component={Link} to="/profile" onClick={handleClose}>ویرایش پروفایل</MenuItem>
-                    <MenuItem component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
-                    <MenuItem component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
-                    <MenuItem component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
+                    <MenuItem disabled component={Link} to="/profile" onClick={handleClose}>وضعیت کتاب‌های من</MenuItem>
+                    <MenuItem disabled component={Link} to="/profile" onClick={handleClose}>مقاله‌های من</MenuItem>
+                    <MenuItem disabled component={Link} to="/profile" onClick={handleClose}>شارژ کیف پول</MenuItem>
                     <MenuItem component={Link} to="/" onClick={handleExit}>
                       <Typography style={{color:"red"}}>خروج از حساب</Typography>
                     </MenuItem>
