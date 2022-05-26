@@ -33,6 +33,12 @@ const ArticleInfo = () => {
       setApiLoading(false);
     });
   }, []);
+  useEffect(() => {
+    document.body.style.background = "#F5F5F5";
+    return () => {
+      document.body.style.background = "white";
+    };
+  }, []);
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -64,7 +70,6 @@ const ArticleInfo = () => {
         <div
           style={{
             display: "flex",
-            boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
             marginTop: "85px",
             marginBottom: "20px",
           }}
@@ -136,14 +141,24 @@ const ArticleInfo = () => {
                     {articleinfo.summary}
                   </div>
                   <div style={{ marginTop: "2%", display: "flex" }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={image}
-                      sx={{ width: 20, height: 20 }}
-                    />
-                    <div style={{ marginRight: "6px", fontSize: "13px" }}>
+                    <Link to={`/ShowProfileuser/${articleinfo.owner_id}`}>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={image}
+                        sx={{ width: 20, height: 20 }}
+                      />
+                    </Link>
+                    <Link
+                      style={{
+                        marginRight: "6px",
+                        fontSize: "13px",
+                        textDecoration: "none",
+                        color: "#0057D9",
+                      }}
+                      to={`/ShowProfileuser/${articleinfo.owner_id}`}
+                    >
                       {articleinfo.owner}
-                    </div>
+                    </Link>
                     <div style={{ display: "flex", marginRight: "6%" }}>
                       <EventIcon style={{ color: "gray", fontSize: "20px" }} />
                       <div style={{ fontSize: "13px", marginRight: "6px" }}>
@@ -178,7 +193,7 @@ const ArticleInfo = () => {
                     style={{
                       height: "250px",
                       width: "100%",
-                      marginTop:"1%"
+                      marginTop: "1%",
                     }}
                   />
                   <h3
@@ -204,14 +219,24 @@ const ArticleInfo = () => {
                     {articleinfo.summary}
                   </div>
                   <div style={{ marginTop: "0.7%", display: "flex" }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={image}
-                      sx={{ width: 20, height: 20 }}
-                    />
-                    <div style={{ marginRight: "6px", fontSize: "12px" }}>
+                    <Link to={`/ShowProfileuser/${articleinfo.owner_id}`} >
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={image}
+                        sx={{ width: 20, height: 20 }}
+                      />
+                    </Link>
+                    <Link
+                      style={{
+                        marginRight: "6px",
+                        fontSize: "12px",
+                        textDecoration: "none",
+                        color: "#0057D9"
+                      }}
+                      to={`/ShowProfileuser/${articleinfo.owner_id}`}
+                    >
                       {articleinfo.owner}
-                    </div>
+                    </Link>
                     <div style={{ display: "flex", marginRight: "6%" }}>
                       <EventIcon style={{ color: "gray", fontSize: "20px" }} />
                       <div style={{ fontSize: "12px", marginRight: "6px" }}>

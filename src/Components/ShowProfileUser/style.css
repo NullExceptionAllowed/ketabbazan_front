@@ -1,0 +1,30 @@
+.ShowProfile_contain{
+   margin-right: 2%; 
+   margin-left: 1.5%;
+}
+.ShowProfile_bio{
+    font-size: 15px;
+}
+.Showprofile_bio{
+    width: 70%;
+}
+.ShowProfile_back{
+    /* background-image:url("../../assets/Image/backgr.png"); */
+}
+@media (max-width:760px) {
+    .Showprofile_bio{
+        width: 96%;
+    }
+}
+
+@media (max-width:500px) {
+    .Showprofile_bio{
+        width: 98%;
+    }
+}
+
+@media (max-width:900px) {
+    .Showprofile_bio{
+        width: 80%;
+    }
+}

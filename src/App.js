@@ -11,9 +11,11 @@ import Article from './Components/Writearticle/article';
 import ArticleInfo from "./Components/ShowinfoPerarticle/Articleinfo";
 import Searchbook from "./Components/Searchbook/Searchbook";
 import ShowAllarticle from './Components/ShowAllarticle/ShowAllarticle';
+import ShowProfileuser from './Components/ShowProfileUser/ShowProfile';
 
 
 const App = () => {
+  
   return (
       <Switch>
         <Route path="/" exact component={Homepage} />
@@ -27,6 +29,7 @@ const App = () => {
         <Route path="/articleinfo/:id"  component={ArticleInfo} />
         <Route path="/Searchbook"  component={Searchbook} />
         <Route path="/Showallarticle"  component={ShowAllarticle} />
+        <Route path="/ShowProfileuser/:id"  component={ShowProfileuser} />
       </Switch>
   );
 };

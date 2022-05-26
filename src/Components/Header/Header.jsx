@@ -8,27 +8,30 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Typical from "react-typical";
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+
 
 const Header = () => {
+  const history = useHistory();
   return (
-      <div className="Homepage_container" >
-        <img
-          className="home_img"
-          src={Home}
-          alt="homeimg"
-          style={{
-            height: "100%",
-            width: "100%",
-          }}
-        />
-        <h2 className="home_title">
-          <Typical steps={["کتاب بازان", 6000]} loop={Infinity} wrapper="p" />
-        </h2>
-        <div className="home_info">
-          کتابخوانی،مقاله گذاشتن و طراحی کوییز با کتاب بازان
-        </div>
-        <div className="home_info1">بهترین کتاب ها رو از اینجا بگیر</div>
-        <Paper
+    <div className="Homepage_container">
+      <img
+        className="home_img"
+        src={Home}
+        alt="homeimg"
+        style={{
+          height: "100%",
+          width: "100%",
+        }}
+      />
+      <h2 className="home_title">
+        <Typical steps={["کتاب بازان", 6000]} loop={Infinity} wrapper="p" />
+      </h2>
+      <div className="home_info">
+        کتابخوانی،مقاله گذاشتن و طراحی کوییز با کتاب بازان
+      </div>
+      <div className="home_info1">بهترین کتاب ها رو از اینجا بگیر</div>
+      {/* <Paper
           component="form"
           sx={{
             p: "2px 4px",
@@ -52,8 +55,16 @@ const Header = () => {
           >
             <SearchIcon style={{ color: "#1565C0" }} />
           </IconButton>
-        </Paper>
-      </div>
+        </Paper> */}
+
+      <button
+        onClick={() => history.push("/Book")}
+        className="home-banner__start-btn"
+      >
+        
+        <span className="home-banner__start-btn-highlight">کتابات از اینجا بگیر...  </span>
+      </button>
+    </div>
   );
 };
 

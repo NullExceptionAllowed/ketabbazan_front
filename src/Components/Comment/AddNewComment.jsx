@@ -42,22 +42,25 @@ const AddNewComment = () => {
         setClick(1);
     }
 
-    const clickHandlerToZero = () =>
-    {
+    const clickHandlerToZero = () => {
         setClick(0);
     }
 
 
     let firstShow = (
         <Grid container >
-        <Grid item xs={4.8} style={{ textAlign: "right", direction: "rtl", marginRight: "450px"  }}>
-                    <h3>دیدگاه شما</h3>
-        <Grid onClick={clickHandler} item xs={12} style={{ marginTop: "20px" }}>
-            <Paper elevation={3} style={{ padding: "10px 20px", backgroundColor: "#f0f5f5" , height:'70px' }} >
-                <AccountCircleIcon fontSize="large" /> <p style={{position:"relative" , top:"-35px" , right:"45px"}}>افزودن دیدگاه</p>
-            </Paper>
-        </Grid>
-        </Grid>
+
+            <Grid item xs={3.6}></Grid>
+            <Grid item xs={4.8} style={{ textAlign: "right", direction: "rtl" }}>
+                <h3>دیدگاه شما</h3>
+                <Grid onClick={clickHandler} item xs={12} style={{ marginTop: "20px" }}>
+                    <Paper elevation={3} style={{ padding: "10px 20px", backgroundColor: "#f0f5f5", height: '70px' }} >
+                        <AccountCircleIcon fontSize="large" /> <p style={{ position: "relative", top: "-35px", right: "45px" }}>افزودن دیدگاه</p>
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid item xs={3.6}></Grid>
+
         </Grid>);
 
 
@@ -65,22 +68,34 @@ const AddNewComment = () => {
 
 
         <div>
-            <Grid item xs={5.4} style={{ textAlign: "right", direction: "rtl", marginRight: "420px"  }}>
+            <Grid container >
+                <Grid item xs={3.55}></Grid>
+                <Grid item xs={4.9}  style={{ marginTop: "20px", height: "auto" }}>
                     <h3>دیدگاه شما</h3>
-                
-            <Grid item xs={12} style={{ marginTop: "20px", height: "auto" }}>
-                <Paper elevation={3} style={{  height: "auto" , padding: "10px 20px" }} >
 
-                    <TextareaAutosize onChange={context.handleSetComment} style={{  fontFamily:"Byekan " , fontSize:"15px", resize: "vertical" ,  width: "565px" , height:"100px" ,padding:"10px 10px" , marginTop:"5px"}}
-                        aria-label="minimum height"
-                        value={context.comment}
-                        placeholder="نظرت و اینجا بنویس"
-                       
-                    />
-                    <Button onClick={context.handleCreateNewComment} variant="contained" style={{ marginTop: "20px", marginRight: "465px" }}>ارسال دیدگاه </Button>
-                </Paper>
+
+                    <Paper elevation={3} style={{ height: "auto", padding: "10px 20px", marginTop:"10px" }} >
+
+                        <TextareaAutosize onChange={context.handleSetComment} 
+                        style={{ fontFamily: "Byekan ", fontSize: "15px", resize: "vertical", width: "100%   ", height: "100px",
+                         padding: "10px 10px", marginTop: "5px" }}
+                            aria-label="minimum height"
+                            value={context.comment}
+                            placeholder="نظرت و اینجا بنویس"
+
+                        />
+                        <Grid container >
+                        <Grid item xs={2.9 } md={7.7}></Grid>
+                        <Grid style={{ direction:"ltr"}} item xs={9} md={4.2}>
+                        <Button onClick={context.handleCreateNewComment} variant="contained" 
+                        style={{ marginTop: "20px"}}>ارسال دیدگاه </Button>
+                        </Grid>
+                        <Grid item xs={0.1} md={0.1}></Grid>
+                        </Grid>
+                    </Paper>
+                </Grid>
+                <Grid item xs={3.55}></Grid>
             </Grid>
-            </Grid >
         </div>
     )
 
@@ -95,8 +110,8 @@ const AddNewComment = () => {
         if (click === 1) {
             mainShow = SecondShow;
         }
-        else if(token !== null){
-            
+        else if (token !== null) {
+
             mainShow = firstShow;
         }
         return mainShow;
@@ -107,18 +122,18 @@ const AddNewComment = () => {
 
     return (
         <SimpleContext.Provider
-        value={{
-            clickHandlerToZero : clickHandlerToZero ,
-            click : click ,
-            setClick : setClick ,
-            Show : Show
-        }}> 
-        <div>
-            <CacheProvider value={cacheRtl}>
-            {Show()}
-                    
-            </CacheProvider>
-        </div>
+            value={{
+                clickHandlerToZero: clickHandlerToZero,
+                click: click,
+                setClick: setClick,
+                Show: Show
+            }}>
+            <div>
+                <CacheProvider value={cacheRtl}>
+                    {Show()}
+
+                </CacheProvider>
+            </div>
         </SimpleContext.Provider>
 
     )

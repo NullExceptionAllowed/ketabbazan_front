@@ -20,7 +20,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const BootstrapDialogTitle = (props) => {
-  const { children, onClose, ...other } = props;
+  const { children, onClose,text, ...other } = props;
 
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -47,7 +47,9 @@ BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
-const Dialog1 = ({close,open}) => {
+const Dialog1 = ({close,open,text}) => {
+  console.log("&&&");
+  console.log(text+"^^");
   return (
     <div>
       <BootstrapDialog
@@ -70,7 +72,7 @@ const Dialog1 = ({close,open}) => {
           }}
         >
           <Typography style={{ textAlign: "center" }}>
-            برای مقاله گذاشتن وارد حساب کاربری شو
+            برای استفاده از امکانات سایت باید وارد سایت بشی
           </Typography>
           <Button
             variant="contained"

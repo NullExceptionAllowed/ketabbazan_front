@@ -13,6 +13,7 @@ import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import "./style.css";
 import { Calculate } from "@mui/icons-material";
+import useWindowDimensions from "./width";
 
 const ShownewArcrousel = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -26,19 +27,11 @@ const ShownewArcrousel = () => {
       setApiLoading(false);
     });
   }, []);
+  const { height, width } = useWindowDimensions();
 
-  const [dimensions, setDimensions] = React.useState({
-    width: window.innerWidth,
-  });
-  React.useEffect(() => {
-      setDimensions({
-        width: window.innerWidth,
-      });
-    console.log(dimensions.width+"@@")
-  },[dimensions]);
   SwiperCore.use([Navigation, Pagination]);
   return (
-    <div style={{marginTop:"60px"}}>
+    <div style={{ marginTop: "60px" }}>
       <div
         style={{
           direction: "rtl",
@@ -85,6 +78,8 @@ const ShownewArcrousel = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            marginRight: "5%",
+            marginLeft: "5%",
           }}
         >
           <div
@@ -93,19 +88,12 @@ const ShownewArcrousel = () => {
               marginTop: "20px",
               direction: "rtl",
               display: "flex",
-              justifyContent: "center",          
+              justifyContent: "center",
             }}
           >
             <Swiper
               spaceBetween={0}
-              slidesPerView={(((dimensions.width)*(97/100))-70)/293}
-
-              breakpoints={{
-                // 1220: {
-                //   slidesPerView: (dimensions.width-110)/293,
-                //   spaceBetween: 10,
-                // },
-              }}
+              slidesPerView={(width * (87 / 100) - 70) / 293}
               pagination={{
                 clickable: true,
               }}
@@ -113,29 +101,29 @@ const ShownewArcrousel = () => {
             >
               {articleinfo.map((info, index) => (
                 <SwiperSlide key={index}>
-                  <Link
-                    to={{
-                      pathname: `/articleinfo/${info.id}`,
+                  <Paper
+                    key={index}
+                    className="shownewarticlecro-Paper"
+                    sx={{
+                      direction: "rtl",
                     }}
-                    style={{ textDecoration: "none" }}
+                    style={{
+                      marginTop: "10px",
+                      textDecoration: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      backgroundColor: "white",
+                      borderRadius: "5px",
+                      marginBottom: "70px",
+                      width: "293px",
+                      height: "350px",
+                    }}
                   >
-                    <Paper
-                      key={index}
-                      className="shownewarticlecro-Paper"
-                      sx={{
-                        direction: "rtl",
+                    <Link
+                      to={{
+                        pathname: `/articleinfo/${info.id}`,
                       }}
-                      style={{
-                        marginTop: "10px",
-                        textDecoration: "none",
-                        display: "flex",
-                        flexDirection: "column",
-                        backgroundColor: "white",
-                        borderRadius: "5px",
-                        marginBottom: "70px",
-                        width: "293px",
-                        height: "350px",
-                      }}
+                      style={{ textDecoration: "none" }}
                     >
                       <div
                         style={{
@@ -160,51 +148,56 @@ const ShownewArcrousel = () => {
                           fontWeight: "bold",
                           marginTop: "20px",
                           marginRight: "10px",
+                          color: "black",
                         }}
                       >
                         {info.title}
                       </div>
-                      <div
-                        style={{
-                          marginRight: "10px",
-                          marginLeft: "10px",
-                          color: "#757C86",
-                          fontSize: "15px",
-                          overflow: "Hidden",
-                          whiteSpace: "normal",
-                          textOverflow: "ellipsis",
-                        }}
-                        className="showarticlecro-summary"
-                      >
-                        {info.summary}
-                      </div>
-                      <Divider style={{ marginTop: "20px" }} />
-                      <div
-                        style={{
-                          display: "flex",
-                          marginTop: "15px",
-                          marginLeft: "10px",
-                          marginBottom: "10px",
-                        }}
-                      >
-                        <div style={{ flex: 1, marginRight: "10px" }}></div>
+                    </Link>
+                    <div
+                      style={{
+                        marginRight: "10px",
+                        marginLeft: "10px",
+                        color: "#757C86",
+                        fontSize: "15px",
+                        overflow: "Hidden",
+                        whiteSpace: "normal",
+                        textOverflow: "ellipsis",
+                      }}
+                      className="showarticlecro-summary"
+                    >
+                      {info.summary}
+                    </div>
+                    <Divider style={{ marginTop: "20px" }} />
+                    <div
+                      style={{
+                        display: "flex",
+                        marginTop: "15px",
+                        marginLeft: "10px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      <div style={{ flex: 1, marginRight: "10px" }}></div>
+                      <Link to={`/ShowProfileuser/${info.owner_id}`}>
                         <Avatar
                           alt="Remy Sharp"
                           src={image}
                           sx={{ width: 20, height: 20 }}
                         />
-                        <span
-                          style={{
-                            marginRight: "5px",
-                            fontSize: "13px",
-                            color: "#0057D9",
-                          }}
-                        >
-                          {info.owner}
-                        </span>
-                      </div>
-                    </Paper>
-                  </Link>
+                      </Link>
+                      <Link
+                        style={{
+                          marginRight: "5px",
+                          fontSize: "13px",
+                          color: "#0057D9",
+                          textDecoration: "none",
+                        }}
+                        to={`/ShowProfileuser/${info.owner_id}`}
+                      >
+                        {info.owner}
+                      </Link>
+                    </div>
+                  </Paper>
                 </SwiperSlide>
               ))}
             </Swiper>
