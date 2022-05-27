@@ -25,6 +25,7 @@ const Homepage = () => {
       <Workinfo />
       <SimpleSlider />
       <ShownewArcrousel />
+      <Link to={'/Designquiz'} ><center>کوییز</center></Link>
     </div>
   );
 };

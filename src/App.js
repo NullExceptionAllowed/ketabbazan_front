@@ -12,6 +12,7 @@ import ArticleInfo from "./Components/ShowinfoPerarticle/Articleinfo";
 import Searchbook from "./Components/Searchbook/Searchbook";
 import ShowAllarticle from './Components/ShowAllarticle/ShowAllarticle';
 import ShowProfileuser from './Components/ShowProfileUser/ShowProfile';
+import DesignQuiz from "./Components/DesignQuiz/Designquiz";
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/Searchbook"  component={Searchbook} />
         <Route path="/Showallarticle"  component={ShowAllarticle} />
         <Route path="/ShowProfileuser/:id"  component={ShowProfileuser} />
+        <Route path="/Designquiz"  component={DesignQuiz} />
       </Switch>
   );
 };
