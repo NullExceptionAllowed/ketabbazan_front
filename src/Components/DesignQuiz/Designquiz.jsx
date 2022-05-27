@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChangeNav from "./../Navbar/changeNav";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
-import quizpic from "../../assets/Image/quiz.jpg";
+import quizpic from "../../assets/Image/designquiz3.jpg";
 import TextField from "@mui/material/TextField";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
@@ -19,13 +19,25 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Addquestion from "./Addquestion";
+import CameraAltSharpIcon from "@mui/icons-material/CameraAltSharp";
+import IconButton from "@mui/material/IconButton";
+import { styled } from "@mui/material/styles";
+import guid from "../../assets/Image/guid.jpg";
 
 const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],
 });
+
+const useStyles = styled((theme) => ({
+  textField: {
+    borderRadius: "20px",
+  },
+}));
 const DesignQuiz = () => {
   const [question, setquestion] = useState([]);
+  const [file, setFile] = useState(quizpic);
+  const [binaryFile, setBinaryFile] = useState(null);
 
   const handleaddonequestion = () => {
     console.log("dsfdg");
@@ -42,227 +54,260 @@ const DesignQuiz = () => {
     }
     setquestion(filterque);
   };
+
+  const handleChange = (e) => {
+    setFile(URL.createObjectURL(e.target.files[0]));
+    let picture = e.target.files[0];
+    setBinaryFile(picture);
+  };
   return (
     <div style={{ direction: "rtl" }}>
       <ChangeNav />
       <CacheProvider value={cacheRtl}>
-        <Grid container style={{ marginTop: "80px" }}>
-          <Grid item sm={8} xs={12} style={{ marginRight: "6%" }}>
-            <div
-              style={{ color: "#1565C0", fontSize: "25px", fontWeight: "bold" }}
-            >
-              طراحی کوییز
-            </div>
-            <div style={{ display: "flex", marginTop: "5%" }}>
-              <Avatar
-                alt="Remy Sharp"
-                src={quizpic}
-                sx={{ width: "120px", height: "120px" }}
-              />
-
-              <TextField
-                id="outlined-basic"
-                label="نام کوییز"
-                variant="outlined"
-                size="small"
-                style={{
-                  width: "280px",
-                  marginRight: "18px",
-                  marginTop: "40px",
-                  borderRadius: "20%",
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <QuizIcon style={{ color: "#1565C0" }} />
-                    </InputAdornment>
-                  ),
-                }}
-                autoFocus
-                inputProps={{}}
-              />
-            </div>
-            <Button
-              variant="contained"
-              component="label"
-              sx={{
-                color: "white",
-                width: "100px",
-                mt: 2,
+        <div style={{ marginTop: "90px" }}>
+          <div
+            style={{ display: "flex", justifyContent: "center", height: "30%" }}
+          >
+            <img
+              src={quizpic}
+              alt="homeimg"
+              style={{
+                height: "30vh",
+                width: "90%",
+                position: "absolute",
+                objectFit: "cover",
+                justifyContent: "center",
+                borderRadius: "10px",
+                zIndex: "-1",
               }}
-              style={{ marginRight: "12px" }}
-            >
-              <p style={{ fontSize: "0.8rem" }}>انتخاب عکس</p>
-              <input type="file" hidden accept=".jpg,.jpeg,.png" />
-            </Button>
+            />
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
-                marginTop: "20px",
-                marginRight: "12px",
+                textAlign: "center",
+                color: "white",
+                fontSize: "40px",
+                alignItems: "center",
+                height: "30vh",
               }}
             >
-              <TextField
-                variant="outlined"
-                InputLabelProps={{
-                  style: { width: "50vw" },
-                }}
-                style={{ width: "80%" }}
-                rows={5}
-                id="outlined-basic"
-                label="توضیحات کوییز"
-                multiline
-                dir="rtl !important"
-                margin="normal"
-              />
+              طراحی سوال؟؟
+            </div>
+          </div>
+          <Grid
+            container
+            style={{
+              marginRight: "5%",
+              marginLeft: "5%",
+              marginTop: "3%",
+              marginBottom: "20px",
+            }}
+          >
+            <Grid item sm={3} xs={12}>
               <div
                 style={{
-                  color: "#1565C0",
-                  fontSize: "17px",
-                  marginTop: "30px",
+                  boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "10px",
+                  paddingBottom: "20px",
                 }}
               >
-                سوالات:
-              </div>
-              <div style={{ marginTop: "10px", marginBottom: "10px" }}>
-                <TextField
-                  variant="outlined"
-                  InputLabelProps={{
-                    style: { width: "50vw" },
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
                   }}
-                  style={{ width: "80%" }}
-                  rows={2}
-                  id="outlined-basic"
-                  label="سوال.."
-                  multiline
-                  dir="rtl !important"
-                  margin="normal"
-                />
-                <FormControl style={{ width: "100%" }}>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
-                    name="radio-buttons-group"
-                  >
-                    <TextField
-                      id="outlined-basic"
-                      placeholder="گزینه اول"
-                      variant="outlined"
-                      size="small"
-                      style={{
-                        width: "80%",
-                        borderRadius: "20%",
-                        marginTop: "16px",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <FormControlLabel
-                              value="female"
-                              control={<Radio />}
-                              label=""
-                            />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-
-                    <TextField
-                      id="outlined-basic"
-                      placeholder="گزینه دوم"
-                      variant="outlined"
-                      size="small"
-                      style={{
-                        width: "80%",
-                        borderRadius: "20%",
-                        marginTop: "16px",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <FormControlLabel
-                              value="female1"
-                              control={<Radio />}
-                              label=""
-                            />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-
-                    <TextField
-                      id="outlined-basic"
-                      placeholder="گزینه سوم"
-                      variant="outlined"
-                      size="small"
-                      style={{
-                        width: "80%",
-                        borderRadius: "20%",
-                        marginTop: "16px",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <FormControlLabel
-                              value="female2"
-                              control={<Radio />}
-                              label=""
-                              //   style={{backgroundColor:"blue"}}
-                            />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-
-                    <TextField
-                      id="outlined-basic"
-                      placeholder="گزینه چهارم"
-                      variant="outlined"
-                      size="small"
-                      style={{
-                        width: "80%",
-                        borderRadius: "20%",
-                        marginTop: "16px",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <FormControlLabel
-                              value="female3"
-                              control={<Radio />}
-                              label=""
-                            />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </RadioGroup>
-                </FormControl>
-                {question}
+                >
+                  <img
+                    style={{
+                      width: "120px",
+                      height: "30%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                    src={guid}
+                    alt="Readbook"
+                  />
+                </div>
+                <center style={{ fontSize: "19px" }}>راهنمای طرح سوال</center>
+                <center style={{ fontSize: "13px" }}>
+                  <div style={{ marginTop: "5px" }}>
+                    لطفا کتابی که از آن سوال طرح میکنید سرچ کنید
+                  </div>
+                  <div style={{ marginTop: "5px" }}>
+                    حتما سوالات را به زبان فارسی تایپ کنید{" "}
+                  </div>
+                  <div style={{ marginTop: "5px" }}>
+                    از توضیح اضافه درباره سوال پرهیز کنید{" "}
+                  </div>
+                  <div style={{ marginTop: "5px" }}>
+                    سوال قابل مفهوم و غلط نگارشی نداشته باشد{" "}
+                  </div>
+                </center>
+              </div>
+            </Grid>
+            <Grid item sm={7.3} style={{ marginRight: "40px", marginBottom:"0px" }}>
+              <div
+                style={{
+                  boxShadow: "rgba(0, 0, 0,0) 0px 2px 10px",
+                  width: "100%",
+                  height: "300px",
+                  borderRadius: "10px",
+                  paddingBottom: "20px",
+                }}
+              >
+                <div style={{ color: "#1565C0" }}>
+                  کتاب مورد نظرتان را سرچ کنید و اضافه کنید
+                </div>
                 <div style={{ display: "flex" }}>
+                  <TextField
+                    variant="outlined"
+                    InputLabelProps={{
+                      style: { width: "50vw" },
+                    }}
+                    style={{ width: "50%" }}
+                    size="small"
+                    id="outlined-basic"
+                    label="نام کتاب"
+                    multiline
+                    dir="rtl !important"
+                    margin="normal"
+                  />
                   <Button
-                    onClick={handleaddonequestion}
-                    style={{ color: "#1565C0", marginTop: "20px" }}
+                    style={{
+                      height: "38px",
+                      marginTop: "16px",
+                      marginRight: "10px",
+                      width: "70px",
+                    }}
+                    size="small"
+                    variant="contained"
+                    type="submit"
                   >
-                    <span> {"اضافه کردن سوال"}</span>
+                    سرچ
                   </Button>
-                  {question.length > 0 && (
-                    <Button
-                      onClick={handleDeleteque}
-                      style={{ color: "#1565C0", marginTop: "20px" }}
+                </div>
+
+                <div style={{ marginTop: "25px" }}>
+                  <TextField
+                    variant="outlined"
+                    InputLabelProps={{
+                      style: { width: "50vw" },
+                    }}
+                    style={{ width: "80%" }}
+                    rows={2}
+                    id="outlined-basic"
+                    label="سوال.."
+                    multiline
+                    dir="rtl !important"
+                    margin="normal"
+                  />
+                  <FormControl style={{ width: "100%" }}>
+                    <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="female"
+                      name="radio-buttons-group"
                     >
-                      <span> {"حذف کردن سوال"}</span>
-                    </Button>
-                  )}
+                      <TextField
+                        id="outlined-basic"
+                        placeholder="گزینه اول"
+                        variant="outlined"
+                        size="small"
+                        style={{
+                          width: "80%",
+                          borderRadius: "20%",
+                          marginTop: "16px",
+                        }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <FormControlLabel
+                                value="female"
+                                control={<Radio />}
+                                label=""
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <TextField
+                        id="outlined-basic"
+                        placeholder="گزینه دوم"
+                        variant="outlined"
+                        size="small"
+                        style={{
+                          width: "80%",
+                          borderRadius: "20%",
+                          marginTop: "16px",
+                        }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <FormControlLabel
+                                value="female1"
+                                control={<Radio />}
+                                label=""
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <TextField
+                        id="outlined-basic"
+                        placeholder="گزینه سوم"
+                        variant="outlined"
+                        size="small"
+                        style={{
+                          width: "80%",
+                          borderRadius: "20%",
+                          marginTop: "16px",
+                        }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <FormControlLabel
+                                value="female2"
+                                control={<Radio />}
+                                label=""
+                                //   style={{backgroundColor:"blue"}}
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <TextField
+                        id="outlined-basic"
+                        placeholder="گزینه چهارم"
+                        variant="outlined"
+                        size="small"
+                        style={{
+                          width: "80%",
+                          borderRadius: "20%",
+                          marginTop: "16px",
+                        }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <FormControlLabel
+                                value="female3"
+                                control={<Radio />}
+                                label=""
+                              />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </RadioGroup>
+                  </FormControl>
                 </div>
               </div>
-            </div>
+            </Grid>
           </Grid>
-          <Grid item xs={3}>
-            قوانین کوییز
-          </Grid>
-        </Grid>
+        </div>
       </CacheProvider>
     </div>
   );
