@@ -418,7 +418,7 @@ const Article = () => {
           </Grid>
         </CacheProvider>
       </Grid>
-      <ToastContainer />
+      <ToastContainer rtl={true} />
     </div>
   );
 };

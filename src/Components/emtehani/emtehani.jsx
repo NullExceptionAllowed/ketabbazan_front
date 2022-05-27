@@ -14,6 +14,7 @@ import SwiperCore, { Navigation, Pagination } from "swiper";
 export default function SimpleSlider() {
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
+
   useEffect(() => {
     setApiLoading(true);
     axios({
@@ -24,6 +25,13 @@ export default function SimpleSlider() {
       setApiLoading(false);
     });
   }, []);
+
+  const MouseOver = (event) => {
+    event.target.style.color = "#30C7CE";
+  };
+  const MouseOut = (event) => {
+    event.target.style.color = "black";
+  };
 
   SwiperCore.use([Navigation, Pagination]);
   return (
@@ -74,6 +82,8 @@ export default function SimpleSlider() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            marginRight:"5%",
+            marginLeft:"5%"
           }}
         >
           <div style={{ width: "100%" }}>
@@ -89,15 +99,29 @@ export default function SimpleSlider() {
                   slidesPerView: 8,
                   spaceBetween: 0,
                 },
-                800: {
+                1000: {
                   slidesPerView: 6,
                   spaceBetween: 0,
                 },
-                550: {
+                800: {
+                  slidesPerView: 5,
+                  spaceBetween: 0,
+                },
+
+                600: {
                   slidesPerView: 4,
                   spaceBetween: 0,
                 },
+
+                560: {
+                  slidesPerView: 3,
+                  spaceBetween: 0,
+                },
                 400: {
+                  slidesPerView: 2,
+                  spaceBetween: 0,
+                },
+                470: {
                   slidesPerView: 3,
                   spaceBetween: 0,
                 },
@@ -147,7 +171,7 @@ export default function SimpleSlider() {
                             height: "150px",
                             width: "120px",
                             boxShadow: "rgba(0, 0, 0, 0.445) 0px 2px 10px",
-                            borderRadius:"2px"
+                            borderRadius: "2px",
                           }}
                         />
                       </div>
@@ -156,6 +180,8 @@ export default function SimpleSlider() {
                         className="showbook_name"
                         variant="subtitle1"
                         component="div"
+                        onMouseOver={MouseOver}
+                        onMouseOut={MouseOut}
                       >
                         {info.name}
                       </div>
