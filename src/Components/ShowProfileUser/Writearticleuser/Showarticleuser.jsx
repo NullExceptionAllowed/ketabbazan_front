@@ -69,6 +69,7 @@ const Showarticleuser = ({ articleuser }) => {
                         width: "140px",
                         height: "100%",
                         borderRadius: "2px",
+                        objectFit:"conver"
                       }}
                     />
                   </Link>

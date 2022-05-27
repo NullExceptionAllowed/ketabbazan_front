@@ -18,6 +18,7 @@ import showToast from "../../Service/toastservice";
 import ReactLoading from "react-loading";
 import SimilarBooks from "../similarBooks/similarBooks";
 import CommentApp from "../Comment/CommentApp";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
@@ -241,7 +242,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        `${baseUrl}/lists/forceadd/`,
         JSON.stringify(haveRead),
         {
           headers: {
@@ -270,7 +271,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        `${baseUrl}/lists/forceadd/`,
         JSON.stringify(reading),
         {
           headers: {
@@ -296,7 +297,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        `${baseUrl}/lists/forceadd/`,
         JSON.stringify(goingtoread),
         {
           headers: {
@@ -322,7 +323,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://derakhshan.pythonanywhere.com/lists/forceadd/",
+        "/lists/forceadd/",
         JSON.stringify(leave),
         {
           headers: {
