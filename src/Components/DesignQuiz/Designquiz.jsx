@@ -343,6 +343,8 @@ import guid from "../../assets/Image/guid.jpg";
 import AddIcon from "@mui/icons-material/Add";
 import Divider from "@mui/material/Divider";
 import "./quiz.css";
+import { baseUrl } from "../../Variable";
+import axios from "axios";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -359,6 +361,69 @@ const classes = styled((theme) => ({
 const DesignQuiz = () => {
   const theme = useTheme();
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
+  const[question,setquesion]=useState("");
+  const[test1,settest1]=useState("");
+  const[test2,settest2]=useState("");
+  const[test3,settest3]=useState("");
+  const[test4,settest4]=useState("");
+  const[correctans,setcorrectans]=useState("1");
+  
+  const SetCorrectans=(event)=>{
+    setcorrectans(event.currentTarget.value);
+  }
+  const SetQuestion=(event)=>{
+    setquesion(event.target.value);
+  }
+
+  const SetTest1=(event)=>{
+    settest1(event.target.value);
+  }
+
+  const SetTest2=(event)=>{
+    settest2(event.target.value);
+  }
+
+  const SetTest3=(event)=>{
+    settest3(event.target.value);
+  }
+
+  const SetTest4=(event)=>{
+    settest4(event.target.value);
+  }
+
+  const handlesentinfo=()=>{
+    const info={
+      question:question,
+      op1:test1,
+      op2:test2,
+      op3:test3,
+      op4:test4,
+      ans:correctans,
+      book:'23'
+    }
+    console.log(info);
+    const token = "Token " + localStorage.getItem("token");
+
+
+    try {
+      const response = axios.post(
+        `${baseUrl}/quiz/propose/`,
+        info,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+      console.log(response + "*");
+      console.log(response.data);
+      if (response.status === 200) {
+      }
+    } catch (ex) {
+    }
+  }
+
   return (
     <div style={{ direction: "rtl" }}>
       <ChangeNav />
@@ -413,13 +478,17 @@ const DesignQuiz = () => {
                   label="صورت سوال"
                   multiline
                   dir="rtl !important"
+                  value={question}
+                  onChange={SetQuestion}
                 />
 
                 <FormControl style={{ width: "100%" }}>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
+                    defaultValue="1"
                     name="radio-buttons-group"
+                    value={correctans}
+                    onChange={SetCorrectans}
                   >
                     <TextField
                       id="outlined-basic"
@@ -431,6 +500,8 @@ const DesignQuiz = () => {
                         borderRadius: "20%",
                         marginTop: "16px",
                       }}
+                      value={test1}
+                      onChange={SetTest1}
                       sx={{
                         [`& fieldset`]: {
                           borderRadius: 10,
@@ -440,7 +511,7 @@ const DesignQuiz = () => {
                         startAdornment: (
                           <InputAdornment position="start">
                             <FormControlLabel
-                              value="female"
+                              value="1"
                               control={<Radio />}
                               label=""
                               style={{}}
@@ -460,6 +531,8 @@ const DesignQuiz = () => {
                           borderRadius: 100,
                         },
                       }}
+                      value={test2}
+                      onChange={SetTest2}
                       style={{
                         width: "100%",
                         borderRadius: "20%",
@@ -469,7 +542,7 @@ const DesignQuiz = () => {
                         startAdornment: (
                           <InputAdornment position="start">
                             <FormControlLabel
-                              value="female1"
+                              value="2"
                               control={<Radio />}
                               label=""
                             />
@@ -487,6 +560,8 @@ const DesignQuiz = () => {
                           borderRadius: 100,
                         },
                       }}
+                      value={test3}
+                      onChange={SetTest3}
                       size="small"
                       style={{
                         width: "100%",
@@ -497,7 +572,7 @@ const DesignQuiz = () => {
                         startAdornment: (
                           <InputAdornment position="start">
                             <FormControlLabel
-                              value="female2"
+                              value="3"
                               control={<Radio />}
                               label=""
                               //   style={{backgroundColor:"blue"}}
@@ -516,6 +591,8 @@ const DesignQuiz = () => {
                           borderRadius: 100,
                         },
                       }}
+                      value={test4}
+                      onChange={SetTest4}
                       size="small"
                       style={{
                         width: "100%",
@@ -526,7 +603,7 @@ const DesignQuiz = () => {
                         startAdornment: (
                           <InputAdornment position="start">
                             <FormControlLabel
-                              value="female3"
+                              value="4"
                               control={<Radio />}
                               label=""
                             />
@@ -545,6 +622,7 @@ const DesignQuiz = () => {
                   size="small"
                   variant="contained"
                   type="submit"
+                  onClick={handlesentinfo}
                 >
                   ثبت سوال
                 </Button>
