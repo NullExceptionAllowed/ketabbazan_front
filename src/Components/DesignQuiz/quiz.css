@@ -1,0 +1,11 @@
+.designquiz_des{
+    margin-top: 80px;
+}
+
+@media (max-width: 900px) {
+    .designquiz_des{
+        margin-top: 20px;
+        margin-right: 2.1vh;
+        margin-left: 2.1vh;
+    }
+}
