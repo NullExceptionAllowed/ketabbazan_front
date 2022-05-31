@@ -94,7 +94,8 @@ const Login = ({ history }) => {
             },
           }
         );
-        console.log(response.data.token);
+        console.log(response);
+        console.log("***");
         console.log(response.status);
         if (response.status === 200) {
           setloading(false);
