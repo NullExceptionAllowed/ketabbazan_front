@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ChangeNav from "./../Navbar/changeNav";
 import Grid from "@mui/material/Grid";
-import Avatar from "@mui/material/Avatar";
-import quizpic from "../../assets/Image/designquiz3.jpg";
 import TextField from "@mui/material/TextField";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
-import { borderRadius } from "@mui/system";
-import QuizIcon from "@mui/icons-material/Quiz";
 import { InputAdornment } from "@mui/material";
 import { Typography, Button, useTheme, useMediaQuery } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Addquestion from "./Addquestion";
-import CameraAltSharpIcon from "@mui/icons-material/CameraAltSharp";
-import IconButton from "@mui/material/IconButton";
-import { styled } from "@mui/material/styles";
-import guid from "../../assets/Image/guid.jpg";
 import AddIcon from "@mui/icons-material/Add";
 import Divider from "@mui/material/Divider";
 import "./quiz.css";
@@ -32,7 +21,6 @@ import showToast from "../../Service/toastservice";
 import { ToastContainer } from "react-toastify";
 import { Link, useParams } from "react-router-dom";
 import ButtonBase from "@mui/material/ButtonBase";
-import Rating from "@mui/material/Rating";
 import Pagination from "@mui/material/Pagination";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactLoading from "react-loading";
@@ -71,6 +59,7 @@ const DesignQuiz = () => {
   const [clickbtnsearch, setclickbtnsearch] = useState(false);
   const [apiloadingbook, setapiloadingbook] = useState(false);
   const [apiloadingsubmit, setapiloadingsubmit] = useState(false);
+  const[p,setp]=useState(false);
 
   const handlePagination2 = (e, p) => {
     setpagenum2(p);
@@ -121,7 +110,7 @@ const DesignQuiz = () => {
   }
   if (listbook.length === 0 && clickbtnsearch && !apiloadingbook) {
     errors.showbook = "این کتاب موجود نیست.";
-  } else if (idbook === "" && aftersubmit) {
+  } else if (p===false && aftersubmit) {
     check = false;
     errors.showbook = "باید حتما یک کتاب را برای طرح سوال انتخاب کنی";
   }
@@ -231,6 +220,7 @@ const DesignQuiz = () => {
   };
 
   const handleaddbookquiz = (id, namebook3, img, author, summary) => {
+    setp(true);
     setshowboxsearch(false);
     setidbook(id);
     console.log("&&&");
@@ -247,6 +237,7 @@ const DesignQuiz = () => {
   };
 
   const handlechangebookquiz = () => {
+    setp(false);
     setshowboxsearch(true);
     setidbook("");
   };
@@ -286,9 +277,9 @@ const DesignQuiz = () => {
                         value={namebook}
                         onChange={(e) => setnamebook(e.target.value)}
                         error={
-                          clickbtnsearch ? Boolean(errors.showbook) : false
+                          clickbtnsearch || aftersubmit ? Boolean(errors.showbook) : false
                         }
-                        helperText={clickbtnsearch ? errors.showbook : null}
+                        helperText={clickbtnsearch || aftersubmit ? errors.showbook : null}
                       />
                       <Button
                         style={{
