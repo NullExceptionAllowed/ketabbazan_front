@@ -35,6 +35,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import Rating from "@mui/material/Rating";
 import Pagination from "@mui/material/Pagination";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ReactLoading from "react-loading";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -69,17 +70,19 @@ const DesignQuiz = () => {
   const [summarybookquiz, setsummarybookquiz] = useState("");
   const [clickbtnsearch, setclickbtnsearch] = useState(false);
   const [apiloadingbook, setapiloadingbook] = useState(false);
+  const [apiloadingsubmit, setapiloadingsubmit] = useState(false);
 
   const handlePagination2 = (e, p) => {
     setpagenum2(p);
     console.log("&&");
     console.log(p);
-
+    setapiloadingbook(true);
     axios(`${baseUrl}/search/quizbook/?q=${namebook2}&page=${p}`).then(
       (response) => {
         console.log(response.data);
         setlistbook(response.data);
         console.log("---");
+        setapiloadingbook(false);
       }
     );
   };
@@ -95,22 +98,22 @@ const DesignQuiz = () => {
   let check = true;
   if (!question) {
     check = false;
-    errors.question = "صورت سوال نباید خالی باشد.";
+    errors.question = " سوال نباید خالی باشد.";
   } else if (question.length < 10) {
     check = false;
-    errors.question = "صورت سوال نباید از 10 کاراکتر کمتر باشد.";
+    errors.question = "  نباید از 10 کاراکتر کمتر باشد.";
   }
   if (!test1) {
     check = false;
-    errors.test1 = "صورت سوال گزینه نباید خالی باشد.";
+    errors.test1 = "  گزینه نباید خالی باشد.";
   }
   if (!test2) {
     check = false;
-    errors.test2 = "صورت سوال گزینه نباید خالی باشد.";
+    errors.test2 = "  گزینه نباید خالی باشد.";
   }
   if (!test3) {
     check = false;
-    errors.test3 = "صورت سوال گزینه نباید خالی باشد.";
+    errors.test3 = " گزینه نباید خالی باشد.";
   }
   if (!test4) {
     check = false;
@@ -148,6 +151,7 @@ const DesignQuiz = () => {
 
   const handlesentinfo = async () => {
     setaftersubmit(true);
+    
     const info = {
       question: question,
       op1: test1,
@@ -160,6 +164,7 @@ const DesignQuiz = () => {
     console.log(info);
     const token = "Token " + localStorage.getItem("token");
     if (check) {
+      setapiloadingsubmit(true);
       try {
         const response = await axios.post(`${baseUrl}/quiz/propose/`, info, {
           headers: {
@@ -171,7 +176,7 @@ const DesignQuiz = () => {
         console.log(response);
         if (response.status === 201) {
           showToast("success", "با موفقیت سوالت را گذاشتی ");
-
+          setapiloadingsubmit(false);
           setquesion("");
           settest1("");
           settest2("");
@@ -197,20 +202,6 @@ const DesignQuiz = () => {
       } catch (ex) {
         showToast("error", "مشکلی پیش آمده است");
       }
-
-      // axios.post(`${baseUrl}/quiz/propose/`, info,{
-      //           headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: token,
-      //     },
-      // })
-      // .then(function (response) {
-      //   if(response.status===201)
-      //   showToast("success", "با موفقیت وارد شدی");
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
     }
   };
 
@@ -314,147 +305,173 @@ const DesignQuiz = () => {
                         سرچ
                       </Button>
                     </div>
-
-                    {listbook.length > 0 && (
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        {listbook.map((info, index) => (
-                          <div style={{ width: "100%" }}>
-                            <Grid
-                              style={{
-                                marginTop: "2%",
-                                display: "flex",
-                                textDecoration: "none",
-                                width: "100%",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  height: "135px",
-                                  width: "100%",
-                                }}
-                              >
+                    {apiloadingbook && (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          padding: "auto",
+                          marginTop: 96,
+                          marginBottom: 96,
+                        }}
+                      >
+                        <ReactLoading
+                          type="spinningBubbles"
+                          color={"#1565C0"}
+                          height={50}
+                          width={50}
+                        />
+                      </div>
+                    )}
+                    {!apiloadingbook && (
+                      <>
+                        {listbook.length > 0 && (
+                          <div
+                            style={{ display: "flex", flexDirection: "column" }}
+                          >
+                            {listbook.map((info, index) => (
+                              <div style={{ width: "100%" }}>
                                 <Grid
-                                  key={index}
-                                  to={`/bookinfo/${info.id}`}
-                                  component={Link}
+                                  style={{
+                                    marginTop: "2%",
+                                    display: "flex",
+                                    textDecoration: "none",
+                                    width: "100%",
+                                  }}
                                 >
-                                  <img
-                                    src={info.image_url}
-                                    alt="img"
-                                    style={{
-                                      width: "105px",
-                                      height: "100%",
-                                      borderRadius: "2px",
-                                    }}
-                                  />
-                                </Grid>
-                                <div style={{ width: "100%" }}>
                                   <div
-                                    style={{ display: "flex", width: "100%" }}
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "row",
+                                      height: "135px",
+                                      width: "100%",
+                                    }}
                                   >
                                     <Grid
-                                      style={{
-                                        fontSize: "16px",
-                                        fontWeight: "bold",
-                                        marginRight: "10px",
-                                        color: "black",
-                                        width: "100%",
-                                        textDecoration: "none",
-                                      }}
                                       key={index}
                                       to={`/bookinfo/${info.id}`}
                                       component={Link}
                                     >
-                                      {info.name}
-                                    </Grid>
-                                    <div style={{}}>
-                                      <Button
+                                      <img
+                                        src={info.image_url}
+                                        alt="img"
                                         style={{
-                                          height: "25px",
-                                          marginRight: "10px",
-                                          width: "50px",
-                                          fontSize: "10px",
+                                          width: "105px",
+                                          height: "100%",
+                                          borderRadius: "2px",
                                         }}
-                                        size="small"
-                                        variant="contained"
-                                        type="submit"
-                                        onClick={() =>
-                                          handleaddbookquiz(
-                                            info.id,
-                                            info.name,
-                                            info.image_url,
-                                            info.author,
-                                            info.summary
-                                          )
-                                        }
+                                      />
+                                    </Grid>
+                                    <div style={{ width: "100%" }}>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          width: "100%",
+                                        }}
                                       >
-                                        <span style={{ fontSize: "10px" }}>
-                                          اضافه
-                                        </span>
-                                      </Button>
+                                        <Grid
+                                          style={{
+                                            fontSize: "16px",
+                                            fontWeight: "bold",
+                                            marginRight: "10px",
+                                            color: "black",
+                                            width: "100%",
+                                            textDecoration: "none",
+                                          }}
+                                          key={index}
+                                          to={`/bookinfo/${info.id}`}
+                                          component={Link}
+                                        >
+                                          {info.name}
+                                        </Grid>
+                                        <div style={{}}>
+                                          <Button
+                                            style={{
+                                              height: "25px",
+                                              marginRight: "10px",
+                                              width: "50px",
+                                              fontSize: "10px",
+                                            }}
+                                            size="small"
+                                            variant="contained"
+                                            type="submit"
+                                            onClick={() =>
+                                              handleaddbookquiz(
+                                                info.id,
+                                                info.name,
+                                                info.image_url,
+                                                info.author,
+                                                info.summary
+                                              )
+                                            }
+                                          >
+                                            <span style={{ fontSize: "10px" }}>
+                                              اضافه
+                                            </span>
+                                          </Button>
+                                        </div>
+                                      </div>
+
+                                      <Grid
+                                        style={{
+                                          marginTop: "0.5%",
+                                          fontSize: "13px",
+                                          marginRight: "10px",
+                                          color: "#757C86",
+                                          textDecoration: "none",
+                                        }}
+                                      >
+                                        {"نویسنده: " + info.author}
+                                      </Grid>
+
+                                      <Grid
+                                        style={{
+                                          marginTop: "1%",
+                                          marginRight: "10px",
+                                          color: "#757C86",
+                                          fontSize: "14px",
+                                          overflow: "Hidden",
+                                          whiteSpace: "normal",
+                                          textOverflow: "ellipsis",
+                                        }}
+                                        className="DesignQuiz_summarybook"
+                                      >
+                                        {info.summary}
+                                      </Grid>
                                     </div>
                                   </div>
-
-                                  <Grid
-                                    style={{
-                                      marginTop: "0.5%",
-                                      fontSize: "13px",
-                                      marginRight: "10px",
-                                      color: "#757C86",
-                                      textDecoration: "none",
-                                    }}
-                                  >
-                                    {"نویسنده: " + info.author}
-                                  </Grid>
-
-                                  <Grid
-                                    style={{
-                                      marginTop: "1%",
-                                      marginRight: "10px",
-                                      color: "#757C86",
-                                      fontSize: "14px",
-                                      overflow: "Hidden",
-                                      whiteSpace: "normal",
-                                      textOverflow: "ellipsis",
-                                    }}
-                                    className="DesignQuiz_summarybook"
-                                  >
-                                    {info.summary}
-                                  </Grid>
-                                </div>
+                                </Grid>
+                                <Divider
+                                  style={{
+                                    color: "red",
+                                    width: "100%",
+                                    marginTop: "2%",
+                                  }}
+                                />
                               </div>
-                            </Grid>
-                            <Divider
+                            ))}
+                            <div
                               style={{
-                                color: "red",
-                                width: "100%",
-                                marginTop: "2%",
+                                display: "flex",
+                                justifyContent: "center",
+                                marginTop: "15px",
+                                direction: "rtl",
                               }}
-                            />
+                            >
+                              <ThemeProvider theme={theme1}>
+                                {numpage2 > 1 && (
+                                  <Pagination
+                                    count={numpage2}
+                                    onChange={handlePagination2}
+                                    size="small"
+                                    page={pagenum2}
+                                  />
+                                )}
+                              </ThemeProvider>
+                            </div>
                           </div>
-                        ))}
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            marginTop: "15px",
-                            direction: "rtl",
-                          }}
-                        >
-                          <ThemeProvider theme={theme1}>
-                            {numpage2 > 1 && (
-                              <Pagination
-                                count={numpage2}
-                                onChange={handlePagination2}
-                                size="small"
-                                page={pagenum2}
-                              />
-                            )}
-                          </ThemeProvider>
-                        </div>
-                      </div>
+                        )}
+                      </>
                     )}
                   </div>
                 )}
@@ -713,7 +730,14 @@ const DesignQuiz = () => {
                   type="submit"
                   onClick={handlesentinfo}
                 >
-                  ثبت سوال
+                  {!apiloadingsubmit && <span>ورود</span>}
+                  {apiloadingsubmit && (
+                    <ReactLoading
+                      type="bubbles"
+                      color="#fff"
+                      className="loading-login"
+                    />
+                  )}
                 </Button>
               </div>
             </Grid>

@@ -1,81 +1,61 @@
 import React, { useState, useEffect, useContext } from "react";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 import AddNewComment from "./AddNewComment.jsx";
 import Comment from "./Comment";
 import SimpleContext from "./SimpleContext";
 import Comments from "./Comments";
 import axios from "axios";
 import SimilarBooks from "../similarBooks/similarBooks.jsx";
-import {Link,useParams,} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../../Variable";
-
 
 const CommentApp = () => {
   const [getComments, setComments] = useState([]);
   const [getComment, setComment] = useState("");
   const [bookId, setBookid] = useState(0);
-  const [replys,setReplys] = useState([]);
+  const [replys, setReplys] = useState([]);
   const [reply, setReply] = useState("");
-  const [refresh , setRefresh] = useState("");
+  const [refresh, setRefresh] = useState("");
 
- const params = useParams();
- const idid = params.id;
- const [reload, setReload] = useState("0");
- const [img , setImg] = useState("");
+  const params = useParams();
+  const idid = params.id;
+  const [reload, setReload] = useState("0");
+  const [img, setImg] = useState("");
   const context = useContext(SimpleContext);
 
-  
+  useEffect(() => {
+    intialize();
+    console.log(refresh);
+  }, [reload, refresh, idid]);
 
-  useEffect(() => { intialize(); console.log(refresh)   } , [reload, refresh ,idid, getComments]);
-
-  
- 
-  
- 
-  
-  let token ="Token " + localStorage.getItem('token');
+  let token = "Token " + localStorage.getItem("token");
 
   const intialize = () => {
-   
-    
+    axios
+      .get(`${baseUrl}/comment/?id=${idid}`, {
+        headers: {
+          "Content-Type": "application/json ",
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.status);
+        setComments(res.data.all_comments);
+      });
 
-  axios.get(`${baseUrl}/comment/?id=${idid}`, {
-      headers: {
-         'Content-Type': 'application/json ',
-         "Authorization": token
-       }
-    }).then((res) => {
-      
-     console.log(res.status);
-     setComments(res.data.all_comments);
-     
-     
-    
-
-    })
-
-    axios.get(`derakhshan.pythonanywhere.com/profile/image/`, {
-      headers: {
-         'Content-Type': 'application/json ',
-         "Authorization": token
-       }
-    }).then((res) => {
-      setImg(res);
-     
-    })
-
-
-     
-
-  }
-  
-  
-
-  
+    axios
+      .get(`derakhshan.pythonanywhere.com/profile/image/`, {
+        headers: {
+          "Content-Type": "application/json ",
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        setImg(res);
+      });
+  };
 
   const handleCreateNewComment = () => {
-    
-     
     context.setClick(0);
     console.log(context.click);
 
@@ -84,67 +64,48 @@ const CommentApp = () => {
     console.log(reload);
 
     const comment = {
-
       comment_text: getComment,
-      book: idid
-
-
+      book: idid,
     };
-   
-      
 
-    axios.post(
-      `${baseUrl}/comment/`,
-      JSON.stringify(comment),
-      {
+    axios
+      .post(`${baseUrl}/comment/`, JSON.stringify(comment), {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token
-        }
-      }
-    ).then((res) => {
-      console.log(res.status);
-
-
-    })
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.status);
+      });
     setComment("");
-   
-  }
+  };
 
-  const handleSetComment = event => {
+  const handleSetComment = (event) => {
     setComment(event.target.value);
-
-  }
-
+  };
 
   return (
     <SimpleContext.Provider
       value={{
-        img: img ,
-        refresh : refresh , 
+        img: img,
+        refresh: refresh,
         comments: getComments,
         comment: getComment,
-        setRefresh : setRefresh ,
+        setRefresh: setRefresh,
         handleCreateNewComment: handleCreateNewComment,
-        handleSetComment: handleSetComment
+        handleSetComment: handleSetComment,
       }}
     >
       <div>
-        
-
-        <SimilarBooks/>
+        <SimilarBooks />
         <br />
         <Comments />
-
-
         <br />
-
         <AddNewComment />
         <br />
       </div>
-
     </SimpleContext.Provider>
-
-  )
-}
+  );
+};
 export default CommentApp;
