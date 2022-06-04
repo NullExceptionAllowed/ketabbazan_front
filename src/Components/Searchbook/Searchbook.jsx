@@ -34,7 +34,7 @@ const Searchbook = () => {
   const [numpage2, setnumpage2] = useState(1);
 
   const MouseOver = (event) => {
-    event.target.style.color = "#30C7CE";
+    event.target.style.color = "#1565C0";
   };
   const MouseOut = (event) => {
     event.target.style.color = "black";

@@ -19,6 +19,13 @@ const Readbook = ({ readbookuser }) => {
     maxHeight: "100%",
   });
 
+  const MouseOver = (event) => {
+    event.target.style.color = "#1565C0";
+  };
+  const MouseOut = (event) => {
+    event.target.style.color = "black";
+  };
+
   return (
     <div
       style={{
@@ -88,6 +95,8 @@ const Readbook = ({ readbookuser }) => {
                         marginRight: "10px",
                         color: "black",
                       }}
+                      onMouseOver={MouseOver}
+                      onMouseOut={MouseOut}
                     >
                       {info.name}
                     </Grid>

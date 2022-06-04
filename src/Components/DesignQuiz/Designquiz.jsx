@@ -77,7 +77,7 @@ const DesignQuiz = () => {
   };
 
   const MouseOver = (event) => {
-    event.target.style.color = "#30C7CE";
+    event.target.style.color = "#1565C0";
   };
   const MouseOut = (event) => {
     event.target.style.color = "black";
@@ -372,6 +372,8 @@ const DesignQuiz = () => {
                                           key={index}
                                           to={`/bookinfo/${info.id}`}
                                           component={Link}
+                                          onMouseOver={MouseOver}
+                                          onMouseOut={MouseOut}
                                         >
                                           {info.name}
                                         </Grid>

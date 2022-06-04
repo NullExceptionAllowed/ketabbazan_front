@@ -50,12 +50,12 @@
 }
 @media (max-width: 600px) {
     .home-banner__start-btn{
-        width: 400px;
+        width: 300px;
     }
 }
 @media (max-width: 400px) {
     .home-banner__start-btn{
-        width: 280px;
+        width: 220px;
     }
     .home_info{
         font-size: 17px;

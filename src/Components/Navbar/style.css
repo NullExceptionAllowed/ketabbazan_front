@@ -1,0 +1,19 @@
+.DrawerComp_list{
+    width: 25vw;
+}
+
+@media (max-width: 700px) {
+    .DrawerComp_list{
+        width: 50vw;
+    }
+}
+@media (max-width: 600px) {
+    .DrawerComp_list{
+        width: 60vw;
+    }
+}
+@media (max-width: 450px) {
+    .DrawerComp_list{
+        width: 70vw;
+    }
+}
