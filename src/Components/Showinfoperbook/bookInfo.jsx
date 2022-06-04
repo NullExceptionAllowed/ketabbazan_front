@@ -18,7 +18,6 @@ import showToast from "../../Service/toastservice";
 import ReactLoading from "react-loading";
 import SimilarBooks from "../similarBooks/similarBooks";
 import CommentApp from "../Comment/CommentApp";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
@@ -27,6 +26,7 @@ import createCache from "@emotion/cache";
 import { MenuItem } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import QuizIcon from '@mui/icons-material/Quiz';
 
 const theme = createTheme({
   direction: "rtl",
@@ -87,7 +87,7 @@ const Emti = () => {
     fontSize: 20,
   };
   let typo8 = {
-    margin: "130px auto auto auto",
+    margin: "100px auto auto auto",
     fontSize: 14,
   };
   let typo9 = {
@@ -116,6 +116,14 @@ const Emti = () => {
     }
   };
 
+  const handleLoginForQuiz = () => {
+    if (flag === null) {
+      setOpen(true);
+    } else {
+      history.push(`/AnswerQuiz/${id}`);
+    }
+  }
+
   const [apiLoading, setApiLoading] = useState(false);
   const token = "Token " + localStorage.getItem("token");
   const [bookinfo, setbookinfo] = useState([]);
@@ -128,7 +136,7 @@ const Emti = () => {
   const [userrate, setuserrate] = React.useState(null);
   const [changerate, setchangerate] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [conditionbook, setConditionbook] = useState("وضعیت کتاب");
+  const [conditionbook, setConditionbook] = useState("وضعیت کتاب"); 
   const oopen = Boolean(anchorEl);
 
   const [vaziat, setvaziat] = React.useState("بدون وضعیت");
@@ -242,7 +250,7 @@ const Emti = () => {
     };
     axios
       .post(
-        `${baseUrl}/lists/forceadd/`,
+        "http://94.101.185.252/lists/forceadd/",
         JSON.stringify(haveRead),
         {
           headers: {
@@ -271,7 +279,7 @@ const Emti = () => {
     };
     axios
       .post(
-        `${baseUrl}/lists/forceadd/`,
+        "http://94.101.185.252/lists/forceadd/",
         JSON.stringify(reading),
         {
           headers: {
@@ -297,7 +305,7 @@ const Emti = () => {
     };
     axios
       .post(
-        `${baseUrl}/lists/forceadd/`,
+        "http://94.101.185.252/lists/forceadd/",
         JSON.stringify(goingtoread),
         {
           headers: {
@@ -323,7 +331,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "/lists/forceadd/",
+        "http://94.101.185.252/lists/forceadd/",
         JSON.stringify(leave),
         {
           headers: {
@@ -552,6 +560,29 @@ const Emti = () => {
                     onClick={handleLoginForReadPdf}
                   >
                     مطالعه کتاب
+                  </Button>
+                  <ShowDialog close={handleClose} open={open} />
+                </Grid>
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <QuizIcon
+                        style={{ margin: "auto -65px auto auto" }}
+                      />
+                    }
+                    variant="outlined"
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      margin: "5px auto auto auto",
+                      borderRadius: "10px",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                    onClick={handleLoginForQuiz}
+                  >
+                     کوئیز دادن
                   </Button>
                   <ShowDialog close={handleClose} open={open} />
                 </Grid>

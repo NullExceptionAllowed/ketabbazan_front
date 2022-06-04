@@ -320,26 +320,6 @@ const Nav = () => {
   const MouseOut = (event) => {
     event.target.style.color = "#545252";
   };
-  const MenuButton = ({ Icon, text, linkTo }) => {
-    return (
-      <div style={{ marginBottom: "5 px" }}>
-        <Button
-          style={{
-            color: "#000",
-            width: "100%",
-            justifyContent: "flex-start",
-            padding: "16px",
-          }}
-          variant="text"
-          component={Link}
-          to="/signup"
-        >
-          <Icon style={{ color: "#1565C0" }} />
-          <span style={{ marginRight: "5px" }}>{text}</span>
-        </Button>
-      </div>
-    );
-  };
   return (
     <Box sx={{ flexGrow: 1, direction: "rtl" }}>
       <AppBar
@@ -542,8 +522,8 @@ const Nav = () => {
                   display: "flex",
                   alignItems: "center",
                   height: "63px",
-                  marginRight:"3%",
-                  width:"100%"
+                  marginRight: "3%",
+                  width: "100%",
                 }}
               >
                 <Grid component={Link} to={`/`}>
@@ -570,6 +550,19 @@ const Nav = () => {
                 >
                   کتاب بازان
                 </Typography>
+
+                <Grid sx={{ marginRight: "3%" }}>
+                  <IconButton
+                    style={{
+                      color: "#1565C0",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                    onClick={handleSearch}
+                  >
+                    <SearchIcon></SearchIcon>
+                  </IconButton>
+                </Grid>
               </Grid>
             </>
           )}
