@@ -18,37 +18,40 @@ const AnswerQuiz = () => {
 
     let token = "Token " + localStorage.getItem('token');
 
+    var currentUrl = window.location.href;
+    const answer_array = currentUrl.split('/');
+
     useEffect(() => { intialize() }, []);
     const intialize = () => {
 
-        axios.get(`${baseUrl}/quiz/generate/44?q=question_count`, {
+        axios.get(`${baseUrl}/quiz/generate/${answer_array[4]}?q=question_count`, {
           headers: {
             'Content-Type': 'application/json ',
             'Authorization': token
           }
         }).then((res) => {
-          console.log(res.data)
+          //console.log(res.data)
 
           setquestionNum(res.data)
 
-          console.log(questionNum)
+          //console.log(questionNum)
         })
     }
 
 
     let show = null;
     if (questionNum === 0) {
-      show = < NoQuestion/>;
+      show = < NoQuestion />;
     } else if(questionNum === 5) {
-      show = <With5Question />;
+      show = <With5Question id={answer_array[4]}/>;
     } else if(questionNum === 2) {
-      show = <With2Question />
+      show = <With2Question id={answer_array[4]}/>
     } else if(questionNum === 1) {
-      show = <With1Question />;
+      show = <With1Question id={answer_array[4]}/>;
     } else if(questionNum === 3) {
-      show = <With3Question />;
+      show = <With3Question id={answer_array[4]}/>;
     } else if(questionNum === 4) {
-      show = <With4Question />;
+      show = <With4Question id={answer_array[4]}/>;
     }
 
     return ( 
@@ -67,7 +70,7 @@ const AnswerQuiz = () => {
                   <Typography 
                   style={{margin:"auto 20px auto auto",fontSize: 22}}
                   >
-                  کوئیز برای کتاب : <span style={{fontSize: 17}}>من پیش از تو</span>
+                  کتاب : <span style={{fontSize: 17}}>من پیش از تو</span>
                   </Typography>
                   
                 </Grid>

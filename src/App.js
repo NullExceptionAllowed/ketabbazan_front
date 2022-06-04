@@ -18,23 +18,22 @@ import AnswerQuiz from "./Components/AnswerQuiz/AnswerQuiz";
 const App = () => {
   
   return (
-      // <Switch>
-      //   <Route path="/" exact component={Homepage} />
-      //   <Route path="/login" exact component={Login} />
-      //   <Route path="/signup"  component={SignUp} />
-      //   <Route path="/profile"  component={Profile} /> 
-      //   <Route path="/Book"  component={Book} />
-      //   <Route path="/bookinfo/:id"  component={BookInfo} />
-      //   <Route path="/ReadPdf/:id"  component={PdfViewer} />
-      //   <Route path="/article/:id"  component={Article} />
-      //   <Route path="/articleinfo/:id"  component={ArticleInfo} />
-      //   <Route path="/Searchbook"  component={Searchbook} />
-      //   <Route path="/Showallarticle"  component={ShowAllarticle} />
-      //   <Route path="/ShowProfileuser/:id"  component={ShowProfileuser} />
-      // </Switch>
+      <Switch>
+        <Route path="/" exact component={Homepage} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/signup"  component={SignUp} />
+        <Route path="/profile"  component={Profile} /> 
+        <Route path="/Book"  component={Book} />
+        <Route path="/bookinfo/:id"  component={BookInfo} />
+        <Route path="/ReadPdf/:id"  component={PdfViewer} />
+        <Route path="/AnswerQuiz/:id"  component={AnswerQuiz} />
+        <Route path="/article/:id"  component={Article} />
+        <Route path="/articleinfo/:id"  component={ArticleInfo} />
+        <Route path="/Searchbook"  component={Searchbook} />
+        <Route path="/Showallarticle"  component={ShowAllarticle} />
+        <Route path="/ShowProfileuser/:id"  component={ShowProfileuser} />
+      </Switch>
 
-
-      <AnswerQuiz/>
   );
 };
 export default App;

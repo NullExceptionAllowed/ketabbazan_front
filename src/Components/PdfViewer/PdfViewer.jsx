@@ -64,6 +64,7 @@ const PdfViewer = (props) => {
       setPageNumber(Number(value));
     }
   };
+  
 
   var currentUrl = window.location.href;
   const answer_array = currentUrl.split('/');
