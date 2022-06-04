@@ -16,27 +16,34 @@ const AnswerQuiz = () => {
 
     const [questionNum, setquestionNum] = useState();
 
+    const [bookName, setbooName] = useState();
+
     let token = "Token " + localStorage.getItem('token');
 
     var currentUrl = window.location.href;
     const answer_array = currentUrl.split('/');
 
-    useEffect(() => { intialize() }, []);
-    const intialize = () => {
+    useEffect(() => {
+      axios.get(`${baseUrl}/quiz/generate/${answer_array[4]}?q=question_count`, {
+        headers: {
+          'Content-Type': 'application/json ',
+          'Authorization': token
+        }
+      }).then((res) => {
+        //console.log(res.data)
 
-        axios.get(`${baseUrl}/quiz/generate/${answer_array[4]}?q=question_count`, {
-          headers: {
-            'Content-Type': 'application/json ',
-            'Authorization': token
-          }
-        }).then((res) => {
-          //console.log(res.data)
+        setquestionNum(res.data)
 
-          setquestionNum(res.data)
+      })
 
-          //console.log(questionNum)
-        })
-    }
+    }, []);
+
+    useEffect(() => {
+      axios.get(`${baseUrl}/read_book/info/${answer_array[4]}`).then((response) => {
+        setbooName(response.data.book_info.name);
+      });
+      
+    }, []);
 
 
     let show = null;
@@ -70,7 +77,7 @@ const AnswerQuiz = () => {
                   <Typography 
                   style={{margin:"auto 20px auto auto",fontSize: 22}}
                   >
-                  کتاب : <span style={{fontSize: 17}}>من پیش از تو</span>
+                  کتاب : <span style={{fontSize: 17}}>{bookName}</span>
                   </Typography>
                   
                 </Grid>
