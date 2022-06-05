@@ -339,27 +339,25 @@ const Nav = () => {
               >
                 <Grid component={Link} to={`/`}>
                   <img
-                    className="SignUpform_img"
+                    className="Nav_img"
                     src={Logo}
                     alt="Signuppicture"
                     style={{
-                      height: "62px",
                     }}
                   />
                 </Grid>
-                <Typography
+                <Grid
                   component={Link}
+                  className="Nav_type"
                   to={`/`}
-                  variant="h5"
                   style={{
-                    fontWeight: 900,
                     color: "#0D9ECF",
                     marginRight: "10px",
                     textDecoration: "none",
                   }}
                 >
                   کتاب بازان
-                </Typography>
+                </Grid>
                 <Grid
                   sx={{
                     marginRight: "0.8rem",
@@ -528,28 +526,25 @@ const Nav = () => {
               >
                 <Grid component={Link} to={`/`}>
                   <img
-                    className="SignUpform_img"
+                    className="Nav_img"
                     src={Logo}
                     alt="Signuppicture"
-                    style={{
-                      height: "62px",
-                    }}
+                    style={{}}
                   />
                 </Grid>
 
-                <Typography
+                <Grid
                   component={Link}
                   to={`/`}
-                  variant="h5"
                   style={{
-                    fontWeight: 900,
                     color: "#0D9ECF",
                     marginRight: "10px",
                     textDecoration: "none",
                   }}
+                  className="Nav_type"
                 >
                   کتاب بازان
-                </Typography>
+                </Grid>
 
                 <Grid sx={{ marginRight: "3%" }}>
                   <IconButton

@@ -393,8 +393,8 @@ import {
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../../assets/Image/logo.png";
 import Box from "@mui/material/Box";
-import ArticleIcon from "@mui/icons-material/Article";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ImageUser from "../../assets/Image/image.png";
 import DrawerComp from "./DrawerCopm";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
@@ -410,6 +410,9 @@ import MenuList from "@mui/material/MenuList";
 import Menu from "@mui/material/Menu";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import "./style.css";
+import OptionProfile from './OPtionProfile';
+
 
 const Nav = () => {
   const theme = useTheme();
@@ -417,6 +420,8 @@ const Nav = () => {
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
   const history = useHistory();
   const [openSearchBar, setOpenSearchBar] = useState(false);
+  const[openop,setopenop]=useState(false);
+
   const handlesubmit = async (event) => {
     event.preventDefault();
     history.replace(`/Searchbook/?q=${search}`);
@@ -445,6 +450,14 @@ const Nav = () => {
   const MouseOut = (event) => {
     event.target.style.color = "#545252";
   };
+  const handleShowmenu = () => {
+    console.log("fatemeh");
+    setopenop(!openop)
+  };
+  let oppro=null;
+  if(openop){
+    oppro=<OptionProfile />
+  }
 
   return (
     <Box sx={{ flexGrow: 1, direction: "rtl" }}>
@@ -460,32 +473,29 @@ const Nav = () => {
                   display: "flex",
                   alignItems: "center",
                   height: "63px",
-                  width: "84%",
+                  width: "95%",
                 }}
               >
                 <Grid component={Link} to={`/`}>
                   <img
-                    className="SignUpform_img"
+                    className="Nav_img"
                     src={Logo}
                     alt="Signuppicture"
-                    style={{
-                      height: "62px",
-                    }}
+                    style={{}}
                   />
                 </Grid>
-                <Typography
+                <Grid
+                  className="Nav_type"
                   component={Link}
                   to={`/`}
-                  variant="h5"
                   style={{
-                    fontWeight: 900,
                     color: "#0D9ECF",
                     marginRight: "10px",
                     textDecoration: "none",
                   }}
                 >
                   کتاب بازان
-                </Typography>
+                </Grid>
                 <Grid
                   sx={{
                     marginRight: "0.8rem",
@@ -601,33 +611,15 @@ const Nav = () => {
 
               <Grid sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
-                  variant="contained"
-                  to="/login"
-                  component={Link}
-                  sx={{
-                    backgroundColor: "1479AD",
-                    fontWeight: 800,
-                    width: "75px",
-                    height: "36px",
-                    marginRight: "auto",
-                  }}
+                  style={{ display: "flex", justifyContent: "center" }}
+                  onClick={handleShowmenu}
                 >
-                  ورود
-                </Button>
-
-                <Button
-                  variant="contained"
-                  to="/signup"
-                  component={Link}
-                  style={{
-                    backgroundColor: "CAE5F3",
-                    marginRight: "10px",
-                    fontWeight: 800,
-                    width: "75px",
-                    height: "36px",
-                  }}
-                >
-                  ثبت نام
+                  <img
+                    src={ImageUser}
+                    alt="image"
+                    style={{}}
+                    className="Nav2_Avatar"
+                  />
                 </Button>
               </Grid>
             </>
@@ -654,28 +646,26 @@ const Nav = () => {
               >
                 <Grid component={Link} to={`/`}>
                   <img
-                    className="SignUpform_img"
+                    className="Nav_img"
                     src={Logo}
                     alt="Signuppicture"
                     style={{
-                      height: "62px",
                     }}
                   />
                 </Grid>
 
-                <Typography
+                <Grid
                   component={Link}
+                  className="Nav_type"
                   to={`/`}
-                  variant="h5"
                   style={{
-                    fontWeight: 900,
                     color: "#0D9ECF",
                     marginRight: "10px",
                     textDecoration: "none",
                   }}
                 >
                   کتاب بازان
-                </Typography>
+                </Grid>
 
                 <Grid sx={{ marginRight: "3%" }}>
                   <IconButton
@@ -690,11 +680,25 @@ const Nav = () => {
                   </IconButton>
                 </Grid>
               </Grid>
+              <Grid sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button
+                  style={{ display: "flex", justifyContent: "center" }}
+                  onClick={handleShowmenu}
+                >
+                  <img
+                    alt="Image"
+                    src={ImageUser}
+                    style={{}}
+                    className="Nav2_Avatar"
+                  />
+                </Button>
+              </Grid>
             </>
           )}
         </Toolbar>
       </AppBar>
       {showbox}
+      {oppro}
     </Box>
   );
 };

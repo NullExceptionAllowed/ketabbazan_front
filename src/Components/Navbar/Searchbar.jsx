@@ -12,6 +12,7 @@ import {
   AppBar,
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import { Calculate } from '@mui/icons-material';
 
 export default function SearchBar({open,close}) {
   const [search, setSearch] = useState("");
@@ -26,7 +27,7 @@ export default function SearchBar({open,close}) {
     <>
       {open && (
         <ClickAwayListener onClickAway={close}>
-          <AppBar sx={{ zIndex: "25", direction: "rtl" }}>
+          <AppBar className="Searchbar_appbar" sx={{ zIndex: "25"}}>
             <Paper
               onSubmit={handleSearch}
               component="form"

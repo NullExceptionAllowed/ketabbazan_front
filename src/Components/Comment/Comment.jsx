@@ -125,7 +125,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
                     
                     <a style={{ position: "relative", top: "-45px", right: "47px" }}>{user}</a>
 
-                    <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{created_on}</p>
+                    <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{(new Date(created_on).toLocaleDateString('fa-IR'))}</p>
                     <p style={{ position: "relative", top: "-25px", right: "5px" }}>{comment_text}</p>
 
                     <Grid container>
@@ -182,7 +182,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
                                                     <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={context.img} />
                                                     <a style={{ position: "relative", top: "-45px", right: "47px" }}>{replyexa.user}</a>
 
-                                                    <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{created_on}</p>
+                                                    <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{(new Date(created_on).toLocaleDateString('fa-IR'))}</p>
                                                     <p style={{ position: "relative", top: "-30px", right: "5px" }}>{replyexa.reply_text}</p>
 
 
