@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
 const SimpleContext = createContext({
+    flag:"",
     img:"",
     refresh : "" ,
     comments: [],
@@ -14,7 +15,8 @@ const SimpleContext = createContext({
     clickHandlerToZero : () => {} ,
     Show : () => {} ,
     reshow : () => {},
-    setRefresh : () => {}
+    setRefresh : () => {},
+    setFlag : () => {}
 });
 
 export default SimpleContext;

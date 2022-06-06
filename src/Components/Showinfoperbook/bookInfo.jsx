@@ -27,6 +27,7 @@ import { MenuItem } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+
 const theme = createTheme({
   direction: "rtl",
 });
@@ -34,7 +35,7 @@ const theme = createTheme({
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
-
+  const [bool, setBool] = useState(0);
   const handleClose = () => {
     setOpen(false);
   };
@@ -96,11 +97,58 @@ const Emti = () => {
 
   let flag = localStorage.getItem("token");
   const handleLoginForReadPdf = () => {
-    if (flag === null) {
-      setOpen(true);
-    } else {
-      history.push(`/ReadPdf/${id}`);
-    }
+
+
+    axios
+      .get(
+        `http://94.101.185.252/read_book/pdf_file/${id}`,
+        // JSON.stringify(hichi),
+        {
+          headers: {
+
+            "Content-Type": "application/json",
+            'Authorization': token
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+
+          history.push(`/ReadPdf/${id}`);
+        }
+        else if (flag === null) {
+          setOpen(true);
+        // } else {
+        //   showToast("error", "اول باید کتاب رو بخری");
+        // }
+        }
+      }).catch(function (error) {
+        if (error.response) {
+          // if(error.response.status === 400)
+          // {
+          //   showToast("error", "قبلا خریدیش");
+          // }
+          if(error.response.status === 400)
+          {
+            showToast("error", "اول باید کتاب رو بخری");
+          }
+          //console.log(error.response.data);
+          console.log(error.response.status);
+         // console.log(error.response.headers);
+        }
+      });
+    //  .catch((error) => {
+
+    //    if(error.status === 400)
+    //   {
+    //     showToast("error", "موجودیت کافی نیست");
+    //   }
+    // } );
+
+
+
+
   };
 
   const handlearticlecanwrite = () => {
@@ -341,7 +389,7 @@ const Emti = () => {
   };
 
   const handleCclick = (event) => {
-    if(flag===null){
+    if (flag === null) {
       setOpen(true);
     }
     setAnchorEl(event.currentTarget);
@@ -349,6 +397,76 @@ const Emti = () => {
   const handleCclose = () => {
     setAnchorEl(null);
   };
+
+
+  const buyHandler = () => {
+    //const hichi ="";
+    axios
+      .get(
+        `http://94.101.185.252/read_book/buy/${id}`,
+        // JSON.stringify(hichi),
+        {
+          headers: {
+
+            "Content-Type": "application/json",
+            Authorization: token
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "خریدت با موفقیت صورت گرفت");
+          setBool(1);
+        }
+
+       
+      })
+      .catch(function (error) {
+        if (error.response) {
+          // if(error.response.status === 400)
+          // {
+          //   showToast("error", "قبلا خریدیش");
+          // }
+          if(error.response.status === 400)
+          {
+            showToast("error", " یا موجودیت کافی نیست یا قبلا خریدی");
+          }
+          //console.log(error.response.data);
+          console.log(error.response.status);
+         // console.log(error.response.headers);
+        }
+      })
+  }
+
+  const readHandler = () => {
+    //const hichi ="";
+    axios
+      .get(
+        `http://94.101.185.252/read_book/pdf_file/${id}`,
+        // JSON.stringify(hichi),
+        {
+          headers: {
+
+            "Content-Type": "application/json",
+            ' Authorization': token
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "خریدت با موفقیت صورت گرفت");
+
+        }
+
+      }).catch((error) => {
+
+        if (error.status === 400) {
+          showToast("error", "موجودیت کافی نیست");
+        }
+      });
+  }
 
   return (
     <div style={{ direction: "rtl" }}>
@@ -653,14 +771,14 @@ const Emti = () => {
                 </Grid>
 
                 <Grid>
-                  <Button
+                  <Button onClick={buyHandler}
                     startIcon={
                       <AddShoppingCartIcon
                         style={{ margin: "auto -40px auto auto" }}
                       />
                     }
                     variant="contained"
-                    disabled
+
                     style={{
                       backgroundColor: "CAE5F3",
                       margin: "7px auto auto auto",
@@ -670,7 +788,7 @@ const Emti = () => {
                       height: "40px",
                     }}
                   >
-                    افزودن به سبد خرید
+                    خرید کتاب
                   </Button>
                 </Grid>
               </center>
@@ -684,6 +802,7 @@ const Emti = () => {
       <br />
 
       <CommentApp />
+      < ToastContainer rtl={true} />
     </div>
   );
 };

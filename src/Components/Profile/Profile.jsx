@@ -24,6 +24,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ConditionBook from "./Tools/Conditionbook";
 import Showbook from "./../Showbookall/Showbookall";
+import Wallet from  "./Tools/Wallet.jsx";
 
 const Profile = () => {
   let s1 = {
@@ -66,6 +67,15 @@ const Profile = () => {
     setSelectedIndex(index);
   };
 
+  const handleWallet = (event, index) => {
+    setFlag(5);
+
+  }
+
+
+
+
+
   let show = null;
   if (flag === 0) {
     show = <EditProfile />;
@@ -76,30 +86,38 @@ const Profile = () => {
   } else if (flag === 9) {
     show = (
       <>
-        <ConditionBook con="getpastread"/>
+        <ConditionBook con="getpastread" />
       </>
     );
   }
   else if (flag === 10) {
     show = (
       <>
-        <ConditionBook con="getcurread"/>
+        <ConditionBook con="getcurread" />
       </>
     );
   }
   else if (flag === 11) {
     show = (
       <>
-        <ConditionBook con="getfavourite"/>
+        <ConditionBook con="getfavourite" />
       </>
     );
   }
   else if (flag === 12) {
     show = (
       <>
-        <ConditionBook con="getleftread"/>
+        <ConditionBook con="getleftread" />
       </>
     );
+  }
+
+  else if (flag === 5) {
+    show = (
+      <>
+       <Wallet/>
+      </>
+    )
   }
 
   return (
@@ -193,16 +211,17 @@ const Profile = () => {
                 <ListItemIcon>
                   <ArticleIcon style={{ color: "#679aea" }} />
                 </ListItemIcon>
-                <Typography style={{ fontSize: "18px" }}  inset>
+                <Typography style={{ fontSize: "18px" }} inset>
                   {" "}
                   مقاله‌های من{" "}
                 </Typography>
               </MenuItem>
 
               <MenuItem
+                onClick={handleWallet}
                 divider={true}
                 style={{ margin: "auto auto 10px auto" }}
-                disabled
+               
                 selected={selectedIndex === 3}
               >
                 <ListItemIcon>
@@ -246,7 +265,7 @@ const Profile = () => {
           </Paper>
         </Grid>
 
-        <Grid item lg={9} xs={12}>
+        <Grid item lg={9} xs={12} >
           <Paper style={p2} elevation={0}>
             {show}
           </Paper>

@@ -17,7 +17,7 @@ const CommentApp = () => {
   const [replys,setReplys] = useState([]);
   const [reply, setReply] = useState("");
   const [refresh , setRefresh] = useState("");
-
+  const [flag , setFlag] = useState(0);
  const params = useParams();
  const idid = params.id;
  const [reload, setReload] = useState("0");
@@ -26,7 +26,7 @@ const CommentApp = () => {
 
   
 
-  useEffect(() => { intialize(); console.log(refresh)   } , [reload, refresh ,idid, getComments]);
+  useEffect(() => { intialize(); console.log(refresh)   } , [reload, refresh ,idid , flag]);
 
   
  
@@ -54,7 +54,7 @@ const CommentApp = () => {
 
     })
 
-    axios.get(`derakhshan.pythonanywhere.com/profile/image/`, {
+    axios.get(`${baseUrl}/profile/image/`, {
       headers: {
          'Content-Type': 'application/json ',
          "Authorization": token
@@ -108,7 +108,7 @@ const CommentApp = () => {
 
     })
     setComment("");
-   
+   setFlag(flag+1);
   }
 
   const handleSetComment = event => {
@@ -120,13 +120,15 @@ const CommentApp = () => {
   return (
     <SimpleContext.Provider
       value={{
+        flag : flag,
         img: img ,
         refresh : refresh , 
         comments: getComments,
         comment: getComment,
         setRefresh : setRefresh ,
         handleCreateNewComment: handleCreateNewComment,
-        handleSetComment: handleSetComment
+        handleSetComment: handleSetComment,
+        setFlag :  setFlag
       }}
     >
       <div>
