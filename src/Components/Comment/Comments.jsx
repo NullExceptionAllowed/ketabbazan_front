@@ -24,6 +24,10 @@ const Item = styled(Paper)(({ theme }) => ({
 const Comments = () => {
     const context = useContext(SimpleContext);
 
+   
+
+
+
     const nullShow = () => {
         let show = null;
         return show;
@@ -87,6 +91,7 @@ const Comments = () => {
                                     comment_id = { comment.id }
                                     replys = { comment.reply }
                                     created_on = { comment.created_on }
+                                    img = { comment}
                                 />
 
 

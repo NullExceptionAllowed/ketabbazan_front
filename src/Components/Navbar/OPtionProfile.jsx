@@ -87,6 +87,7 @@ const OptionProfile = () => {
               component={Link}
               to={`/profile`}
               style={{ textDecoration: "none", color: "#555252" }}
+              disabled
             >
               {" "}
               شارژ کیف پول{" "}

@@ -34,7 +34,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
     let token = "Token " + localStorage.getItem('token');
     const [reply, setReply] = useState("");
     const [id, setId] = useState("");
-    const [flag, setFlag] = useState("0");
+    const [flag1, setFlag1] = useState("0");
     const context = useContext(SimpleContext);
     useEffect(() => {
         Show(); console.log(context.refresh);
@@ -44,7 +44,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
 
 
     const handleSetReply = (e) => {
-        setFlag(1);
+        setFlag1(1);
 
         setReply(e.target.value);
 
@@ -79,10 +79,12 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
         })
         setReply("");
         context.setRefresh((Math.random() * 9999999) + 1);
-        setFlag(0);
+        setFlag1(0);
+        context.setFlag(context.flag+1);
+
     }
     const sethandler = () => {
-        setFlag(0);
+        setFlag1(0);
         context.setRefresh((Math.random() * 9999999) + 1);
 
     }
@@ -90,7 +92,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
     const Show = () => {
         let show = null;
 
-        if (flag == 1) {
+        if (flag1 == 1) {
             show = (<div>
                 <Button variant="contained" onClick={addNewReply}
                     style={{ marginTop: "12px", marginLeft: "82%", backgroundColor: "transparent", color: "blue" }}>ریپلای </Button>

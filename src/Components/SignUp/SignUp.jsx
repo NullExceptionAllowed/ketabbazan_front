@@ -328,7 +328,7 @@ const SignUp = ({ history }) => {
             </Link>
           </Grid>
         </CacheProvider>
-        <ToastContainer />
+        <ToastContainer rtl={true}/>
       </Box>
     </div>
   );

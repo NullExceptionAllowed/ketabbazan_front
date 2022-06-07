@@ -36,6 +36,8 @@ const Emti = () => {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
 
+  const [bool, setBool] = useState(0);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -97,11 +99,40 @@ const Emti = () => {
 
   let flag = localStorage.getItem("token");
   const handleLoginForReadPdf = () => {
-    if (flag === null) {
-      setOpen(true);
-    } else {
-      history.push(`/ReadPdf/${id}`);
-    }
+
+    axios
+    .get(
+      `http://94.101.185.252/read_book/pdf_file/${id}`,
+      {
+        headers: {
+
+          "Content-Type": "application/json",
+          'Authorization': token
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res.status);
+      if (res.status === 200) {
+
+        history.push(`/ReadPdf/${id}`);
+      }
+      
+    }).catch(function (error) {
+      if (error.response) {
+       
+        if(error.response.status === 400)
+        {
+          showToast("error", "اول باید کتاب رو بخری");
+        } else if (flag === null) {
+          setOpen(true);
+        }
+       
+        console.log(error.response.status);
+    
+      }
+    });
+
   };
 
   const handlearticlecanwrite = () => {
@@ -358,6 +389,48 @@ const Emti = () => {
   const handleCclose = () => {
     setAnchorEl(null);
   };
+
+  const buyHandler = () => {
+    //const hichi ="";
+    axios
+      .get(
+        `http://94.101.185.252/read_book/buy/${id}`,
+        // JSON.stringify(hichi),
+        {
+          headers: {
+
+            "Content-Type": "application/json",
+            Authorization: token
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          showToast("success", "خریدت با موفقیت صورت گرفت");
+          setBool(1);
+        }
+
+       
+      })
+      .catch(function (error) {
+        if (error.response) {
+          // if(error.response.status === 400)
+          // {
+          //   showToast("error", "قبلا خریدیش");
+          // }
+          if(error.response.status === 400)
+          {
+            showToast("error", " یا موجودیت کافی نیست یا قبلا خریدی");
+          } else if (flag === null) {
+            setOpen(true);
+          }
+          //console.log(error.response.data);
+          console.log(error.response.status);
+         // console.log(error.response.headers);
+        }
+      })
+  }
 
   return (
     <div style={{ direction: "rtl" }}>
@@ -692,7 +765,7 @@ const Emti = () => {
                       />
                     }
                     variant="contained"
-                    disabled
+                    onClick={buyHandler}
                     style={{
                       backgroundColor: "CAE5F3",
                       margin: "7px auto auto auto",
@@ -702,7 +775,7 @@ const Emti = () => {
                       height: "40px",
                     }}
                   >
-                    افزودن به سبد خرید
+                      خرید کتاب 
                   </Button>
                 </Grid>
               </center>

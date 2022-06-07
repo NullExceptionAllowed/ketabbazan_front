@@ -233,19 +233,17 @@ const Login = ({ history }) => {
                 />
               )}
             </Button>            
-            <Grid item sx={{ mt: 2, mb: 1, ml: 1 }}>
-              <Link
-                to="/signup"
-                component={routerLink}
+            <Grid disabled item sx={{ mt: 2, mb: 1, ml: 1 }}>
+              <Grid
                 variant="body2"
                 style={{
-                  color: "#1565C0",
+                  color: "gray",
                   fontSize: "15px",
                   textDecorationLine: "none",
                 }}
               >
                 رمزت را فراموش کرده ای؟
-              </Link>
+              </Grid>
             </Grid>
             <Grid item sx={{ mb: 2, ml: 1 }}>
               <Link

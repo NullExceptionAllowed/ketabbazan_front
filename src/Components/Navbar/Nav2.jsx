@@ -379,7 +379,7 @@
 
 // export default Nav;
 
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import {
   AppBar,
   Toolbar,
@@ -412,6 +412,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "./style.css";
 import OptionProfile from './OPtionProfile';
+import axios, { post } from 'axios';
 
 
 const Nav = () => {
@@ -420,7 +421,25 @@ const Nav = () => {
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
   const history = useHistory();
   const [openSearchBar, setOpenSearchBar] = useState(false);
+  const [username, setusername] = useState("");
   const[openop,setopenop]=useState(false);
+
+  let token = "Token " + localStorage.getItem('token');
+
+  useEffect(() => {
+
+    axios.get(`http://94.101.185.252/profile/info/`, {
+        headers: {
+            'Content-Type': 'application/json ',
+            'Authorization': token
+        }
+    }).then((res) => {
+
+        setusername(res.data.username);
+       
+    });
+
+}, []);
 
   const handlesubmit = async (event) => {
     event.preventDefault();
@@ -615,9 +634,9 @@ const Nav = () => {
                   onClick={handleShowmenu}
                 >
                   <img
-                    src={ImageUser}
+                    src={`http://94.101.185.252/profile/getimage/?username=${username}`}
                     alt="image"
-                    style={{}}
+                    style={{borderRadius:"50%"}}
                     className="Nav2_Avatar"
                   />
                 </Button>
@@ -687,8 +706,8 @@ const Nav = () => {
                 >
                   <img
                     alt="Image"
-                    src={ImageUser}
-                    style={{}}
+                    src={`http://94.101.185.252/profile/getimage/?username=${username}`}
+                    style={{borderRadius:"50%"}}
                     className="Nav2_Avatar"
                   />
                 </Button>

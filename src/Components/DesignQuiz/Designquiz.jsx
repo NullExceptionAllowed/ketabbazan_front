@@ -707,7 +707,7 @@ const DesignQuiz = () => {
                           </InputAdornment>
                         ),
                       }}
-                      error={aftersubmit ? Boolean(errors.test3) : false}
+                      error={aftersubmit ? Boolean(errors.test4) : false}
                       helperText={aftersubmit ? errors.test3 : null}
                     />
                   </RadioGroup>
@@ -723,7 +723,7 @@ const DesignQuiz = () => {
                   type="submit"
                   onClick={handlesentinfo}
                 >
-                  {!apiloadingsubmit && <span>ورود</span>}
+                  {!apiloadingsubmit && <span>ثبت</span>}
                   {apiloadingsubmit && (
                     <ReactLoading
                       type="bubbles"

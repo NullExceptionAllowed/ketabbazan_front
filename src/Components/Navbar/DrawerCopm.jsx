@@ -98,6 +98,7 @@ export const MenuButton = ({ Icon, text, linkTo }) => {
         variant="text"
         component={Link}
         to={linkTo}
+        disabled
       >
         <Icon style={{ color: "#1565C0" }} />
         <span
@@ -227,7 +228,7 @@ const DrawerComp = () => {
           <MenuButton Icon={HomeIcon} text="خانه" linkTo={`/`} />
           <Divider variant="middle" style={{ width: "90%" }} />
 
-          <MenuButton Icon={NotListedLocationOutlinedIcon} text="درباره ما" />
+          <MenuButton  Icon={NotListedLocationOutlinedIcon} text="درباره ما" />
           <Divider variant="middle" style={{ width: "90%" }} />
           {!loginperson && (
             <MenuButton Icon={QuizIcon} text="طرح سوال" linkTo={`/login`} />
