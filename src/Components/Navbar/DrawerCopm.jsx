@@ -98,7 +98,6 @@ export const MenuButton = ({ Icon, text, linkTo }) => {
         variant="text"
         component={Link}
         to={linkTo}
-        disabled
       >
         <Icon style={{ color: "#1565C0" }} />
         <span
