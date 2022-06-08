@@ -96,7 +96,7 @@ const PdfViewer = (props) => {
   }
 
 async function status() {
-  const url = `${baseUrl}/${answer_array[4]}`
+  const url = `${baseUrl}/read_book/pdf_file/${answer_array[4]}`
   let response = await axios.get(url);
   return response.data;
 }
