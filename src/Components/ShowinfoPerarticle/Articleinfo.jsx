@@ -216,6 +216,7 @@ const ArticleInfo = () => {
                       fontSize: "15px",
                       textJustify: "inter-word",
                       textAlign: "justify",
+                      lineHeight:"2"
                     }}
                   >
                     {articleinfo.summary}
@@ -254,6 +255,7 @@ const ArticleInfo = () => {
                 marginTop: "3%",
                 textJustify: "inter-word",
                 textAlign: "justify",
+                lineHeight:"2"
               }}
             >
               {body}

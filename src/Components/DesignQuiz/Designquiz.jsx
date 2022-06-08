@@ -760,7 +760,8 @@ const DesignQuiz = () => {
                         marginTop: "10px",
                         marginLeft: "10px",
                         textJustify:"inter-word",
-                        textAlign:"justify"
+                        textAlign:"justify",
+                        lineHeight:"2"
                       }}
                     >
                       رعایت اصول نگارش یکی از کلیدی ترین و مهمترین مواردی است که
@@ -781,7 +782,8 @@ const DesignQuiz = () => {
                         marginTop: "10px",
                         marginLeft: "10px",
                         textJustify:"inter-word",
-                        textAlign:"justify"
+                        textAlign:"justify",
+                        lineHeight:"2"
                       }}
                     >
                       دقت کنید حتما از کتابی که انتخاب می کنید سوال طرح کنید
@@ -799,7 +801,8 @@ const DesignQuiz = () => {
                         marginTop: "10px",
                         marginLeft: "10px",
                         textJustify:"inter-word",
-                        textAlign:"justify"
+                        textAlign:"justify",
+                        lineHeight:"2"
                       }}
                     >
                       در ابتدا سوال مورد نظر را حتما به زبان فارسی تایپ کنید و
