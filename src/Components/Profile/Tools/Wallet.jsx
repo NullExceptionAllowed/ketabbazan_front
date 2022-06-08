@@ -17,6 +17,8 @@ import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import createCache from "@emotion/cache";
 import { ToastContainer } from "react-toastify";
+import { baseUrl } from "../../../Variable";
+
 
 const cacheRtl = createCache({
     key: "muirtl",
@@ -55,7 +57,7 @@ const Wallet = () => {
 
     useEffect( () =>{ axios
         .get(
-            `http://94.101.185.252/accounts/balance/`,
+            `${baseUrl}/accounts/balance/`,
             //JSON.stringify(user),
             {
                 headers: {
@@ -108,7 +110,7 @@ const Wallet = () => {
       //  console.log(token);
         axios
             .post(
-                "http://94.101.185.252/accounts/deposit/",
+                `${baseUrl}/accounts/deposit/`,
                 JSON.stringify(user),
                 {
                     headers: {

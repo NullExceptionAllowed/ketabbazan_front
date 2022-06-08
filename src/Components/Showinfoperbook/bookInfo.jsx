@@ -102,7 +102,7 @@ const Emti = () => {
 
     axios
     .get(
-      `http://94.101.185.252/read_book/pdf_file/${id}`,
+      `${baseUrl}/read_book/pdf_file/${id}`,
       {
         headers: {
 
@@ -281,7 +281,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://94.101.185.252/lists/forceadd/",
+        `${baseUrl}/lists/forceadd/`,
         JSON.stringify(haveRead),
         {
           headers: {
@@ -310,7 +310,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://94.101.185.252/lists/forceadd/",
+        `${baseUrl}/lists/forceadd/`,
         JSON.stringify(reading),
         {
           headers: {
@@ -336,7 +336,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://94.101.185.252/lists/forceadd/",
+        `${baseUrl}/forceadd/`,
         JSON.stringify(goingtoread),
         {
           headers: {
@@ -362,7 +362,7 @@ const Emti = () => {
     };
     axios
       .post(
-        "http://94.101.185.252/lists/forceadd/",
+        `${baseUrl}/lists/forceadd/`,
         JSON.stringify(leave),
         {
           headers: {
@@ -391,35 +391,27 @@ const Emti = () => {
   };
 
   const buyHandler = () => {
-    //const hichi ="";
     axios
       .get(
-        `http://94.101.185.252/read_book/buy/${id}`,
+        `${baseUrl}/read_book/buy/${id}`,
         // JSON.stringify(hichi),
         {
           headers: {
-
             "Content-Type": "application/json",
             Authorization: token
           },
         }
       )
       .then((res) => {
-        console.log(res.status);
+        console.log(res.status+"**");
         if (res.status === 200) {
           showToast("success", "خریدت با موفقیت صورت گرفت");
           setBool(1);
-        }
-
-       
+        }       
       })
       .catch(function (error) {
         if (error.response) {
-          // if(error.response.status === 400)
-          // {
-          //   showToast("error", "قبلا خریدیش");
-          // }
-          if(error.response.status === 400)
+          if(error.response.status === 402)
           {
             showToast("error", " یا موجودیت کافی نیست یا قبلا خریدی");
           } else if (flag === null) {

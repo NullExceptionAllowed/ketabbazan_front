@@ -66,8 +66,6 @@ const OptionProfile = () => {
           </div>
           <div style={{ display: "flex", marginTop: "8px" }}>
             <Grid
-              component={Link}
-              to={`/profile`}
               style={{ textDecoration: "none", color: "#555252" }}
             >
               وضعیت کتاب های من{" "}
@@ -75,8 +73,6 @@ const OptionProfile = () => {
           </div>
           <div style={{ display: "flex", marginTop: "8px" }}>
             <Grid
-              component={Link}
-              to={`/profile`}
               style={{ textDecoration: "none", color: "#555252" }}
             >
               مقاله های من{" "}
@@ -84,8 +80,6 @@ const OptionProfile = () => {
           </div>
           <div style={{ display: "flex", marginTop: "8px" }}>
             <Grid
-              component={Link}
-              to={`/profile`}
               style={{ textDecoration: "none", color: "#555252" }}
               disabled
             >
@@ -97,8 +91,6 @@ const OptionProfile = () => {
         <Divider  style={{ width: "100%", marginTop:"15px" }} />
         <div style={{ display: "flex", marginTop: "10px" }} onClick={handleExit}>
           <Grid
-            component={Link}
-            to={`/`}
             style={{ textDecoration: "none", color: "red" }}
           >
             خروج

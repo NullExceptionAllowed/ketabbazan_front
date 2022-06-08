@@ -10,9 +10,11 @@ import { Document,Page } from 'react-pdf/dist/esm/entry.webpack';
 import './PdfViewer.css';
 import axios from 'axios';
 import { Paper } from "@mui/material";
-
 import { pdfjs } from "react-pdf";
+import { baseUrl } from "../../Variable";
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 
 
 const PdfViewer = (props) => {
@@ -94,7 +96,7 @@ const PdfViewer = (props) => {
   }
 
 async function status() {
-  const url = `http://98522148.pythonanywhere.com/read_book/pdf_file/${answer_array[4]}`
+  const url = `${baseUrl}/${answer_array[4]}`
   let response = await axios.get(url);
   return response.data;
 }
