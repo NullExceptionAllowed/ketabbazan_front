@@ -214,12 +214,14 @@ const ArticleInfo = () => {
                       whiteSpace: "normal",
                       textOverflow: "ellipsis",
                       fontSize: "15px",
+                      textJustify: "inter-word",
+                      textAlign: "justify",
                     }}
                   >
                     {articleinfo.summary}
                   </div>
                   <div style={{ marginTop: "0.7%", display: "flex" }}>
-                    <Link to={`/ShowProfileuser/${articleinfo.owner_id}`} >
+                    <Link to={`/ShowProfileuser/${articleinfo.owner_id}`}>
                       <Avatar
                         alt="Remy Sharp"
                         src={image}
@@ -231,7 +233,7 @@ const ArticleInfo = () => {
                         marginRight: "6px",
                         fontSize: "12px",
                         textDecoration: "none",
-                        color: "#0057D9"
+                        color: "#0057D9",
                       }}
                       to={`/ShowProfileuser/${articleinfo.owner_id}`}
                     >
@@ -247,7 +249,15 @@ const ArticleInfo = () => {
                 </div>
               </div>
             )}
-            <div style={{ marginTop: "3%" }}>{body}</div>
+            <div
+              style={{
+                marginTop: "3%",
+                textJustify: "inter-word",
+                textAlign: "justify",
+              }}
+            >
+              {body}
+            </div>
           </div>
         </div>
       )}

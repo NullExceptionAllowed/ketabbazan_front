@@ -759,6 +759,8 @@ const DesignQuiz = () => {
                         fontSize: "15.5px",
                         marginTop: "10px",
                         marginLeft: "10px",
+                        textJustify:"inter-word",
+                        textAlign:"justify"
                       }}
                     >
                       رعایت اصول نگارش یکی از کلیدی ترین و مهمترین مواردی است که
@@ -778,6 +780,8 @@ const DesignQuiz = () => {
                         fontSize: "15.5px",
                         marginTop: "10px",
                         marginLeft: "10px",
+                        textJustify:"inter-word",
+                        textAlign:"justify"
                       }}
                     >
                       دقت کنید حتما از کتابی که انتخاب می کنید سوال طرح کنید
@@ -794,6 +798,8 @@ const DesignQuiz = () => {
                         fontSize: "15.5px",
                         marginTop: "10px",
                         marginLeft: "10px",
+                        textJustify:"inter-word",
+                        textAlign:"justify"
                       }}
                     >
                       در ابتدا سوال مورد نظر را حتما به زبان فارسی تایپ کنید و
