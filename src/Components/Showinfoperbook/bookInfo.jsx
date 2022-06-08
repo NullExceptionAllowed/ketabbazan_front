@@ -212,7 +212,7 @@ const Emti = () => {
         setApiLoading(false);
       }
     });
-  }, [rateinfocount]);
+  }, [rateinfocount,id]);
 
   useEffect(() => {
     if (flag !== null) {
@@ -230,7 +230,7 @@ const Emti = () => {
           setApiLoading(false);
         });
     }
-  }, [rateinfocount]);
+  }, [rateinfocount,id]);
 
   function round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
