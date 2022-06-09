@@ -413,6 +413,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "./style.css";
 import OptionProfile from './OPtionProfile';
 import axios, { post } from 'axios';
+import { baseUrl } from './../../Variable';
 
 
 const Nav = () => {
@@ -428,7 +429,7 @@ const Nav = () => {
 
   useEffect(() => {
 
-    axios.get(`http://94.101.185.252/profile/info/`, {
+    axios.get(`${baseUrl}/profile/info/`, {
         headers: {
             'Content-Type': 'application/json ',
             'Authorization': token
@@ -634,7 +635,7 @@ const Nav = () => {
                   onClick={handleShowmenu}
                 >
                   <img
-                    src={`http://94.101.185.252/profile/getimage/?username=${username}`}
+                    src={`${baseUrl}/profile/getimage/?username=${username}`}
                     alt="image"
                     style={{borderRadius:"50%"}}
                     className="Nav2_Avatar"
@@ -706,7 +707,7 @@ const Nav = () => {
                 >
                   <img
                     alt="Image"
-                    src={`http://94.101.185.252/profile/getimage/?username=${username}`}
+                    src={`${baseUrl}/profile/getimage/?username=${username}`}
                     style={{borderRadius:"50%"}}
                     className="Nav2_Avatar"
                   />
