@@ -79,7 +79,7 @@ const EditProfile = () => {
             setuserrEmail(res.data.email);
             setusername(res.data.username);
             console.log(res.data.username);
-           setimage( `http://94.101.185.252/profile/getimage/?username=${res.data.username}`);
+           setimage( `${baseUrl}/profile/getimage/?username=${res.data.username}`);
            
             // axios.get(`${baseUrl}/profile/getimage/?username=${res.data.username}`, {
             //     headers: {
