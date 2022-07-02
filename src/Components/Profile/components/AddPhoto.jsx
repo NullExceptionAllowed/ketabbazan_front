@@ -38,7 +38,7 @@ const AddPhoto = () => {
 
         // Request made to the backend api
         // Send formData object
-        axios.post("http://127.0.0.1:8000/profile/image/", formData,{
+        axios.post(`${baseUrl}/profile/image/`, formData,{
         headers: {
             'content-type': 'application/json ',
             'Authorization': token

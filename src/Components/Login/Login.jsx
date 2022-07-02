@@ -142,12 +142,6 @@ const Login = ({ history }) => {
             src={Loginimage}
             alt="Loginpicture"
             style={{
-              height: "200px",
-              width:"85%",
-              marginBottom: "1px",
-              marginRight: "6px",
-              marginTop: "2px",
-              marginBottom:"-26.5px",
             }}
           />
           <CacheProvider value={cacheRtl}>
