@@ -160,7 +160,7 @@ const DrawerComp = () => {
               }}
             />
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center", marginTop:"20px" }}>
             <Typography
               component={Link}
               to={`/`}

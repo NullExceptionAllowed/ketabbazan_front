@@ -18,7 +18,7 @@ export default function SimpleSlider() {
   useEffect(() => {
     setApiLoading(true);
     axios({
-      url: `${baseUrl}/read_book/newest_books`,
+      url: `${baseUrl}/read_book/mostscore_books`,
     }).then((response) => {
       console.log(response.data);
       setbookinfo(response.data);
@@ -42,21 +42,12 @@ export default function SimpleSlider() {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
+          marginTop:"45px"
         }}
       >
         <h2 style={{ textAlign: "center", color: "#1565C0" }}>
-          جدیدترین کتاب ها
+          پر امتیاز ترین کتاب ها
         </h2>
-        <Link
-          to={`/Book`}
-          style={{
-            textAlign: "center",
-            textDecoration: "none",
-            marginTop: "5px",
-          }}
-        >
-          مشاهده همه{" "}
-        </Link>
         {apiLoading && (
           <div
             style={{
@@ -203,3 +194,5 @@ export default function SimpleSlider() {
     </div>
   );
 }
+
+

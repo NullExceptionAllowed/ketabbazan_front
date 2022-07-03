@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import ShownewArcrousel from "../shownewarticle-crousel/shownewarcrousel";
 import SimpleSlider from "../emtehani/emtehani";
 import Login from "../Login/Login";
+import BestRate from "../Bestratebook/Bestrate";
+
 
 const Homepage = () => {
   useEffect(() => {
@@ -24,6 +26,7 @@ const Homepage = () => {
       <Header />
       <Workinfo />
       <SimpleSlider />
+      <BestRate/>
       <ShownewArcrousel />
       {/* <Link to={'/Designquiz'} ><center>کوییز</center></Link> */}
     </div>
