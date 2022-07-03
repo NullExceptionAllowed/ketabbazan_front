@@ -14,6 +14,7 @@ import ShowAllarticle from './Components/ShowAllarticle/ShowAllarticle';
 import ShowProfileuser from './Components/ShowProfileUser/ShowProfile';
 import DesignQuiz from "./Components/DesignQuiz/Designquiz";
 import AnswerQuiz from "./Components/AnswerQuiz/AnswerQuiz";
+import Showbookcategory from "./Components/Showcategorybook/ShowCategory";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/article/:id"  component={Article} />
         <Route path="/articleinfo/:id"  component={ArticleInfo} />
         <Route path="/Searchbook"  component={Searchbook} />
+        <Route path="/showbook/:id"  component={Showbookcategory} />
         <Route path="/Showallarticle"  component={ShowAllarticle} />
         <Route path="/ShowProfileuser/:id"  component={ShowProfileuser} />
         <Route path="/Designquiz"  component={DesignQuiz} />

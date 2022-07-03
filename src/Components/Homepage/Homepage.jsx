@@ -11,6 +11,7 @@ import ShownewArcrousel from "../shownewarticle-crousel/shownewarcrousel";
 import SimpleSlider from "../emtehani/emtehani";
 import Login from "../Login/Login";
 import BestRate from "../Bestratebook/Bestrate";
+ import Categories from "../Categorybook/Category";
 
 
 const Homepage = () => {
@@ -25,6 +26,7 @@ const Homepage = () => {
       <ChangeNav />
       <Header />
       <Workinfo />
+      <Categories/>
       <SimpleSlider />
       <BestRate/>
       <ShownewArcrousel />
