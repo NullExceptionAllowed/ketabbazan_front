@@ -32,7 +32,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-right: calc(2%-20px);
+    margin-right: 2%-20px;
     margin-left: 2%;
 }
 
@@ -60,7 +60,7 @@
          height: 45px;
      }
      .categories-section__items{
-        margin-right: calc(2%-18px);
+        margin-right: 2%-10px;
         margin-left: 2%;
     }
 } 
@@ -75,7 +75,7 @@
          height: 45px;
      }
      .categories-section__items{
-        margin-right: calc(1%-13px); 
+        margin-right: 1%-14px; 
          margin-left: 1%;
     }
 } 
@@ -90,7 +90,7 @@
          height: 45px;
      }
      .categories-section__items{
-        margin-right: calc(1%-11px);
+        margin-right: 1%-13px;
         margin-left: 1%;
     }
 } 
