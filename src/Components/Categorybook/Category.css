@@ -75,8 +75,8 @@
          height: 45px;
      }
      .categories-section__items{
-        margin-right: calc(1%-15px);
-        margin-left: 1%;
+        margin-right: calc(1%-15px); 
+         margin-left: 1%;
     }
 } 
 
@@ -92,6 +92,5 @@
      .categories-section__items{
         margin-right: calc(1%-13px);
         margin-left: 1%;
-        margin-right: -13px;
     }
 } 
