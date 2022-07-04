@@ -117,12 +117,11 @@ const Emti = () => {
 
           history.push(`/ReadPdf/${id}`);
         }
-        else if (flag === null) {
-          setOpen(true);
+       
         // } else {
         //   showToast("error", "اول باید کتاب رو بخری");
         // }
-        }
+        
       }).catch(function (error) {
         if (error.response) {
           // if(error.response.status === 400)
