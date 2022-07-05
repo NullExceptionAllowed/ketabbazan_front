@@ -156,7 +156,7 @@ export default function SimpleSlider() {
                         display: "flex",
                         alignItems: "center",
                         flexDirection: "column",
-                        height: "340px",
+                        height: "300px",
                       }}
                     >
                       <div

@@ -14,6 +14,7 @@ import SwiperCore, { Navigation, Pagination } from "swiper";
 import "./style.css";
 import { Calculate } from "@mui/icons-material";
 import useWindowDimensions from "./width";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const ShownewArcrousel = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -28,9 +29,8 @@ const ShownewArcrousel = () => {
   }, []);
 
   const { height, width } = useWindowDimensions();
-
-
-
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down(480));
   SwiperCore.use([Navigation, Pagination]);
   return (
     <div style={{ marginTop: "60px" }}>
@@ -75,139 +75,138 @@ const ShownewArcrousel = () => {
         )}
       </div>
       {!apiLoading && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginRight: "5%",
-            marginLeft: "5%",
-          }}
-        >
+        <>
           <div
             style={{
-              width: "97%",
-              marginTop: "20px",
-              direction: "rtl",
               display: "flex",
               justifyContent: "center",
+              alignItems: "center",
+              marginRight: "5%",
+              marginLeft: "5%",
             }}
           >
-            <Swiper
-              spaceBetween={0}
-              slidesPerView={(width * (87 / 100) - 70) / 293}
-              pagination={{
-                clickable: true,
+            <div
+              style={{
+                width: "97%",
+                marginTop: "20px",
+                direction: "rtl",
+                display: "flex",
+                justifyContent: "center",
               }}
-              modules={[Pagination]}
             >
-              {articleinfo.map((info, index) => (
-                <SwiperSlide key={index}>
-                  <Paper
-                    key={index}
-                    className="shownewarticlecro-Paper"
-                    sx={{
-                      direction: "rtl",
-                    }}
-                    style={{
-                      marginTop: "10px",
-                      textDecoration: "none",
-                      display: "flex",
-                      flexDirection: "column",
-                      backgroundColor: "white",
-                      borderRadius: "5px",
-                      marginBottom: "70px",
-                      width: "293px",
-                      height: "400px",
-                    }}
-                  >
-                    <Link
-                      to={{
-                        pathname: `/articleinfo/${info.id}`,
+              <Swiper
+                spaceBetween={0}
+                slidesPerView={isMatch ? (width * (89 / 100) ) / 270:(width * (87 / 100) - 70) / 293}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Pagination]}
+              >
+                {articleinfo.map((info, index) => (
+                  <SwiperSlide key={index}>
+                    <Paper
+                      key={index}
+                      className="shownewarticlecro-Paper"
+                      sx={{
+                        direction: "rtl",
                       }}
-                      style={{ textDecoration: "none" }}
+                      style={{
+                        marginTop: "10px",
+                        textDecoration: "none",
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "white",
+                        borderRadius: "5px",
+                        marginBottom: "70px",
+                      }}
                     >
+                      <Link
+                        to={{
+                          pathname: `/articleinfo/${info.id}`,
+                        }}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            position: "relative",
+                          }}
+                        >
+                          <img
+                            alt="img"
+                            src={info.image}
+                            style={{
+                              width: "100%",
+                              borderRadius: "5px 5px 0px 0px",
+                            }}
+                            className="shownewarticlecro-img"
+                          />
+                        </div>
+                        <div
+                        className="showar_title"
+                          style={{
+                            fontWeight: "bold",
+                            marginTop: "20px",
+                            marginRight: "10px",
+                            color: "black",
+                          }}
+                        >
+                          {info.title}
+                        </div>
+                      </Link>
+                      <div
+                      className="showar_sum"
+                        style={{
+                          marginRight: "10px",
+                          marginLeft: "10px",
+                          color: "#757C86",
+                          overflow: "Hidden",
+                          whiteSpace: "normal",
+                          textOverflow: "ellipsis",
+                          textJustify: "inter-word",
+                          textAlign: "justify",
+                          lineHeight: "1.5",
+                        }}
+                      >
+                        {articleinfo[index].summary.slice(0, 161) + "..."}
+                      </div>
+                      <Divider style={{ marginTop: "20px" }} />
                       <div
                         style={{
                           display: "flex",
-                          alignItems: "center",
-                          position: "relative",
+                          marginTop: "15px",
+                          marginLeft: "10px",
+                          marginBottom: "10px",
                         }}
                       >
-                        <img
-                          alt="img"
-                          src={info.image}
+                        <div style={{ flex: 1, marginRight: "10px" }}></div>
+                        <Link to={`/ShowProfileuser/${info.owner_id}`}>
+                          <Avatar
+                            alt="Remy Sharp"
+                            src={image}
+                            sx={{ width: 20, height: 20 }}
+                          />
+                        </Link>
+                        <Link
                           style={{
-                            width: "100%",
-                            borderRadius: "5px 5px 0px 0px",
+                            marginRight: "5px",
+                            fontSize: "13px",
+                            color: "#0057D9",
+                            textDecoration: "none",
                           }}
-                          className="shownewarticlecro-img"
-                        />
+                          to={`/ShowProfileuser/${info.owner_id}`}
+                        >
+                          {info.owner}
+                        </Link>
                       </div>
-                      <div
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          marginTop: "20px",
-                          marginRight: "10px",
-                          color: "black",
-                        }}
-                      >
-                        {info.title}
-                      </div>
-                    </Link>
-                    <div
-                      style={{
-                        marginRight: "10px",
-                        marginLeft: "10px",
-                        color: "#757C86",
-                        fontSize: "15px",
-                        overflow: "Hidden",
-                        whiteSpace: "normal",
-                        textOverflow: "ellipsis",
-                        textJustify: "inter-word",
-                        textAlign: "justify",
-                        lineHeight:"1.5"
-                      }}
-                      className="showarticlecro-summary"
-                    >
-                      {articleinfo[index].summary.slice(0,161)+"..."}
-                    </div>
-                    <Divider style={{ marginTop: "20px" }} />
-                    <div
-                      style={{
-                        display: "flex",
-                        marginTop: "15px",
-                        marginLeft: "10px",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      <div style={{ flex: 1, marginRight: "10px" }}></div>
-                      <Link to={`/ShowProfileuser/${info.owner_id}`}>
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={image}
-                          sx={{ width: 20, height: 20 }}
-                        />
-                      </Link>
-                      <Link
-                        style={{
-                          marginRight: "5px",
-                          fontSize: "13px",
-                          color: "#0057D9",
-                          textDecoration: "none",
-                        }}
-                        to={`/ShowProfileuser/${info.owner_id}`}
-                      >
-                        {info.owner}
-                      </Link>
-                    </div>
-                  </Paper>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                    </Paper>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
