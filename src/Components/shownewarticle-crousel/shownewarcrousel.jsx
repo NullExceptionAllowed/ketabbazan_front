@@ -18,7 +18,6 @@ import useWindowDimensions from "./width";
 const ShownewArcrousel = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const [articleinfo, setarticleinfo] = useState([]);
-
   useEffect(() => {
     setApiLoading(true);
     axios.get(`${baseUrl}/write_article/newest_articles/`).then((response) => {
@@ -27,7 +26,10 @@ const ShownewArcrousel = () => {
       setApiLoading(false);
     });
   }, []);
+
   const { height, width } = useWindowDimensions();
+
+
 
   SwiperCore.use([Navigation, Pagination]);
   return (
@@ -116,7 +118,7 @@ const ShownewArcrousel = () => {
                       borderRadius: "5px",
                       marginBottom: "70px",
                       width: "293px",
-                      height: "350px",
+                      height: "400px",
                     }}
                   >
                     <Link
@@ -163,10 +165,13 @@ const ShownewArcrousel = () => {
                         overflow: "Hidden",
                         whiteSpace: "normal",
                         textOverflow: "ellipsis",
+                        textJustify: "inter-word",
+                        textAlign: "justify",
+                        lineHeight:"1.5"
                       }}
                       className="showarticlecro-summary"
                     >
-                      {info.summary}
+                      {articleinfo[index].summary.slice(0,161)+"..."}
                     </div>
                     <Divider style={{ marginTop: "20px" }} />
                     <div
