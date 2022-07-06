@@ -22,6 +22,10 @@ object-fit: cover;
     /* fontSize: "15px", */
     font-size: 15px;
 }
+.aricle_p{
+    /* fontSize: "14px" */
+    font-size: 14px;
+}
 
 @media (max-width: 479px ) {
     .shownewarticlecro-Paper{
@@ -38,6 +42,10 @@ object-fit: cover;
     .showar_sum{
         /* fontSize: "15px", */
         font-size: 13px;
+    }
+    .aricle_p{
+        /* fontSize: "14px" */
+        font-size: 12px;
     }
     
 }

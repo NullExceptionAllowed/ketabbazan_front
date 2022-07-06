@@ -172,6 +172,7 @@ const ShownewArcrousel = () => {
                           textJustify: "inter-word",
                           textAlign: "justify",
                           lineHeight: "1.5",
+                          height:"100%"
                         }}
                       >
                         {articleinfo[index].summary.slice(0, 161) + "..."}
@@ -192,7 +193,7 @@ const ShownewArcrousel = () => {
                             src={info.owner_image}
                             sx={{ width: 20, height: 20 }}
                           />
-                          <p style={{color:"#0057D9" ,fontSize: "13px",
+                          <p className="aricle_p" style={{color:"#0057D9" ,
                          marginRight: "5px"}}>{info.owner} </p>
                         </Link>
                         {/* <Link
