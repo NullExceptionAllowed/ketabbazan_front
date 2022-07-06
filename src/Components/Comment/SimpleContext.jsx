@@ -12,11 +12,14 @@ const SimpleContext = createContext({
    
     handleSetComment: () => {} , 
     
+    intialize : () => {},
+
     clickHandlerToZero : () => {} ,
     Show : () => {} ,
     reshow : () => {},
     setRefresh : () => {},
-    setFlag : () => {}
+    setFlag : () => {},
+    setComments : () => {},
 });
 
 export default SimpleContext;

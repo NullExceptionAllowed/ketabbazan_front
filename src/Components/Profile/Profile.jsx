@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./Profile.css";
 
 import EditProfile from "./Tools/EditProfile.jsx";
-import AddPhoto from "./Tools/AddPhoto.jsx";
 import { Link } from "react-router-dom";
 import ChangeNav from "./../Navbar/changeNav";
 import MenuList from "@mui/material/MenuList";
@@ -16,7 +15,6 @@ import ArticleIcon from "@mui/icons-material/Article";
 import PaymentIcon from "@mui/icons-material/Payment";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import SyncLockIcon from "@mui/icons-material/SyncLock";
-import Edit from "./Tools/Edit.jsx";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import Collapse from "@mui/material/Collapse";
@@ -25,6 +23,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import ConditionBook from "./Tools/Conditionbook";
 import Showbook from "./../Showbookall/Showbookall";
 import Wallet from  "./Tools/Wallet.jsx";
+import ChangePassword from "./Tools/ChangePassword";
 
 const Profile = () => {
   let s1 = {
@@ -33,6 +32,7 @@ const Profile = () => {
   };
   let p1 = {
     height: "500px",
+    margin:"auto auto 40px auto"
   };
   let p2 = {
     height: "500px",
@@ -72,13 +72,14 @@ const Profile = () => {
     setSelectedIndex(index);
   }
 
+  const handleChangePassword = (event, index) => {
+    setFlag(66);
+    setSelectedIndex(index);
+  }
+
   let show = null;
   if (flag === 0) {
     show = <EditProfile />;
-  } else if (flag === 1) {
-    show = <Edit />;
-  } else if (flag === 2) {
-    show = <AddPhoto />;
   } else if (flag === 9) {
     show = (
       <>
@@ -116,6 +117,14 @@ const Profile = () => {
     )
   }
 
+  else if (flag === 66) {
+    show = (
+      <> 
+       <ChangePassword/>
+      </>
+    )
+  }
+
   return (
     <div>
       <ChangeNav />
@@ -124,7 +133,7 @@ const Profile = () => {
         <Grid item lg={3} xs={12}>
           <Paper style={p1} elevation={1}>
             <MenuList dense dir="rtl">
-              <Grid
+              <MenuItem
                 style={{ margin: "5px auto 10px auto" }}
                 divider={true}
                 selected={selectedIndex === 0}
@@ -137,7 +146,7 @@ const Profile = () => {
                   {" "}
                   ویرایش پروفایل{" "}
                 </Typography>
-              </Grid>
+              </MenuItem>
 
               <MenuItem
                 divider={true}
@@ -217,7 +226,6 @@ const Profile = () => {
                 onClick={(event) => handleWallet(event, 3)}
                 divider={true}
                 style={{ margin: "auto auto 10px auto" }}
-               
                 selected={selectedIndex === 3}
               >
                 <ListItemIcon>
@@ -230,9 +238,9 @@ const Profile = () => {
               </MenuItem>
 
               <MenuItem
+                onClick={(event) => handleChangePassword(event, 4)}
                 divider={true}
                 style={{ margin: "auto auto 10px auto" }}
-                disabled
                 selected={selectedIndex === 4}
               >
                 <ListItemIcon>
@@ -262,13 +270,10 @@ const Profile = () => {
         </Grid>
 
         <Grid item lg={9} xs={12} >
-          <Paper style={p2} elevation={0}>
             {show}
-          </Paper>
         </Grid>
       </Grid>
 
-      {/* <EditProfile /> */}
     </div>
   );
 };

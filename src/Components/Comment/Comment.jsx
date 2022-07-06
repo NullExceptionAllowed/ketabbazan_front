@@ -17,6 +17,7 @@ import { baseUrl } from "../../Variable";
 import SimpleContext from "./SimpleContext";
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
+import {Link,useParams,} from "react-router-dom";
 
 
 
@@ -35,10 +36,13 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
     const [reply, setReply] = useState("");
     const [id, setId] = useState("");
     const [flag1, setFlag1] = useState("0");
+    const [getComments, setComments] = useState("");
     const context = useContext(SimpleContext);
+    const params = useParams();
+    const idid = params.id;
     useEffect(() => {
-        Show(); console.log(context.refresh);
-    }, [context.refresh]);
+        Show();  console.log(context.refresh);
+    }, [context.refresh,flag1]);
 
 
 
@@ -51,6 +55,46 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
 
 
     }
+
+    
+    const intialize = () => {
+   
+    
+
+        axios.get(`${baseUrl}/comment/?id=${idid}`, {
+            headers: {
+               'Content-Type': 'application/json ',
+               "Authorization": token
+             }
+          }).then((res) => {
+            
+           console.log(res.status);
+           setComments(res.data.all_comments);
+           
+           
+          
+      
+          })
+      
+        //   axios.get(`${baseUrl}/profile/image/`, {
+        //     headers: {
+        //        'Content-Type': 'application/json ',
+        //        "Authorization": token
+        //      }
+        //   }).then((res) => {
+        //     setImg(res);
+           
+        //   })
+      
+      
+           
+      
+        }
+        
+
+
+
+
 
     const addNewReply = () => {
 
@@ -78,10 +122,11 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
 
         })
         setReply("");
-        context.setRefresh((Math.random() * 9999999) + 1);
         setFlag1(0);
         context.setFlag(context.flag+1);
-
+        intialize();
+        //context.setRefresh((Math.rnpmandom() * 9999999) + 1);
+       
     }
     const sethandler = () => {
         setFlag1(0);
@@ -117,13 +162,26 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
         //         refresh: refreshl
         //     }}
         // >
+        <SimpleContext.Provider
+        value={{
+          
+          
+          
+          comments: getComments,
+          
+          
+         
+         
+         //setComments : setComments,
+        }}
+      >
         <div>
-            <Grid container spacing={2}>
-                <Grid item xs={0.1} ></Grid>
-                <Grid item xs={11.6} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
+            <Grid container >
+                <Grid  item md={0.2} xs={0.2} ></Grid>
+                <Grid item md={11.6}  xs={11.6} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
 
 
-                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={context.img} />
+                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
                     
                     <a style={{ position: "relative", top: "-45px", right: "47px" }}>{user}</a>
 
@@ -181,7 +239,8 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
                                                     <Divider orientation="vertical" variant="middle" flexItem />
 
 
-                                                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={context.img} />
+                                                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" 
+                                                    src={`${baseUrl}/profile/getimage/?username=${replyexa.user}`} />
                                                     <a style={{ position: "relative", top: "-45px", right: "47px" }}>{replyexa.user}</a>
 
                                                     <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{(new Date(created_on).toLocaleDateString('fa-IR'))}</p>
@@ -205,10 +264,10 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
 
 
                 </Grid>
-                <Grid item xs={0.1}></Grid>
+                <Grid  item md={0.2} xs={0.2}></Grid>
             </Grid>
         </div>
-        // </SimpleContext.Provider >
+         </SimpleContext.Provider >
 
 
 

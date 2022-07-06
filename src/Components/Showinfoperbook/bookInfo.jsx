@@ -147,10 +147,14 @@ const Emti = () => {
     }
   };
 
+  
+
   const handleLoginForQuiz = () => {
     if (flag === null) {
       setOpen(true);
-    } else {
+    } else if(conditionbook === "وضعیت کتاب") {
+      showToast("error", "ابتدا وضعیت کتاب را مشخص کنید");
+    } else{
       history.push(`/AnswerQuiz/${id}`);
     }
   }
@@ -411,10 +415,14 @@ const Emti = () => {
       })
       .catch(function (error) {
         if (error.response) {
-          if(error.response.status === 402)
+          if(error.response.status === 304)
           {
-            showToast("error", " یا موجودیت کافی نیست یا قبلا خریدی");
-          } else if (flag === null) {
+            showToast("error", "قبلا کتاب رو خریدی");
+          } else if(error.response.status === 402)
+          {
+            showToast("error", "موجودیت کافی نیست");
+          } 
+          else if (flag === null) {
             setOpen(true);
           }
           //console.log(error.response.data);
@@ -445,8 +453,8 @@ const Emti = () => {
         </div>
       )}
       {!apiLoading && (
-        <Grid lg={10} xs={10} container item spacing={2} style={s1}>
-          <Grid item lg={3} xs={12}>
+        <Grid lg={10} xs={10} md={10} container item spacing={2} style={s1}>
+          <Grid item lg={3} xs={12} md={4}>
             <Paper style={p1} elevation={1}>
               <center>
                 <Grid>
@@ -542,7 +550,7 @@ const Emti = () => {
             </Paper>
           </Grid>
 
-          <Grid item lg={6} xs={12}>
+          <Grid item lg={6} xs={12} md={4}>
             <Paper style={p2} elevation={1}>
               <Grid>
                 <Typography style={typo2}>{bookinfo.name}</Typography>
@@ -583,7 +591,7 @@ const Emti = () => {
                 <Typography style={typo6}>خلاصه کتاب :</Typography>
               </Grid>
 
-              <Grid item xs={10}>
+              <Grid item xs={12}>
                 <Typography
                   style={{
                     margin: "10px 30px auto auto",
@@ -591,7 +599,7 @@ const Emti = () => {
                     whiteSpace: "normal",
                     textOverflow: "ellipsis",
                     fontSize: 14,
-                    width: "350px",
+                    width: "80%",
                     direction: "rtl",
                     height: "70px",
                     border: "1px solid #ffffff",
@@ -600,10 +608,11 @@ const Emti = () => {
                   {bookinfo.summary}
                 </Typography>
               </Grid>
+
             </Paper>
           </Grid>
 
-          <Grid item lg={3} xs={12}>
+          <Grid item lg={3} xs={12} md={4}>
             <Paper style={p3} elevation={1}>
               <center>
                 <Grid>

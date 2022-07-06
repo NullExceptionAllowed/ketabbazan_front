@@ -81,88 +81,11 @@ const EditProfile = () => {
             console.log(res.data.username);
            setimage( `${baseUrl}/profile/getimage/?username=${res.data.username}`);
            
-            // axios.get(`${baseUrl}/profile/getimage/?username=${res.data.username}`, {
-            //     headers: {
-            //         'Content-Type': 'application/json ',
-            //         'Authorization': token
-            //     }
-            // }).then((res) => {
-            //     console.log(res.data);
-            //    // setFile(res);
-            //  setgetimage(res.data);
-            //  //setgetimage(URL.createObjectURL(getimage));
-            // });
         });
        
-
-
-
-        // axios.get(`${baseUrl}/profile/getimage/?username=${username}`, {
-        //     headers: {
-        //         'Content-Type': 'application/json ',
-        //         'Authorization': token
-        //     }
-        // }).then((res) => {
-        //     console.log(res); console.log(username);
-        //     setFile(res);
-        // });
     }, []);
-    //useEffect(() => { getProfileImage() }, []);
-
     let token = "Token " + localStorage.getItem('token');
- 
-    const intialize = () => {
-        //getProfileImage();
 
-        // axios.get(`${baseUrl}/profile/info/`, {
-        //   headers: {
-        //     'Content-Type': 'application/json ',
-        //     'Authorization': token
-        //   }
-        // }).then((res) => {
-
-        //   setnickName(res.data.nickname);
-        //   setfullName(res.data.profile.fullname);
-        //   setBio(res.data.profile.bio);
-        //   setuserrEmail(res.data.email);
-        //   setusername(res.data.username);
-        // })
-
-
-        // axios.get(`http://derakhshan.pythonanywhere.com/profile/getimage/?username=${username}`, {
-        //         headers: {
-        //           'Content-Type': 'application/json ',
-        //           'Authorization': token
-        //         }
-        //       }).then((res) => {
-        //           console.log(res);console.log(username);
-        //           setFile(res);
-        //       })
-
-
-        //     axios.get(`http://derakhshan.pythonanywhere.com/profile/getimage/?username=${username}`, {
-        //     headers: {
-        //       'Content-Type': 'application/json ',
-        //       'Authorization': token
-        //     }
-        //   }).then((res) => {
-        //       console.log(res);console.log(username);
-        //       setFile(res);
-        //   })
-    }
-
-    // const getProfileImage = () => {
-
-    // axios.get(`http://derakhshan.pythonanywhere.com/profile/getimage/?username=${username}`, {
-    //     headers: {
-    //       'Content-Type': 'application/json ',
-    //       'Authorization': token
-    //     }
-    //   }).then((res) => {
-    //       console.log(res);console.log(username);
-    //       setFile(res);
-    //   })
-    // }
 
     const sethandlerFullName = (e) => {
         setfullName(e.target.value);
@@ -180,14 +103,11 @@ const EditProfile = () => {
         setimage(URL.createObjectURL(e.target.files[0]));
         setChangeImage(true);
         console.log(e.target.files[0]);
-        // setpostimage({
-        //     image: e.target.files,
-        // });
+
         setpostimage(
             e.target.files[0]
         );
 
-     // setimage( `http://94.101.185.252/profile/getimage/?username=${username}`);
     };
 
     const user = {
@@ -223,15 +143,6 @@ const EditProfile = () => {
             }
         });
 
-
-
-
-
-
-
-        // fileUpload(file);
-
-
         const formData = new FormData();
         formData.append('image', postimage);
         const response = await axios.post(
@@ -244,14 +155,8 @@ const EditProfile = () => {
                 },
             }
         );
-       
-       // setFlag(flag + 1);
       
     };
-
-
-
-
 
     const fileUpload = (file) => {
         const url = `${baseUrl}/profile/image/`;
@@ -267,168 +172,132 @@ const EditProfile = () => {
     }
 
 
-
-
     return (
-        <center>
-            <Grid lg={10} xs={10} container  >
+        <Paper style={{ height: "500px" }} elevation={0}>
+            
+            <CacheProvider value={cacheRtl}>
 
-                <CacheProvider value={cacheRtl}>
+            <center>
+                <Grid container lg={8} xs={12}>
+                
+                    <Grid item lg={12} xs={12} className="Editprofile_divider" 
+                        style={{ backgroundColor: "rgb(225, 228, 228)", 
+                        margin: "auto auto auto auto", 
+                        height: "140px" }}>
+                        <center>
+                            <Badge
 
-                    <Stack direction="column" spacing={2}>
-                        {/* <Grid item >
-                        <Typography style={{fontSize:20, margin: "auto 50px auto auto"}}>ویرایش حساب کاربری</Typography>
-                    </Grid> */}
-
-                        <Grid item>
-
-                            <Paper className="Editprofile_divider" elevation={0} style={{ backgroundColor: "rgb(225, 228, 228)", margin: "auto 50px auto auto", width: "550px", height: "140px" }}>
-
-                                {/* <Divider className="Editprofile_divider" style={{backgroundColor:"lightBlue",margin:"auto auto auto auto"}} textAlign="right"> */}
-
-                                <Badge
-
-                                    overlap="circular"
-                                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                                    badgeContent={
-                                        <IconButton
-                                            variant="contained"
-                                            component="label"
-                                        >
-                                            <AddIcon
-                                                style={{ color: "white", margin: "auto auto auto auto", backgroundColor: "#679aea", borderRadius: "100%" }}
-                                            />
-                                            <input
-                                                type="file"
-                                                hidden
-                                                onChange={handleChange}
-                                                accept=".jpg,.jpeg,.png"
-                                            />
-                                        </IconButton>
-
-                                    }
+                                overlap="circular"
+                                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                                badgeContent={
+                                <IconButton
+                                    variant="contained"
+                                    component="label"
                                 >
-                                    <Avatar
-                                        sx={{ width: 100, height: 100 }}
-                                        src={image}
-
-                                        style={{ margin: "20px auto auto auto" }}
-                                    />
-
-                                </Badge>
-                                {/* <br></br>
-                                <Avatar 
-                                    sx={{ width: 70, height: 70 }} 
-                                    src="photo_2022-05-11_13-23-36.jpg"
-                                    style={{margin:"-20px auto auto auto"}}
+                                <AddIcon
+                                style={{ color: "white", margin: "auto auto auto auto", backgroundColor: "#679aea", borderRadius: "100%" }}
+                                />
+                                <input
+                                    type="file"
+                                    hidden
+                                    onChange={handleChange}
+                                    accept=".jpg,.jpeg,.png"
+                                />
+                                    </IconButton>
+                                }
                                 >
-                                
-                                    
-                                </Avatar>
-                                
-                                <AddIcon style={{color:"white",margin:"-80px auto auto 50px",backgroundColor:"#679aea", borderRadius:"100%"}}/> */}
-                                {/* </Divider> */}
+                                <Avatar
+                                    sx={{ width: 100, height: 100 }}
+                                    src={image}
 
-                                {/* <Grid dir="rtl">
-                                <Typography style={{margin:"20px auto auto auto"}}>
-                                    <span style={{color:"#000000"}}>{"ایمیل: "}</span>
-                                    samad@gmail.com
-                                </Typography>
-                                
-                            </Grid>   */}
+                                    style={{ margin: "20px auto auto auto" }}
+                                />
 
-                            </Paper>
+                            </Badge>
+                        </center>
+                        
+                    </Grid>
 
-
-
-                            {/* <Avatar 
-                            sx={{ width: 65, height: 65 }} 
-                            style={{margin:"20px auto auto auto"}}
-                            badgeContent={
-                                <AddIcon />
-                            }
-                        >
-                        </Avatar> */}
-
-                            {/* <Badge
-                            overlap="circular"
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                            badgeContent={
-                                <AddIcon style={{color:"white",margin:"auto 85px auto auto",backgroundColor:"#679aea", borderRadius:"100%"}}/>
-                            }
-                        >
-                            <Avatar
-                                sx={{ width: 70, height: 70 }} 
-                                src="photo_2022-05-11_13-23-36.jpg"
-                                style={{margin:"20px 50px auto auto"}}
-                            />
-
-                        </Badge> */}
-
+                    <Grid item container lg={12} xs={12} style={{margin: "20px auto auto auto"}}>
+                        
+                        <Grid item lg={5.5} xs={12}>
+                                    <div>
+                                    <TextField
+                                        onChange={(e) => (sethandlerFullName(e))}
+                                        style={{margin: "25px auto auto auto", width: "100%"}}
+                                        size="small"
+                                        id="outlined-basic"
+                                        label="نام و نام خانوادگی"
+                                        variant="outlined"
+                                        value={fullName} />
+                                        </div>
                         </Grid>
 
-                        <Grid item >
-                            <TextField
-                                onChange={(e) => (sethandlerFullName(e))}
-                                style={{ margin: "20px 50px auto auto", width: "250px" }}
-                                size="small"
-                                id="outlined-basic"
-                                label="نام و نام خانوادگی"
-                                variant="outlined"
-                                value={fullName} />
+                        <Grid lg={1}>
 
-                            <TextField
-                                onChange={(e) => (sethandlerNickName(e))}
-                                style={{ margin: "20px 50px auto auto", width: "250px" }}
-                                size="small"
-                                id="outlined-basic"
-                                label="نام مستعار"
-                                variant="outlined"
-                                value={nickName} />
                         </Grid>
+                            
 
-                        <Grid item>
-                            <TextField
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                                style={{ margin: "20px 50px auto auto", width: "550px" }}
-                                size="small"
-                                id="outlined-read-only-input"
-                                label="ایمیل"
-                                defaultValue={"@gmail.com"}
-                                value={userrEmail}
-
-                            />
+                        <Grid item lg={5.5} xs={12}>
+                                    <TextField
+                                        onChange={(e) => (sethandlerNickName(e))}
+                                        style={{margin: "25px auto auto auto", width: "100%"}}
+                                        size="small"
+                                        id="outlined-basic"
+                                        label="نام مستعار"
+                                        variant="outlined"
+                                        value={nickName} />
                         </Grid>
+                        
+                    </Grid>
 
-                        <Grid>
-                            <TextField
-                                onChange={sethandlerBio}
-                                variant="outlined"
-                                id="outlined-basic"
-                                label="بیوگرافی"
-                                multiline
-                                rows={3}
-                                value={bio}
-                                style={{
-                                    width: "550px", margin: "20px 50px auto auto"
-                                    , directin: "rtl !important"
-                                }}
+                    <Grid item lg={12} xs={12}>
+                        
+                        <TextField
+                            InputProps={{
+                            readOnly: true,
+                            }}
+                            style={{ margin: "20px auto auto auto", width:"100%"}}
+                            size="small"
+                            id="outlined-read-only-input"
+                            label="ایمیل"
+                            defaultValue={"@gmail.com"}
+                            value={userrEmail} />
+                    </Grid>
 
-                            />
-                        </Grid>
+                    <Grid item lg={12} xs={12}>
+                        <TextField
+                            onChange={sethandlerBio}
+                            variant="outlined"
+                            id="outlined-basic"
+                            label="بیوگرافی"
+                            multiline
+                            rows={3}
+                            value={bio}
+                            style={{
+                            width: "100%", margin: "20px auto auto auto"
+                            , directin: "rtl !important"
+                            }}
+                        />
+                    </Grid>
 
-                        <Grid>
-                            <Button onClick={handleSubmit} variant="contained" style={{ margin: "15px 50px auto auto" }}>ویرایش اطلاعات</Button>
-                        </Grid>
-                    </Stack>
+                    <Grid item lg={12} xs={12}>
+                        <Button 
+                        onClick={handleSubmit} 
+                        variant="contained" 
+                        style={{ margin: "30px auto 30px auto" }}>ویرایش اطلاعات</Button>
+                    </Grid>
 
-                </CacheProvider>
-            </Grid>
-            < ToastContainer rtl= {true}/>
-        </center>
+
+                </Grid>            
+            </center>
+
+            </CacheProvider>
+
+            <ToastContainer rtl={true} />
+        </Paper>
     );
+
 }
 
-export default EditProfile;
+ export default EditProfile;

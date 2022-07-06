@@ -55,26 +55,28 @@ const Wallet = () => {
 
     }
 
-    useEffect( () =>{ axios
-        .get(
-            `${baseUrl}/accounts/balance/`,
-            //JSON.stringify(user),
-            {
-                headers: {
+    useEffect(() => {
+        axios
+            .get(
+                `${baseUrl}/accounts/balance/`,
+                //JSON.stringify(user),
+                {
+                    headers: {
 
-                    "Content-Type": "application/json",
-                    Authorization: token
-                },
-            }
-        )
+                        "Content-Type": "application/json",
+                        Authorization: token
+                    },
+                }
+            )
         .then((res) => {
-           // console.log(res.status);
+            // console.log(res.status);
             setBalance(res.data.balance);
 
 
 
 
-        })},   [flag]);
+        })
+    }, [flag]);
 
 
     // const intialize = () => {
@@ -107,7 +109,7 @@ const Wallet = () => {
         const user = {
             amount: value,
         }
-      //  console.log(token);
+        //  console.log(token);
         axios
             .post(
                 `${baseUrl}/accounts/deposit/`,
@@ -156,8 +158,30 @@ const Wallet = () => {
         // .catch(function (error) {
         //   console.log(error);
         // });
-      //  setFlag(Math.floor(Math.random() * 9999999) + 1);
-      setFlag(flag+1);
+        //  setFlag(Math.floor(Math.random() * 9999999) + 1);
+        setValue("");
+        axios
+        .get(
+            `${baseUrl}/accounts/balance/`,
+            //JSON.stringify(user),
+            {
+                headers: {
+
+                    "Content-Type": "application/json",
+                    Authorization: token
+                },
+            }
+        )
+    .then((res) => {
+        // console.log(res.status);
+        setBalance(res.data.balance);
+
+
+
+
+    })
+        setFlag(flag + 1);
+
     }
 
 
@@ -169,8 +193,8 @@ const Wallet = () => {
         <center>
             <CacheProvider value={cacheRtl}>
                 <Grid container>
-                    <Grid item md={2.5} xs={1} ></Grid>
-                    <Grid item md={6.5} xs={8.5} >
+                    <Grid item md={2.5} xs={0} ></Grid>
+                    <Grid item md={6.5} xs={12} >
                         <Paper elevation={3} style={{ height: "500px", borderRadius: "30px" }}>
 
                             <h3 style={{ position: "relative", top: "70px" }}>اعتبار شما</h3>
@@ -178,16 +202,20 @@ const Wallet = () => {
 
                             <TextField onChange={sethandler} value={value}
                                 style={{
-                                    position: "relative", top: "150px", width: "226px",
+                                    position: "relative", top: "150px", width: "212px",
                                     borderRadius: "8px"
                                 }}
                                 id="outlined-basic" label="مبلغ مورد نظر" variant="outlined" placeholder="مبلغ رو به تومان وارد کن" />
 
                             <Grid container>
 
-                                <Grid item md={1} xs={1} ></Grid>
-                                <Grid item md={10} xs={10} style={{ height: "70px", position: "relative", top: "175px" }}>
+                                <Grid item md={1} xs={0.1} ></Grid>
+                                <Grid item md={10} xs={11.8} style={{ height: "70px", position: "relative", top: "175px"}}>
+                                   
+                                   
                                     <button onClick={handleb1} style={{
+                                       // float: "right",
+                                       
                                         width: "100px",
                                         height: "42px",
                                         borderRadius: " 8px",
@@ -199,11 +227,16 @@ const Wallet = () => {
                                         backgroundColor: " #ebebeb",
                                         border: "0px solid transparent",
                                         padding: "6px 12px",
-                                        marginLeft: "16px"
+                                        marginTop: "5px",
+                                          marginLeft: "9px"
                                     }}>10,000 تومان</button>
+                                       
 
+                                   
 
+                                   
                                     <button onClick={handleb2} style={{
+                                        //float: "right",
                                         width: "100px",
                                         height: "42px",
                                         borderRadius: " 8px",
@@ -214,9 +247,14 @@ const Wallet = () => {
                                         outline: " none",
                                         backgroundColor: " #ebebeb",
                                         border: "0px solid transparent",
-                                        padding: "6px 12px"
+                                        padding: "6px 12px",
+                                        marginTop: "5px",
                                     }}>20,000 تومان</button>
+                                       
 
+                                  
+                                  
+                                   
                                     <button onClick={handleb3} className="hoverb" style={{
                                         width: "100px",
                                         height: "42px",
@@ -229,18 +267,20 @@ const Wallet = () => {
                                         backgroundColor: " #ebebeb",
                                         border: "0px solid transparent",
                                         padding: "6px 12px",
-                                        marginRight: "16px",
+                                         marginRight: "9px",
                                         marginTop: "5px",
 
                                     }}>50,000 تومان</button>
+                                   
+                                  
 
                                 </Grid>
 
-                                <Grid item md={1} xs={1} ></Grid>
+                                <Grid item md={1} xs={0.1} ></Grid>
                             </Grid>
                             <Grid container>
                                 <Grid item md={2} xs={1}></Grid>
-                                <Grid  item md={8} xs={10}>
+                                <Grid item md={8} xs={10}>
                                     <Button onClick={handleDeposit} style={{ position: "relative", top: "215px", width: "93%" }} variant="contained">افزایش موجودی</Button>
                                 </Grid>
                                 <Grid item md={2} xs={1}></Grid>
@@ -250,7 +290,7 @@ const Wallet = () => {
                     <Grid item md={7} xs={1} ></Grid>
                 </Grid >
             </CacheProvider>
-            < ToastContainer rtl= {true}/>
+            < ToastContainer rtl={true} />
         </center >
 
     )

@@ -54,15 +54,15 @@ const CommentApp = () => {
 
     })
 
-    axios.get(`${baseUrl}/profile/image/`, {
-      headers: {
-         'Content-Type': 'application/json ',
-         "Authorization": token
-       }
-    }).then((res) => {
-      setImg(res);
+     //axios.get(`${baseUrl}/profile/getimage/?username=${user}`, {
+    //   headers: {
+    //      'Content-Type': 'application/json ',
+    //      "Authorization": token
+    //    }
+    // }).then((res) => {
+    //   setImg(res);
      
-    })
+    // })
 
 
      
@@ -109,6 +109,7 @@ const CommentApp = () => {
     })
     setComment("");
    setFlag(flag+1);
+   intialize();
   }
 
   const handleSetComment = event => {
@@ -128,7 +129,9 @@ const CommentApp = () => {
         setRefresh : setRefresh ,
         handleCreateNewComment: handleCreateNewComment,
         handleSetComment: handleSetComment,
-        setFlag :  setFlag
+        setFlag :  setFlag,
+        intialize : intialize,
+       // setComments : setComments,
       }}
     >
       <div>
@@ -136,6 +139,7 @@ const CommentApp = () => {
 
         <SimilarBooks/>
         <br />
+        
         <Comments />
 
 

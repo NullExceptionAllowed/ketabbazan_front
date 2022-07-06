@@ -59,7 +59,8 @@ const DesignQuiz = () => {
   const [clickbtnsearch, setclickbtnsearch] = useState(false);
   const [apiloadingbook, setapiloadingbook] = useState(false);
   const [apiloadingsubmit, setapiloadingsubmit] = useState(false);
-  const[p,setp]=useState(false);
+  const [readbook, setreadbook] = useState(false);
+  const [p, setp] = useState(false);
 
   const handlePagination2 = (e, p) => {
     setpagenum2(p);
@@ -110,7 +111,7 @@ const DesignQuiz = () => {
   }
   if (listbook.length === 0 && clickbtnsearch && !apiloadingbook) {
     errors.showbook = "این کتاب موجود نیست.";
-  } else if (p===false && aftersubmit) {
+  } else if (p === false && aftersubmit) {
     check = false;
     errors.showbook = "باید حتما یک کتاب را برای طرح سوال انتخاب کنی";
   }
@@ -140,7 +141,7 @@ const DesignQuiz = () => {
 
   const handlesentinfo = async () => {
     setaftersubmit(true);
-    
+
     const info = {
       question: question,
       op1: test1,
@@ -219,21 +220,39 @@ const DesignQuiz = () => {
     setclickbtn(true);
   };
 
-  const handleaddbookquiz = (id, namebook3, img, author, summary) => {
-    setp(true);
-    setshowboxsearch(false);
-    setidbook(id);
-    console.log("&&&");
-    console.log(id);
-    console.log("&&&");
-    setnamebookquiz(namebook3);
-    console.log(img);
-    setimgbookquiz(img);
-    setauthorbookquiz(author);
-    setsummarybookquiz(summary);
-    setnamebook(namebook3);
-    // setpagenum2(1);
-    // setnumpage2(1);
+  const handleaddbookquiz = async (id, namebook3, img, author, summary) => {
+    const token = "Token " + localStorage.getItem("token");
+    setreadbook(true);
+    let x = false;
+    axios
+      .get(`${baseUrl}/accounts/has_read/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        showToast('success',"کتاب با موفقیت ثبت شد.")
+        x = true;
+        setp(true);
+        setshowboxsearch(false);
+        setidbook(id);
+        console.log("&&&");
+        console.log(id);
+        console.log("&&&");
+        setnamebookquiz(namebook3);
+        console.log(img);
+        setimgbookquiz(img);
+        setauthorbookquiz(author);
+        setsummarybookquiz(summary);
+        setnamebook(namebook3);
+        // setpagenum2(1);
+        // setnumpage2(1);
+        setreadbook(false);
+      })
+      .catch((error) => {
+        showToast("error", "وضعیت شما در این کتاب خواندن نیست");
+        setreadbook(false);
+      });
   };
 
   const handlechangebookquiz = () => {
@@ -250,7 +269,13 @@ const DesignQuiz = () => {
           <Grid container>
             <Grid item md={0.4} xs={0.2}></Grid>
             <Grid item md={5.3} xs={11.4} style={{ marginBottom: "20px" }}>
-              <div style={{ display: "flex",alignItems:"center", fontSize: "24px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "24px",
+                }}
+              >
                 <AddIcon style={{ fontWeight: "bold", marginTop: "8px" }} />
                 <span> {"    "}</span>
                 <span>طرح سوال</span>
@@ -277,9 +302,13 @@ const DesignQuiz = () => {
                         value={namebook}
                         onChange={(e) => setnamebook(e.target.value)}
                         error={
-                          clickbtnsearch || aftersubmit ? Boolean(errors.showbook) : false
+                          clickbtnsearch || aftersubmit
+                            ? Boolean(errors.showbook)
+                            : false
                         }
-                        helperText={clickbtnsearch || aftersubmit ? errors.showbook : null}
+                        helperText={
+                          clickbtnsearch || aftersubmit ? errors.showbook : null
+                        }
                       />
                       <Button
                         style={{
@@ -759,9 +788,9 @@ const DesignQuiz = () => {
                         fontSize: "15.5px",
                         marginTop: "10px",
                         marginLeft: "10px",
-                        textJustify:"inter-word",
-                        textAlign:"justify",
-                        lineHeight:"2"
+                        textJustify: "inter-word",
+                        textAlign: "justify",
+                        lineHeight: "2",
                       }}
                     >
                       رعایت اصول نگارش یکی از کلیدی ترین و مهمترین مواردی است که
@@ -781,9 +810,9 @@ const DesignQuiz = () => {
                         fontSize: "15.5px",
                         marginTop: "10px",
                         marginLeft: "10px",
-                        textJustify:"inter-word",
-                        textAlign:"justify",
-                        lineHeight:"2"
+                        textJustify: "inter-word",
+                        textAlign: "justify",
+                        lineHeight: "2",
                       }}
                     >
                       دقت کنید حتما از کتابی که انتخاب می کنید سوال طرح کنید
@@ -800,9 +829,9 @@ const DesignQuiz = () => {
                         fontSize: "15.5px",
                         marginTop: "10px",
                         marginLeft: "10px",
-                        textJustify:"inter-word",
-                        textAlign:"justify",
-                        lineHeight:"2"
+                        textJustify: "inter-word",
+                        textAlign: "justify",
+                        lineHeight: "2",
                       }}
                     >
                       در ابتدا سوال مورد نظر را حتما به زبان فارسی تایپ کنید و

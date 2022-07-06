@@ -5,7 +5,7 @@ import ZoomInRoundedIcon from '@mui/icons-material/ZoomInRounded';
 import ZoomOutRoundedIcon from '@mui/icons-material/ZoomOutRounded';
 import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Document,Page } from 'react-pdf/dist/esm/entry.webpack';
 import './PdfViewer.css';
 import axios from 'axios';
@@ -24,6 +24,8 @@ const PdfViewer = (props) => {
   const [scale, setScale] = useState(1.0);
 
   const [fiUrl, setfiUrl] = useState(null);
+
+  let token = "Token " + localStorage.getItem("token");
 
   const isFirstPage = pageNumber === 1;
   const isLastPage = pageNumber === numPages;
@@ -95,12 +97,27 @@ const PdfViewer = (props) => {
     width : 100
   }
 
-async function status() {
-  const url = `${baseUrl}/read_book/pdf_file/${answer_array[4]}`
-  let response = await axios.get(url);
-  return response.data;
-}
-status().then((data) => setfiUrl(data));
+// async function status() {
+//   const url = `${baseUrl}/read_book/pdf_file/${answer_array[4]}`
+//   let response = await axios.get(url);
+//   return response.data;
+// }
+// status().then((data) => setfiUrl(data));
+
+useEffect(() => {
+  axios
+    .get(`${baseUrl}/read_book/pdf_file/${answer_array[4]}`, {
+      headers: {
+        "Content-Type": "application/json ",
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      console.log(res.data)
+
+      setfiUrl(res.data);
+    });
+}, []);
 
   return (
     <div className="Pdf">

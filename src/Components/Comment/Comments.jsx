@@ -66,9 +66,9 @@ const Comments = () => {
 
 
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2} style={{ marginTop: "4px" }}>
-                    <Grid item xs={3}></Grid>
-                    <Grid item xs={6} style={{
+                <Grid container  style={{ marginTop: "4px" }}>
+                    <Grid  item md={2.5} xs={1}></Grid>
+                    <Grid item md={7}  xs={10} style={{
                         height: " auto", marginTop: "15px",
                         backgroundColor: "rgb(251,251,251)", paddingTop: "1px"
                     }}>
@@ -91,7 +91,7 @@ const Comments = () => {
                                     comment_id = { comment.id }
                                     replys = { comment.reply }
                                     created_on = { comment.created_on }
-                                    img = { comment}
+                                    img = { comment.user}
                                 />
 
 
@@ -107,7 +107,7 @@ const Comments = () => {
                         )}
 
                     </Grid>
-                    <Grid item xs={3}></Grid>
+                    <Grid  item md={2.5} xs={1}></Grid>
                 </Grid>
             </Box>
 

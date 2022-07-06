@@ -50,8 +50,8 @@ const AddNewComment = () => {
     let firstShow = (
         <Grid container >
 
-            <Grid item xs={3.6}></Grid>
-            <Grid item xs={4.8} style={{ textAlign: "right", direction: "rtl" }}>
+            <Grid item md={3.6} xs={1}></Grid>
+            <Grid item md={4.8} xs={10} style={{ textAlign: "right", direction: "rtl" }}>
                 <h3>دیدگاه شما</h3>
                 <Grid onClick={clickHandler} item xs={12} style={{ marginTop: "20px" }}>
                     <Paper elevation={3} style={{ padding: "10px 20px", backgroundColor: "#f0f5f5", height: '70px' }} >
@@ -59,7 +59,7 @@ const AddNewComment = () => {
                     </Paper>
                 </Grid>
             </Grid>
-            <Grid item xs={3.6}></Grid>
+            <Grid item md={3.6} xs={1}></Grid>
 
         </Grid>);
 
@@ -69,8 +69,8 @@ const AddNewComment = () => {
 
         <div>
             <Grid container >
-                <Grid item xs={3.55}></Grid>
-                <Grid item xs={4.9}  style={{ marginTop: "20px", height: "auto" }}>
+                <Grid item md={3.55} xs={1}></Grid>
+                <Grid item md={4.9} xs={10}  style={{ marginTop: "20px", height: "auto" }}>
                     <h3>دیدگاه شما</h3>
 
 
@@ -94,7 +94,7 @@ const AddNewComment = () => {
                         </Grid>
                     </Paper>
                 </Grid>
-                <Grid item xs={3.55}></Grid>
+                <Grid item md={3.55} xs={1}></Grid>
             </Grid>
         </div>
     )
