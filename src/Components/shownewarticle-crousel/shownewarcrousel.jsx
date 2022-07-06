@@ -186,7 +186,7 @@ const ShownewArcrousel = () => {
                         }}
                       >
                         <div style={{ flex: 1, marginRight: "10px" }}></div>
-                        <Link style={{display:"flex", textDecoration:"none"}} to={`/ShowProfileuser/${info.owner_id}`}>
+                        <Link className="article_link" style={{ textDecoration:"none"}} to={`/ShowProfileuser/${info.owner_id}`}>
                           <Avatar
                             alt="Remy Sharp"
                             src={info.owner_image}
