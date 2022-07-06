@@ -31,12 +31,15 @@ const ShowProfileuser = () => {
   const [articleuser, setarticleuser] = useState([]);
   const [bio, setbio] = useState();
   const[readbookuser,setreadbookuser]=useState([]);
+  const[image,setimage]=useState();
 
   useEffect(() => {
     setApiLoading(true);
     axios.get(`${baseUrl}/showprofile/?id=${id}`).then((response) => {
       setbio(response.data.profile.profile.bio);
       setinfouser(response.data.profile);
+      setimage(response.data.profile.profile.image);
+      console.log("^^");
       setarticleuser(response.data.user_articles);
       setreadbookuser(response.data.read_books);
       console.log("@@@");
@@ -80,7 +83,7 @@ const ShowProfileuser = () => {
           <center style={{ backgroundColor: "#FAFAFA" }}>
             <Avatar
               alt="Remy Sharp"
-              src={Profileimg}
+              src={image}
               sx={{ width: 100, height: 100 }}
             />
             <div
@@ -125,7 +128,7 @@ const ShowProfileuser = () => {
 
           {value === 0 && (
             <>
-              <Showarticleuser articleuser={articleuser} />
+              <Showarticleuser articleuser={articleuser} image={image} />
 
             </>
           )}

@@ -12,7 +12,7 @@ import "./style.css";
 import Profileimg from "../../../assets/Image/image.png";
 import { width } from "@mui/system";
 
-const Showarticleuser = ({ articleuser }) => {
+const Showarticleuser = ({ articleuser,image }) => {
   return (
     <div
       style={{
@@ -132,7 +132,7 @@ const Showarticleuser = ({ articleuser }) => {
                       >
                         <Avatar
                           alt="Remy Sharp"
-                          src={Profileimg}
+                          src={image}
                           sx={{ width: 20, height: 20 }}
                         />
                         <div

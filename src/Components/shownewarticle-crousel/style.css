@@ -23,7 +23,7 @@ object-fit: cover;
     font-size: 15px;
 }
 
-@media (max-width: 450px ) {
+@media (max-width: 449px ) {
     .shownewarticlecro-Paper{
         width: 250px;
         height: 390px;            
