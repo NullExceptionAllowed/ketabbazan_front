@@ -21,6 +21,7 @@ object-fit: cover;
 .showar_sum{
     /* fontSize: "15px", */
     font-size: 15px;
+    line-height: 1.52;
 }
 .aricle_p{
     /* fontSize: "14px" */
@@ -42,6 +43,7 @@ object-fit: cover;
     .showar_sum{
         /* fontSize: "15px", */
         font-size: 13px;
+        margin-top: 7px;
     }
     .aricle_p{
         /* fontSize: "14px" */

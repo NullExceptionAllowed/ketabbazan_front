@@ -171,7 +171,6 @@ const ShownewArcrousel = () => {
                           textOverflow: "ellipsis",
                           textJustify: "inter-word",
                           textAlign: "justify",
-                          lineHeight: "1.5",
                           height:"100%"
                         }}
                       >
