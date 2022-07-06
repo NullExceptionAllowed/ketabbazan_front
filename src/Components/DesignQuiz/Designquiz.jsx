@@ -250,7 +250,7 @@ const DesignQuiz = () => {
           <Grid container>
             <Grid item md={0.4} xs={0.2}></Grid>
             <Grid item md={5.3} xs={11.4} style={{ marginBottom: "20px" }}>
-              <div style={{ display: "flex", fontSize: "24px" }}>
+              <div style={{ display: "flex",alignItems:"center", fontSize: "24px" }}>
                 <AddIcon style={{ fontWeight: "bold", marginTop: "8px" }} />
                 <span> {"    "}</span>
                 <span>طرح سوال</span>
