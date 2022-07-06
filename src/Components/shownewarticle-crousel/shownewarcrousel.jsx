@@ -194,7 +194,7 @@ const ShownewArcrousel = () => {
                             sx={{ width: 20, height: 20 }}
                           />
                           <p className="aricle_p" style={{color:"#0057D9" ,
-                         marginRight: "5px"}}>{info.owner} </p>
+                         marginRight: "5px", display:"inline-block"}}>{info.owner} </p>
                         </Link>
                         {/* <Link
                           style={{
