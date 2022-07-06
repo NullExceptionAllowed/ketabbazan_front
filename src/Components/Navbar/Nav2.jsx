@@ -471,8 +471,7 @@ const Nav = () => {
     event.target.style.color = "#545252";
   };
   const handleShowmenu = () => {
-    console.log("fatemeh");
-    setopenop(!openop)
+    history.push('/profile');
   };
   let oppro=null;
   if(openop){

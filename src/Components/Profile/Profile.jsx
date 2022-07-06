@@ -124,7 +124,7 @@ const Profile = () => {
         <Grid item lg={3} xs={12}>
           <Paper style={p1} elevation={1}>
             <MenuList dense dir="rtl">
-              <MenuItem
+              <Grid
                 style={{ margin: "5px auto 10px auto" }}
                 divider={true}
                 selected={selectedIndex === 0}
@@ -137,7 +137,7 @@ const Profile = () => {
                   {" "}
                   ویرایش پروفایل{" "}
                 </Typography>
-              </MenuItem>
+              </Grid>
 
               <MenuItem
                 divider={true}

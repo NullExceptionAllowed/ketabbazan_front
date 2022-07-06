@@ -15,6 +15,11 @@ import "./style.css";
 import { Calculate } from "@mui/icons-material";
 import useWindowDimensions from "./width";
 import { useMediaQuery, useTheme } from "@mui/material";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import {  Typography } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
 
 const ShownewArcrousel = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -181,14 +186,16 @@ const ShownewArcrousel = () => {
                         }}
                       >
                         <div style={{ flex: 1, marginRight: "10px" }}></div>
-                        <Link to={`/ShowProfileuser/${info.owner_id}`}>
+                        <Link style={{display:"flex", textDecoration:"none"}} to={`/ShowProfileuser/${info.owner_id}`}>
                           <Avatar
                             alt="Remy Sharp"
                             src={info.owner_image}
                             sx={{ width: 20, height: 20 }}
                           />
+                          <p style={{color:"#0057D9" ,fontSize: "13px",
+                         marginRight: "5px"}}>{info.owner} </p>
                         </Link>
-                        <Link
+                        {/* <Link
                           style={{
                             marginRight: "5px",
                             fontSize: "13px",
@@ -198,7 +205,7 @@ const ShownewArcrousel = () => {
                           to={`/ShowProfileuser/${info.owner_id}`}
                         >
                           {info.owner}
-                        </Link>
+                        </Link> */}
                       </div>
                     </Paper>
                   </SwiperSlide>

@@ -62,7 +62,7 @@ const Header = () => {
         className="home-banner__start-btn"
       >
         
-        <span className="home-banner__start-btn-highlight">کتاب هات از اینجا بگیر...  </span>
+        <span className="home-banner__start-btn-highlight">کتابارو از اینجا مشاهده کن </span>
       </button>
     </div>
   );
