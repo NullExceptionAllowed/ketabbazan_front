@@ -28,6 +28,7 @@ const ArticleInfo = () => {
   useEffect(() => {
     setApiLoading(true);
     axios.get(`${baseUrl}/write_article/${id}`).then((response) => {
+      console.log();
       setarticleinfo(response.data);
       setsummary(response.data.summary);
       if(response.data.summary.length>160)
@@ -150,7 +151,7 @@ const ArticleInfo = () => {
                     <Link to={`/ShowProfileuser/${articleinfo.owner_id}`}>
                       <Avatar
                         alt="Remy Sharp"
-                        src={image}
+                        src={articleinfo.owner_image}
                         sx={{ width: 20, height: 20 }}
                       />
                     </Link>
@@ -231,7 +232,7 @@ const ArticleInfo = () => {
                     <Link to={`/ShowProfileuser/${articleinfo.owner_id}`}>
                       <Avatar
                         alt="Remy Sharp"
-                        src={image}
+                        src={articleinfo.owner_image}
                         sx={{ width: 20, height: 20 }}
                       />
                     </Link>

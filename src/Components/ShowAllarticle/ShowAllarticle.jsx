@@ -151,7 +151,7 @@ const ShowAllarticle = () => {
                           >
                             <Avatar
                               alt="Remy Sharp"
-                              src={image}
+                              src={info.owner_image}
                               sx={{ width: 20, height: 20 }}
                             />
                             <div

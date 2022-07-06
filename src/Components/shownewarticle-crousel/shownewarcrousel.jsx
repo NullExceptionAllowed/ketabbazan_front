@@ -184,7 +184,7 @@ const ShownewArcrousel = () => {
                         <Link to={`/ShowProfileuser/${info.owner_id}`}>
                           <Avatar
                             alt="Remy Sharp"
-                            src={image}
+                            src={info.owner_image}
                             sx={{ width: 20, height: 20 }}
                           />
                         </Link>
