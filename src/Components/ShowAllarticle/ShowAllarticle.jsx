@@ -10,8 +10,9 @@ import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import image from "../../assets/Image/image.png";
 import ChangeNav from "./../Navbar/changeNav";
-import './style.css';
+import "./style.css";
 import { useMediaQuery, useTheme } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
 
 const ShowAllarticle = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -30,28 +31,71 @@ const ShowAllarticle = () => {
     <div>
       <ChangeNav />
       {apiLoading && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          <ReactLoading
-            type="spinningBubbles"
-            color={"#1565C0"}
-            height={100}
-            width={100}
-          />
+        <div style={{ direction: "rtl", marginRight: "5%", marginTop:"80px" }}>
+          {Array.from(Array(10)).map((_, index) => (
+            <div style={{ marginTop: "20px" }}>
+              <div style={{ display: "flex" }}>
+                <Skeleton variant="rectangular" width={150} height={150} />
+                <div style={{ marginRight: "16px" }}>
+                  <Skeleton
+                    style={{ marginTop: "5px" }}
+                    variant="rectangular"
+                    width={140}
+                    height={6}
+                  />
+                  <Skeleton
+                    style={{ marginTop: "10px" }}
+                    variant="rectangular"
+                    width={120}
+                    height={6}
+                  />
+
+                  <Skeleton
+                    style={{ marginTop: "20px" }}
+                    variant="rectangular"
+                    width={200}
+                    height={6}
+                  />
+                  <Skeleton
+                    style={{ marginTop: "10px" }}
+                    variant="rectangular"
+                    width={200}
+                    height={6}
+                  />
+                  <Skeleton
+                    style={{ marginTop: "10px" }}
+                    variant="rectangular"
+                    width={200}
+                    height={6}
+                  />
+                  <Skeleton
+                    style={{ marginTop: "10px" }}
+                    variant="rectangular"
+                    width={200}
+                    height={6}
+                  />
+                  <Skeleton
+                    style={{ marginTop: "10px" }}
+                    variant="rectangular"
+                    width={200}
+                    height={6}
+                  />
+
+                  <Skeleton style={{marginTop:"10px"}} variant="circular" width={25} height={25} />
+                </div>
+              </div>
+              <Divider
+                style={{ color: "red", width: "100%", marginTop: "2%" }}
+              />
+            </div>
+          ))}
         </div>
       )}
       {!apiLoading && (
         <div
           style={{
             direction: "rtl",
-            marginTop:"90px"
+            marginTop: "90px",
           }}
         >
           <div
@@ -92,7 +136,7 @@ const ShowAllarticle = () => {
                             width: "140px",
                             height: "100%",
                             borderRadius: "2px",
-                            objectFit:"conver"
+                            objectFit: "conver",
                           }}
                         />
                       </Link>
@@ -127,11 +171,12 @@ const ShowAllarticle = () => {
                               height: "45px",
                               textJustify: "inter-word",
                               textAlign: "justify",
-
                             }}
                             className="showall_summary"
                           >
-                            {isMatch ?info.summary.slice(0,62)+"..." :info.summary.slice(0,110)+"..."}
+                            {isMatch
+                              ? info.summary.slice(0, 62) + "..."
+                              : info.summary.slice(0, 110) + "..."}
                           </div>
                           <Grid
                             style={{
@@ -153,7 +198,7 @@ const ShowAllarticle = () => {
                               marginRight: "10px",
                               marginTop: "10px",
                               display: "flex",
-                              alignItems:"center"
+                              alignItems: "center",
                             }}
                           >
                             <Avatar
