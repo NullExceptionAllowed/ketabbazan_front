@@ -80,7 +80,7 @@ const ShowProfileuser = () => {
             marginTop: "120px",
           }}
         >
-          <center style={{ backgroundColor: "#FAFAFA" }}>
+          <center style={{  }}>
             <Avatar
               alt="Remy Sharp"
               src={image}
@@ -99,7 +99,7 @@ const ShowProfileuser = () => {
             </div>
             <div
               className="Showprofile_bio"
-              style={{ marginTop: "0.5%", color: "#626462", fontSize: "15px" }}
+              style={{ marginTop: "3px", color: "#626462", fontSize: "15px" }}
             >
               {bio}
             </div>

@@ -25,8 +25,7 @@ import Pagination from "@mui/material/Pagination";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactLoading from "react-loading";
 
-
-const cacheRtl = createCache({  
+const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],
 });
@@ -34,9 +33,6 @@ const cacheRtl = createCache({
 const theme1 = createTheme({
   direction: "rtl",
 });
-
-
-
 
 const DesignQuiz = () => {
   const theme = useTheme();
@@ -464,7 +460,9 @@ const DesignQuiz = () => {
                                         }}
                                         className="DesignQuiz_summarybook"
                                       >
-                                      {isMatch450 ? info.summary.slice(0, 89) + "...": info.summary.slice(0, 120) + "..."}
+                                        {isMatch450
+                                          ? info.summary.slice(0, 89) + "..."
+                                          : info.summary.slice(0, 120) + "..."}
                                       </div>
                                     </div>
                                   </div>
@@ -507,6 +505,7 @@ const DesignQuiz = () => {
                   <div style={{ width: "100%" }}>
                     <Grid
                       style={{
+                        marginTop: "2%",
                         display: "flex",
                         textDecoration: "none",
                         width: "100%",
@@ -520,7 +519,8 @@ const DesignQuiz = () => {
                           width: "100%",
                         }}
                       >
-                        <Grid>
+                        <Grid
+                        >
                           <img
                             src={imgbookquiz}
                             alt="img"
@@ -532,7 +532,12 @@ const DesignQuiz = () => {
                           />
                         </Grid>
                         <div style={{ width: "100%" }}>
-                          <div style={{ display: "flex", width: "100%" }}>
+                          <div
+                            style={{
+                              display: "flex",
+                              width: "100%",
+                            }}
+                          >
                             <Grid
                               style={{
                                 fontSize: "16px",
@@ -542,6 +547,8 @@ const DesignQuiz = () => {
                                 width: "100%",
                                 textDecoration: "none",
                               }}
+                              onMouseOver={MouseOver}
+                              onMouseOut={MouseOut}
                             >
                               {namebookquiz}
                             </Grid>
@@ -565,7 +572,7 @@ const DesignQuiz = () => {
 
                           <Grid
                             style={{
-                              marginTop: "0.5%",
+                              marginTop: "3px",
                               fontSize: "13px",
                               marginRight: "10px",
                               color: "#757C86",
@@ -575,20 +582,23 @@ const DesignQuiz = () => {
                             {"نویسنده: " + authorbookquiz}
                           </Grid>
 
-                          <Grid
+                          <div
                             style={{
-                              marginTop: "1%",
+                              marginTop: "6px",
                               marginRight: "10px",
                               color: "#757C86",
-                              fontSize: "14px",
                               overflow: "Hidden",
                               whiteSpace: "normal",
                               textOverflow: "ellipsis",
+                              height: "75px",
+                              lineHeight: 1.5,
                             }}
                             className="DesignQuiz_summarybook"
                           >
-                            {summarybookquiz}
-                          </Grid>
+                            {isMatch450
+                              ? summarybookquiz.slice(0, 100) + "..."
+                              : summarybookquiz.slice(0, 130) + "..."}
+                          </div>
                         </div>
                       </div>
                     </Grid>

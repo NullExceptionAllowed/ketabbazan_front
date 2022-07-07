@@ -10,8 +10,12 @@ import Avatar from "@mui/material/Avatar";
 import Profileimg from "../../../assets/Image/me.jpg";
 import { DriveEta } from "@mui/icons-material";
 import Rating from "@mui/material/Rating";
+import './Style.css'
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const Readbook = ({ readbookuser }) => {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down(600));
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -88,56 +92,56 @@ const Readbook = ({ readbookuser }) => {
                     />
                   </div>
                   <div>
-                    <Grid
+                    <div
                       style={{
-                        fontSize: "16px",
                         fontWeight: "bold",
                         marginRight: "10px",
                         color: "black",
                       }}
                       onMouseOver={MouseOver}
                       onMouseOut={MouseOut}
+                      className="readbook_name"
                     >
                       {info.name}
-                    </Grid>
+                    </div>
 
-                    <Grid
+                    <div
                       style={{
-                        marginTop: "0.5%",
-                        fontSize: "13px",
+                        marginTop: "4px",
                         marginRight: "10px",
                         color: "#757C86",
                       }}
+                      className="readbook_author"
                     >
-                      {"نویسنده: " + info.author}
-                    </Grid>
+                      {"نویسنده: " + info.author}                      
+                    </div>
 
-                    <Grid
+                    <div
                       style={{
-                        marginTop: "0.5%",
-                        fontSize: "13px",
+                        marginTop: "4px",
                         marginRight: "10px",
                         color: "#757C86",
                       }}
+                      className="readbook_author"
                     >
                       {" انتشارات:" + info.publisher}
-                    </Grid>
+                    </div>
 
-                    <Grid
+                    <div
                       style={{
-                        marginTop: "1%",
+                        marginTop: "3px",
                         marginRight: "10px",
                         color: "#757C86",
-                        fontSize: "14px",
                         overflow: "Hidden",
                         whiteSpace: "normal",
                         textOverflow: "ellipsis",
-                        width: "65%",
-                        height: "28%",
+                        textJustify: "inter-word",
+                        textAlign: "justify",
                       }}
+                      className="readbook_summary1"
                     >
-                      {info.summary}
-                    </Grid>
+                      {isMatch ?info.summary.slice(0,90)+"..." :info.summary.slice(0,110)+"..."}
+                    </div>
 
                     <Grid
                       style={{
@@ -145,8 +149,8 @@ const Readbook = ({ readbookuser }) => {
                         marginRight: "10px",
                       }}
                     >
-                      <div style={{ display: "flex", direction: "rtl" }}>
-                        <span style={{ color: "#757C86", fontSize: "13px" }}>
+                      <div style={{ display: "flex",alignItems:"center", direction: "rtl" }}>
+                        <span style={{ color: "#757C86" }} className="readbook_rate">
                           امتیاز:
                         </span>
                         <Rating
