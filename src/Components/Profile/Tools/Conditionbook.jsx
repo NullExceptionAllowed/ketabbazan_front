@@ -6,6 +6,7 @@ import ReactLoading from "react-loading";
 import { baseUrl } from "../../../Variable";
 import axios from "axios";
 import ButtonBase from "@mui/material/ButtonBase";
+import Skeleton from "@mui/material/Skeleton";
 
 const ConditionBook = ({ con }) => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -72,21 +73,73 @@ const ConditionBook = ({ con }) => {
         }}
       ></div>
       {apiLoading && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-          }}
-        >
-          <ReactLoading
-            type="spinningBubbles"
-            color={"#1565C0"}
-            height={100}
-            width={100}
-          />
-        </div>
+                    <div
+                    style={{
+                      direction: "rtl",
+                      display: "flex",
+                      justifyContent: "center",
+                      marginBottom: "50px",
+                    }}
+                  >
+                    <Grid
+                      item
+                      container
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {Array.from(Array(8)).map((_, index) => (
+                        <Grid
+                          key={index}
+                          sx={{
+                            direction: "rtl",
+                          }}
+                          style={{
+                            width: "155px",
+                            height: "202px",
+                            marginRight: "10px",
+                            marginTop: "40px",
+                            textDecoration: "none",
+                            display: "flex",
+                            alignItems: "center",
+                            flexDirection: "column",
+                          }}
+                        >
+                          <Skeleton
+                            variant="rectangular"
+                            width="120px"
+                            height="150px"
+                          />
+                          <div
+                            className="showbookall_name"
+                            variant="subtitle1"
+                            component="div"
+                            style={{ color: "black" }}
+                          >
+                            <Skeleton
+                              variant="rectangular"
+                              width="100px"
+                              height="12px"
+                            />
+                          </div>
+      
+                          <div
+                            variant="body2"
+                            style={{ color: "#757C86", fontSize: "13px" }}
+                            className="showbookall_author"
+                          >
+                            <Skeleton
+                              variant="rectangular"
+                              width="80px"
+                              height="12px"
+                            />
+                          </div>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </div>
       )}
       {!apiLoading && (
         <>

@@ -24,6 +24,8 @@ import ConditionBook from "./Tools/Conditionbook";
 import Showbook from "./../Showbookall/Showbookall";
 import Wallet from  "./Tools/Wallet.jsx";
 import ChangePassword from "./Tools/ChangePassword";
+import Myarticle from './Tools/myarticle';
+
 
 const Profile = () => {
   let s1 = {
@@ -84,6 +86,13 @@ const Profile = () => {
     show = (
       <>
         <ConditionBook con="getpastread" />
+      </>
+    );
+  }
+  else if(flag===1){
+    show = (
+      <>
+        <Myarticle/>
       </>
     );
   }
@@ -211,7 +220,7 @@ const Profile = () => {
                 style={{ margin: "auto auto 10px auto" }}
                 selected={selectedIndex === 2}
                 onClick={(event) => test(event, 2)}
-                disabled
+
               >
                 <ListItemIcon>
                   <ArticleIcon style={{ color: "#679aea" }} />
