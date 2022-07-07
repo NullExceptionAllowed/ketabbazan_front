@@ -103,7 +103,6 @@ const ShowAllarticle = () => {
                         >
                           <div
                             style={{
-                              fontSize: "16px",
                               fontWeight: "bold",
                               marginRight: "10px",
                               color: "black",
@@ -132,7 +131,7 @@ const ShowAllarticle = () => {
                             }}
                             className="showall_summary"
                           >
-                            {isMatch ?info.summary.slice(0,65)+"..." :info.summary.slice(0,110)+"..."}
+                            {isMatch ?info.summary.slice(0,62)+"..." :info.summary.slice(0,110)+"..."}
                           </div>
                           <Grid
                             style={{
