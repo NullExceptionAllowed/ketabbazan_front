@@ -15,6 +15,7 @@ import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactLoading from "react-loading";
 import Readbook from "./ShowReadBook/ReadBook";
+import './style.css'
 
 const theme = createTheme({
   direction: "rtl",
@@ -98,8 +99,10 @@ const ShowProfileuser = () => {
               {infouser.nickname}
             </div>
             <div
-              className="Showprofile_bio"
-              style={{ marginTop: "3px", color: "#626462", fontSize: "15px" }}
+              className="ShowProfile_bio"
+              style={{ marginTop: "5px", color: "#626462",
+              textOverflow: "ellipsis",
+              textJustify: "inter-word",lineHeight:1.5 }}
             >
               {bio}
             </div>

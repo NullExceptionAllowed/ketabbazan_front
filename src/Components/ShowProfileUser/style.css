@@ -4,27 +4,36 @@
 }
 .ShowProfile_bio{
     font-size: 15px;
+    margin-right: 10%;
+    margin-left: 10%;
 }
-.Showprofile_bio{
-    width: 70%;
-}
+
 .ShowProfile_back{
     /* background-image:url("../../assets/Image/backgr.png"); */
 }
 @media (max-width:760px) {
-    .Showprofile_bio{
-        width: 96%;
+
+    .ShowProfile_bio{
+        font-size: 13px;
+        margin-right: 5%;
+        margin-left: 5%;
     }
 }
 
 @media (max-width:500px) {
-    .Showprofile_bio{
-        width: 98%;
+
+    .ShowProfile_bio{
+        font-size: 12px;
+        margin-right: 4%;
+        margin-left: 4%;
     }
 }
 
 @media (max-width:900px) {
-    .Showprofile_bio{
-        width: 80%;
+
+    .ShowProfile_bio{
+        font-size: 13.5px;
+        margin-right: 7%;
+        margin-left: 7%;
     }
 }
