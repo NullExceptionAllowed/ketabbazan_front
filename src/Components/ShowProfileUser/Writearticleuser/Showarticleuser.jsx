@@ -86,6 +86,7 @@ const Showarticleuser = ({ articleuser, image }) => {
                           fontWeight: "bold",
                           marginRight: "10px",
                           color: "black",
+                          lineHeight:1.5
                         }}
                         className="showar_title"
                       >
