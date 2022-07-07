@@ -334,7 +334,7 @@ const Emti = () => {
       book_id: id,
     };
     axios
-      .post(`${baseUrl}/forceadd/`, JSON.stringify(goingtoread), {
+      .post(`${baseUrl}/lists/forceadd/`, JSON.stringify(goingtoread), {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
