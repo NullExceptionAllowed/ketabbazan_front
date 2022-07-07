@@ -186,7 +186,7 @@ const Myarticle = () => {
                             className="showall_summary"
                           >
                             {isMatch
-                              ? info.summary.slice(0, 80) + "..."
+                              ? info.summary.slice(0, 100) + "..."
                               : info.summary.slice(0, 250) + "..."}
                           </div>
                           <Grid

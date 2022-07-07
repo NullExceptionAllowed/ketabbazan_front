@@ -26,7 +26,7 @@ import createCache from "@emotion/cache";
 import { MenuItem } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import QuizIcon from '@mui/icons-material/Quiz';
+import QuizIcon from "@mui/icons-material/Quiz";
 
 const theme = createTheme({
   direction: "rtl",
@@ -35,7 +35,7 @@ const theme = createTheme({
 const Emti = () => {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
-
+  const [apiloadar, setapiload] = useState(false);
   const [bool, setBool] = useState(0);
 
   const handleClose = () => {
@@ -99,65 +99,68 @@ const Emti = () => {
 
   let flag = localStorage.getItem("token");
   const handleLoginForReadPdf = () => {
-
     axios
-    .get(
-      `${baseUrl}/read_book/pdf_file/${id}`,
-      {
+      .get(`${baseUrl}/read_book/pdf_file/${id}`, {
         headers: {
-
           "Content-Type": "application/json",
-          'Authorization': token
+          Authorization: token,
         },
-      }
-    )
-    .then((res) => {
-      console.log(res.status);
-      if (res.status === 200) {
-
-        history.push(`/ReadPdf/${id}`);
-      }
-      
-    }).catch(function (error) {
-      if (error.response) {
-       
-        if(error.response.status === 400)
-        {
-          showToast("error", "اول باید کتاب رو بخری");
-        } else if (flag === null) {
-          setOpen(true);
+      })
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          history.push(`/ReadPdf/${id}`);
         }
-       
-        console.log(error.response.status);
-    
-      }
-    });
+      })
+      .catch(function (error) {
+        if (error.response) {
+          if (error.response.status === 400) {
+            showToast("error", "اول باید کتاب رو بخری");
+          } else if (flag === null) {
+            setOpen(true);
+          }
 
+          console.log(error.response.status);
+        }
+      });
   };
 
   const handlearticlecanwrite = () => {
-    let nic = localStorage.getItem("nickname");
-    console.log(nic + "445");
     if (flag === null) {
       setOpen(true);
-    } else if (nic === null) {
-      showToast("error", "اطلاعات پروفایل کامل نیست.");
     } else {
-      history.push(`/article/${id}`);
+      if (conditionbook === "خوانده ام") {
+        setapiload(true);
+        axios
+          .get(`${baseUrl}/accounts/has_nickname`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          })
+          .then((response) => {
+            setApiLoading(false);
+            history.push(`/article/${id}`);
+          })
+          .catch((error) => {
+            setApiLoading(false);
+            showToast("error", "اطلاعات پروفایل کافی نیست.");
+          });
+      } else {
+        showToast("error", "وضعیت شما در این کتاب خواندن نیست");
+      }
     }
   };
-
-  
 
   const handleLoginForQuiz = () => {
     if (flag === null) {
       setOpen(true);
-    } else if(conditionbook === "وضعیت کتاب") {
+    } else if (conditionbook === "وضعیت کتاب") {
       showToast("error", "ابتدا وضعیت کتاب را مشخص کنید");
-    } else{
+    } else {
       history.push(`/AnswerQuiz/${id}`);
     }
-  }
+  };
 
   const [apiLoading, setApiLoading] = useState(false);
   const token = "Token " + localStorage.getItem("token");
@@ -171,7 +174,7 @@ const Emti = () => {
   const [userrate, setuserrate] = React.useState(null);
   const [changerate, setchangerate] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [conditionbook, setConditionbook] = useState("وضعیت کتاب"); 
+  const [conditionbook, setConditionbook] = useState("وضعیت کتاب");
   const oopen = Boolean(anchorEl);
 
   const [vaziat, setvaziat] = React.useState("بدون وضعیت");
@@ -216,7 +219,7 @@ const Emti = () => {
         setApiLoading(false);
       }
     });
-  }, [rateinfocount,id]);
+  }, [rateinfocount, id]);
 
   useEffect(() => {
     if (flag !== null) {
@@ -234,7 +237,7 @@ const Emti = () => {
           setApiLoading(false);
         });
     }
-  }, [rateinfocount,id]);
+  }, [rateinfocount, id]);
 
   function round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
@@ -284,16 +287,12 @@ const Emti = () => {
       book_id: id,
     };
     axios
-      .post(
-        `${baseUrl}/lists/forceadd/`,
-        JSON.stringify(haveRead),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      )
+      .post(`${baseUrl}/lists/forceadd/`, JSON.stringify(haveRead), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
@@ -313,16 +312,12 @@ const Emti = () => {
       book_id: id,
     };
     axios
-      .post(
-        `${baseUrl}/lists/forceadd/`,
-        JSON.stringify(reading),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      )
+      .post(`${baseUrl}/lists/forceadd/`, JSON.stringify(reading), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
@@ -339,16 +334,12 @@ const Emti = () => {
       book_id: id,
     };
     axios
-      .post(
-        `${baseUrl}/forceadd/`,
-        JSON.stringify(goingtoread),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      )
+      .post(`${baseUrl}/forceadd/`, JSON.stringify(goingtoread), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
@@ -365,16 +356,12 @@ const Emti = () => {
       book_id: id,
     };
     axios
-      .post(
-        `${baseUrl}/lists/forceadd/`,
-        JSON.stringify(leave),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      )
+      .post(`${baseUrl}/lists/forceadd/`, JSON.stringify(leave), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
@@ -385,7 +372,7 @@ const Emti = () => {
   };
 
   const handleCclick = (event) => {
-    if(flag===null){
+    if (flag === null) {
       setOpen(true);
     }
     setAnchorEl(event.currentTarget);
@@ -402,35 +389,32 @@ const Emti = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: token
+            Authorization: token,
           },
         }
       )
       .then((res) => {
-        console.log(res.status+"**");
+        console.log(res.status + "**");
         if (res.status === 200) {
           showToast("success", "خریدت با موفقیت صورت گرفت");
           setBool(1);
-        }       
+        }
       })
       .catch(function (error) {
         if (error.response) {
-          if(error.response.status === 304)
-          {
+          if (error.response.status === 304) {
             showToast("error", "قبلا کتاب رو خریدی");
-          } else if(error.response.status === 402)
-          {
+          } else if (error.response.status === 402) {
             showToast("error", "موجودیت کافی نیست");
-          } 
-          else if (flag === null) {
+          } else if (flag === null) {
             setOpen(true);
           }
           //console.log(error.response.data);
           console.log(error.response.status);
-         // console.log(error.response.headers);
+          // console.log(error.response.headers);
         }
-      })
-  }
+      });
+  };
 
   return (
     <div style={{ direction: "rtl" }}>
@@ -608,7 +592,6 @@ const Emti = () => {
                   {bookinfo.summary}
                 </Typography>
               </Grid>
-
             </Paper>
           </Grid>
 
@@ -641,9 +624,7 @@ const Emti = () => {
                 <Grid>
                   <Button
                     startIcon={
-                      <QuizIcon
-                        style={{ margin: "auto -65px auto auto" }}
-                      />
+                      <QuizIcon style={{ margin: "auto -65px auto auto" }} />
                     }
                     variant="outlined"
                     style={{
@@ -656,7 +637,7 @@ const Emti = () => {
                     }}
                     onClick={handleLoginForQuiz}
                   >
-                     کوئیز دادن
+                    کوئیز دادن
                   </Button>
                   <ShowDialog close={handleClose} open={open} />
                 </Grid>
@@ -677,7 +658,14 @@ const Emti = () => {
                       height: "40px",
                     }}
                   >
-                    نوشتن مقاله
+                    {!apiloadar && <span>نوشتن مقاله</span>}
+                    {apiloadar && (
+                      <ReactLoading
+                        type="bubbles"
+                        color="blue"
+                        className="loading-login"
+                      />
+                    )}
                   </Button>
                   <ShowDialog close={handleClose} open={open} />
                 </Grid>
@@ -776,7 +764,7 @@ const Emti = () => {
                       height: "40px",
                     }}
                   >
-                      خرید کتاب 
+                    خرید کتاب
                   </Button>
                 </Grid>
               </center>
