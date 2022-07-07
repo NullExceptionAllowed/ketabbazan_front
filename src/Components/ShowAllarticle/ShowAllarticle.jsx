@@ -10,10 +10,14 @@ import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import image from "../../assets/Image/image.png";
 import ChangeNav from "./../Navbar/changeNav";
+import './style.css';
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const ShowAllarticle = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const [articleinfo, setarticleinfo] = useState([]);
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down(550));
   useEffect(() => {
     setApiLoading(true);
     axios.get(`${baseUrl}/write_article/`).then((response) => {
@@ -60,14 +64,14 @@ const ShowAllarticle = () => {
             }}
           >
             <div
-              className="showarticleuser_fa"
+              className="showarti_fa"
               style={{ display: "flex", flexDirection: "column" }}
             >
               {articleinfo.map((info, index) => (
                 <div>
                   <Grid
                     style={{
-                      marginTop: "2%",
+                      marginTop: "3px",
                       display: "flex",
                       textDecoration: "none",
                     }}
@@ -97,43 +101,46 @@ const ShowAllarticle = () => {
                           to={`/articleinfo/${info.id}`}
                           style={{ textDecoration: "none" }}
                         >
-                          <Grid
+                          <div
                             style={{
                               fontSize: "16px",
                               fontWeight: "bold",
                               marginRight: "10px",
                               color: "black",
                             }}
+                            className="showar_title"
                           >
                             {info.title}
-                          </Grid>
+                          </div>
                         </Link>
                         <Link
                           to={`/articleinfo/${info.id}`}
                           style={{ textDecoration: "none" }}
                         >
-                          <Grid
+                          <div
                             style={{
-                              marginTop: "2%",
+                              marginTop: "5px",
                               marginRight: "10px",
                               color: "#757C86",
-                              fontSize: "14px",
                               overflow: "Hidden",
                               whiteSpace: "normal",
                               textOverflow: "ellipsis",
-                              width: "80%",
-                              height: "28%",
+                              height: "45px",
+                              textJustify: "inter-word",
+                              textAlign: "justify",
+
                             }}
+                            className="showall_summary"
                           >
-                            {info.summary}
-                          </Grid>
+                            {isMatch ?info.summary.slice(0,65)+"..." :info.summary.slice(0,110)+"..."}
+                          </div>
                           <Grid
                             style={{
-                              marginTop: "1%",
+                              marginTop: "3px",
                               marginRight: "10px",
                               color: "#757C86",
-                              fontSize: "12px",
                             }}
+                            className="showar_tarikh"
                           >
                             {"تاریخ مقاله:" + info.created_jalali}
                           </Grid>
@@ -145,8 +152,9 @@ const ShowAllarticle = () => {
                           <div
                             style={{
                               marginRight: "10px",
-                              marginTop: "2.5%",
+                              marginTop: "10px",
                               display: "flex",
+                              alignItems:"center"
                             }}
                           >
                             <Avatar
@@ -157,9 +165,9 @@ const ShowAllarticle = () => {
                             <div
                               style={{
                                 marginRight: "5px",
-                                fontSize: "13px",
                                 color: "#0057D9",
                               }}
+                              className="showar_owner"
                             >
                               {info.owner}
                             </div>
