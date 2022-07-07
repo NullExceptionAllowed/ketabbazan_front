@@ -25,7 +25,8 @@ import Pagination from "@mui/material/Pagination";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactLoading from "react-loading";
 
-const cacheRtl = createCache({
+
+const cacheRtl = createCache({  
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],
 });
@@ -34,9 +35,13 @@ const theme1 = createTheme({
   direction: "rtl",
 });
 
+
+
+
 const DesignQuiz = () => {
   const theme = useTheme();
   const checkpx = useMediaQuery(theme.breakpoints.down(900));
+  const isMatch450 = useMediaQuery(theme.breakpoints.down(650));
   const [question, setquesion] = useState("");
   const [test1, settest1] = useState("");
   const [test2, settest2] = useState("");
@@ -231,7 +236,7 @@ const DesignQuiz = () => {
         },
       })
       .then((res) => {
-        showToast('success',"کتاب با موفقیت ثبت شد.")
+        showToast("success", "کتاب با موفقیت ثبت شد.");
         x = true;
         setp(true);
         setshowboxsearch(false);
@@ -436,7 +441,7 @@ const DesignQuiz = () => {
 
                                       <Grid
                                         style={{
-                                          marginTop: "0.5%",
+                                          marginTop: "3px",
                                           fontSize: "13px",
                                           marginRight: "10px",
                                           color: "#757C86",
@@ -446,20 +451,21 @@ const DesignQuiz = () => {
                                         {"نویسنده: " + info.author}
                                       </Grid>
 
-                                      <Grid
+                                      <div
                                         style={{
-                                          marginTop: "1%",
+                                          marginTop: "6px",
                                           marginRight: "10px",
                                           color: "#757C86",
-                                          fontSize: "14px",
                                           overflow: "Hidden",
                                           whiteSpace: "normal",
                                           textOverflow: "ellipsis",
+                                          height: "75px",
+                                          lineHeight: 1.5,
                                         }}
                                         className="DesignQuiz_summarybook"
                                       >
-                                        {info.summary}
-                                      </Grid>
+                                      {isMatch450 ? info.summary.slice(0, 89) + "...": info.summary.slice(0, 120) + "..."}
+                                      </div>
                                     </div>
                                   </div>
                                 </Grid>

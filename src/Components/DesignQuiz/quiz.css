@@ -5,6 +5,7 @@
 .DesignQuiz_summarybook{
     width: 75%;
     height: 36%;
+    font-size: 14px;
 }
 @media (max-width: 900px) {
     .designquiz_des{
@@ -17,5 +18,11 @@
     .DesignQuiz_summarybook{
         width: 98%;
         height: 30%;
+    }
+}
+
+@media (max-width: 600px) {
+    .DesignQuiz_summarybook{
+        font-size: 12px;
     }
 }
