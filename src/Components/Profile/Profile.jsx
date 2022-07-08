@@ -22,11 +22,10 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ConditionBook from "./Tools/Conditionbook";
 import Showbook from "./../Showbookall/Showbookall";
-import Wallet from  "./Tools/Wallet.jsx";
+import Wallet from "./Tools/Wallet.jsx";
 import ChangePassword from "./Tools/ChangePassword";
-import Myarticle from './Tools/myarticle';
+import Myarticle from "./Tools/myarticle";
 import Footer from "../Footer/footer";
-
 
 const Profile = () => {
   let s1 = {
@@ -35,7 +34,7 @@ const Profile = () => {
   };
   let p1 = {
     height: "500px",
-    margin:"auto auto 40px auto"
+    margin: "auto auto 40px auto",
   };
   let p2 = {
     height: "500px",
@@ -73,12 +72,12 @@ const Profile = () => {
   const handleWallet = (event, index) => {
     setFlag(5);
     setSelectedIndex(index);
-  }
+  };
 
   const handleChangePassword = (event, index) => {
     setFlag(66);
     setSelectedIndex(index);
-  }
+  };
 
   let show = null;
   if (flag === 0) {
@@ -89,50 +88,42 @@ const Profile = () => {
         <ConditionBook con="getpastread" />
       </>
     );
-  }
-  else if(flag===1){
+  } else if (flag === 1) {
     show = (
       <>
-        <Myarticle/>
+        <Myarticle />
       </>
     );
-  }
-  else if (flag === 10) {
+  } else if (flag === 10) {
     show = (
       <>
         <ConditionBook con="getcurread" />
       </>
     );
-  }
-  else if (flag === 11) {
+  } else if (flag === 11) {
     show = (
       <>
         <ConditionBook con="getfavourite" />
       </>
     );
-  }
-  else if (flag === 12) {
+  } else if (flag === 12) {
     show = (
       <>
         <ConditionBook con="getleftread" />
       </>
     );
-  }
-
-  else if (flag === 5) {
+  } else if (flag === 5) {
     show = (
       <>
-       <Wallet/>
+        <Wallet />
       </>
-    )
-  }
-
-  else if (flag === 66) {
+    );
+  } else if (flag === 66) {
     show = (
-      <> 
-       <ChangePassword/>
+      <>
+        <ChangePassword />
       </>
-    )
+    );
   }
 
   return (
@@ -221,7 +212,6 @@ const Profile = () => {
                 style={{ margin: "auto auto 10px auto" }}
                 selected={selectedIndex === 2}
                 onClick={(event) => test(event, 2)}
-
               >
                 <ListItemIcon>
                   <ArticleIcon style={{ color: "#679aea" }} />
@@ -279,11 +269,13 @@ const Profile = () => {
           </Paper>
         </Grid>
 
-        <Grid item lg={9} xs={12} >
-            {show}
+        <Grid item lg={9} xs={12}>
+          {show}
         </Grid>
       </Grid>
-      <Footer/>
+      <div style={{marginTop:"10px"}}>
+        <Footer />
+      </div>
     </div>
   );
 };

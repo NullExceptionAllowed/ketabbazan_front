@@ -3,10 +3,8 @@
 // const Myarticle = () => {
 //     return (  );
 // }
- 
+
 // export default Myarticle;
-
-
 
 import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
@@ -30,16 +28,17 @@ const Myarticle = () => {
   useEffect(() => {
     setApiLoading(true);
     axios
-    .get(`${baseUrl}/write_article/my_articles/`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    }).then((response) => {
-      console.log(response.data);
-      setarticleinfo(response.data);
-      setApiLoading(false);
-    });
+      .get(`${baseUrl}/write_article/my_articles/`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setarticleinfo(response.data);
+        setApiLoading(false);
+      });
   }, []);
   return (
     <div>
@@ -94,7 +93,12 @@ const Myarticle = () => {
                     height={6}
                   />
 
-                  <Skeleton style={{marginTop:"10px"}} variant="circular" width={25} height={25} />
+                  <Skeleton
+                    style={{ marginTop: "10px" }}
+                    variant="circular"
+                    width={25}
+                    height={25}
+                  />
                 </div>
               </div>
               <Divider
@@ -110,6 +114,18 @@ const Myarticle = () => {
             direction: "rtl",
           }}
         >
+          {articleinfo.length === 0 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "50px",
+                fontSize: "19px",
+              }}
+            >
+              مقاله ای موجود نیست
+            </div>
+          )}
           <div
             style={{
               direction: "rtl",

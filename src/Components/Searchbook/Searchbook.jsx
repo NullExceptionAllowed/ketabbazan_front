@@ -25,7 +25,6 @@ const theme = createTheme({
 const Searchbook = () => {
   const location = useLocation();
   const search = location.search;
-  // console.log(search);
   const searchUrlParam = new URLSearchParams(search).get("q");
   const searchUrlParamPage = new URLSearchParams(search).get("page");
   const [apiLoading, setApiLoading] = useState(false);

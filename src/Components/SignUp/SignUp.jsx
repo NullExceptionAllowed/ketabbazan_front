@@ -121,7 +121,6 @@ const SignUp = ({ history }) => {
               "Content-Type": "application/json",
             },
           },
-          { withCredentials: true }
         );
         console.log(response.data);
         if (response.status === 201) {

@@ -15,13 +15,17 @@ import ShowProfileuser from './Components/ShowProfileUser/ShowProfile';
 import DesignQuiz from "./Components/DesignQuiz/Designquiz";
 import AnswerQuiz from "./Components/AnswerQuiz/AnswerQuiz";
 import Showbookcategory from "./Components/Showcategorybook/ShowCategory";
+import Forgetpass from "./Components/Forgetpass/Forgetpass";
+import Reset from "./Components/Resetpass/Reset";
 
 const App = () => {
   return (
       <Switch>
         <Route path="/" exact component={Homepage} />
         <Route path="/login" exact component={Login} />
+        <Route path="/forgetpass" exact component={Forgetpass} />
         <Route path="/signup"  component={SignUp} />
+        <Route path="/resetpass"  component={Reset} />
         <Route path="/profile"  component={Profile} /> 
         <Route path="/Book"  component={Book} />
         <Route path="/bookinfo/:id"  component={BookInfo} />

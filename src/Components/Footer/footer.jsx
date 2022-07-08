@@ -37,7 +37,7 @@ const Footer = () => {
         src={footer}
         alt="footer background nature"
       />
-      <div className="footer_ti">در شبکه های زیز ما را دنبال کنید</div>
+      <div className="footer_ti">در شبکه های زیر ما را دنبال کنید</div>
       <div
         style={{
           display: "flex",
@@ -47,7 +47,7 @@ const Footer = () => {
         }}
         className="footer_social"
       >
-        <a href="https://www.instagram.com" target="_blank">
+        <a href="https://www.instagram.com/ketabbazan_ml/" target="_blank">
           <img
             alt="instagram"
             src={instagram}
@@ -56,7 +56,7 @@ const Footer = () => {
           />
         </a>
 
-        <a href="https://www.facebook.com/" target="_blank">
+        <a href="https://www.facebook.com/profile.php?id=100082999008181" target="_blank">
           <img
             alt="facebook"
             src={facebook}
@@ -73,7 +73,7 @@ const Footer = () => {
             className="footer_ajza"
           />
         </a>
-        <a href="https://twitter.com/" target="_blank">
+        <a href="https://twitter.com/ketabbazan" target="_blank">
           <img alt="twitter" src={twitter} style={{}} className="footer_ajza" />
         </a>
 
