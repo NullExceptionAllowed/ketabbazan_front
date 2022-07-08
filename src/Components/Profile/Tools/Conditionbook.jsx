@@ -26,7 +26,7 @@ const ConditionBook = ({ con }) => {
       .then((response) => {
         console.log("+++++");
         console.log(response.data);
-        setbookinfo(response.data.results);
+        setbookinfo(response.data);
         setApiLoading(false);
       });
   }, [con]);
