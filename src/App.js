@@ -18,6 +18,7 @@ import Showbookcategory from "./Components/Showcategorybook/ShowCategory";
 import Forgetpass from "./Components/Forgetpass/Forgetpass";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import Reset from "./Components/Resetpass/Reset";
+import NotFound from "./NotFoundPage";
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/Designquiz"  component={DesignQuiz} />
         <Route path="/AnswerQuiz/:id"  component={AnswerQuiz} />
         <Route path="/AboutUs"  component={AboutUs} />
+        <Route component={NotFound} />
       </Switch>
   );
 };
