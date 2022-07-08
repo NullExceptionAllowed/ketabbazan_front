@@ -13,6 +13,8 @@ import ChangeNav from "./../Navbar/changeNav";
 import "./style.css";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
+import Footer from "../Footer/footer";
+
 
 const ShowAllarticle = () => {
   const [apiLoading, setApiLoading] = useState(false);
@@ -229,6 +231,7 @@ const ShowAllarticle = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

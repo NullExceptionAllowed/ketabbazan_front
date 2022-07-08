@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactLoading from "react-loading";
 import Readbook from "./ShowReadBook/ReadBook";
 import './style.css'
+import Footer from "../Footer/footer";
 
 const theme = createTheme({
   direction: "rtl",
@@ -142,6 +143,7 @@ const ShowProfileuser = () => {
           )}
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

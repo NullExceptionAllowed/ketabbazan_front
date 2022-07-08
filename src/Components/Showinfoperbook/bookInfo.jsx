@@ -27,6 +27,7 @@ import { MenuItem } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuizIcon from "@mui/icons-material/Quiz";
+import Footer from "../Footer/footer";
 
 const theme = createTheme({
   direction: "rtl",
@@ -778,6 +779,7 @@ const Emti = () => {
       <br />
 
       <CommentApp />
+      <Footer/>
     </div>
   );
 };

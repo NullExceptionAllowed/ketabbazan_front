@@ -1,5 +1,6 @@
 .designquiz_des{
     margin-top: 80px;
+    margin-bottom: 20px;
     /* position: fixed; */
 }
 .DesignQuiz_summarybook{
@@ -24,5 +25,11 @@
 @media (max-width: 600px) {
     .DesignQuiz_summarybook{
         font-size: 12px;
+    }
+
+    .designquiz_des{
+        margin-top: 80px;
+        margin-bottom: 90px;
+        /* position: fixed; */
     }
 }

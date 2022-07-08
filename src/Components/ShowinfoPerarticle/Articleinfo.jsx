@@ -13,6 +13,7 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import EventIcon from "@mui/icons-material/Event";
 import { useMediaQuery, useTheme } from "@mui/material";
+import Footer from "../Footer/footer";
 
 const ArticleInfo = () => {
   const theme = useTheme();
@@ -207,14 +208,14 @@ const ArticleInfo = () => {
                     style={{
                       color: "#262C7C",
                       fontSize: "20px",
-                      marginTop: "1%",
+                      marginTop: "10px",
                     }}
                   >
                     {articleinfo.title}
                   </h3>
                   <div
                     style={{
-                      marginTop: "0.7%",
+                      marginTop: "5px",
                       height: "30%",
                       marginLeft: "10px",
                       overflow: "Hidden",
@@ -228,7 +229,7 @@ const ArticleInfo = () => {
                   >
                     {summary}
                   </div>
-                  <div style={{ marginTop: "0.7%", display: "flex" }}>
+                  <div style={{ marginTop: "0.7%", display: "flex", alignItems:"center" }}>
                     <Link to={`/ShowProfileuser/${articleinfo.owner_id}`}>
                       <Avatar
                         alt="Remy Sharp"
@@ -270,6 +271,7 @@ const ArticleInfo = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

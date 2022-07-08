@@ -12,6 +12,7 @@ import SimpleSlider from "../emtehani/emtehani";
 import Login from "../Login/Login";
 import BestRate from "../Bestratebook/Bestrate";
  import Categories from "../Categorybook/Category";
+import Footer from "../Footer/footer";
 
 
 const Homepage = () => {
@@ -30,7 +31,7 @@ const Homepage = () => {
       <SimpleSlider />
       <BestRate/>
       <ShownewArcrousel />
-      {/* <Link to={'/Designquiz'} ><center>کوییز</center></Link> */}
+      <Footer/>
     </div>
   );
 };

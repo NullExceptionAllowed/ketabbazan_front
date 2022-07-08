@@ -29,6 +29,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import ChangeNav from "./../Navbar/changeNav";
 import ReactLoading from "react-loading";
 import Stack from "@mui/material/Stack";
+import Footer from "../Footer/footer";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -419,6 +420,7 @@ const Article = () => {
         </CacheProvider>
       </Grid>
       <ToastContainer rtl={true} />
+      <Footer/>
     </div>
   );
 };

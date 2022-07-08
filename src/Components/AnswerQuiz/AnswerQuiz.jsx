@@ -11,6 +11,7 @@ import With2Question from "./With2Question";
 import With3Question from "./With3Question";
 import With4Question from "./With4Question";
 import With5Question from "./With5Question";
+import Footer from "../Footer/footer";
 
 const AnswerQuiz = () => {
   const [questionNum, setquestionNum] = useState();
@@ -112,6 +113,7 @@ const AnswerQuiz = () => {
           {show}
         </Grid>
       </Grid>
+      <Footer />
     </div>
   );
 };

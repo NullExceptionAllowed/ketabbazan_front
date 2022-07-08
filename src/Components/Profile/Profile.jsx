@@ -25,6 +25,7 @@ import Showbook from "./../Showbookall/Showbookall";
 import Wallet from  "./Tools/Wallet.jsx";
 import ChangePassword from "./Tools/ChangePassword";
 import Myarticle from './Tools/myarticle';
+import Footer from "../Footer/footer";
 
 
 const Profile = () => {
@@ -282,7 +283,7 @@ const Profile = () => {
             {show}
         </Grid>
       </Grid>
-
+      <Footer/>
     </div>
   );
 };

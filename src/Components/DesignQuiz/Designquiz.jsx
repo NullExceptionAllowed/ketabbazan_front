@@ -24,6 +24,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import Pagination from "@mui/material/Pagination";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactLoading from "react-loading";
+import Footer from "../Footer/footer";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -519,8 +520,7 @@ const DesignQuiz = () => {
                           width: "100%",
                         }}
                       >
-                        <Grid
-                        >
+                        <Grid>
                           <img
                             src={imgbookquiz}
                             alt="img"
@@ -863,6 +863,9 @@ const DesignQuiz = () => {
         </div>
       </CacheProvider>
       <ToastContainer rtl={true} />
+      <div style={{marginTop:"20px"}}>
+        <Footer />
+      </div>
     </div>
   );
 };
