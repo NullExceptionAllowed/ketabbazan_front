@@ -16,6 +16,7 @@ import DesignQuiz from "./Components/DesignQuiz/Designquiz";
 import AnswerQuiz from "./Components/AnswerQuiz/AnswerQuiz";
 import Showbookcategory from "./Components/Showcategorybook/ShowCategory";
 import Forgetpass from "./Components/Forgetpass/Forgetpass";
+import AboutUs from "./Components/AboutUs/AboutUs";
 import Reset from "./Components/Resetpass/Reset";
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/ShowProfileuser/:id"  component={ShowProfileuser} />
         <Route path="/Designquiz"  component={DesignQuiz} />
         <Route path="/AnswerQuiz/:id"  component={AnswerQuiz} />
+        <Route path="/AboutUs"  component={AboutUs} />
       </Switch>
   );
 };

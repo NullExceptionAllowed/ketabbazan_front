@@ -227,7 +227,7 @@ const DrawerComp = () => {
           <MenuButton Icon={HomeIcon} text="خانه" linkTo={`/`} />
           <Divider variant="middle" style={{ width: "90%" }} />
 
-          <MenuButton  Icon={NotListedLocationOutlinedIcon} text="درباره ما" />
+          <MenuButton  Icon={NotListedLocationOutlinedIcon} text="درباره ما" linkTo={`/AboutUs`}/>
           <Divider variant="middle" style={{ width: "90%" }} />
           {!loginperson && (
             <MenuButton Icon={QuizIcon} text="طرح سوال" linkTo={`/login`} />

@@ -382,6 +382,7 @@ const Nav = () => {
                   </Typography>
                   <Typography
                     component={Link}
+                    to={`/AboutUs`}
                     sx={{
                       marginRight: "1.1rem",
                       textDecoration: "none",
