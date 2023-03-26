@@ -18,7 +18,7 @@ import SimpleContext from "./SimpleContext";
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import {Link,useParams,} from "react-router-dom";
-
+import {ValidateComment} from './validateComment/ValidateComment'
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -31,7 +31,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
+const Comment = ({ comment_text, user, comment_id, replys ,created_on,is_admin, }) => {
     let token = "Token " + localStorage.getItem('token');
     const [reply, setReply] = useState("");
     const [id, setId] = useState("");
@@ -177,8 +177,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
       >
         <div>
             <Grid container >
-                <Grid  item md={0.2} xs={0.2} ></Grid>
-                <Grid item md={11.6}  xs={11.6} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
+                <Grid item md={11}  xs={11.6} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
 
 
                     <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
@@ -189,7 +188,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
                     <p style={{ position: "relative", top: "-25px", right: "5px" }}>{comment_text}</p>
 
                     <Grid container>
-                        <Grid item xs={0.5} ></Grid>
+                        {/* <Grid item xs={0.5} ></Grid> */}
 
                         <Grid item xs={11.0} style={{ marginRight: "5px" }}>
                             <TextareaAutosize onChange={handleSetReply}
@@ -259,12 +258,11 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on }) => {
 
 
                         </Grid>
-                        <Grid item xs={0.5} ></Grid>
                     </Grid>
-
-
                 </Grid>
-                <Grid  item md={0.2} xs={0.2}></Grid>
+                {/* <Grid  item md={0.2} xs={0.2}></Grid> */}
+                <Grid item xs={1} ><ValidateComment comment_id={comment_id} is_validated={false}></ValidateComment></Grid>
+
             </Grid>
         </div>
          </SimpleContext.Provider >
