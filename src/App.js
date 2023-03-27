@@ -19,7 +19,7 @@ import Forgetpass from "./Components/Forgetpass/Forgetpass";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import Reset from "./Components/Resetpass/Reset";
 import NotFound from "./NotFoundPage";
-
+import AdminPanel from "./Components/AdminPanel/AdminPanel";
 const App = () => {
   return (
       <Switch>
@@ -41,6 +41,7 @@ const App = () => {
         <Route path="/Designquiz"  component={DesignQuiz} />
         <Route path="/AnswerQuiz/:id"  component={AnswerQuiz} />
         <Route path="/AboutUs"  component={AboutUs} />
+        <Route path="/Admin"  component={AdminPanel} />
         <Route component={NotFound} />
       </Switch>
   );
