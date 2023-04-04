@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { styled } from '@mui/material/styles';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -18,7 +18,17 @@ import SimpleContext from "./SimpleContext";
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import {Link,useParams,} from "react-router-dom";
-import {ValidateComment} from './validateComment/ValidateComment'
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import IconButton from '@mui/material/IconButton';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import { useTheme } from '@mui/material/styles';
+import BasicTabs from "./tab.jsx";
+import DescriptionIcon from '@mui/icons-material/Description';
+import BadgeIcon from '@mui/icons-material/Badge';
+
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -31,7 +41,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const Comment = ({ comment_text, user, comment_id, replys ,created_on,is_admin, }) => {
+const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , dislike }) => {
     let token = "Token " + localStorage.getItem('token');
     const [reply, setReply] = useState("");
     const [id, setId] = useState("");
@@ -43,6 +53,10 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on,is_admin, 
     useEffect(() => {
         Show();  console.log(context.refresh);
     }, [context.refresh,flag1]);
+
+    const [likeNumber , setlikeNumber]  = useState(0)
+    const [dislikeNumber , setdislikeNumber]  = useState(0)
+    const [open, setOpen] = React.useState(false);
 
 
 
@@ -148,7 +162,159 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on,is_admin, 
 
 
     //const replyShow = (<div>salam</div>) ;
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
+    function SimpleDialog(props) {
+        const { onClose, selectedValue, open } = props;
+      
+        const handleClose = () => {
+          onClose(selectedValue);
+        };
+      
+        const handleListItemClick = (value) => {
+          onClose(value);
+        };
+
+
+       
+
+        // useEffect(() => {
+
+        //     axios.get(`${baseUrl}/profile/info/`, {
+        //         headers: {
+        //             'Content-Type': 'application/json ',
+        //             'Authorization': token
+        //         }
+        //     }).then((res) => {
+    
+        //         setnickName(res.data.nickname);
+        //         setfullName(res.data.profile.fullname);
+        //         setBio(res.data.profile.bio);
+        //         setuserrEmail(res.data.email);
+        //         setusername(res.data.username);
+        //         console.log(res.data.username);
+        //        setimage( `${baseUrl}/profile/getimage/?username=${res.data.username}`);
+               
+        //     });
+           
+        // }, []);
+        // let token = "Token " + localStorage.getItem('token');
+
+
+
+
+
+
+
+        if(window.innerWidth <= 400)
+        {
+        return (
+          
+          <Dialog fullScreen={fullScreen}  onClose={handleClose} open={open}>
+        
+               <center >
+               <Avatar  sx={{ width: 140, height: 140 }}  style={{   marginTop:"25px"}} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
+               <p  style={{  marginTop:"15px" , fontSize:"20px"  }}>امیرحسین ایزدی<BadgeIcon style={{position:"relative", top:"6px", right:"-5px"}}/></p>
+             
+               
+              
+               
+             
+               
+              <div style={{width:"65%"  , marginTop:"15px"  }}>
+                <p style={{  fontSize:"20px"  , color:"rgb(25,118,210)" }}>بیوگرافی <DescriptionIcon style={{position:"relative", top:"6px"}}/></p>
+               <p  style={{  fontSize:"16px"   }}>  آینده زیبا از آن کسانی خواهد بود
+
+                    که زیبایی رویاهایشان را باتمام وجود باور دارند
+
+                     همیشه لبخند بزنیم و بگوییم
+
+                    باور دارم که میشود
+                  </p>
+                 </div>
+
+           
+              
+              
+             
+               
+                
+               </center>
+                 
+
+                <br/>
+
+               <BasicTabs />
+          </Dialog>
+        );
+        }
+        else {
+            return (
+          
+                <Dialog fullScreen={fullScreen}  onClose={handleClose} open={open}>
+              
+                     <div >
+                     <Avatar  sx={{ width: 140, height: 140 }}  style={{  float:"right" , marginRight:"20px" , marginTop:"25px"}} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
+                     <p  style={{ float:"right" , marginTop:"45px" , fontSize:"20px" , marginRight:"15px" ,  direction:"rtl" }}>امیرحسین ایزدی<BadgeIcon style={{position:"relative", top:"6px", right:"5px"}}/></p>
+                      <br/>
+                      <br/>
+                      <br/>
+                    
+                     
+                   
+                     
+                    <div style={{width:"65%"  , marginTop:"35px"  , marginRight:"10px"  , float:"right"}}>
+                      <p style={{  fontSize:"20px"  , direction:"rtl" , color:"rgb(25,118,210)" }}>بیوگرافی <DescriptionIcon style={{position:"relative", top:"6px"}}/></p>
+                     <p  style={{  fontSize:"16px"  , direction:"rtl" }}>  آینده زیبا از آن کسانی خواهد بود
+      
+                          که زیبایی رویاهایشان را باتمام وجود باور دارند
+      
+                           همیشه لبخند بزنیم و بگوییم
+      
+                          باور دارم که میشود
+                        </p>
+                       </div>
+      
+                 
+                     <br/>
+                    
+                   
+                     
+                      
+                     </div>
+                       
+      
+                      <br/>
+      
+                     <BasicTabs />
+                </Dialog>
+              );
+
+
+        }
+      }
+
+
+
+
+    const dislikeFunction = () => {
+           
+    }
+
+
+    const likeFunction = () => {
+        
+    }
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+       
+      };
 
 
 
@@ -173,22 +339,72 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on,is_admin, 
          
          
          //setComments : setComments,
+           //  
+           //
         }}
       >
+         
         <div>
             <Grid container >
-                <Grid item md={11}  xs={11.6} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
+                <Grid  item md={0.2} xs={0.2} ></Grid>
+                <Grid item md={11.6}  xs={11.6} style={{ borderBottom: "1px solid lightgray", paddingBottom: "10px" }}>
 
-
-                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
                     
-                    <a style={{ position: "relative", top: "-45px", right: "47px" }}>{user}</a>
+                    <Avatar onClick={handleClickOpen} style={{ marginTop: "15px" }} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
+                    <SimpleDialog
+                     
+                    open={open}
+                     onClose={handleClose}
+                     /> 
 
-                    <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{(new Date(created_on).toLocaleDateString('fa-IR'))}</p>
+                  
+        
+      
+                    <Grid container >
+                    <Grid xs={1} md={1}>
+                    <a style={{ position: "relative", top: "-40px", right: "50px" }}>{user}</a>
+
+                    <p  style={{ position: "relative", top: "-45px", right: "43px" }}>{(new Date(created_on).toLocaleDateString('fa-IR'))}</p>
+
+                    </Grid>
+                    <Grid xs={7.5} md={8.6}> </Grid>
+                    <Grid xs={0.3} md={0.15}>  <a style={{ position:"relative", top:"6px"}}>{like}</a>  </Grid>
+                    <Grid item xs={0.8} md={0.4}>
+                       <IconButton  >
+                            <ThumbDownIcon color="primary"  onClick={dislikeFunction} />
+                       </IconButton>
+                    </Grid>
+                    <Grid xs={0.7} sm={0.45} md={0.45}></Grid>
+
+                    {/* </div> */}
+                   
+                    <Grid xs={0.3} md={0.15}>  <a style={{   position:"relative", top:"6px"}}>{dislike}</a> </Grid>
+
+
+                    {/* <div style={{position:"relative" , right:"85%",top:"-12px" , display:"inline" }}> */}
+                   
+                   <Grid xs={0.8} md={0.4}>
+                      <IconButton  children= "no" >
+                           <ThumbUpIcon color="primary" onClick={likeFunction}  />  
+                      </IconButton>
+                   </Grid>
+                   
+                    
+                    {/* </div> */}
+                   
+                    {/*  */}
+
+                     <Grid xs={0.5} md={0.8}></Grid>
+                    
+                    </Grid>
+
+                    
+                   
+                    <br/>
                     <p style={{ position: "relative", top: "-25px", right: "5px" }}>{comment_text}</p>
-
+                    
                     <Grid container>
-                        {/* <Grid item xs={0.5} ></Grid> */}
+                        <Grid item xs={0.5} ></Grid>
 
                         <Grid item xs={11.0} style={{ marginRight: "5px" }}>
                             <TextareaAutosize onChange={handleSetReply}
@@ -258,11 +474,12 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on,is_admin, 
 
 
                         </Grid>
+                        <Grid item xs={0.5} ></Grid>
                     </Grid>
-                </Grid>
-                {/* <Grid  item md={0.2} xs={0.2}></Grid> */}
-                <Grid item xs={1} ><ValidateComment comment_id={comment_id} is_validated={false}></ValidateComment></Grid>
 
+
+                </Grid>
+                <Grid  item md={0.2} xs={0.2}></Grid>
             </Grid>
         </div>
          </SimpleContext.Provider >

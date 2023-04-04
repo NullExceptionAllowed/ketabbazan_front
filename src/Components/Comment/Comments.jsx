@@ -23,21 +23,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Comments = () => {
     const context = useContext(SimpleContext);
-    const [validationStates, setValidationStates] = useState([]);
-   useEffect(() => {
-    if( context.comments.length > 0) {
-        const v=[];
-        context.comments.map((comment) => {
-            v.push({
-                comment_id:comment.id,
-                is_validated:-1//-1: not validated, 0: nothing, 1: accepted
-            });
-        });
-    }
-   }, [context.comments]);
 
-   const is_admin=()=>localStorage.getItem('is_admin') === "true" ? true : false;
    
+
+
 
     const nullShow = () => {
         let show = null;
@@ -103,9 +92,8 @@ const Comments = () => {
                                     replys = { comment.reply }
                                     created_on = { comment.created_on }
                                     img = { comment.user}
-                                    is_admin={is_admin()}
-                                    validationStates={validationStates}
-                                    setValidationStates={setValidationStates}
+                                    like = {comment.like}
+                                    dislike = {comment.dislike}
                                 />
 
 
