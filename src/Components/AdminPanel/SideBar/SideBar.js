@@ -14,7 +14,7 @@ function SideBar(props) {
     const ClosesideBar =()=> setsidebar(!sidebar)
     return (
         <>
-            <IconContext.Provider value={{color:'red'}}>
+            <IconContext.Provider value={{color:'white'}}>
         <div className="navbar">
             <Link to="#" className="menu-bars">
                 <FaIcons.FaBars onClick={Showsidebar}/>

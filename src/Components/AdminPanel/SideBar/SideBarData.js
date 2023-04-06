@@ -13,7 +13,7 @@ export const SideBarData = [
     },
     {
         title:'کامنت ها',
-        path:'/Admin/comments',
+        path:'/Admin_comments',
         icon:<AiIcons.AiOutlineComment></AiIcons.AiOutlineComment>,
         cName:'nav-text'
     },
@@ -31,7 +31,7 @@ export const SideBarData = [
     },
     {
         title:'مقاله ها',
-        path:'/Admin/Articles',
+        path:'/Admin_Articles',
         icon:<RiIcons.RiArticleLine></RiIcons.RiArticleLine>,
         cName:'nav-text'
     }

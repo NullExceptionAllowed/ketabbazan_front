@@ -3,6 +3,8 @@ import './commentsPage.css';
 import SideBar from "../SideBar/SideBar";
 import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
+import AboutUs from "../../AboutUs/AboutUs";
+
 
 
 const ChangeNav = () => {
@@ -34,7 +36,7 @@ function Comments(props) {
             <SideBar />
             <div className="Admin_comments_page">
 
-
+                
 
                 <p>cmnt</p>
             </div>
