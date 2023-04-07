@@ -366,6 +366,81 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
 
     }
 
+
+
+
+
+    const dislikeFunction2 = () => {
+        axios.post(
+            `${baseUrl}/comment/dislike/`,
+            JSON.stringify(comment_id_set),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            }
+        ).then((res) => {
+            console.log(res.status);
+        })
+
+        axios.get(`${baseUrl}/comment/?id=${idid}`, {
+            headers: {
+               'Content-Type': 'application/json ',
+               "Authorization": token
+             }
+          }).then((res) => {
+            
+           console.log(res.status);
+           context.setComments(res.data.all_comments);
+           context.setRefresh(context.refresh +  1);
+
+           
+          
+      
+          })
+        }
+
+
+
+        const likeFunction2 = () => {
+            axios.post(
+                `${baseUrl}/comment/like/`,
+                JSON.stringify(comment_id_set),
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": token
+                    }
+                }
+            ).then((res) => {
+                console.log(res.status);
+            })
+    
+            axios.get(`${baseUrl}/comment/?id=${idid}`, {
+                headers: {
+                   'Content-Type': 'application/json ',
+                   "Authorization": token
+                 }
+              }).then((res) => {
+                
+               console.log(res.status);
+               context.setComments(res.data.all_comments);
+               context.setRefresh(context.refresh +  1);
+               
+              
+          
+              })
+    
+        }
+
+
+
+
+
+
+
+
     const handleClickOpen = () => {
         setOpen(true);
       };
@@ -460,15 +535,48 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
                             />
                             {Show()}
 
-
+                            
                             <Grid container >
 
 
                                 <Grid item xs={12} >
 
                                     {replys.map(replyexa => (
-                                        <div>
+                                        <div style={{position:"relative"}}>
+                                            
+                                            <Grid  container >
 
+<Grid  item xs={8.7} md={9.9}></Grid>
+
+<Grid item xs={0.3} md={0.15}>
+<a style={{ position:"absolute", top:"21px"}}>{dislike}</a>
+</Grid>
+
+
+<Grid item xs={0.8} md={0.4}>
+<IconButton   style={{position:"absolute", top:"15px"}}>
+ <ThumbDownIcon color="primary"  onClick={dislikeFunction2} />
+</IconButton>
+ </Grid>
+
+
+ <Grid xs={0.7} sm={0.45} md={0.45}></Grid>
+
+
+ <Grid item xs={0.3} md={0.15}>
+<a style={{ position:"absolute", top:"21px"}}>{like}</a>
+</Grid>
+
+
+<Grid item xs={0.8} md={0.4}>
+<IconButton   style={{position:"absolute", top:"15px"}}>
+ <ThumbUpIcon color="primary"  onClick={likeFunction2} />
+</IconButton>
+ </Grid>
+
+
+
+</Grid>
 
 
                                             <Box
@@ -501,9 +609,16 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
                                                     open={open}
                                                     onClose={handleClose}
                                                          /> 
+
+
+                                                          
                                                     <a style={{ position: "relative", top: "-45px", right: "47px" }}>{replyexa.user}</a>
 
                                                     <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{(new Date(created_on).toLocaleDateString('fa-IR'))}</p>
+
+
+                                                 
+
                                                     <p style={{ position: "relative", top: "-30px", right: "5px" }}>{replyexa.reply_text}</p>
 
 
