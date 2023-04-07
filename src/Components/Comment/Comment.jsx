@@ -494,8 +494,13 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
                                                     <Divider orientation="vertical" variant="middle" flexItem />
 
 
-                                                    <Avatar style={{ marginTop: "15px" }} alt="Remy Sharp" 
+                                                    <Avatar 
+                                                            onClick={handleClickOpen} style={{ marginTop: "15px" }} alt="Remy Sharp" 
                                                     src={`${baseUrl}/profile/getimage/?username=${replyexa.user}`} />
+                                                      <SimpleDialog
+                                                    open={open}
+                                                    onClose={handleClose}
+                                                         /> 
                                                     <a style={{ position: "relative", top: "-45px", right: "47px" }}>{replyexa.user}</a>
 
                                                     <p  style={{ position: "relative", top: "-48px", right: "43px" }}>{(new Date(created_on).toLocaleDateString('fa-IR'))}</p>
