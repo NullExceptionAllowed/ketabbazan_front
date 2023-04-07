@@ -2,6 +2,7 @@ import React from 'react';
 import SideBar from "./SideBar/SideBar";
 import Nav from "../Navbar/Nav";
 import Nav2 from "../Navbar/Nav2";
+import Homepage from "../Homepage/Homepage";
 
 
 const ChangeNav = () => {
@@ -31,6 +32,7 @@ function AdminPanel(props) {
         <>
             <ChangeNav></ChangeNav>
             <SideBar />
+            <Homepage />
 
 
         </>

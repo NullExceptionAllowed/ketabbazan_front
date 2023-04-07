@@ -36,7 +36,7 @@ function Comments(props) {
             <SideBar />
             <div className="Admin_comments_page">
 
-                
+
 
                 <p>cmnt</p>
             </div>

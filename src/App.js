@@ -23,6 +23,7 @@ import AdminPanel from "./Components/AdminPanel/AdminPanel";
 import comments from "./Components/AdminPanel/Pages/comments";
 import Quizz from "./Components/AdminPanel/Pages/Quizz";
 import Articles from "./Components/AdminPanel/Pages/Articles";
+import Users from "./Components/AdminPanel/Pages/Users";
 const App = () => {
   return (
       <Switch>
@@ -46,8 +47,9 @@ const App = () => {
         <Route path="/AboutUs"  component={AboutUs} />
         <Route path="/Admin"  component={AdminPanel} />
         <Route path="/Admin_comments"  component={comments} />
-        <Route path="/Admin/Quizzes"  component={Quizz} />
+        <Route path="/Admin_Quizzes"  component={Quizz} />
         <Route path="/Admin_Articles"  component={Articles} />
+        <Route path="/Admin_Users"  component={Users} />
         <Route component={NotFound} />
       </Switch>
   );

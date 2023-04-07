@@ -19,13 +19,13 @@ export const SideBarData = [
     },
     {
         title:'کوییز ها',
-        path:'/Admin/Quizzes',
+        path:'/Admin_Quizzes',
         icon:<MdIcons.MdQuiz></MdIcons.MdQuiz>,
         cName:'nav-text'
     },
     {
         title:'کاربران ها',
-        path:'/Admin/Users',
+        path:'/Admin_Users',
         icon:<AiIcons.AiOutlineUserSwitch></AiIcons.AiOutlineUserSwitch>,
         cName:'nav-text'
     },
