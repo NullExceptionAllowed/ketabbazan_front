@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/VeriFyArticles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/AdminPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/AdminPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Articles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Articles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ArticlesPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ArticlesPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/QuizzPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/QuizzPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/UsersPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/UsersPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/commentsPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/commentsPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/SideBar/SideBarData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/SideBar/SideBarData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Comment/Comment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Comment/Comment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Comment/CommentApp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Comment/CommentApp.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Comment/Comments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Comment/Comments.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Comment/tab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Comment/tab.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +65,7 @@
       <workItem from="1680003156308" duration="1077000" />
       <workItem from="1680426028811" duration="4667000" />
       <workItem from="1680783689270" duration="5995000" />
-      <workItem from="1680866219607" duration="4972000" />
+      <workItem from="1680866219607" duration="5633000" />
     </task>
     <servers />
   </component>
