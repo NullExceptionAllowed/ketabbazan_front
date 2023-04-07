@@ -207,12 +207,15 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
         // let token = "Token " + localStorage.getItem('token');
 
 
+        //   const isnull = bio.isnull;
+          let length = 0
+          if(bio != null)
+          {
+           length = bio.length;
+          }
+          
 
-
-
-
-
-        if(window.innerWidth <= 600)
+        if(window.innerWidth <= 600 || length <=20 )
         {
         return (
           
