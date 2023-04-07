@@ -46,18 +46,20 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
     const [reply, setReply] = useState("");
     const [id, setId] = useState("");
     const [flag1, setFlag1] = useState("0");
-    const [getComments, setComments] = useState("");
+    
     const context = useContext(SimpleContext);
     const params = useParams();
     const idid = params.id;
     useEffect(() => {
-        Show();  console.log(context.refresh);
+        intialize();Show();  console.log(context.refresh);
     }, [context.refresh,flag1]);
 
     const [likeNumber , setlikeNumber]  = useState(0)
     const [dislikeNumber , setdislikeNumber]  = useState(0)
     const [open, setOpen] = React.useState(false);
-
+    const [name , setName] = React.useState("");
+    const [bio , setBio]= React.useState("");
+    const [image , setImage]= React.useState("");
 
 
 
@@ -83,22 +85,25 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
           }).then((res) => {
             
            console.log(res.status);
-           setComments(res.data.all_comments);
+           context.setComments(res.data.all_comments);
            
            
-          
       
           })
       
-        //   axios.get(`${baseUrl}/profile/image/`, {
-        //     headers: {
-        //        'Content-Type': 'application/json ',
-        //        "Authorization": token
-        //      }
-        //   }).then((res) => {
-        //     setImg(res);
-           
-        //   })
+          axios.get(`${baseUrl}/showprofile/?username=${user}`, {
+            headers: {
+               'Content-Type': 'application/json ',
+               "Authorization": token
+             }
+          }).then((res) => {
+            
+             setName(res.data.profile.nickname);
+             setBio(res.data.profile.profile.bio);
+             setImage(res.data.profile.profile.image)
+
+             
+          })
       
       
            
@@ -207,7 +212,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
 
 
 
-        if(window.innerWidth <= 400)
+        if(window.innerWidth <= 600)
         {
         return (
           
@@ -215,7 +220,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
         
                <center >
                <Avatar  sx={{ width: 140, height: 140 }}  style={{   marginTop:"25px"}} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
-               <p  style={{  marginTop:"15px" , fontSize:"20px"  }}>امیرحسین ایزدی<BadgeIcon style={{position:"relative", top:"6px", right:"-5px"}}/></p>
+               <p  style={{  marginTop:"15px" , fontSize:"20px"  }}>{name}<BadgeIcon style={{position:"relative", top:"6px", right:"-5px"}}/></p>
              
                
               
@@ -224,13 +229,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
                
               <div style={{width:"65%"  , marginTop:"15px"  }}>
                 <p style={{  fontSize:"20px"  , color:"rgb(25,118,210)" }}>بیوگرافی <DescriptionIcon style={{position:"relative", top:"6px"}}/></p>
-               <p  style={{  fontSize:"16px"   }}>  آینده زیبا از آن کسانی خواهد بود
-
-                    که زیبایی رویاهایشان را باتمام وجود باور دارند
-
-                     همیشه لبخند بزنیم و بگوییم
-
-                    باور دارم که میشود
+               <p  style={{  fontSize:"16px"   }}>  {bio}
                   </p>
                  </div>
 
@@ -256,23 +255,20 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
               
                      <div >
                      <Avatar  sx={{ width: 140, height: 140 }}  style={{  float:"right" , marginRight:"20px" , marginTop:"25px"}} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user}`} />
-                     <p  style={{ float:"right" , marginTop:"45px" , fontSize:"20px" , marginRight:"15px" ,  direction:"rtl" }}>امیرحسین ایزدی<BadgeIcon style={{position:"relative", top:"6px", right:"5px"}}/></p>
-                      <br/>
-                      <br/>
-                      <br/>
-                    
+                     <p  style={{ float:"right" , marginTop:"40px" , fontSize:"20px" , marginRight:"15px" ,  direction:"rtl" }}>{name}<BadgeIcon style={{position:"relative", top:"6px", right:"5px"}}/></p>
+                      
                      
                    
                      
-                    <div style={{width:"65%"  , marginTop:"35px"  , marginRight:"10px"  , float:"right"}}>
-                      <p style={{  fontSize:"20px"  , direction:"rtl" , color:"rgb(25,118,210)" }}>بیوگرافی <DescriptionIcon style={{position:"relative", top:"6px"}}/></p>
-                     <p  style={{  fontSize:"16px"  , direction:"rtl" }}>  آینده زیبا از آن کسانی خواهد بود
-      
-                          که زیبایی رویاهایشان را باتمام وجود باور دارند
-      
-                           همیشه لبخند بزنیم و بگوییم
-      
-                          باور دارم که میشود
+                    <div style={{width:"69%"  , marginTop:"23px"  , marginRight:"10px"  , float:"right"}}>
+                      <p style={{  fontSize:"20px"  , direction:"rtl" , color:"rgb(25,118,210)" , float:"right" }}>بیوگرافی <DescriptionIcon style={{position:"relative", top:"6px"}}/></p>
+                      <br/>
+                      <br/>
+                      
+                      
+                     <p  style={{  fontSize:"16px"  , direction:"rtl" , float:"right" ,marginLeft:"100px"  }}>  {bio}
+                    
+                    
                         </p>
                        </div>
       
@@ -295,16 +291,76 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
         }
       }
 
+    const comment_id_set = {
 
+        comment_id : comment_id 
+    }
 
 
     const dislikeFunction = () => {
+        axios.post(
+            `${baseUrl}/comment/dislike/`,
+            JSON.stringify(comment_id_set),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            }
+        ).then((res) => {
+            console.log(res.status);
+        })
+
+        axios.get(`${baseUrl}/comment/?id=${idid}`, {
+            headers: {
+               'Content-Type': 'application/json ',
+               "Authorization": token
+             }
+          }).then((res) => {
+            
+           console.log(res.status);
+           context.setComments(res.data.all_comments);
+           context.setRefresh(context.refresh +  1);
+
            
+          
+      
+          })
+
+
+
     }
 
 
     const likeFunction = () => {
-        
+        axios.post(
+            `${baseUrl}/comment/like/`,
+            JSON.stringify(comment_id_set),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            }
+        ).then((res) => {
+            console.log(res.status);
+        })
+
+        axios.get(`${baseUrl}/comment/?id=${idid}`, {
+            headers: {
+               'Content-Type': 'application/json ',
+               "Authorization": token
+             }
+          }).then((res) => {
+            
+           console.log(res.status);
+           context.setComments(res.data.all_comments);
+           context.setRefresh(context.refresh +  1);
+           
+          
+      
+          })
+
     }
 
     const handleClickOpen = () => {
@@ -322,27 +378,8 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
     //onClick={context.handleCreateNewComment}
 
     return (
-        // <SimpleContext.Provider
-        //     value={{
-
-        //         refresh: refreshl
-        //     }}
-        // >
-        <SimpleContext.Provider
-        value={{
-          
-          
-          
-          comments: getComments,
-          
-          
-         
-         
-         //setComments : setComments,
-           //  
-           //
-        }}
-      >
+        
+        <div >
          
         <div>
             <Grid container >
@@ -368,7 +405,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
 
                     </Grid>
                     <Grid xs={7.5} md={8.6}> </Grid>
-                    <Grid xs={0.3} md={0.15}>  <a style={{ position:"relative", top:"6px"}}>{like}</a>  </Grid>
+                    <Grid xs={0.3} md={0.15}>  <a style={{ position:"relative", top:"6px"}}>{dislike}</a>  </Grid>
                     <Grid item xs={0.8} md={0.4}>
                        <IconButton  >
                             <ThumbDownIcon color="primary"  onClick={dislikeFunction} />
@@ -378,7 +415,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
 
                     {/* </div> */}
                    
-                    <Grid xs={0.3} md={0.15}>  <a style={{   position:"relative", top:"6px"}}>{dislike}</a> </Grid>
+                    <Grid xs={0.3} md={0.15}>  <a style={{   position:"relative", top:"6px"}}>{like}</a> </Grid>
 
 
                     {/* <div style={{position:"relative" , right:"85%",top:"-12px" , display:"inline" }}> */}
@@ -482,7 +519,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
                 <Grid  item md={0.2} xs={0.2}></Grid>
             </Grid>
         </div>
-         </SimpleContext.Provider >
+         </div >
 
 
 

@@ -8,6 +8,8 @@ import axios from "axios";
 import SimilarBooks from "../similarBooks/similarBooks.jsx";
 import {Link,useParams,} from "react-router-dom";
 import { baseUrl } from "../../Variable";
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
 
 
 const CommentApp = () => {
@@ -131,7 +133,7 @@ const CommentApp = () => {
         handleSetComment: handleSetComment,
         setFlag :  setFlag,
         intialize : intialize,
-       // setComments : setComments,
+        setComments : setComments,
       }}
     >
       <div>
