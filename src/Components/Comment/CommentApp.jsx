@@ -10,6 +10,7 @@ import {Link,useParams,} from "react-router-dom";
 import { baseUrl } from "../../Variable";
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
+import SimpleDialogGift from "../Gift/Gift.jsx";
 
 
 const CommentApp = () => {
@@ -149,10 +150,11 @@ const CommentApp = () => {
 
         <AddNewComment />
         <br />
+        {/* <SimpleDialogGift open={true}  idofbook={true}  onClose={() => {return false}}  />  */}
       </div>
 
     </SimpleContext.Provider>
-
+  
   )
 }
 export default CommentApp;

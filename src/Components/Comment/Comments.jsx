@@ -38,6 +38,7 @@ const Comments = () => {
 
     let showHeader = () => {
         let show = null;
+        console.log(context.comments)
         if (context.comments.length > 0) {
             show = (<Grid container spacing={2}>
                 <Grid item xs={3}></Grid>
@@ -77,7 +78,6 @@ const Comments = () => {
                             context.comments.map(comment => (
                             
                                 
-                           
                                    
                                     
                                       

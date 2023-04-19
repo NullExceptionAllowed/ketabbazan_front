@@ -28,6 +28,8 @@ import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QuizIcon from "@mui/icons-material/Quiz";
 import Footer from "../Footer/footer";
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import SimpleDialogGift from "../Gift/Gift.jsx";
 
 const theme = createTheme({
   direction: "rtl",
@@ -38,6 +40,9 @@ const Emti = () => {
   const history = useHistory();
   const [apiloadar, setapiload] = useState(false);
   const [bool, setBool] = useState(0);
+  const [opengift, setOpengift] = React.useState(false);
+  // const params = useParams();
+  // const idofbook = params.id;
 
   const handleClose = () => {
     setOpen(false);
@@ -90,7 +95,7 @@ const Emti = () => {
     fontSize: 20,
   };
   let typo8 = {
-    margin: "100px auto auto auto",
+    margin: "40px auto auto auto",
     fontSize: 14,
   };
   let typo9 = {
@@ -378,6 +383,17 @@ const Emti = () => {
     }
     setAnchorEl(event.currentTarget);
   };
+
+  const handleClickOpenGift = () => {
+    setOpengift(true);
+  };
+
+  const handleCloseGift = () => {
+    setOpengift(false);
+   
+  };
+
+
   const handleCclose = () => {
     setAnchorEl(null);
   };
@@ -735,6 +751,32 @@ const Emti = () => {
                     </Menu>
                   )}
                 </Grid>
+
+
+                <Grid>
+                  <Button
+                    startIcon={
+                      <CardGiftcardIcon
+                        style={{ margin: "auto -40px auto auto" }}
+                      />
+                    }
+                    variant="contained"
+                    onClick={handleClickOpenGift}
+                    style={{
+                      backgroundColor: "CAE5F3",
+                      margin: "20px auto auto auto",
+                      borderRadius: "10px",
+                      fontWeight: 800,
+                      width: "200px",
+                      height: "40px",
+                    }}
+                  >
+                    هدیه دادن کتاب
+                  </Button>
+                </Grid>
+                {/* opengift */}
+                <SimpleDialogGift open={opengift}  idofbook={id}  onClose={handleCloseGift}  />
+
 
                 <Grid>
                   <Typography style={typo8}>قیمت محصول:</Typography>

@@ -90,7 +90,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
            
       
           })
-      
+          console.log(user)
           axios.get(`${baseUrl}/showprofile/?username=${user}`, {
             headers: {
                'Content-Type': 'application/json ',
