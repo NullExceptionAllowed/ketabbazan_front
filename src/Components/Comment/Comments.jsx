@@ -92,6 +92,8 @@ const Comments = () => {
                                     replys = { comment.reply }
                                     created_on = { comment.created_on }
                                     img = { comment.user}
+                                    like = {comment.like}
+                                    dislike = {comment.dislike}
                                 />
 
 

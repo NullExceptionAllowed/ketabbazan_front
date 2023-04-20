@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { Calculate } from '@mui/icons-material';
+import { AiFillFilter } from 'react-icons/ai';
 
 export default function SearchBar({open,close}) {
   const [search, setSearch] = useState("");
@@ -51,11 +52,12 @@ export default function SearchBar({open,close}) {
               </IconButton>
               <InputBase
                 sx={{ ml: 1, flex: 1 }}
-                placeholder="جستجوی کتاب و نویسنده"
+                placeholder=" سلام"
                 inputProps={{ "aria-label": "سرچ کتاب ها" }}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
+              <AiFillFilter/>
               <IconButton
                 sx={{ p: "10px", color: "#1565C0" }}
                 aria-label="search"
