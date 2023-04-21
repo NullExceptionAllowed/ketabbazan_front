@@ -102,6 +102,8 @@ const Login = ({ history }) => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("is_super_admin", response.data.is_super_admin);
           localStorage.setItem("is_admin", response.data.is_admin);
+          //console.log( response.data.is_super_admin);
+          //console.log( response.data.is_admin);
           if (response.data.nickname !== null) {
             localStorage.setItem("nickname", response.data.nickname);
           }
@@ -109,10 +111,13 @@ const Login = ({ history }) => {
           setTimeout(() => {
             if (response.data.is_admin == true && response.data.is_super_admin == true){
               history.replace("/Root");
+              localStorage.setItem("main_path", "/Root");
             }else if (response.data.is_admin == true && response.data.is_super_admin == false){
               history.replace("/Admin");
+              localStorage.setItem("main_path", "/Admin");
             }else {
               history.replace("/");
+              localStorage.setItem("main_path", "/");
             }
 
           }, 2000);
