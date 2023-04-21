@@ -58,20 +58,20 @@ const Searchbook = () => {
     }
 
     axios({
-      url: `${baseUrl}/search/?q=${searchUrlParam}&page=page_count`,
+      url: `${baseUrl}/search/?q=${searchUrlParam}?s=${searchUrlParamstars}?w=${searchUrlParamwriter}?pb=${searchUrlParampublisher}?g=${searchUrlParamganre}&page=page_count`,
     }).then((response) => {
       setnumpage2(response.data);
       console.log(response.data);
     });
     axios({
       url: searchUrlParamPage
-        ? `${baseUrl}/search/?q=${searchUrlParam}&page=${pagenum2}`
-        : `${baseUrl}/search/?q=${searchUrlParam}`,
+        ? `${baseUrl}/search/?q=${searchUrlParam}?s=${searchUrlParamstars}?w=${searchUrlParamwriter}?pb=${searchUrlParampublisher}?g=${searchUrlParamganre}&page=${pagenum2}`
+        : `${baseUrl}/search/?q=${searchUrlParam}?s=${searchUrlParamstars}?w=${searchUrlParamwriter}?pb=${searchUrlParampublisher}?g=${searchUrlParamganre}`,
     }).then((response) => {
       setbookinfo(response.data);
       setApiLoading(false);
     });
-  }, [search]);
+  }, [search,writer,stars,publisher,ganre]);
 
   const handlePagination2 = (e, p) => {
     setpagenum2(p);
