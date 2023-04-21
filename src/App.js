@@ -24,7 +24,6 @@ import comments from "./Components/AdminPanel/Pages/comments";
 import Quizz from "./Components/AdminPanel/Pages/Quizz";
 import Articles from "./Components/AdminPanel/Pages/Articles";
 import Users from "./Components/AdminPanel/Pages/Users";
-import AdvancedSearch from "./Components/AdvancedSearch/AdvancedSearch";
 const App = () => {
   return (
       <Switch>
@@ -51,7 +50,6 @@ const App = () => {
         <Route path="/Admin_Quizzes"  component={Quizz} />
         <Route path="/Admin_Articles"  component={Articles} />
         <Route path="/Admin_Users"  component={Users} />
-        <Route path="/Adv"  component={AdvancedSearch} />
         <Route component={NotFound} />
       </Switch>
   );

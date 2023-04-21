@@ -5,6 +5,7 @@
     border-radius: 20px ;
     box-shadow: rgba(0, 0, 0, 0.443) 0px 2px 10px;
     border: #aaaaaa;
+    background-color: white;
 }
 
 .grid-item {
@@ -42,4 +43,13 @@
 .advanced_search_img{
     height: 62px;
     width: 60px;
+}
+.GenerList{
+    background-color: transparent;
+    border: none;
+
+}
+.GenerList option{
+    background-color: #ebedf1;
+    border: none;
 }

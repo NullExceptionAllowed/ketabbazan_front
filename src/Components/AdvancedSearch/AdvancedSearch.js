@@ -55,12 +55,40 @@ const AdvancedSearch = () => {
             setoptions(response.data);
             console.log(response.data);
         });
-    }, [])
+    }, []);
+
+
+    const allgeners = options.map((item,index) => item.name);
+    allgeners.push("سایر دسته بندی ها")
+    console.log(allgeners)
+    console.log(typeof(allgeners))
+    function GenerList(props) {
+        const listItems = allgeners.map((item) =>
+            <option onChange={Setganre} value={ganre}>{item}</option>
+        );
+        return (
+            <select className="GenerList">{listItems}</select>
+        );
+    }
+
+
 
 
 
     return (
         <>
+            <Typography
+                variant="h5"
+                style={{
+                    fontWeight: 800,
+                    color: "#1565C0",
+                    textAlign: "center",
+                    marginBottom: "20px",
+                }}
+            >
+                جستجوی پیشرفته
+            </Typography>
+
 
             <div className="Advanced_Search">
                 <Box
@@ -213,18 +241,7 @@ const AdvancedSearch = () => {
                                 display: { md: "flex", xs: "none" },
                             }}
                         >
-                            <Dropdown
-                                sx={{ ml: 1, flex: 1, padding: "16px" ,direction: "rtl"}}
-                                style={{
-                                    marginRight: "1.1rem",
-                                    textDecoration: "none",
-                                    color: "#545252",
-                                }}
-                                options={options}
-                                onChange={Setganre}
-                                value={ganre}
-                                placeholder="جست و جو ژانر" />
-                                <MdOutlineKeyboardArrowDown style={{ color: "gray" }} />
+                            <GenerList/>
                         </Grid>
                         <Grid
                             sx={{
