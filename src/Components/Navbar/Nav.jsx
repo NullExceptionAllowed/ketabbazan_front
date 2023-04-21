@@ -320,6 +320,16 @@ const Nav = () => {
   const MouseOut = (event) => {
     event.target.style.color = "#545252";
   };
+  let is_admin = localStorage.getItem('is_admin');
+  let is_super_admin = localStorage.getItem('is_super_admin');
+  let path ='/';
+  if (is_admin == true && is_super_admin == true){
+    path.replace("/Root")
+  }else if (is_admin == true && is_super_admin == false){
+    path.replace("/Admin");
+  }else {
+    path.replace("/");
+  }
   return (
     <Box sx={{ flexGrow: 1, direction: "rtl" }}>
       <AppBar
@@ -337,7 +347,7 @@ const Nav = () => {
                   width: "84%",
                 }}
               >
-                <Grid component={Link} to={`/`}>
+                <Grid component={Link} to={path}>
                   <img
                     className="Nav_img"
                     src={Logo}
@@ -349,7 +359,7 @@ const Nav = () => {
                 <Grid
                   component={Link}
                   className="Nav_type"
-                  to={`/`}
+                  to={path}
                   style={{
                     color: "#0D9ECF",
                     marginRight: "10px",
@@ -369,7 +379,7 @@ const Nav = () => {
                 >
                   <Typography
                     component={Link}
-                    to={`/`}
+                    to={path}
                     sx={{
                       marginRight: "1.1rem",
                       textDecoration: "none",
