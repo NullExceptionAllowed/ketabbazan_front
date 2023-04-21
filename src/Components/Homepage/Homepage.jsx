@@ -13,6 +13,7 @@ import Login from "../Login/Login";
 import BestRate from "../Bestratebook/Bestrate";
  import Categories from "../Categorybook/Category";
 import Footer from "../Footer/footer";
+import AdvancedSearch from "../AdvancedSearch/AdvancedSearch";
 
 
 const Homepage = () => {
@@ -28,6 +29,7 @@ const Homepage = () => {
       <Header />
       <Workinfo />
       <Categories/>
+      <AdvancedSearch/>
       <SimpleSlider />
       <BestRate/>
       <ShownewArcrousel />
