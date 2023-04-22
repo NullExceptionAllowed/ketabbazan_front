@@ -280,16 +280,22 @@ const idofbook = params.id;
             Authorization: token,
           },
           
-        }).then((response) => {
-          sethasbook(response.data.hasbook);
         });
 
  //---------------------------
+ const response =  await axios.get(`${baseUrl}/read_book/hasbook/?book_id=${id}`, {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: token,
+  },
+  
+});
+//  await sethasbook(response.data.hasbook);
 
-
+ 
 //----------------------------
          
-        if(hasbook == false){
+        if(response.data.hasbook === false){
            showToast("error", "ابتدا باید کتاب را بخری");
         }
          else {
@@ -300,6 +306,7 @@ const idofbook = params.id;
           receiver : receiver ,
           book : id ,
         };
+        try {
        const  response= await axios.post(`${baseUrl}/gift/sendbook/`,JSON.stringify(sendgift
           ), {
           headers: {
@@ -312,9 +319,14 @@ const idofbook = params.id;
           if(response.status === 200){
              showToast("success", "هدیه با موفقیت ارسال شد");
         }
-         
-       
-     
+      }catch (ex) {
+        if(ex.response.status === 400){
+
+          showToast("error", "دوستت این کتاب رو داره یا قبلا خودش این کتاب رو بهت هدیه داده");
+        }
+
+
+      }
       }
       }
      
