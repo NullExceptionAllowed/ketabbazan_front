@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import CheckIcon from '@mui/icons-material/Check';
 import { baseUrl } from "../../../Variable";
+import Avatar from '@mui/material/Avatar';
 
 
 const AddandDelUser = ({ user}) => {
@@ -17,23 +18,20 @@ const AddandDelUser = ({ user}) => {
 
 
     const [status, setstatus]=useState(false) ;
+    const { email, id, is_admin, is_super_admin, nickname, username} = user ;
     const changeStatus =()=>{
         setstatus(!status)
-    }
-    const { id, usname} = user
-    let token = "Token " + localStorage.getItem('token');
-    useEffect(() => {
-        axios.post({
-            url: `${baseUrl}/admin-panel/user/change-role/:${id}`,
-            data: {},
-            config: {
+        axios.post(`${baseUrl}/admin-panel/user/change-role/:${id}`,{
                 headers: {
-                    'Content-Type': 'application/json ',
-                    "Authorization": token
+                    "Content-Type": "application/json",
+                    Authorization: token,
                 }
             }
-        }).then(res => console.log(res)).catch(e => console.log(e))
-    }, [status]);
+        ).then(res => console.log(res)).catch(e => console.log(e))
+    }
+
+    let token = "Token " + localStorage.getItem('token');
+
 
 
 
@@ -41,7 +39,19 @@ const AddandDelUser = ({ user}) => {
         return (
             <>
                 <div>
-                    <Grid
+                    <center >
+                        <Avatar  sx={{ width: 140, height: 140 }}  style={{   marginTop:"25px"}} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${username}`} />
+                        <p  style={{  marginTop:"15px" , fontSize:"20px"  }}>{nickname}</p>
+                        <ToggleButton
+                            value="check"
+                            onChange={() => {
+                                changeStatus()
+                            }}
+                        >
+                            <CheckIcon/>
+                        </ToggleButton>
+                    </center>
+                    {/*<Grid
                         style={{
                             marginTop: "3px",
                             display: "flex",
@@ -49,7 +59,8 @@ const AddandDelUser = ({ user}) => {
                         }}
                         key={id}
                     >
-                        <p>{usname}</p>
+                        <p>{nickname}</p>
+                        <p>{email}</p>
 
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "space-evenly"}}>
 
@@ -62,7 +73,7 @@ const AddandDelUser = ({ user}) => {
                                 <CheckIcon/>
                             </ToggleButton>
                         </div>
-                    </Grid>
+                    </Grid>*/}
                 </div>
             </>
         );

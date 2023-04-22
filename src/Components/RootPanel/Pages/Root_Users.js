@@ -30,36 +30,49 @@ const ChangeNav = () => {
         </div>
     );
 }
-function Root_Users(props) {
+const Root_Users =(props)=> {
     const [users, setusers] = useState(["کاربری وجود ندارد"]);
     let token = "Token " + localStorage.getItem('token');
+
+
+    const [show,setshow] = useState();
     useEffect(() => {
-        axios.get({
-            url: `${baseUrl}/admin-panel/user`,
-            config: {
-                headers: {
-                    'Content-Type': 'application/json ',
-                    "Authorization": token
-                }
-            }
+        axios.get(`${baseUrl}/admin-panel/user`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+
         }).then((response) => {
             setusers(response.data);
+            setshow(<>
+                {
+                    response.data.map(
+                        (usr) => {
+                            return <AddandDelUser  user={usr} />
+                            console.log(usr.nickname)
+                        }
+                    )
+                }
+            </>)
             console.log(response.data);
         });
-    }, []);
 
+    }, []);
+    const test = ()=>{
+        return show;
+    }
     return (
         <>
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_Users_page">
                 {
-                    users.map(
-                        (usr) => {
-                            return <AddandDelUser  article={usr} />
-                        }
-                    )
+                    test()
                 }
+
+
+
 
             </div>
         </>

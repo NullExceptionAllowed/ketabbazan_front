@@ -1,6 +1,6 @@
 .Admin_Users_page{
-    display: flex;
-    height: 90vh;
+
+    height: auto;
     align-items: center;
     justify-content: center;
     font-size: 3rem;
