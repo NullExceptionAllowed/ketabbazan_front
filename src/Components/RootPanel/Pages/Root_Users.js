@@ -31,13 +31,19 @@ const ChangeNav = () => {
 }
 function Root_Users(props) {
     const [users, setusers] = useState(["کاربری وجود ندارد"]);
-
+    let token = "Token " + localStorage.getItem('token');
     useEffect(() => {
         axios({
             url: `${baseUrl}/admin-panel/user`,
+            data: {},
+            config: {
+                headers: {
+                    'Content-Type': 'application/json ',
+                    "Authorization": token
+                }
+            }
         }).then((response) => {
             setusers(response.data);
-            console.log("-----------users:-------------")
             console.log(response.data);
         });
     }, []);
