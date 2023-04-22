@@ -524,7 +524,7 @@ const Nav = () => {
           </div>
           <div style={{display:"flex", justifyContent:"space-evenly"}}>
           <Button onClick={()=>{
-          history.replace(`/bookinfo/14`);
+          history.replace(`/bookinfo/${book.book.id}`);
         }}  >مشاهده کتاب</Button>
               <Button onClick={()=>{
           console.log("api call to mark gift messages as read")
