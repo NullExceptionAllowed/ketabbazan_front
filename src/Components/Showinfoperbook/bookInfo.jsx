@@ -176,7 +176,7 @@ const Emti = () => {
   const params = useParams();
   const id = params.id;
   const [to, setto] = React.useState(null);
-  const [rate, setrate] = React.useState(0);
+  const [rate, setrate] = React.useState(null);
   const [userrate, setuserrate] = React.useState(null);
   const [changerate, setchangerate] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -240,6 +240,7 @@ const Emti = () => {
           console.log("+++++");
           console.log(response.data.rate.rate);
           setuserrate(response.data.rate.rate);
+          setrate(response.data.rate.rate);
           setApiLoading(false);
         });
     }
@@ -465,8 +466,6 @@ const Emti = () => {
                     style={imgstyle}
                   />
                 </Grid>
-                {userrate === null && (
-                  <>
                     <Grid>
                       <Typography
                         style={{ margin: "20px auto auto auto", fontSize: 14 }}
@@ -515,38 +514,13 @@ const Emti = () => {
                           width: "200px",
                           height: "40px",
                         }}
+                        data-testid="submit-rate-btn"
                       >
-                        ثبت امتیاز
+                        {userrate == null ? "ثبت" : "تغییر"} امتیاز
                       </Button>
                       <ShowDialog close={handleClose} open={open} />
                     </Grid>
-                  </>
-                )}
-
-                {userrate !== null && (
-                  <>
-                    <Grid style={{ marginTop: "15%" }}>
-                      <Typography
-                        style={{ margin: "20px auto auto auto", fontSize: 14 }}
-                      >
-                        امتیاز شما به این محصول:
-                      </Typography>
-                    </Grid>
-
-                    <Grid>
-                      <ThemeProvider theme={theme}>
-                        <Rating
-                          style={{ direction: "rtl", top: "10px" }}
-                          size="large"
-                          name="no-value"
-                          precision={1}
-                          value={userrate}
-                          readOnly
-                        />
-                      </ThemeProvider>
-                    </Grid>
-                  </>
-                )}
+                  
               </center>
             </Paper>
           </Grid>
