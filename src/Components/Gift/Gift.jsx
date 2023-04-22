@@ -3,7 +3,7 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import { Button, Typography } from "@mui/material";
-
+import SimpleContext from "./simpleContext.jsx";
 
 import Avatar from '@mui/material/Avatar';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
@@ -11,7 +11,7 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import axios from "axios";
 import { baseUrl } from "../../Variable";
 
-
+import showToast from "../../Service/toastservice";
 
 
 
@@ -37,10 +37,137 @@ import {
 
   import MenuIcon from '@mui/icons-material/Menu';
 
-  import DirectionsIcon from '@mui/icons-material/Directions';
+//   import DirectionsIcon from '@mui/icons-material/Directions';
+// import { event } from "jquery";
+// import { PassThrough } from "stream";
+ 
+
+
+ 
+
+
+
+
+function SimpleDialogGift(props) {
+
+//---------------------------------------------------------------------------
+const [receiver, setreceiver] = useState("test");
+const CustomizedInputBase = () => {
+  const params = useParams();
   
- function CustomizedInputBase() {
+  const [search, setsearchname] = useState("");
+  //   const Setsearch = (event) => {
+  //   setsearchname(event.target.value);
+  // };
+    const [click , setClick] = useState(false);
+    const [users, setusers] = useState([])
+    let token = "Token " + localStorage.getItem('token');
+    const [flag, setFlag] = useState(false);
+  const searchHandler = (event) =>
+  {
+      setsearchname(event.target.value);
+    setFlag(!flag);
+     
+
+  }
+
+
+  useEffect(() => {
+   const getData = async () => {
+     await axios.get(`${baseUrl}/accounts/searchuser/?username=${search}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      }}).then((response) => {
+        setusers(response.data);
+      })
+      
+      setshow(<center> <Paper style={{paddingTop:"5px", paddingBottom:"5px"}}>
+      {
+        users.map(user => (
+               <div onClick={event => HandleClick(event, user.username, user.id)}>         
+                        <Avatar   style={{ marginTop: "15px" }} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user.username}`} />       
+                        <p >  {user.username}    </p> 
+                             
+                                 
+                                   
+               </div>        
+                     
+       ))
+      }
+      
+      
+      </Paper>
+      </center>);
+   }
+
+    getData();
+      
+      
+ 
+     
+  }, [flag]);
+
+
+
+const [show , setshow] = useState(<center></center>);
+const idofbook = params.id;
+ const HandleClick = (event, username, id)  =>
+  {
+       setClick(true);
+       setreceiver(id);
+      setshow(
+         <div>
+                           <Avatar sx={{ width: 150, height: 150 }} style={{ marginTop: "15px" }} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${username}`} />       
+                            <p>  {username}    </p> 
+         </div>
+       );
+
+      //  setClick(true);
+
+      // const sendgift = {
+      //   receiver : id ,
+      //   book : idofbook ,
+      // };
+      // axios.post(`${baseUrl}/gift/sendbook/`,JSON.stringify(sendgift
+      //   ), {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: token,
+      //   },
+        
+      // });
+
+
+
+  };
+
+
+
+  
+
+
+  
+ 
+
+
+
+ 
+   
+ 
+
+
+ const lastshow = () =>
+ {
+    return show ;
+ };
+ 
+
     return (
+
+
+
+      <center>
       <Paper
         component="form"
         sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 ,backgroundColor:"lightgray" }}
@@ -48,7 +175,7 @@ import {
         <IconButton sx={{ p: '10px' }} aria-label="menu">
           <MenuIcon />
         </IconButton>
-        <InputBase
+        <InputBase onChange={searchHandler}
           sx={{ ml: 1, flex: 1, color:"black" }}
           placeholder="جست و جوی کاربر "
           inputProps={{ 'aria-label': 'search google maps' }}
@@ -59,21 +186,33 @@ import {
         {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" /> */}
       
 
-      
+    
       </Paper>
+       
+      
+      
+  
+    {lastshow()}
+   
+
+
+
+
+       </center>
+      
     );
   }
 
 
 
 
+  //----------------------------------------------------------------------
 
 
-
-function SimpleDialogGift(props) {
     const { onClose, selectedValue, open, idofbook } = props;
     const params = useParams();
     const id = params.id;
+    const context = useContext(SimpleContext);
     const handleClose = () => {
       onClose(selectedValue);
     };
@@ -81,54 +220,21 @@ function SimpleDialogGift(props) {
     const handleListItemClick = (value) => {
       onClose(value);
     };
-    const [search, setsearchname] = useState("");
-  const Setsearch = (event) => {
-    setsearchname(event.target.value);
-  };
-
-    useEffect(() => {
-       
-        axios.get(`${baseUrl}/read_book/info/${id}`).then((response) => {
-          setbookinfo(response.data.book_info);
-         
-        });
-      }, );
-
-
-    // const loaddata = () => {
-
-    //     axios.get(`${baseUrl}/read_book/info/${id}`).then((response) => {
-    //         setbookinfo(response.data.book_info);
-    //         console.log(response.data.book_info);
-    //         //setApiLoading(false);
-    //       });
-    // };
    
-
     // useEffect(() => {
-
-    //     axios.get(`${baseUrl}/profile/info/`, {
-    //         headers: {
-    //             'Content-Type': 'application/json ',
-    //             'Authorization': token
-    //         }
-    //     }).then((res) => {
-
-    //         setnickName(res.data.nickname);
-    //         setfullName(res.data.profile.fullname);
-    //         setBio(res.data.profile.bio);
-    //         setuserrEmail(res.data.email);
-    //         setusername(res.data.username);
-    //         console.log(res.data.username);
-    //        setimage( `${baseUrl}/profile/getimage/?username=${res.data.username}`);
-           
-    //     });
        
-    // }, []);
-    // let token = "Token " + localStorage.getItem('token');
+    //     axios.get(`${baseUrl}/read_book/info/${id}`).then((response) => {
+    //       setbookinfo(response.data.book_info);
+         
+    //     });
+    //   }, );
 
 
-    //   const isnull = bio.isnull;
+    
+    let token = "Token " + localStorage.getItem('token');
+
+     
+
      
     
       let typo2 = {
@@ -162,9 +268,36 @@ function SimpleDialogGift(props) {
       };
     
 
+    
+
+      const giftHandler =async () =>
+      
+      {
+        // showToast("error", "ابتدا باید کتاب را بخری");
+        const sendgift = {
+          receiver : receiver ,
+          book : id ,
+        };
+       const  response= await axios.post(`${baseUrl}/gift/sendbook/`,JSON.stringify(sendgift
+          ), {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          
+        });
+     
+          if(response.status === 200){
+             showToast("success", "هدیه با موفقیت ارسال شد");
+        }
+         
+       
+     
+        
+      }
      
     return (
-      
+     
       <Dialog   onClose={handleClose} open={open}>
     
            <center  style={{padding:"10px 40px 10px 40px"}}>
@@ -180,7 +313,7 @@ function SimpleDialogGift(props) {
           
                   <br/>
                   <br/>
-                 <CustomizedInputBase/>
+                 {CustomizedInputBase()}
 
                  <br/>
 
@@ -195,7 +328,7 @@ function SimpleDialogGift(props) {
                     
          
 
-                    <Button
+                    <Button onClick={giftHandler}
             style={{
               marginTop: "10px",
               marginBottom:"20px",
@@ -220,6 +353,7 @@ function SimpleDialogGift(props) {
 
            
       </Dialog>
+   
     );
    
   }
