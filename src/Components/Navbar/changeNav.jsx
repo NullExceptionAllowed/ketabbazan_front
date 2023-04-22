@@ -18,10 +18,11 @@ const ChangeNav = () => {
             <Nav2/>
         );
     }
-
+ 
     return ( 
         <div>
             {temp}
+            <div>an</div>
         </div>
      );
 }
