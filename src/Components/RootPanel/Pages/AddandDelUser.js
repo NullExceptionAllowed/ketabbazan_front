@@ -10,29 +10,32 @@ import CheckIcon from '@mui/icons-material/Check';
 import { baseUrl } from "../../../Variable";
 
 
-const AddandDelUser = ({ user, refresh }) => {
+const AddandDelUser = ({ user}) => {
 
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down(550));
 
 
-
+    const [status, setstatus]=useState(false) ;
+    const changeStatus =()=>{
+        setstatus(!status)
+    }
     const { id, usname} = user
-
-    const changeStatus = () => {
-        let token = "Token " + localStorage.getItem('token');
-        useEffect(() => {
-            axios.post({
-                url: `${baseUrl}/admin-panel/user/change-role/:${id}`,
-                data: {},
-                config: {
-                    headers: {
-                        'Content-Type': 'application/json ',
-                        "Authorization": token
-                    }
+    let token = "Token " + localStorage.getItem('token');
+    useEffect(() => {
+        axios.post({
+            url: `${baseUrl}/admin-panel/user/change-role/:${id}`,
+            data: {},
+            config: {
+                headers: {
+                    'Content-Type': 'application/json ',
+                    "Authorization": token
                 }
-            }).then(res => console.log(res)).catch(e => console.log(e))
-        }, []);
+            }
+        }).then(res => console.log(res)).catch(e => console.log(e))
+    }, [status]);
+
+
 
 
         return (
@@ -64,5 +67,5 @@ const AddandDelUser = ({ user, refresh }) => {
             </>
         );
     }
-}
+
 export default AddandDelUser;

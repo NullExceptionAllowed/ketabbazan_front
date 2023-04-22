@@ -6,6 +6,7 @@ import Nav2 from "../../Navbar/Nav2";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
 
+import AddandDelUser from "./AddandDelUser";
 
 const ChangeNav = () => {
 
@@ -33,9 +34,8 @@ function Root_Users(props) {
     const [users, setusers] = useState(["کاربری وجود ندارد"]);
     let token = "Token " + localStorage.getItem('token');
     useEffect(() => {
-        axios({
+        axios.get({
             url: `${baseUrl}/admin-panel/user`,
-            data: {},
             config: {
                 headers: {
                     'Content-Type': 'application/json ',
@@ -53,8 +53,14 @@ function Root_Users(props) {
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_Users_page">
+                {
+                    users.map(
+                        (usr) => {
+                            return <AddandDelUser  article={usr} />
+                        }
+                    )
+                }
 
-                <p>usrs</p>
             </div>
         </>
 
