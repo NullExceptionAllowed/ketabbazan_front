@@ -65,8 +65,14 @@ const CustomizedInputBase = () => {
     const [flag, setFlag] = useState(false);
   const searchHandler = (event) =>
   {
+     if(event.target.value !== null){
       setsearchname(event.target.value);
-    setFlag(!flag);
+      setFlag(!flag);
+     }
+     else{
+         setshow();
+     }
+     
      
 
   }
@@ -80,11 +86,13 @@ const CustomizedInputBase = () => {
         Authorization: token,
       }}).then((response) => {
         setusers(response.data);
-      })
+     
       
       setshow(<center> <Paper style={{paddingTop:"5px", paddingBottom:"5px"}}>
       {
-        users.map(user => (
+         
+            
+        response.data.map(user => (
                <div onClick={event => HandleClick(event, user.username, user.id)}>         
                         <Avatar   style={{ marginTop: "15px" }} alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${user.username}`} />       
                         <p >  {user.username}    </p> 
@@ -99,6 +107,7 @@ const CustomizedInputBase = () => {
       
       </Paper>
       </center>);
+       })
    }
 
     getData();
@@ -110,7 +119,7 @@ const CustomizedInputBase = () => {
 
 
 
-const [show , setshow] = useState(<center></center>);
+const [show , setshow] = useState();
 const idofbook = params.id;
  const HandleClick = (event, username, id)  =>
   {
@@ -269,6 +278,14 @@ const idofbook = params.id;
     
 
       const [hasbook, sethasbook] = useState(false);
+      const [message, setmessage] = useState("");
+
+      const textHandler = (event) =>
+      {
+        setmessage(event.target.value);
+
+      }
+
 
       const giftHandler =async () =>
       
@@ -305,6 +322,7 @@ const idofbook = params.id;
         const sendgift = {
           receiver : receiver ,
           book : id ,
+          message : message,
         };
         try {
        const  response= await axios.post(`${baseUrl}/gift/sendbook/`,JSON.stringify(sendgift
@@ -351,7 +369,7 @@ const idofbook = params.id;
 
                  <br/>
 
-                 <TextareaAutosize 
+                 <TextareaAutosize  onChange={textHandler}
                         style={{ fontFamily: "Byekan ", fontSize: "15px", resize: "vertical", width: "100%   ", height: "100px",
                          padding: "10px 10px", marginTop: "5px" }}
                             aria-label="minimum height"
