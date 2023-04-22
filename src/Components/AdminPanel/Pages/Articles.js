@@ -18,7 +18,6 @@ const ChangeNav = () => {
         );
     }
     else{
-        console.log(flag)
         temp = (
             <Nav2/>
         );
@@ -42,8 +41,8 @@ function Articles(props) {
                 'Content-Type': 'application/json ',
                 "Authorization": token
             }
-        }).then(res => setArticles(res.data.articles)).catch(e => console.log(e))
-    }, [articles, refreshArticle])
+        }).then(res => setArticles(res.data)).catch(e => console.log(e))
+    }, [refreshArticle])
 
     const refresh = ()=>{
         setRefresh(!refreshArticle)
@@ -53,15 +52,15 @@ function Articles(props) {
         <>
             <ChangeNav></ChangeNav>
             <SideBar />
-            <div className="Admin_Articles_page">
+            <div style={{display:"flex", height:"100%", flexDirection:"column", padding: 32, overflow:"auto" }} className="Admin_Articles_page">
 
 
                 {articles.length == 0 ? <>هیچ مقاله ای وجود ندارد</> : <>
 
                     {
                         articles.map(
-                            (art) => {
-                                return <VeriFyArticles refresh={refresh} article={art} />
+                            (art,i) => {
+                                return <VeriFyArticles key={i} refresh={refresh} article={art} />
                             }
                         )
                     }
