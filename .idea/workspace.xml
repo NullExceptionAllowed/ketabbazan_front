@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Homepage/Homepage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Homepage/Homepage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/AddandDelUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/AddandDelUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/UsersPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/UsersPage.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -70,7 +69,9 @@
       <workItem from="1680783689270" duration="5995000" />
       <workItem from="1680866219607" duration="7373000" />
       <workItem from="1682038038054" duration="274000" />
-      <workItem from="1682038765239" duration="5539000" />
+      <workItem from="1682038765239" duration="5700000" />
+      <workItem from="1682113289207" duration="328000" />
+      <workItem from="1682142790866" duration="3827000" />
     </task>
     <servers />
   </component>
@@ -87,7 +88,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js</url>
           <line>62</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

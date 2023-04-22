@@ -139,7 +139,7 @@ const AdvancedSearch = () => {
                                 sx={{ p: "10px" }}
                                 aria-label="search"
                             >
-                                <SearchIcon style={{ color: "gray" }} />
+                                <SearchIcon style={{  color: "#0D9ECF" }} />
                             </IconButton>
                         </Grid>
                         <Grid
@@ -209,7 +209,7 @@ const AdvancedSearch = () => {
                                 sx={{ p: "10px" }}
                                 aria-label="search"
                             >
-                                <FaLeanpub style={{ color: "gray" }} />
+                                <FaLeanpub style={{  color: "#0D9ECF" }} />
                             </IconButton>
                         </Grid>
                         <Grid
