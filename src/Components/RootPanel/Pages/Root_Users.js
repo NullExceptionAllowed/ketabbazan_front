@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './UsersPage.css'
 import SideBar from "../SideBar/SideBar";
 import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
+import axios from "axios";
+import {baseUrl} from "../../../Variable";
 
 
 const ChangeNav = () => {
@@ -27,7 +29,19 @@ const ChangeNav = () => {
         </div>
     );
 }
-function Users(props) {
+function Root_Users(props) {
+    const [users, setusers] = useState(["کاربری وجود ندارد"]);
+
+    useEffect(() => {
+        axios({
+            url: `${baseUrl}/admin-panel/user`,
+        }).then((response) => {
+            setusers(response.data);
+            console.log("-----------users:-------------")
+            console.log(response.data);
+        });
+    }, []);
+
     return (
         <>
             <ChangeNav></ChangeNav>
@@ -41,4 +55,4 @@ function Users(props) {
     );
 }
 
-export default Users;
+export default Root_Users;
