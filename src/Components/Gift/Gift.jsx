@@ -268,11 +268,33 @@ const idofbook = params.id;
       };
     
 
-    
+      const [hasbook, sethasbook] = useState(false);
 
       const giftHandler =async () =>
       
       {
+
+        await axios.get(`${baseUrl}/read_book/hasbook/?book_id=${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          
+        }).then((response) => {
+          sethasbook(response.data.hasbook);
+        });
+
+ //---------------------------
+
+
+//----------------------------
+         
+        if(hasbook == false){
+           showToast("error", "ابتدا باید کتاب را بخری");
+        }
+         else {
+
+         
         // showToast("error", "ابتدا باید کتاب را بخری");
         const sendgift = {
           receiver : receiver ,
@@ -293,7 +315,7 @@ const idofbook = params.id;
          
        
      
-        
+      }
       }
      
     return (
