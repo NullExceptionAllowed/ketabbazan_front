@@ -27,6 +27,7 @@ import ChangePassword from "./Tools/ChangePassword";
 import Myarticle from "./Tools/myarticle";
 import Footer from "../Footer/footer";
 import GiftToOther from "./Tools/giftstoother";
+import GiftToMe from "./Tools/gifttome";
 
 const Profile = () => {
   let s1 = {
@@ -97,6 +98,12 @@ const Profile = () => {
     show = (
       <>
         <ConditionBook con="getpastread" />
+      </>
+    );
+  }else if (flag === 98) {
+    show = (
+      <>
+        <GiftToMe  />
       </>
     );
   } else if (flag === 1) {
@@ -270,8 +277,8 @@ const Profile = () => {
 
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    selected={selectedIndex === 10}
-                    onClick={(event) => handleshowbook(event, 10)}
+                    selected={selectedIndex === 98}
+                    onClick={(event) => handleshowbook(event, 98)}
                   >
                     <Typography style={{ fontSize: "16px" }} inset>
                       بهم هدیه دادند

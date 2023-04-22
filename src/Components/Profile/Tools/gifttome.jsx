@@ -11,7 +11,7 @@ import Skeleton from "@mui/material/Skeleton";
 
 
 
-const GiftToOther =  () =>
+const GiftToMe =  () =>
 {
 
 
@@ -29,7 +29,7 @@ const GiftToOther =  () =>
    
     setApiLoading(true);
      axios
-      .get(`${baseUrl}/gift/allsendgifts/`, {
+      .get(`${baseUrl}/gift/allreceivedgifts/`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
@@ -245,4 +245,4 @@ const GiftToOther =  () =>
    };
  
 
-export default  GiftToOther;
+export default  GiftToMe;
