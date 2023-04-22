@@ -389,7 +389,10 @@ import {
   Grid,
   useTheme,
   useMediaQuery,
+  Modal,
 } from "@mui/material";
+import Badge from '@mui/material/Badge';
+import EmailIcon from '@mui/icons-material/Email';
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../../assets/Image/logo.png";
 import Box from "@mui/material/Box";
@@ -424,6 +427,9 @@ const Nav = () => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [username, setusername] = useState("");
   const[openop,setopenop]=useState(false);
+  const [invisible,setInvisible] = useState(true);
+  const [dialogVisibility,setDialogVisibility] = useState();
+  const [newGifts,setNewGifts] = useState([]);
 
   let token = "Token " + localStorage.getItem('token');
 
@@ -439,6 +445,25 @@ const Nav = () => {
         setusername(res.data.username);
        
     });
+
+    axios.get(`${baseUrl}/gift/hasunread/`,{
+      headers: {
+        'Content-Type': 'application/json ',
+        'Authorization': token
+    }
+    }).then((res)=>{
+      setInvisible(!res.data.has_unread)
+    })
+
+    axios.get(`${baseUrl}/gift/allreceivedgifts/`,{
+      headers: {
+        'Content-Type': 'application/json ',
+        'Authorization': token
+    }
+    }).then((res)=>{
+      setNewGifts(res.data.filter(gift=> gift.is_read != true))
+      console.log(res.data)
+    })
 
 }, []);
 
@@ -477,6 +502,60 @@ const Nav = () => {
   if(openop){
     oppro=<OptionProfile />
   }
+
+  const bazKonandeyeDialog = ()=>{
+    setDialogVisibility(true);
+  }
+
+  const OurNiceModal = ()=>{
+    return       <Modal open={dialogVisibility} onClose={()=>{setDialogVisibility(false)}}>
+    <div style={{width:300, height:300, backgroundColor:"white", marginTop:100, marginLeft:50}}>
+      {newGifts.map((book,i)=>{
+        return <div  style={{direction:"rtl"}}>
+          کاربر
+          {" "+book.sender.username+" "}
+          کتاب
+          {" "+book.book.name+" "}
+          را به شما هدیه داده
+          😁
+          <div style={{direction:"rtl" ,display:"block"}}>
+            پیام ارسالی
+            {": "+book.message}
+          </div>
+          <div style={{display:"flex", justifyContent:"space-evenly"}}>
+          <Button onClick={()=>{
+          history.replace(`/bookinfo/14`);
+        }}  >مشاهده کتاب</Button>
+              <Button onClick={()=>{
+          console.log("api call to mark gift messages as read")
+          setNewGifts(newGifts.filter(gift=> gift.id !== book.id))
+          setInvisible(newGifts.length == 1)
+          axios.put(`${baseUrl}/gift/markasread/`,{id:book.id},{
+            headers: {
+              'Content-Type': 'application/json ',
+              'Authorization': token
+          }})
+        }} >متوجه شدم</Button>
+          </div>
+        </div>
+      })}
+      {newGifts.length == 0 ?? <div> هیچ هدیه جدیدی دریافت نکرده اید</div>}
+    </div>
+
+  </Modal>
+  }
+
+  const OurNiceBadge = ()=>{
+    return <div>
+    <IconButton onClick={bazKonandeyeDialog}>
+    <Badge color="primary" variant="dot" invisible={invisible}>
+    <EmailIcon  color="black" style={{color:"black"}} />
+</Badge>
+    </IconButton>
+    </div>
+  }
+
+
 
   return (
     <Box sx={{ flexGrow: 1, direction: "rtl" }}>
@@ -628,6 +707,7 @@ const Nav = () => {
                   </Grid>
                 )}
               </Grid>
+              <OurNiceBadge />
 
               <Grid sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
@@ -691,7 +771,7 @@ const Nav = () => {
                   <IconButton
                     style={{
                       color: "#1565C0",
-                      display: "flex",
+                      display: "flex", 
                       justifyContent: "center",
                     }}
                     onClick={handleSearch}
@@ -700,6 +780,8 @@ const Nav = () => {
                   </IconButton>
                 </Grid>
               </Grid>
+              <OurNiceBadge />
+
               <Grid sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
                   style={{ display: "flex", justifyContent: "center" }}
@@ -719,6 +801,7 @@ const Nav = () => {
       </AppBar>
       {showbox}
       {oppro}
+      <OurNiceModal />
     </Box>
   );
 };
