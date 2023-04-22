@@ -172,14 +172,49 @@ const idofbook = params.id;
  };
  
 
-    return (
+ const firstshow = () =>
+ {
+    if(window.innerWidth <= 800 )
+    {
+    return(<center>
+      <div>
+     
+        
+       
+    <Paper
+      component="form"
+    fullWidth  sx={{ p: '2px 4px', display: 'flex', alignItems: 'center',width:"100%" ,backgroundColor:"lightgray" }}
+    >
+      <IconButton sx={{ p: '10px' }} aria-label="menu">
+        <MenuIcon />
+      </IconButton>
+      <InputBase onChange={searchHandler}
+        sx={{ ml: 1, flex: 1, color:"black" }}
+        placeholder="جست و جوی کاربر "
+        inputProps={{ 'aria-label': 'search google maps' }}
+      />
+      <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+        <SearchIcon />
+      </IconButton>
+      {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" /> */}
+    
 
-
-
-      <center>
+  
+    </Paper>
+    </div>
+    </center>
+   );
+      
+    }
+    else {
+      return(<center>
+        <div>
+       
+          
+         
       <Paper
         component="form"
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 ,backgroundColor:"lightgray" }}
+      fullWidth  sx={{ p: '2px 4px', display: 'flex', alignItems: 'center',width:"400px" ,backgroundColor:"lightgray" }}
       >
         <IconButton sx={{ p: '10px' }} aria-label="menu">
           <MenuIcon />
@@ -194,15 +229,45 @@ const idofbook = params.id;
         </IconButton>
         {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" /> */}
       
-
+  
     
       </Paper>
-       
+      </div>
+      </center>
+     );
+    }
+ };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return (
+
+
+
+      <center>
       
       
-  
-    {lastshow()}
+      {firstshow()}
    
+    {lastshow()}
+
+  
+
+
 
 
 
