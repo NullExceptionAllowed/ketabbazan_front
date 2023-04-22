@@ -426,15 +426,30 @@ const Nav = () => {
   const history = useHistory();
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [username, setusername] = useState("");
+  //const [is_admin, setis_admin] = useState("");
+  //const [is_super_admin, setis_super_admin] = useState("");
   const[openop,setopenop]=useState(false);
   const [invisible,setInvisible] = useState(true);
   const [dialogVisibility,setDialogVisibility] = useState();
   const [newGifts,setNewGifts] = useState([]);
+  const[path,setpath]=useState(localStorage.getItem('main_path'));
 
   let token = "Token " + localStorage.getItem('token');
 
-  useEffect(() => {
 
+  useEffect(() => {
+    /*let is_admin = localStorage.getItem('is_admin');
+    let is_super_admin = localStorage.getItem('is_super_admin');
+    if (is_admin == true && is_super_admin == true){
+      setpath("/Root") ;
+    }else if (is_admin == true && is_super_admin == false){
+      setpath("/Admin");
+    }else {
+      setpath("/");
+    }
+    console.log( is_super_admin);
+    console.log( is_admin);
+    console.log( path);*/
     axios.get(`${baseUrl}/profile/info/`, {
         headers: {
             'Content-Type': 'application/json ',
@@ -478,11 +493,9 @@ const Nav = () => {
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
   };
-  console.log(openSearchBar + "11111");
   let showbox = null;
   if (openSearchBar && checkpx) {
     showbox = <SearchBar open={openSearchBar} close={handleSearchBarClose} />;
-    console.log(openSearchBar);
   }
   const [search, setsearchname] = useState("");
   const Setsearch = (event) => {
@@ -495,6 +508,8 @@ const Nav = () => {
   const MouseOut = (event) => {
     event.target.style.color = "#545252";
   };
+
+
   const handleShowmenu = () => {
     history.push('/profile');
   };
@@ -574,7 +589,7 @@ const Nav = () => {
                   width: "95%",
                 }}
               >
-                <Grid component={Link} to={`/`}>
+                <Grid component={Link} to={localStorage.getItem('main_path')}>
                   <img
                     className="Nav_img"
                     src={Logo}
@@ -585,7 +600,7 @@ const Nav = () => {
                 <Grid
                   className="Nav_type"
                   component={Link}
-                  to={`/`}
+                  to={localStorage.getItem('main_path')}
                   style={{
                     color: "#0D9ECF",
                     marginRight: "10px",
@@ -605,7 +620,7 @@ const Nav = () => {
                 >
                   <Typography
                     component={Link}
-                    to={`/`}
+                    to={localStorage.getItem('main_path')}
                     sx={{
                       marginRight: "1.1rem",
                       textDecoration: "none",

@@ -26,6 +26,8 @@ import Wallet from "./Tools/Wallet.jsx";
 import ChangePassword from "./Tools/ChangePassword";
 import Myarticle from "./Tools/myarticle";
 import Footer from "../Footer/footer";
+import GiftToOther from "./Tools/giftstoother";
+import GiftToMe from "./Tools/gifttome";
 
 const Profile = () => {
   let s1 = {
@@ -98,10 +100,22 @@ const Profile = () => {
         <ConditionBook con="getpastread" />
       </>
     );
+  }else if (flag === 98) {
+    show = (
+      <>
+        <GiftToMe  />
+      </>
+    );
   } else if (flag === 1) {
     show = (
       <>
         <Myarticle />
+      </>
+    );
+  } else if (flag === 313) {
+    show = (
+      <>
+        <GiftToOther />
       </>
     );
   } else if (flag === 10) {
@@ -253,8 +267,8 @@ const Profile = () => {
               <Collapse dir="rtl" in={open2} timeout="auto" unmountOnExit>
                 <List component="div">
                   <ListItemButton
-                    selected={selectedIndex === 9}
-                    onClick={(event) => handleshowbook(event, 9)}
+                    selected={selectedIndex ===313}
+                    onClick={(event) => handleshowbook(event, 313)}
                   >
                     <Typography style={{ fontSize: "16px" }} inset>
                       هدیه دادم
@@ -263,8 +277,8 @@ const Profile = () => {
 
                   <ListItemButton
                     sx={{ pl: 4 }}
-                    selected={selectedIndex === 10}
-                    onClick={(event) => handleshowbook(event, 10)}
+                    selected={selectedIndex === 98}
+                    onClick={(event) => handleshowbook(event, 98)}
                   >
                     <Typography style={{ fontSize: "16px" }} inset>
                       بهم هدیه دادند

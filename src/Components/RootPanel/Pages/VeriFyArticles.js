@@ -18,7 +18,7 @@ const VeriFyArticles = ({ article, refresh }) => {
     const [dialogStatus, setDialogStatus] = useState(false)
 
     const {
-        id, image, title, summary, created_jalali, is_verified, body
+        id, image, title, summary, created_jalali, isverified, body
     } = article
 
     const changeStatus = () => {
@@ -29,7 +29,9 @@ const VeriFyArticles = ({ article, refresh }) => {
                 "Authorization": token
             }
         }).then(res => console.log(res)).catch(e => console.log(e))
-        refresh()
+        // axios post to verify article with this id
+        // refresh list of articles and remove this one
+        // refresh()
     }
 
 
@@ -51,7 +53,7 @@ const VeriFyArticles = ({ article, refresh }) => {
             >
 
                 <img
-                    src={baseUrl+image}
+                    src={image}
                     alt="img"
                     style={{
                         width: "140px",
@@ -106,7 +108,7 @@ const VeriFyArticles = ({ article, refresh }) => {
 
                 <ToggleButton
                     value="check"
-                    selected={is_verified}
+                    selected={isverified}
                     onChange={() => {
                         changeStatus()
                     }}

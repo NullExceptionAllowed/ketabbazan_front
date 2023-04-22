@@ -7,25 +7,31 @@ import * as MdIcons from 'react-icons/md';
 export const SideBarData = [
     {
         title:'خانه',
-        path:'/Admin',
+        path:'/Root',
         icon:<AiIcons.AiFillHome></AiIcons.AiFillHome>,
         cName:'nav-text'
     },
     {
         title:'کامنت ها',
-        path:'/Admin_comments',
+        path:'/Root_comments',
         icon:<AiIcons.AiOutlineComment></AiIcons.AiOutlineComment>,
         cName:'nav-text'
     },
     {
         title:'کوییز ها',
-        path:'/Admin_Quizzes',
+        path:'/Root_Quizzes',
         icon:<MdIcons.MdQuiz></MdIcons.MdQuiz>,
         cName:'nav-text'
     },
     {
+        title:'کاربران ها',
+        path:'/Root_Users',
+        icon:<AiIcons.AiOutlineUserSwitch></AiIcons.AiOutlineUserSwitch>,
+        cName:'nav-text'
+    },
+    {
         title:'مقاله ها',
-        path:'/Admin_Articles',
+        path:'/Root_Articles',
         icon:<RiIcons.RiArticleLine></RiIcons.RiArticleLine>,
         cName:'nav-text'
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './ArticlesPage.css';
+import '../../AdminPanel/Pages/ArticlesPage.css';
 import SideBar from "../SideBar/SideBar";
 import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
@@ -18,6 +18,7 @@ const ChangeNav = () => {
         );
     }
     else{
+        console.log(flag)
         temp = (
             <Nav2/>
         );
@@ -29,7 +30,7 @@ const ChangeNav = () => {
         </div>
     );
 }
-function Articles(props) {
+function Root_Articles(props) {
     const [articles, setArticles] = React.useState([])
 
     const [refreshArticle, setRefresh] = React.useState(false)
@@ -41,8 +42,8 @@ function Articles(props) {
                 'Content-Type': 'application/json ',
                 "Authorization": token
             }
-        }).then(res => setArticles(res.data)).catch(e => console.log(e))
-    }, [refreshArticle])
+        }).then(res => setArticles(res.data.articles)).catch(e => console.log(e))
+    }, [articles, refreshArticle])
 
     const refresh = ()=>{
         setRefresh(!refreshArticle)
@@ -52,15 +53,15 @@ function Articles(props) {
         <>
             <ChangeNav></ChangeNav>
             <SideBar />
-            <div style={{display:"flex", height:"100%", flexDirection:"column", padding: 32, overflow:"auto" }} className="Admin_Articles_page">
+            <div className="Admin_Articles_page">
 
 
                 {articles.length == 0 ? <>هیچ مقاله ای وجود ندارد</> : <>
 
                     {
                         articles.map(
-                            (art,i) => {
-                                return <VeriFyArticles key={i} refresh={refresh} article={art} />
+                            (art) => {
+                                return <VeriFyArticles refresh={refresh} article={art} />
                             }
                         )
                     }
@@ -73,4 +74,4 @@ function Articles(props) {
     );
 }
 
-export default Articles;
+export default Root_Articles;
