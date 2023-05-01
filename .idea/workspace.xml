@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/AddandDelUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/AddandDelUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/UsersPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/UsersPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/ValidateComment" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +39,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/online education/Soft/project/ketab_bazan_front_end&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -52,6 +52,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\online education\Soft\project\ketab_bazan_front_end\src\Components\AdminPanel\Pages" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -72,6 +77,9 @@
       <workItem from="1682038765239" duration="5700000" />
       <workItem from="1682113289207" duration="328000" />
       <workItem from="1682142790866" duration="3827000" />
+      <workItem from="1682786015989" duration="616000" />
+      <workItem from="1682835067709" duration="171000" />
+      <workItem from="1682947810749" duration="3994000" />
     </task>
     <servers />
   </component>
