@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../AdminPanel/Pages/commentsPage.css';
 import SideBar from "../SideBar/SideBar";
 import Nav from "../../Navbar/Nav";
@@ -7,6 +7,7 @@ import AboutUs from "../../AboutUs/AboutUs";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
 import ValidateComment from "../../AdminPanel/Pages/ValidateComment";
+import List from "@mui/material/List";
 
 
 
@@ -33,13 +34,13 @@ const ChangeNav = () => {
     );
 }
 function Root_Comments(props) {
-    const [cmnts, setcmnts] = React.useState(["کامنتی وجود ندارد"])
+    const [cmnts, setcmnts] = useState(["کامنتی وجود ندارد"]);
 
     let token = "Token " + localStorage.getItem('token');
 
     const [show,setshow] = useState();
 
-    React.useEffect(() => {
+    useEffect(() => {
         axios.get(`${baseUrl}/admin-panel/comment`, {
             headers: {
                 'Content-Type': 'application/json ',
@@ -47,17 +48,20 @@ function Root_Comments(props) {
             }
         }).then((response) => {
             setcmnts(response.data);
-            console.log("-------------------------comments :",response.data)
+            console.log("-------------------------comments :",response.data);
             setshow(<>
-                {
-                    response.data.map(
-                        (cmnt) => {
-                            return <ValidateComment  comment={cmnt} />
-                        }
-                    )
-                }
-            </>)
-            //console.log(response.data);
+                <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+
+                    {
+                        response.data.map(
+                            (cmnt) => {
+                                return <ValidateComment  comment={cmnt} />
+                                //console.log(cmnt.comment_text)
+                            })
+                    }
+                </List>
+
+            </>);
         });
     }, [])
 

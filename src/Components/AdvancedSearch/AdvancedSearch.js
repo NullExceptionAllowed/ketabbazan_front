@@ -53,15 +53,15 @@ const AdvancedSearch = () => {
             url: `${baseUrl}/read_book/allgenres`,
         }).then((response) => {
             setoptions(response.data);
-            console.log(response.data);
+            //console.log(response.data);
         });
     }, []);
 
 
     const allgeners = options.map((item,index) => item.name);
     allgeners.push("سایر دسته بندی ها")
-    console.log(allgeners)
-    console.log(typeof(allgeners))
+    //console.log(allgeners)
+    //console.log(typeof(allgeners))
     function GenerList(props) {
         const listItems = allgeners.map((item) =>
             <option onChange={Setganre} value={ganre}>{item}</option>

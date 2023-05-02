@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './commentsPage.css';
 import SideBar from "../SideBar/SideBar";
 import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
-import AboutUs from "../../AboutUs/AboutUs";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
 import VeriFyArticles from "./VeriFyArticles";
 import ValidateComment from "./ValidateComment";
-import AddandDelUser from "../../RootPanel/Pages/AddandDelUser";
+import List from '@mui/material/List';
+
 
 
 
@@ -35,13 +35,12 @@ const ChangeNav = () => {
     );
 }
 function Comments(props) {
-    const [cmnts, setcmnts] = React.useState(["کامنتی وجود ندارد"])
+    const [cmnts, setcmnts] = useState(["کامنتی وجود ندارد"]) ;
 
     let token = "Token " + localStorage.getItem('token');
 
     const [show,setshow] = useState();
-
-    React.useEffect(() => {
+    useEffect(() => {
         axios.get(`${baseUrl}/admin-panel/comment`, {
             headers: {
                 'Content-Type': 'application/json ',
@@ -49,16 +48,19 @@ function Comments(props) {
             }
         }).then((response) => {
             setcmnts(response.data);
-            console.log("-------------------------comments :",response.data)
+            console.log("-------------------------comments :",response.data);
             setshow(<>
-                {
-                    response.data.map(
-                        (cmnt) => {
-                            return <ValidateComment  comment={cmnt} />
-                        }
-                    )
-                }
-            </>)
+                <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+
+                    {
+                        response.data.map(
+                            (cmnt) => {
+                                return <ValidateComment  comment={cmnt} />
+                                //console.log(cmnt.comment_text)
+                            })
+                    }
+                </List>
+            </>);
             //console.log(response.data);
         });
     }, [])
@@ -71,9 +73,11 @@ function Comments(props) {
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_comments_page">
+
                 {
                     test()
                 }
+
             </div>
         </>
 

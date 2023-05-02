@@ -4,18 +4,49 @@ import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 import {ButtonGroup} from '@mui/material';
 import {setCommentState} from '../../../Service/ApiCalls';
-export function ValidateComment({ comment}){
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import {baseUrl} from "../../../Variable";
 
+const ValidateComment = ({ comment}) => {
+
+    const {id, user, book, comment_text, created_on, is_verified} = comment ;
+    //console.log(user.username.toString(),"  :  ",comment_text.toString())
 
 
     return(
 
 
         <div>
-            <ButtonGroup variant="outlined" aria-label="outlined button group">
-                <Button color="success" onClick={} ><DoneIcon/></Button>
-                <Button color="error" onClick={} ><CloseIcon/></Button>
-            </ButtonGroup>
+            <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                    <Avatar alt={user.username} src={`${baseUrl}/profile/getimage/?username=${user.username}`}/>//}
+                </ListItemAvatar>
+                <ListItemText
+                    primary={user.username}
+                    secondary={
+                        <React.Fragment>
+                            <Typography
+                                sx={{display: 'inline'}}
+                                component="span"
+                                variant="body2"
+                                color="text.primary"
+                            >
+                                Ali Connors
+                            </Typography>
+                            {comment_text}
+                        </React.Fragment>
+                    }
+                />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+
         </div>
     );
 }
+
+export default ValidateComment
