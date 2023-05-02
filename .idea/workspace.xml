@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Quizz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Quizz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/UsersPage.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_comments.js" afterDir="false" />
     </list>
@@ -88,22 +82,22 @@
       <workItem from="1682835067709" duration="171000" />
       <workItem from="1682947810749" duration="4485000" />
       <workItem from="1682964210773" duration="532000" />
-      <workItem from="1683056799897" duration="5773000" />
+      <workItem from="1683056799897" duration="7728000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js</url>
-          <line>62</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

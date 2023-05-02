@@ -50,7 +50,7 @@ function Root_Comments(props) {
             setcmnts(response.data);
             console.log("-------------------------comments :",response.data);
             setshow(<>
-                <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+                <List sx={{width: '100%', maxWidth: 500, bgcolor: 'background.paper'}}>
 
                     {
                         response.data.map(

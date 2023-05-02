@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
@@ -11,11 +11,28 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import {baseUrl} from "../../../Variable";
+import ListItemButton from '@mui/material/ListItemButton';
+import {FaCommentMedical, FaLeanpub} from 'react-icons/fa';
+import axios from "axios";
 
 const ValidateComment = ({ comment}) => {
 
     const {id, user, book, comment_text, created_on, is_verified} = comment ;
+    const [status, setstatus]=useState(false) ;
+    let token = "Token " + localStorage.getItem('token');
     //console.log(user.username.toString(),"  :  ",comment_text.toString())
+    const changeStatus =()=>{
+        setstatus(!status)
+        axios.post(`${baseUrl}/admin-panel/comment/verify/:${id}`,{
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: token,
+                }
+            }
+        ).then(res => console.log(res)).catch(e => console.log(e))
+    }
+
+
 
 
     return(
@@ -42,6 +59,12 @@ const ValidateComment = ({ comment}) => {
                         </React.Fragment>
                     }
                 />
+                <ListItemButton
+                    onClick={changeStatus()}
+                >
+                    <FaCommentMedical style={{  color: "#0D9ECF" }} />
+                </ListItemButton>
+
             </ListItem>
             <Divider variant="inset" component="li" />
 
