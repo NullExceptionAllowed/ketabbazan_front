@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdvancedSearch/AdvancedSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +80,8 @@
       <workItem from="1682835067709" duration="171000" />
       <workItem from="1682947810749" duration="4485000" />
       <workItem from="1682964210773" duration="532000" />
-      <workItem from="1683056799897" duration="7728000" />
+      <workItem from="1683056799897" duration="7807000" />
+      <workItem from="1683122270814" duration="1170000" />
     </task>
     <servers />
   </component>
@@ -99,5 +98,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js</url>
+          <line>20</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
