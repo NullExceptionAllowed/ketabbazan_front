@@ -477,7 +477,7 @@ const Nav = () => {
     }
     }).then((res)=>{
       setNewGifts(res.data.filter(gift=> gift.is_read != true))
-      console.log(res.data)
+      //console.log(res.data)
     })
 
 }, []);
@@ -488,7 +488,7 @@ const Nav = () => {
   };
   const handleSearch = () => {
     setOpenSearchBar(!openSearchBar);
-    console.log(openSearchBar + "2222");
+    //console.log(openSearchBar + "2222");
   };
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);

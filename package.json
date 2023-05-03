@@ -2,7 +2,6 @@
   "name": "ketabbazan",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^34.0.0",
     "@ckeditor/ckeditor5-dev-webpack-plugin": "^30.1.3",

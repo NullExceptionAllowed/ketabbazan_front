@@ -11,6 +11,7 @@ import List from "@mui/material/List";
 
 
 
+
 const ChangeNav = () => {
 
     let temp = null;
@@ -34,7 +35,7 @@ const ChangeNav = () => {
     );
 }
 function Root_Comments(props) {
-    const [cmnts, setcmnts] = useState(["کامنتی وجود ندارد"]);
+    const [cmnts, setcmnts] = useState({});
 
     let token = "Token " + localStorage.getItem('token');
 
@@ -47,25 +48,29 @@ function Root_Comments(props) {
                 "Authorization": token
             }
         }).then((response) => {
-            setcmnts(response.data);
+            //setcmnts(response.data);
             console.log("-------------------------comments :",response.data);
-            setshow(<>
-                <List sx={{width: '100%', maxWidth: 500, bgcolor: 'background.paper'}}>
-
-                    {
-                        response.data.map(
-                            (cmnt) => {
-                                return <ValidateComment  comment={cmnt} />
-                                //console.log(cmnt.comment_text)
-                            })
-                    }
-                </List>
-
-            </>);
+            setshow(
+                <>
+                <List sx={{width: '100%', maxWidth: 500}}>
+                        {
+                            response.data.map(
+                                (cm) => {
+                                    //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                                    //return <p>{cm.comment_text}</p>
+                                    return <ValidateComment  comment={cm} />
+                                    //console.log(cmnt.comment_text)
+                                }
+                                )
+                        }
+                    </List>
+                </>
+            );
         });
-    }, [])
+    }, []);
 
-    const test = ()=>{
+    const testsh = ()=>{
+
         return show;
     }
     return (
@@ -74,7 +79,7 @@ function Root_Comments(props) {
             <SideBar />
             <div className="Admin_comments_page">
                 {
-                    test()
+                    testsh()
                 }
             </div>
         </>
