@@ -22,7 +22,7 @@ const GiftCard = ({ gift, goToBookById, markAsRead }) => {
       {gift.message != null &&
       gift.message != undefined &&
       gift.message != "" ? (
-        <div style={{ direction: "rtl", display: "block" }}>
+        <div data-testid="main-message-gift" style={{ direction: "rtl", display: "block" }}>
           پیام ارسالی
           {": " + gift.message}
         </div>
