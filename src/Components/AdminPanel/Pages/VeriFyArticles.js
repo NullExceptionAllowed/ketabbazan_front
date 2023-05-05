@@ -14,7 +14,6 @@ const VeriFyArticles = ({ article, refresh, renderSquare }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down(550));
 
-  console.log(article);
 
   const [dialogStatus, setDialogStatus] = useState(false);
 
@@ -141,8 +140,9 @@ const VeriFyArticles = ({ article, refresh, renderSquare }) => {
           onChange={() => {
             changeStatus();
           }}
+          data-testid="change-status-of-article"
         >
-          <CheckIcon />
+          <CheckIcon data-testid="change-status-of-article2" />
         </ToggleButton>
       </div>
     );
@@ -204,6 +204,7 @@ const VeriFyArticles = ({ article, refresh, renderSquare }) => {
           onClick={() => {
             setDialogStatus(false);
           }}
+          data-testid="icon-btn-close-dialog"
           sx={{
             position: "absolute",
             right: 8,
@@ -211,7 +212,7 @@ const VeriFyArticles = ({ article, refresh, renderSquare }) => {
             color: (theme) => theme.palette.grey[500],
           }}
         >
-          <CloseIcon />
+          <CloseIcon  />
         </IconButton>
       </Dialog>
     </div>
