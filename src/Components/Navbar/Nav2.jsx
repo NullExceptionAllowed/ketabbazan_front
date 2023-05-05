@@ -460,6 +460,7 @@ const Nav = () => {
         setusername(res.data.username);
       });
 
+
     axios
       .get(`${baseUrl}/gift/hasunread/`, {
         headers: {
@@ -480,7 +481,6 @@ const Nav = () => {
       })
       .then((res) => {
         setNewGifts(res.data.filter((gift) => gift.is_read != true));
-        console.log(res.data);
       });
   }, []);
 
@@ -500,13 +500,14 @@ const Nav = () => {
     );
   };
 
+
   const handlesubmit = async (event) => {
     event.preventDefault();
     history.replace(`/Searchbook/?q=${search}`);
   };
   const handleSearch = () => {
     setOpenSearchBar(!openSearchBar);
-    console.log(openSearchBar + "2222");
+    //console.log(openSearchBar + "2222");
   };
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
