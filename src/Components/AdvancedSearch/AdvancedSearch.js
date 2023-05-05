@@ -20,6 +20,8 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { FaLeanpub } from 'react-icons/fa';
 import { BsSearch } from 'react-icons/bs';
+
+
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 // import Dropdown from 'react-dropdown';
 import axios from "axios";
@@ -53,15 +55,15 @@ const AdvancedSearch = () => {
             url: `${baseUrl}/read_book/allgenres`,
         }).then((response) => {
             setoptions(response.data);
-            console.log(response.data);
+            //console.log(response.data);
         });
     }, []);
 
 
     const allgeners = options.map((item,index) => item.name);
     allgeners.push("سایر دسته بندی ها")
-    console.log(allgeners)
-    console.log(typeof(allgeners))
+    //console.log(allgeners)
+    //console.log(typeof(allgeners))
     function GenerList(props) {
         const listItems = allgeners.map((item) =>
             <option onChange={Setganre} value={ganre}>{item}</option>
