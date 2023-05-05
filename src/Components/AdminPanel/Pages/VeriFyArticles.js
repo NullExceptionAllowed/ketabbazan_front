@@ -1,147 +1,221 @@
-import { Button, Dialog, IconButton, ToggleButton } from "@mui/material"
-import ArticleCard from "../../Comment/tabContent/articleCard"
-import { Divider, Grid } from "@mui/material"
+import { Button, Dialog, IconButton, Paper, ToggleButton } from "@mui/material";
+import ArticleCard from "../../Comment/tabContent/articleCard";
+import { Divider, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
-import CheckIcon from '@mui/icons-material/Check';
+import CheckIcon from "@mui/icons-material/Check";
 import { baseUrl } from "../../../Variable";
+import noPicture from "../../../assets/Image/nopic.png";
 
+const VeriFyArticles = ({ article, refresh, renderSquare }) => {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down(550));
 
-const VeriFyArticles = ({ article, refresh }) => {
+  console.log(article);
 
-    const theme = useTheme();
-    const isMatch = useMediaQuery(theme.breakpoints.down(550));
+  const [dialogStatus, setDialogStatus] = useState(false);
 
-    const [dialogStatus, setDialogStatus] = useState(false)
+  const {
+    id,
+    image,
+    title,
+    summary,
+    created_jalali,
+    is_verified,
+    body,
+    owner,
+  } = article;
+  const { username } = owner;
 
-    const {
-        id, image, title, summary, created_jalali, is_verified, body
-    } = article
+  const changeStatus = () => {
+    let token = "Token " + localStorage.getItem("token");
+    axios
+      .post(
+        `${baseUrl}/admin-panel/article/verify/${id}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json ",
+            Authorization: token,
+          },
+        }
+      )
+      .then((res) => refresh())
+      .catch((e) => console.log(e));
+  };
 
-    const changeStatus = () => {
-        let token = "Token " + localStorage.getItem('token');
-        axios.post(`${baseUrl}/admin-panel/article/verify/${id}`, {} , {
-            headers: {
-                'Content-Type': 'application/json ',
-                "Authorization": token
-            }
-        }).then(res => console.log(res)).catch(e => console.log(e))
-        refresh()
-    }
+  const RenderImage = () => {
+    return (
+      <img
+        src={image.includes("default") ? noPicture : baseUrl + image}
+        alt="img"
+        style={{
+          width: 152,
+          height: 152,
+          borderRadius: 4,
+          objectFit: "cover",
+          marginTop: 4,
+          marginLeft: 8,
+        }}
+      />
+    );
+  };
 
+  const RenderContent = () => {
+    return (
+      <div style={{ width: 320, marginLeft: 8 }}>
+        <div
+          style={{
+            marginTop: 6,
 
-    return <div>
-        <Grid
-            style={{
-                marginTop: "3px",
-                display: "flex",
-                textDecoration: "none",
-            }}
-            key={id}
+            color: "black",
+            direction: "rtl",
+            fontSize: 14,
+            height: 24,
+            overflow: "hidden",
+          }}
+          className="showar_title"
         >
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    height: "150px",
-                }}
-            >
+          مقاله
+          <span style={{ fontWeight: "bold", fontSize: 16 }}>
+            {" " + title + " "}
+          </span>
+        </div>
 
-                <img
-                    src={baseUrl+image}
-                    alt="img"
-                    style={{
-                        width: "140px",
-                        height: "100%",
-                        borderRadius: "2px",
-                        objectFit: "conver",
-                    }}
-                />
-                <div>
+        <div
+          style={{
+            marginTop: 6,
+            color: "gray",
+            direction: "rtl",
+            fontSize: 12,
+          }}
+        >
+          <span style={{ fontSize: 14, color: "black" }}>توسط</span>
+          <span style={{ fontWeight: "bold", color: "black", fontSize: 16 }}>
+            {" " + username + " "}
+          </span>
+          در تاریخ:{" "}
+          <span style={{ fontWeight: "bold" }}>
+            {" " + created_jalali + " "}
+          </span>
+        </div>
+        <div
+          style={{
+            fontSize: 14,
+            direction: "rtl",
+            marginTop: 8,
+            height: 62,
+            overflow: "hidden",
+          }}
+        >
+          پیش نمایش:
+          <span style={{ fontSize: 14 }}>{"  " + summary}</span>
+        </div>
+      </div>
+    );
+  };
 
-                    <div
-                        style={{
-                            fontWeight: "bold",
-                            marginRight: "10px",
-                            color: "black",
-                        }}
-                        className="showar_title"
-                    >
-                        {title}
-                    </div>
-                    <div
-                        style={{
-                            marginTop: "5px",
-                            marginRight: "10px",
-                            color: "#757C86",
-                            overflow: "Hidden",
-                            whiteSpace: "normal",
-                            textOverflow: "ellipsis",
-                            textJustify: "inter-word",
-                            textAlign: "justify",
-                        }}
-                        className="showall_summary"
-                    >
-                        {isMatch
-                            ? summary.slice(0, 100) + "..."
-                            : summary.slice(0, 250) + "..."}
-                    </div>
-                    <Grid
-                        style={{
-                            marginTop: "3px",
-                            marginRight: "10px",
-                            color: "#757C86",
-                        }}
-                        className="showar_tarikh"
-                    >
-                        {"تاریخ مقاله:" + created_jalali}
-                    </Grid>
-                </div>
+  const RenderButtons = () => {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <Button
+          onClick={() => {
+            setDialogStatus(true);
+          }}
+          variant="outlined"
+        >
+          مشاهده مقاله
+        </Button>
+        <ToggleButton
+          value="check"
+          selected={is_verified}
+          onChange={() => {
+            changeStatus();
+          }}
+        >
+          <CheckIcon />
+        </ToggleButton>
+      </div>
+    );
+  };
+
+  return (
+    <div style={{ marginLeft: 8, marginRight: 8 }}>
+      {renderSquare ? (
+        <Paper elevation={2}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: 305,
+              width: 340,
+              margin: 6,
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+              {RenderImage()}
+              <div style={{ marginRight: 32, display: "flex" }}>
+                {RenderButtons()}
+              </div>
             </div>
+            <Divider style={{ marginTop: 8 }} />
+            {RenderContent()}
+          </div>
+        </Paper>
+      ) : (
+        <Paper elevation={2}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              height: 160,
+              width: 560,
+              margin: 6,
+            }}
+          >
+            {RenderImage()}
+            {RenderContent()}
+            {RenderButtons()}
+          </div>
+        </Paper>
+      )}
 
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
-
-                <ToggleButton
-                    value="check"
-                    selected={is_verified}
-                    onChange={() => {
-                        changeStatus()
-                    }}
-                >
-                    <CheckIcon />
-                </ToggleButton>
-
-                <Button onClick={() => { setDialogStatus(true) }} variant="outlined">
-                    Text
-                </Button>
-            </div>
-
-        </Grid>
-        <Divider
-            style={{ color: "red", width: "100%", marginTop: "2%" }}
+      <Dialog
+        onClose={() => {
+          setDialogStatus(false);
+        }}
+        open={dialogStatus}
+      >
+        <div
+          style={{ direction: "rtl", padding: "24px", paddingTop: "42px" }}
+          dangerouslySetInnerHTML={{ __html: body }}
         />
-
-        <Dialog open={dialogStatus}>
-            <div style={{ padding: "24px", paddingTop: "42px" }}>
-                {body}
-            </div>
-            <IconButton
-                aria-label="close"
-                onClick={() => { setDialogStatus(false) }}
-                sx={{
-                    position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
-                }}
-            >
-                <CloseIcon />
-            </IconButton>
-        </Dialog>
+        <IconButton
+          aria-label="close"
+          onClick={() => {
+            setDialogStatus(false);
+          }}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </Dialog>
     </div>
-}
+  );
+};
 
-export default VeriFyArticles
+export default VeriFyArticles;
