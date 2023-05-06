@@ -6,7 +6,7 @@ import Nav2 from "../../Navbar/Nav2";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
 import VeriFyArticles from "./VeriFyArticles";
-import ValidateComment from "./ValidateComment";
+import ValidateComment from "./Validatec";
 import List from '@mui/material/List';
 
 
