@@ -8,6 +8,7 @@ import {baseUrl} from "../../../Variable";
 
 import AddandDelUser from "./AddandDelUser";
 
+
 const ChangeNav = () => {
 
     let temp = null;
@@ -45,7 +46,8 @@ const Root_Users =(props)=> {
 
         }).then((response) => {
             setusers(response.data);
-            setshow(<>
+            setshow(<div>
+                <h6 style={{color:"blue"}}>پنل مدیریتی کاربران</h6>
                 {
                     response.data.map(
                         (usr) => {
@@ -54,28 +56,28 @@ const Root_Users =(props)=> {
                         }
                     )
                 }
-            </>)
+            </div>)
             console.log(response.data);
         });
 
     }, []);
-    const test = ()=>{
+    const Test = ()=>{
         return show;
     }
     return (
-        <>
+       <div>
             <ChangeNav></ChangeNav>
             <SideBar />
+            <center>
             <div className="Admin_Users_page">
-                {
-                    test()
-                }
+            {Test()}
 
 
 
 
             </div>
-        </>
+            </center>
+            </div>
 
     );
 }
