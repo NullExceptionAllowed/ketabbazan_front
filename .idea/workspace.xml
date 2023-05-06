@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Validatec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Varifycomment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Nav2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Nav2.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Quizz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Quizz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/ValidateComment" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/commentsPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/commentsPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_comments.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,6 +92,7 @@
       <workItem from="1683056799897" duration="7807000" />
       <workItem from="1683122270814" duration="2231000" />
       <workItem from="1683136608124" duration="7945000" />
+      <workItem from="1683367714427" duration="11096000" />
     </task>
     <servers />
   </component>
