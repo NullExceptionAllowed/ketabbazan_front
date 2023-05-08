@@ -8,6 +8,7 @@ import {baseUrl} from "../../../Variable";
 import VeriFyArticles from "./VeriFyArticles";
 import ValidateComment from "./Validatec";
 import List from '@mui/material/List';
+import Validatec from "./Validatec";
 
 
 
@@ -48,19 +49,22 @@ function Comments(props) {
             }
         }).then((response) => {
             setcmnts(response.data);
-            console.log("-------------------------comments :",response.data);
-            setshow(<>
-                <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
 
-                    {
-                        response.data.map(
-                            (cmnt) => {
-                                return <ValidateComment  comment={cmnt} />
-                                //console.log(cmnt.comment_text)
-                            })
-                    }
-                </List>
-            </>);
+            {/*
+                setshow(<>
+                        {
+                            response.data.map(
+                                (cm) => {
+                                    //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                                    //return <p>{cm.comment_text}</p>
+                                    return <Validatec.js comment={cm}/>
+                                    //console.log(cmnt.comment_text)
+                                }
+                            )
+                        }
+                    </>
+                );*/
+            }
             //console.log(response.data);
         });
     }, [])
@@ -73,10 +77,45 @@ function Comments(props) {
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_comments_page">
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {
 
-                {
-                    test()
-                }
+                        cmnts?.length != 0 && cmnts.map(
+                            cm =>
+                                //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                                //(<p>{cm.comment_text}</p>)
+                                ( <Validatec comment={cm}/>)
+                            //console.log(cmnt.comment_text)
+                            //return <p>{cm.comment_text}</p>
+
+                        )
+
+
+                    }
+                </List>
+                {/*
+                <Grid container wrap="nowrap" spacing={2}>
+                <Grid item>
+                    <Avatar alt="Remy Sharp" src={`${baseUrl}/profile/getimage/?username=${comment.user.username}`} />
+                </Grid>
+                <ListItemButton
+                    onClick={changeStatus()}
+                >
+                    <FaCommentMedical style={{color: "#0D9ECF"}}/>
+                </ListItemButton>
+                <Grid justifyContent="left" item xs zeroMinWidth>
+                    <h4 style={{ margin: 0, textAlign: "left" }}>{comment.user.username}</h4>
+                    <p style={{ textAlign: "left" }}>
+                        {comment.comment_text}
+                    </p>
+                    <p style={{ textAlign: "left", color: "gray" }}>
+                        {comment.created_on}
+                    </p>
+                </Grid>
+            </Grid>
+
+            <Divider variant="inset" component="li" />
+                */}
 
             </div>
         </>
