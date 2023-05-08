@@ -5,6 +5,8 @@ import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
+import VarifyQuiz from "./VarifyQuiz";
+
 
 
 const ChangeNav = () => {
@@ -33,7 +35,7 @@ function Quizz(props) {
 
 
 
-    const [quz, setquz] = useState(["کامنتی وجود ندارد"])
+    const [quzes, setquz] = useState(["کوییزی وجود ندارد"])
 
     let token = "Token " + localStorage.getItem('token');
 
@@ -47,15 +49,15 @@ function Quizz(props) {
         }).then((response) => {
             setquz(response.data);
             console.log("-------------------------quiz :",response.data)
-            setshow(<>
+            /*setshow(<>
                 {
                     response.data.map(
                         (quz) => {
-                            //return <Validatec.js  quiz={quz} />
+                            return <VarifyQuiz  quiz={quz} />
                         }
                     )
                 }
-            </>)
+            </>)*/
             //console.log(response.data);
         });
     }, [])
@@ -73,7 +75,18 @@ function Quizz(props) {
             <div className="Admin_Quizz_page">
 
                 {
-                    test()
+
+                    quzes?.length != 0 && quzes.map(
+                        quz =>
+                            //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                            //(<p>{cm.comment_text}</p>)
+                            ( <VarifyQuiz quiz={quz}/>)
+                        //console.log(cmnt.comment_text)
+                        //return <p>{cm.comment_text}</p>
+
+                    )
+
+
                 }
             </div>
         </>

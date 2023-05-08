@@ -5,6 +5,7 @@ import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
+import VarifyQuiz from "../../AdminPanel/Pages/VarifyQuiz";
 
 
 const ChangeNav = () => {
@@ -31,7 +32,7 @@ const ChangeNav = () => {
 }
 const Root_Quizz=({props})=> {
 
-    const [quz, setquz] = useState(["کوییزی وجود ندارد"])
+    const [quzes, setquz] = useState(["کوییزی وجود ندارد"])
 
     let token = "Token " + localStorage.getItem('token');
 
@@ -45,7 +46,7 @@ const Root_Quizz=({props})=> {
         }).then((response) => {
             setquz(response.data);
             console.log("-------------------------quiz :",response.data)
-            setshow(<>
+            /*setshow(<>
                 {
                     response.data.map(
                         (quz) => {
@@ -53,7 +54,7 @@ const Root_Quizz=({props})=> {
                         }
                     )
                 }
-            </>)
+            </>)*/
             //console.log(response.data);
         });
     }, [])
@@ -67,7 +68,20 @@ const Root_Quizz=({props})=> {
             <SideBar />
             <div className="Admin_Quizz_page">
 
-                {test()}
+                {
+
+                    quzes?.length != 0 && quzes.map(
+                        quz =>
+                            //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                            //(<p>{cm.comment_text}</p>)
+                            ( <VarifyQuiz quiz={quz}/>)
+                        //console.log(cmnt.comment_text)
+                        //return <p>{cm.comment_text}</p>
+
+                    )
+
+
+                }
             </div>
         </>
 
