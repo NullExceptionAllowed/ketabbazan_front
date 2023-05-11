@@ -23,4 +23,4 @@ const VarifyQuiz = ({quiz})=>{
 
 }
 
-export default VarifyQuiz
+export default VarifyQuiz;

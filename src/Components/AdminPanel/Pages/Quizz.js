@@ -5,6 +5,7 @@ import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
+import QuizSummery from "./QuizSummery";
 import VarifyQuiz from "./VarifyQuiz";
 
 
@@ -49,15 +50,15 @@ function Quizz(props) {
         }).then((response) => {
             setquz(response.data);
             console.log("-------------------------quiz :",response.data)
-            /*setshow(<>
+            setshow(<>
                 {
                     response.data.map(
                         (quz) => {
-                            return <VarifyQuiz  quiz={quz} />
+                            return <QuizSummery  quiz={quz} />
                         }
                     )
                 }
-            </>)*/
+            </>)
             //console.log(response.data);
         });
     }, [])
@@ -74,7 +75,7 @@ function Quizz(props) {
             <SideBar />
             <div className="Admin_Quizz_page">
 
-                {
+                {/*
 
                     quzes?.length != 0 && quzes.map(
                         quz =>
@@ -84,7 +85,7 @@ function Quizz(props) {
                         //console.log(cmnt.comment_text)
                         //return <p>{cm.comment_text}</p>
 
-                    )
+                    )*/
 
 
                 }

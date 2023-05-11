@@ -5,6 +5,10 @@ import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
+import QuizSummery from "../../AdminPanel/Pages/QuizSummery";
+
+import {Paper} from '@mui/material';
+import {Grid} from '@mui/material';
 import VarifyQuiz from "../../AdminPanel/Pages/VarifyQuiz";
 
 
@@ -50,7 +54,7 @@ const Root_Quizz=({props})=> {
                 {
                     response.data.map(
                         (quz) => {
-                            //return <Validatec.js  quiz={quz} />
+                            //return <QuizSummery quiz={quz} />
                         }
                     )
                 }
@@ -67,21 +71,26 @@ const Root_Quizz=({props})=> {
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_Quizz_page">
+                <div className="Admin_Quizz_page_inside">
+                    <Grid container spacing={1}>
+                        <Grid container item xs={12} spacing={3}>
+                            {
 
-                {
+                                quzes?.length != 0 && quzes.map(
+                                    quz =>
+                                        //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                                        //(<p>{cm.comment_text}</p>)
+                                        ( <QuizSummery quiz={quz}/>)
+                                    //console.log(cmnt.comment_text)
+                                    //return <p>{cm.comment_text}</p>
 
-                    quzes?.length != 0 && quzes.map(
-                        quz =>
-                            //console.log("-------------------inside setshow comment : ",typeof(cm) );
-                            //(<p>{cm.comment_text}</p>)
-                            ( <VarifyQuiz quiz={quz}/>)
-                        //console.log(cmnt.comment_text)
-                        //return <p>{cm.comment_text}</p>
-
-                    )
+                                )
 
 
-                }
+                            }
+                        </Grid>
+                    </Grid>
+                </div>
             </div>
         </>
 
