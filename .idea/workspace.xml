@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/QuizSummery.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Quizz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Quizz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/QuizzPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/QuizzPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/QuizSummery.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/QuizSummery.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/VarifyQuiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/VarifyQuiz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +87,7 @@
       <workItem from="1683367714427" duration="11096000" />
       <workItem from="1683576896777" duration="2955000" />
       <workItem from="1683837295678" duration="972000" />
-      <workItem from="1683839377990" duration="7395000" />
+      <workItem from="1683839377990" duration="9005000" />
     </task>
     <servers />
   </component>

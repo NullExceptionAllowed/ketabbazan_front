@@ -11,16 +11,41 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {Paper} from '@mui/material';
 import {Grid} from '@mui/material';
+import {DialogTitle} from '@mui/material';
+import {Dialog} from '@mui/material';
+import VarifyQuiz from "./VarifyQuiz";
 import './QuizzPage.css'
 import question_mark from "../../../assets/Image/question-mark.jpg"
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
+function SimpleDialog(props) {
+    const { onClose,  open , quiz } = props;
+
+    const handleClose = () => {
+        onClose();
+    };
+
+
+
+    return (
+        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+            <VarifyQuiz quiz ={quiz}></VarifyQuiz>
+        </Dialog>
+    );
+
+
+};
 
 const QuizSummery = ({quiz}) => {
     const theme = useTheme();
     let token = "Token " + localStorage.getItem('token');
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
     /*useEffect(()=>{
         console.log(quiz.id)
         axios.post(`${baseUrl}/admin-panel/quiz/verify/:${quiz.id}`,{
@@ -33,38 +58,41 @@ const QuizSummery = ({quiz}) => {
     },[]);*/
     //console.log(quiz.question.length)
     return (
-        <React.Fragment>
-            <Grid item xs={4}>
-                <Paper className="Admin_Quizz_page_inside_box">
-                    <Card sx={{ direction:'rtl',display: 'flex', margin: '1%' }}>
-                        <CardMedia
-                            component="img"
-                            sx={{ width:'40%' , height: 'auto' }}
-                            image={require('../../../assets/Image/question-mark.jpg')}
-                            alt="Live from space album cover"
-                        />
-                        <Box sx={{width:'50%',direction:'rtl', display: 'flex', flexDirection: 'column' }}>
-                            <CardContent sx={{ flex: '1 0 auto' }}>
-                                <Typography component="div" variant="h5">
-                                    کوییز
-                                </Typography>
-                                <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    تعداد سوال : { quiz.question.length
-                                }
-                                </Typography>
-                            </CardContent>
-                            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                                <IconButton aria-label="open">
-                                    <Button size="small"> مشاهده و تایید</Button>
-                                </IconButton>
+        <>
+            <React.Fragment>
+                <Grid item xs={4}>
+                    <Paper className="Admin_Quizz_page_inside_box">
+                        <Card sx={{ direction:'rtl',display: 'flex', margin: '1%' }}>
+                            <CardMedia
+                                component="img"
+                                sx={{ width:'40%' , height: 'auto' }}
+                                image={require('../../../assets/Image/question-mark.jpg')}
+                                alt="Live from space album cover"
+                            />
+                            <Box sx={{width:'50%',direction:'rtl', display: 'flex', flexDirection: 'column' }}>
+                                <CardContent sx={{ flex: '1 0 auto' }}>
+                                    <Typography component="div" variant="h5">
+                                        کوییز
+                                    </Typography>
+                                    <Typography variant="subtitle1" color="text.secondary" component="div">
+                                        تعداد سوال : { quiz.question.length
+                                    }
+                                    </Typography>
+                                </CardContent>
+                                <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+                                    <IconButton aria-label="open">
+                                        <Button size="small" onClick={()=>{setOpen(!open)}}> مشاهده و تایید</Button>
+                                    </IconButton>
+                                </Box>
                             </Box>
-                        </Box>
 
-                    </Card>
+                        </Card>
 
-                </Paper>
-            </Grid>
-        </React.Fragment>
+                    </Paper>
+                </Grid>
+            </React.Fragment>
+            <SimpleDialog  open={open} onClose={handleClose} quiz={quiz} />
+        </>
 
     );
 }

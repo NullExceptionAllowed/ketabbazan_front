@@ -19,6 +19,11 @@ const VarifyQuiz = ({quiz})=>{
     const changeStatus =()=> {
         setstatus(!status)
     }
+    return(
+        <p>
+            {quiz.question[0].question}
+        </p>
+    );
 
 
 }
