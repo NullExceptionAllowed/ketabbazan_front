@@ -31,8 +31,8 @@ function SimpleDialog(props) {
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-            <VarifyQuiz quiz ={quiz}></VarifyQuiz>
+            <DialogTitle id="simple-dialog-title">تایید کوییز</DialogTitle>
+            <VarifyQuiz quiz ={quiz} onsubmit={handleClose}></VarifyQuiz>
         </Dialog>
     );
 

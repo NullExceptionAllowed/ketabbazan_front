@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
+import './QuizzPage.css'
 
-
-const VarifyQuiz = ({quiz})=>{
+const VarifyQuiz = (props)=>{
+    const {  onsubmit , quiz } = props;
     let token = "Token " + localStorage.getItem('token');
     const [status, setstatus]=useState(false) ;
     useEffect(()=>{
@@ -16,13 +17,21 @@ const VarifyQuiz = ({quiz})=>{
             }
         ).then(res => console.log(res)).catch(e => console.log(e));
     },[status]);
-    const changeStatus =()=> {
+
+    const handelsubmit = ()=>{
         setstatus(!status)
+        onsubmit();
     }
     return(
-        <p>
-            {quiz.question[0].question}
-        </p>
+        <>
+            <div className="Admin_Quizz_page_inside_dialog">
+                {quiz.question.map(
+                    qstn =>
+                        (<p>{qstn.question}</p>)
+                )}
+            </div>
+            <button onClick={handelsubmit}>تایید</button>
+        </>
     );
 
 
