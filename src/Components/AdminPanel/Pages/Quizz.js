@@ -7,6 +7,7 @@ import axios from "axios";
 import {baseUrl} from "../../../Variable";
 import QuizSummery from "./QuizSummery";
 import VarifyQuiz from "./VarifyQuiz";
+import {Grid} from "@mui/material";
 
 
 
@@ -50,15 +51,15 @@ function Quizz(props) {
         }).then((response) => {
             setquz(response.data);
             console.log("-------------------------quiz :",response.data)
-            setshow(<>
+            /*setshow(<>
                 {
                     response.data.map(
                         (quz) => {
-                            return <QuizSummery  quiz={quz} />
+                            //return <QuizSummery quiz={quz} />
                         }
                     )
                 }
-            </>)
+            </>)*/
             //console.log(response.data);
         });
     }, [])
@@ -68,27 +69,31 @@ function Quizz(props) {
     }
 
 
-
     return (
         <>
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_Quizz_page">
+                <div className="Admin_Quizz_page_inside">
+                    <Grid container spacing={1}>
+                        <Grid container item xs={12} spacing={3}>
+                            {
 
-                {/*
+                                quzes?.length != 0 && quzes.map(
+                                    quz =>
+                                        //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                                        //(<p>{cm.comment_text}</p>)
+                                        ( <QuizSummery quiz={quz}/>)
+                                    //console.log(cmnt.comment_text)
+                                    //return <p>{cm.comment_text}</p>
 
-                    quzes?.length != 0 && quzes.map(
-                        quz =>
-                            //console.log("-------------------inside setshow comment : ",typeof(cm) );
-                            //(<p>{cm.comment_text}</p>)
-                            ( <VarifyQuiz quiz={quz}/>)
-                        //console.log(cmnt.comment_text)
-                        //return <p>{cm.comment_text}</p>
-
-                    )*/
+                                )
 
 
-                }
+                            }
+                        </Grid>
+                    </Grid>
+                </div>
             </div>
         </>
 
