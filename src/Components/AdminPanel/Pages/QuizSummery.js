@@ -30,8 +30,7 @@ function SimpleDialog(props) {
 
 
     return (
-        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">تایید کوییز</DialogTitle>
+        <Dialog className="quiz_dialog" onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <VarifyQuiz quiz ={quiz} onsubmit={handleClose}></VarifyQuiz>
         </Dialog>
     );
@@ -75,7 +74,7 @@ const QuizSummery = ({quiz}) => {
                                         کوییز
                                     </Typography>
                                     <Typography variant="subtitle1" color="text.secondary" component="div">
-                                        تعداد سوال : { quiz.question.length
+                                        تعداد سوال : { //quiz.question.length
                                     }
                                     </Typography>
                                 </CardContent>
