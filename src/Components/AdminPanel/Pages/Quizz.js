@@ -5,6 +5,10 @@ import Nav from "../../Navbar/Nav";
 import Nav2 from "../../Navbar/Nav2";
 import axios from "axios";
 import {baseUrl} from "../../../Variable";
+import QuizSummery from "./QuizSummery";
+import VarifyQuiz from "./VarifyQuiz";
+import {Grid} from "@mui/material";
+
 
 
 const ChangeNav = () => {
@@ -33,7 +37,7 @@ function Quizz(props) {
 
 
 
-    const [quz, setquz] = useState(["کامنتی وجود ندارد"])
+    const [quzes, setquz] = useState(["کوییزی وجود ندارد"])
 
     let token = "Token " + localStorage.getItem('token');
 
@@ -47,15 +51,15 @@ function Quizz(props) {
         }).then((response) => {
             setquz(response.data);
             console.log("-------------------------quiz :",response.data)
-            setshow(<>
+            /*setshow(<>
                 {
                     response.data.map(
                         (quz) => {
-                            //return <Validatec.js  quiz={quz} />
+                            //return <QuizSummery quiz={quz} />
                         }
                     )
                 }
-            </>)
+            </>)*/
             //console.log(response.data);
         });
     }, [])
@@ -65,16 +69,31 @@ function Quizz(props) {
     }
 
 
-
     return (
         <>
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_Quizz_page">
+                <div className="Admin_Quizz_page_inside">
+                    <Grid container spacing={1}>
+                        <Grid container item xs={12} spacing={3}>
+                            {
 
-                {
-                    test()
-                }
+                                quzes?.length != 0 && quzes.map(
+                                    quz =>
+                                        //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                                        //(<p>{cm.comment_text}</p>)
+                                        ( <QuizSummery quiz={quz}/>)
+                                    //console.log(cmnt.comment_text)
+                                    //return <p>{cm.comment_text}</p>
+
+                                )
+
+
+                            }
+                        </Grid>
+                    </Grid>
+                </div>
             </div>
         </>
 
