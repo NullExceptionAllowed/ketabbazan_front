@@ -10,7 +10,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { baseUrl } from "../../../Variable";
 import noPicture from "../../../assets/Image/nopic.png";
 
-const VeriFyArticles = ({ article, refresh, renderSquare }) => {
+const VeriFyArticles = ({ article, refresh, renderSquare, justContent }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down(550));
 
@@ -134,16 +134,20 @@ const VeriFyArticles = ({ article, refresh, renderSquare }) => {
         >
           مشاهده مقاله
         </Button>
-        <ToggleButton
-          value="check"
-          selected={is_verified}
-          onChange={() => {
-            changeStatus();
-          }}
-          data-testid="change-status-of-article"
-        >
-          <CheckIcon data-testid="change-status-of-article2" />
-        </ToggleButton>
+        {justContent == true ? (
+          <></>
+        ) : (
+          <ToggleButton
+            value="check"
+            selected={is_verified}
+            onChange={() => {
+              changeStatus();
+            }}
+            data-testid="change-status-of-article"
+          >
+            <CheckIcon data-testid="change-status-of-article2" />
+          </ToggleButton>
+        )}
       </div>
     );
   };

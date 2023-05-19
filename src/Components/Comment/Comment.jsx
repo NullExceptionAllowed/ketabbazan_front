@@ -247,7 +247,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
 
                 <br/>
 
-               <BasicTabs />
+               <BasicTabs user={user}/>
           </Dialog>
         );
         }
@@ -286,7 +286,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
       
                       <br/>
       
-                     <BasicTabs />
+                     <BasicTabs user={user} />
                 </Dialog>
               );
 

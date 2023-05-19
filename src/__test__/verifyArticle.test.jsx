@@ -64,7 +64,7 @@ test("Functional test for show article btn to show dialog after click", async ()
 test("Functional test for verify article btn", async () => {
   const mockFetch = jest.fn(() => Promise.resolve({ ok: true }));
   global.fetch = mockFetch;
-  render(<VeriFyArticles renderSquare={true} article={fakeArticle} />);
+  render(<VeriFyArticles article={fakeArticle} />);
   const btn = await screen.findByTestId("change-status-of-article");
   fireEvent.click(btn);
   await waitFor(() => {
