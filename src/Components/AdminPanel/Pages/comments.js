@@ -9,6 +9,7 @@ import VeriFyArticles from "./VeriFyArticles";
 import ValidateComment from "./Validatec";
 import List from '@mui/material/List';
 import Validatec from "./Validatec";
+import {Grid} from "@mui/material";
 
 
 
@@ -77,22 +78,24 @@ function Comments(props) {
             <ChangeNav></ChangeNav>
             <SideBar />
             <div className="Admin_comments_page">
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {
+                <div style={{ padding: "40px 20px",flexGrow: 1 }}>
+                    <Grid container  xs={12}  spacing={3}>
+                        {
 
-                        cmnts?.length != 0 && cmnts.map(
-                            cm =>
-                                //console.log("-------------------inside setshow comment : ",typeof(cm) );
-                                //(<p>{cm.comment_text}</p>)
-                                ( <Validatec comment={cm}/>)
-                            //console.log(cmnt.comment_text)
-                            //return <p>{cm.comment_text}</p>
+                            cmnts?.length != 0 && cmnts.map(
+                                cm =>
+                                    //console.log("-------------------inside setshow comment : ",typeof(cm) );
+                                    //(<p>{cm.comment_text}</p>)
+                                    ( <Validatec comment={cm}/>)
+                                //console.log(cmnt.comment_text)
+                                //return <p>{cm.comment_text}</p>
 
-                        )
+                            )
 
 
-                    }
-                </List>
+                        }
+                    </Grid>
+                </div>
                 {/*
                 <Grid container wrap="nowrap" spacing={2}>
                 <Grid item>
@@ -116,7 +119,6 @@ function Comments(props) {
 
             <Divider variant="inset" component="li" />
                 */}
-
             </div>
         </>
 

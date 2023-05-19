@@ -58,7 +58,7 @@ const Validatec = ({comment}) => {
             {!isMatch600 &&(
                 <>
 
-                    <Grid  item xs={12} wrap="nowrap" spacing={2} className="Admin_comment_page_inside_box">
+                    <Grid  container xs={12} wrap="nowrap" spacing={2} className="Admin_comment_page_inside_box">
                         <Grid item>
                             <Avatar alt="user" src={`${baseUrl}/profile/getimage/?username=${comment.user.username}`} />
                         </Grid>
@@ -86,32 +86,29 @@ const Validatec = ({comment}) => {
             )}
             {isMatch600 &&(
                 <>
-                    <>
-                        <Grid item xs={12} wrap="nowrap" spacing={2} className="Admin_comment_page_inside_box">
-                            <Grid item>
-                                <Avatar alt="user" src={`${baseUrl}/profile/getimage/?username=${comment.user.username}`} />
-                            </Grid>
+                    <Grid container xs={12} wrap="nowrap" spacing={2} className="Admin_comment_page_inside_box_phone">
+                        <Grid item>
+                            <Avatar alt="user" src={`${baseUrl}/profile/getimage/?username=${comment.user.username}`} />
+                        </Grid>
 
-                            <Grid justifyContent="right" item xs zeroMinWidth>
-                                <h6 style={{  margin: 0 }}>{comment.user.username}</h6>
-                                <p style={{fontSize:"14px" }}>
-                                    {comment.comment_text}
-                                </p>
-                                {/*<p style={{textAlign: "left", color: "gray"}}>
+                        <Grid justifyContent="right" item xs zeroMinWidth>
+                            <h6 style={{  margin: 0 }}>{comment.user.username}</h6>
+                            <p style={{fontSize:"14px" }}>
+                                {comment.comment_text}
+                            </p>
+                            {/*<p style={{textAlign: "left", color: "gray"}}>
                                     {comment.created_on.getMonth()}
                                 </p>*/}
-                                <Button className="comment_submit_btn" variant="contained"
-                                        onClick={() => {setstatus(!status)}}
-                                        style={{
-                                            backgroundColor: "CAE5F3",
-                                            margin: "10px",
-                                            fontWeight: 800,
-                                        }}>تایید</Button>
-                            </Grid>
-
+                            <Button className="comment_submit_btn" variant="contained"
+                                    onClick={() => {setstatus(!status)}}
+                                    style={{
+                                        backgroundColor: "CAE5F3",
+                                        margin: "10px",
+                                        fontWeight: 800,
+                                    }}>تایید</Button>
                         </Grid>
-                    </>
 
+                    </Grid>
                 </>
             )}
 
