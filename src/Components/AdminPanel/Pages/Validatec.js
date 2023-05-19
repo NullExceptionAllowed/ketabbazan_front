@@ -14,7 +14,10 @@ import {baseUrl} from "../../../Variable";
 import ListItemButton from '@mui/material/ListItemButton';
 import {FaCommentMedical, FaLeanpub} from 'react-icons/fa';
 import axios from "axios";
+import {Grid} from '@mui/material';
 import List from "@mui/material/List";
+import {Paper, useMediaQuery, useTheme} from '@mui/material';
+import './commentsPage.css'
 
 const Validatec = ({comment}) => {
 
@@ -35,6 +38,13 @@ const Validatec = ({comment}) => {
     const changeStatus =()=> {
         setstatus(!status)
     }
+    const theme = useTheme();
+    const isMatch600 = useMediaQuery(theme.breakpoints.down(650));
+    const Return_with_paper = ()=>{
+
+
+
+    }
 
 
 
@@ -44,37 +54,68 @@ const Validatec = ({comment}) => {
     return(
 
 
-        <div>
+        <div className="one_comment_varify">
+            {!isMatch600 &&(
+                <>
 
+                    <Grid  item xs={12} wrap="nowrap" spacing={2} className="Admin_comment_page_inside_box">
+                        <Grid item>
+                            <Avatar alt="user" src={`${baseUrl}/profile/getimage/?username=${comment.user.username}`} />
+                        </Grid>
 
-            <ListItem alignItems="flex-start" >
-                <ListItemAvatar>
-                    <Avatar alt={comment.user.username} src={`${baseUrl}/profile/getimage/?username=${comment.user.username}`}/>
-                </ListItemAvatar>
-                <ListItemText
-                    primary={comment.user.username}
-                    secondary={
-                        <React.Fragment>
-                            <Typography
-                                sx={{display: 'inline'}}
-                                component="span"
-                                variant="body2"
-                                color="text.primary"
-                            >
+                        <Grid justifyContent="right" item xs zeroMinWidth>
+                            <h6 style={{ margin: 0 }}>{comment.user.username}</h6>
+                            <p style={{ fontSize:"20px" }}>
                                 {comment.comment_text}
-                            </Typography>
+                            </p>
+                            {/*<p style={{textAlign: "left", color: "gray"}}>
+                                {comment.created_on.getMonth()}
+                            </p>*/}
 
-                        </React.Fragment>
-                    }
-                />
-                <Button
-                    onClick={/*changeStatus()*/()=>{setstatus(!status)}}
-                >
-                    <FaCommentMedical style={{color: "#0D9ECF"}}/>
-                </Button>
+                            <Button className="comment_submit_btn" variant="contained"
+                                    onClick={() => {setstatus(!status)}}
+                                    style={{
+                                        backgroundColor: "CAE5F3",
+                                        margin: "10px",
+                                        fontWeight: 800,
+                                    }}>تایید</Button>
+                        </Grid>
 
-            </ListItem>
-                <Divider variant="inset" component="li" />
+                    </Grid>
+                </>
+            )}
+            {isMatch600 &&(
+                <>
+                    <>
+                        <Grid item xs={12} wrap="nowrap" spacing={2} className="Admin_comment_page_inside_box">
+                            <Grid item>
+                                <Avatar alt="user" src={`${baseUrl}/profile/getimage/?username=${comment.user.username}`} />
+                            </Grid>
+
+                            <Grid justifyContent="right" item xs zeroMinWidth>
+                                <h6 style={{  margin: 0 }}>{comment.user.username}</h6>
+                                <p style={{fontSize:"14px" }}>
+                                    {comment.comment_text}
+                                </p>
+                                {/*<p style={{textAlign: "left", color: "gray"}}>
+                                    {comment.created_on.getMonth()}
+                                </p>*/}
+                                <Button className="comment_submit_btn" variant="contained"
+                                        onClick={() => {setstatus(!status)}}
+                                        style={{
+                                            backgroundColor: "CAE5F3",
+                                            margin: "10px",
+                                            fontWeight: 800,
+                                        }}>تایید</Button>
+                            </Grid>
+
+                        </Grid>
+                    </>
+
+                </>
+            )}
+
+
 
 
         </div>
