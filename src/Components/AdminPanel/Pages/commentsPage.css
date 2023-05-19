@@ -7,4 +7,26 @@
     margin: 4% 7%;
     box-shadow: rgba(0, 0, 0, 0.443) 0px 2px 10px;
     border: #aaaaaa;
+    direction: rtl;
+}
+
+.one_comment_varify{
+    box-shadow: rgba(0, 0, 0, 0.443) 0px 2px 10px;
+    border: #aaaaaa;
+    margin:2% ;
+    padding: 3%;
+}
+.comment_submit_btn{
+    margin: 20px;
+}
+.Admin_comment_page_inside_box{
+
+    width: 100%;
+    direction:rtl;
+
+
+}
+.Admin_comment_page_inside_box_phone{
+    width: auto;
+    direction:rtl;
 }
