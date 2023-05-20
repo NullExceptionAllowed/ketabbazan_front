@@ -31,7 +31,7 @@ export const SideBarData = [
     },
     {
         title:'مقاله ها',
-        path:'/Root_Articles',
+        path:'.../.../AdminPanel/Pages/Articles',
         icon:<RiIcons.RiArticleLine></RiIcons.RiArticleLine>,
         cName:'nav-text'
     }
