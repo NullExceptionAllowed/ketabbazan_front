@@ -51,7 +51,7 @@ function Quizz(props) {
                 {
                     response.data.map(
                         (quz) => {
-                            //return <ValidateComment  quiz={quz} />
+                            //return <Validatec.js  quiz={quz} />
                         }
                     )
                 }
