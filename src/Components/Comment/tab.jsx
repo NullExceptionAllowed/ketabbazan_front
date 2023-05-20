@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import ArticleCard from './tabContent/articleCard';
 // import VeriFyArticles from '../VerifyArticles';
@@ -12,6 +12,7 @@ import axios from 'axios';
 import { baseUrl } from '../../Variable';
 import ConditionBook from '../Profile/Tools/Conditionbook';
 import { ButtonBase, Grid } from '@mui/material';
+import VeriFyArticles from '../AdminPanel/Pages/VeriFyArticles';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -27,7 +28,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -46,32 +47,35 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
-export default function BasicTabs({user}) {
+ 
+export default function BasicTabs({user}) { 
   const [value, setValue] = React.useState(0);
 
   const [userArticles, setUserArticles] = React.useState([]);
   const [userBooks, setUserBooks] = React.useState([]);
   const [userComments, setComments] = React.useState([]);
 
+  const history = useHistory();
 
   React.useState(()=>{
     let token = "Token " + localStorage.getItem('token');
-    axios.get(`${baseUrl}/showprofile/?username=${user}`, {
-      headers: {
-        'Content-Type': 'application/json ',
-        "Authorization": token
-      }
-    }).then(res => {
-      setUserBooks(res.data.read_books)
-      setUserArticles(res.data.user_articles)
-      setComments(res.data.user_comments)}).catch(e => console.log(e))
-    axios.get()
+    axios
+      .get(`${baseUrl}/showprofile/?username=${user}`, {
+        headers: {
+          "Content-Type": "application/json ",
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log("resssssss",res)
+        const { data } = res;
+        const { read_books, user_articles, user_comments } = data;
+        setUserBooks(read_books);
+        setUserArticles(user_articles);
+        setComments(user_comments);
+      })
+      .catch((e) => console.log(e));
   },[])
-
-  // اينا بايد برن توي ادمين  پنل
- 
-  // از اون بالا تا اين پايين برن توي ادمين  پنل
 
 
   const handleChange = (event, newValue) => {
@@ -100,7 +104,6 @@ export default function BasicTabs({user}) {
                   className="showbookall_paper"
                   key={index}
                   to={`/bookinfo/${info.id}`}
-                  component={Link}
                   sx={{
                     direction: "rtl",
                   }}
@@ -111,8 +114,9 @@ export default function BasicTabs({user}) {
                     alignItems: "center",
                     flexDirection: "column",
                   }}
+                  
                 >
-                  <ButtonBase style={{ display: "flex", alignItems: "center" }}>
+                  <ButtonBase onClick={()=>{history.push(`/bookinfo/${info.id}`);}} style={{ display: "flex", alignItems: "center" }}>
                     <img
                       alt="complex1"
                       className="showbookall_img"
@@ -130,7 +134,6 @@ export default function BasicTabs({user}) {
                   <div
                     className="showbookall_name"
                     variant="subtitle1"
-                    component="div"
                     style={{ color: "black" }}
                     onMouseOver={MouseOver}
                     onMouseOut={MouseOut}
@@ -153,7 +156,7 @@ export default function BasicTabs({user}) {
           {
             userArticles.map(
               (art) => {
-                return <ArticleCard article={art} />
+                return <VeriFyArticles key={art.id} article={art} renderSquare={true} justContent />; 
               }
             )
           }
@@ -164,7 +167,7 @@ export default function BasicTabs({user}) {
       {
             userComments.map(
               (comment) => {
-                return <div style={{padding:8}} >{comment.comment_text}</div>
+                return <div key={comment.comment_text} style={{padding:8}} >{comment.comment_text}</div>
 
               }
             )
