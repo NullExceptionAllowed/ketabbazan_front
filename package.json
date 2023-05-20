@@ -19,6 +19,7 @@
     "axios": "^0.26.1",
     "cors": "^2.8.5",
     "draft-js": "^0.11.7",
+    "enzyme": "^3.11.0",
     "formik": "^2.2.9",
     "html-react-parser": "^1.4.12",
     "node-sass": "^8.0.0",

@@ -484,7 +484,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
                     </Grid>
                     <Grid xs={7.5} md={8.6}> </Grid>
                     <Grid xs={0.3} md={0.15}>  <a style={{ position:"relative", top:"6px"}}>{dislike}</a>  </Grid>
-                    <Grid item xs={0.8} md={0.4}>
+                    <Grid data-test="dislike" item xs={0.8} md={0.4}>
                        <IconButton  >
                             <ThumbDownIcon color="primary"  onClick={dislikeFunction} />
                        </IconButton>
@@ -498,7 +498,7 @@ const Comment = ({ comment_text, user, comment_id, replys ,created_on , like , d
 
                     {/* <div style={{position:"relative" , right:"85%",top:"-12px" , display:"inline" }}> */}
                    
-                   <Grid xs={0.8} md={0.4}>
+                   <Grid data-test="like" xs={0.8} md={0.4}>
                       <IconButton  children= "no" >
                            <ThumbUpIcon color="primary" onClick={likeFunction}  />  
                       </IconButton>
