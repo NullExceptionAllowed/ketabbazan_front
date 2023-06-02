@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4d57527c-3f44-4ec7-9b9a-16cda53ec309" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Variable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Variable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Validatec.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/Validatec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/commentsPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AdminPanel/Pages/commentsPage.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +18,19 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="27SeEwtwwoHZc6HvQc5uv4YBMVY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -22,12 +38,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="vue.rearranger.settings.migration" value="true" />
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/online education/Soft/project/ketab_bazan_front_end&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\online education\Soft\project\ketab_bazan_front_end\src\Components\AdminPanel\Pages" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -39,10 +68,61 @@
       <updated>1649317811373</updated>
       <workItem from="1649317813504" duration="32000" />
       <workItem from="1660067952874" duration="14000" />
+      <workItem from="1679935184143" duration="5471000" />
+      <workItem from="1679946004291" duration="372000" />
+      <workItem from="1680003156308" duration="1077000" />
+      <workItem from="1680426028811" duration="4667000" />
+      <workItem from="1680783689270" duration="5995000" />
+      <workItem from="1680866219607" duration="7373000" />
+      <workItem from="1682038038054" duration="274000" />
+      <workItem from="1682038765239" duration="5700000" />
+      <workItem from="1682113289207" duration="328000" />
+      <workItem from="1682142790866" duration="3827000" />
+      <workItem from="1682786015989" duration="616000" />
+      <workItem from="1682835067709" duration="171000" />
+      <workItem from="1682947810749" duration="4485000" />
+      <workItem from="1682964210773" duration="532000" />
+      <workItem from="1683056799897" duration="7807000" />
+      <workItem from="1683122270814" duration="2231000" />
+      <workItem from="1683136608124" duration="7945000" />
+      <workItem from="1683367714427" duration="11096000" />
+      <workItem from="1683576896777" duration="2955000" />
+      <workItem from="1683837295678" duration="972000" />
+      <workItem from="1683839377990" duration="10573000" />
+      <workItem from="1684330952537" duration="2757000" />
+      <workItem from="1684500071378" duration="8926000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/Components/RootPanel/Pages/Root_Quizz.js</url>
+          <line>25</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

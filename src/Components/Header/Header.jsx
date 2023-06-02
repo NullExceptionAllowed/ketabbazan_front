@@ -1,13 +1,8 @@
 import React from "react";
 import Home from "../../assets/Image/banner8.jpg";
 import "./Header.css";
-import { InputAdornment } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import Typical from "react-typical";
-import { Link } from "react-router-dom";
+
+// import Typical from "react-typical";
 import { useHistory } from 'react-router-dom';
 
 
@@ -25,7 +20,8 @@ const Header = () => {
         }}
       />
       <h2 className="home_title">
-        <Typical steps={["کتاب بازان", 6000]} loop={Infinity} wrapper="p" />
+        {/* <Typical steps={["کتاب بازان", 6000]} loop={Infinity} wrapper="p" /> */}
+        <p>کتاب بازان</p>
       </h2>
       <div className="home_info">
         کتابخوانی،مقاله گذاشتن و طراحی کوییز با کتاب بازان

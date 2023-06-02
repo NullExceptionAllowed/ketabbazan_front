@@ -26,6 +26,8 @@ import Wallet from "./Tools/Wallet.jsx";
 import ChangePassword from "./Tools/ChangePassword";
 import Myarticle from "./Tools/myarticle";
 import Footer from "../Footer/footer";
+import GiftToOther from "./Tools/giftstoother";
+import GiftToMe from "./Tools/gifttome";
 
 const Profile = () => {
   let s1 = {
@@ -33,8 +35,9 @@ const Profile = () => {
     direction: "rtl",
   };
   let p1 = {
-    height: "500px",
+    height: "auto",
     margin: "auto auto 40px auto",
+    paddingBottom :"10px",
   };
   let p2 = {
     height: "500px",
@@ -45,9 +48,18 @@ const Profile = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [heightchange, setheightchange] = React.useState(false);
+  
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+
+  const handleClick2 = () => {
+    setOpen2(!open2);
+    setheightchange(!heightchange);
   };
 
   const handleEdit = (event, index) => {
@@ -88,10 +100,22 @@ const Profile = () => {
         <ConditionBook con="getpastread" />
       </>
     );
+  }else if (flag === 98) {
+    show = (
+      <>
+        <GiftToMe  />
+      </>
+    );
   } else if (flag === 1) {
     show = (
       <>
         <Myarticle />
+      </>
+    );
+  } else if (flag === 313) {
+    show = (
+      <>
+        <GiftToOther />
       </>
     );
   } else if (flag === 10) {
@@ -222,6 +246,50 @@ const Profile = () => {
                 </Typography>
               </MenuItem>
 
+
+
+                
+              <MenuItem
+                divider={true}
+                style={{ margin: "auto auto 10px auto" }}
+                onClick={handleClick2}
+              >
+                <ListItemIcon>
+                  <MenuBookIcon style={{ color: "#679aea" }} />
+                </ListItemIcon>
+                <Typography style={{ fontSize: "18px" }} inset>
+                  {" "}
+                  وضعیت کتاب های هدیه
+                </Typography>
+                {open2 ? <ExpandLess /> : <ExpandMore />}
+              </MenuItem>
+
+              <Collapse dir="rtl" in={open2} timeout="auto" unmountOnExit>
+                <List component="div">
+                  <ListItemButton
+                    selected={selectedIndex ===313}
+                    onClick={(event) => handleshowbook(event, 313)}
+                  >
+                    <Typography style={{ fontSize: "16px" }} inset>
+                      هدیه دادم
+                    </Typography>
+                  </ListItemButton>
+
+                  <ListItemButton
+                    sx={{ pl: 4 }}
+                    selected={selectedIndex === 98}
+                    onClick={(event) => handleshowbook(event, 98)}
+                  >
+                    <Typography style={{ fontSize: "16px" }} inset>
+                      بهم هدیه دادند
+                    </Typography>
+                  </ListItemButton>
+                </List>
+              </Collapse>
+
+
+
+
               <MenuItem
                 onClick={(event) => handleWallet(event, 3)}
                 divider={true}
@@ -265,6 +333,10 @@ const Profile = () => {
                   خروج از حساب
                 </Typography>
               </MenuItem>
+
+             
+
+
             </MenuList>
           </Paper>
         </Grid>

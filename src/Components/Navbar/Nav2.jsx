@@ -379,7 +379,7 @@
 
 // export default Nav;
 
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -389,7 +389,10 @@ import {
   Grid,
   useTheme,
   useMediaQuery,
+  Modal,
 } from "@mui/material";
+import Badge from "@mui/material/Badge";
+import EmailIcon from "@mui/icons-material/Email";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../../assets/Image/logo.png";
 import Box from "@mui/material/Box";
@@ -411,10 +414,10 @@ import Menu from "@mui/material/Menu";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "./style.css";
-import OptionProfile from './OPtionProfile';
-import axios, { post } from 'axios';
-import { baseUrl } from './../../Variable';
-
+import OptionProfile from "./OPtionProfile";
+import axios, { post } from "axios";
+import { baseUrl } from "./../../Variable";
+import GiftCard from "../GiftNotification/GiftCard";
 
 const Nav = () => {
   const theme = useTheme();
@@ -423,24 +426,80 @@ const Nav = () => {
   const history = useHistory();
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [username, setusername] = useState("");
-  const[openop,setopenop]=useState(false);
+  //const [is_admin, setis_admin] = useState("");
+  //const [is_super_admin, setis_super_admin] = useState("");
+  const [openop, setopenop] = useState(false);
+  const [invisible, setInvisible] = useState(true);
+  const [dialogVisibility, setDialogVisibility] = useState();
+  const [newGifts, setNewGifts] = useState([]);
+  const [path, setpath] = useState(localStorage.getItem("main_path"));
 
-  let token = "Token " + localStorage.getItem('token');
+  let token = "Token " + localStorage.getItem("token");
 
   useEffect(() => {
-
-    axios.get(`${baseUrl}/profile/info/`, {
+    /*let is_admin = localStorage.getItem('is_admin');
+    let is_super_admin = localStorage.getItem('is_super_admin');
+    if (is_admin == true && is_super_admin == true){
+      setpath("/Root") ;
+    }else if (is_admin == true && is_super_admin == false){
+      setpath("/Admin");
+    }else {
+      setpath("/");
+    }
+    console.log( is_super_admin);
+    console.log( is_admin);
+    console.log( path);*/
+    axios
+      .get(`${baseUrl}/profile/info/`, {
         headers: {
-            'Content-Type': 'application/json ',
-            'Authorization': token
-        }
-    }).then((res) => {
-
+          "Content-Type": "application/json ",
+          Authorization: token,
+        },
+      })
+      .then((res) => {
         setusername(res.data.username);
-       
-    });
+      });
 
-}, []);
+
+    axios
+      .get(`${baseUrl}/gift/hasunread/`, {
+        headers: {
+          "Content-Type": "application/json ",
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        setInvisible(!res.data.has_unread);
+      });
+
+    axios
+      .get(`${baseUrl}/gift/allreceivedgifts/`, {
+        headers: {
+          "Content-Type": "application/json ",
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        setNewGifts(res.data.filter((gift) => gift.is_read != true));
+      });
+  }, []);
+
+  const MarkGiftAsRead = (id) => {
+    console.log("api call to mark gift messages as read");
+    setNewGifts(newGifts.filter((gift) => gift.id !== id));
+    setInvisible(newGifts.length == 1);
+    axios.put(
+      `${baseUrl}/gift/markasread/`,
+      { id: id },
+      {
+        headers: {
+          "Content-Type": "application/json ",
+          Authorization: token,
+        },
+      }
+    );
+  };
+
 
   const handlesubmit = async (event) => {
     event.preventDefault();
@@ -448,16 +507,14 @@ const Nav = () => {
   };
   const handleSearch = () => {
     setOpenSearchBar(!openSearchBar);
-    console.log(openSearchBar + "2222");
+    //console.log(openSearchBar + "2222");
   };
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
   };
-  console.log(openSearchBar + "11111");
   let showbox = null;
   if (openSearchBar && checkpx) {
     showbox = <SearchBar open={openSearchBar} close={handleSearchBarClose} />;
-    console.log(openSearchBar);
   }
   const [search, setsearchname] = useState("");
   const Setsearch = (event) => {
@@ -470,13 +527,71 @@ const Nav = () => {
   const MouseOut = (event) => {
     event.target.style.color = "#545252";
   };
+
   const handleShowmenu = () => {
-    history.push('/profile');
+    history.push("/profile");
   };
-  let oppro=null;
-  if(openop){
-    oppro=<OptionProfile />
+  let oppro = null;
+  if (openop) {
+    oppro = <OptionProfile />;
   }
+
+  const bazKonandeyeDialog = () => {
+    setDialogVisibility(true);
+  };
+
+  const OurNiceModal = () => {
+    return (
+      <Modal
+        open={dialogVisibility}
+        onClose={() => {
+          setDialogVisibility(false);
+        }}
+      >
+        <div
+          style={{
+            width: 300,
+            maxHeight: 600,
+            overflow: "auto",
+            backgroundColor: "white",
+            marginTop: 62,
+            marginLeft: 50,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            borderRadius: 4,
+          }}
+        >
+          {newGifts.map((gift, i) => {
+            return (
+              <GiftCard
+                gift={gift}
+                key={i}
+                goToBookById={(id) => {
+                  history.replace(`/bookinfo/${id}`);
+                  setDialogVisibility(false);
+                }}
+                markAsRead={MarkGiftAsRead}
+              />
+            );
+          })}
+          {newGifts.length == 0 ?? <div> هیچ هدیه جدیدی دریافت نکرده اید</div>}
+        </div>
+      </Modal>
+    );
+  };
+
+  const OurNiceBadge = () => {
+    return (
+      <div>
+        <IconButton onClick={bazKonandeyeDialog}>
+          <Badge color="primary" variant="dot" invisible={invisible}>
+            <EmailIcon color="black" style={{ color: "black" }} />
+          </Badge>
+        </IconButton>
+      </div>
+    );
+  };
 
   return (
     <Box sx={{ flexGrow: 1, direction: "rtl" }}>
@@ -495,7 +610,7 @@ const Nav = () => {
                   width: "95%",
                 }}
               >
-                <Grid component={Link} to={`/`}>
+                <Grid component={Link} to={localStorage.getItem("main_path")}>
                   <img
                     className="Nav_img"
                     src={Logo}
@@ -506,7 +621,7 @@ const Nav = () => {
                 <Grid
                   className="Nav_type"
                   component={Link}
-                  to={`/`}
+                  to={localStorage.getItem("main_path")}
                   style={{
                     color: "#0D9ECF",
                     marginRight: "10px",
@@ -526,7 +641,7 @@ const Nav = () => {
                 >
                   <Typography
                     component={Link}
-                    to={`/`}
+                    to={localStorage.getItem("main_path")}
                     sx={{
                       marginRight: "1.1rem",
                       textDecoration: "none",
@@ -628,6 +743,7 @@ const Nav = () => {
                   </Grid>
                 )}
               </Grid>
+              <OurNiceBadge />
 
               <Grid sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
@@ -637,7 +753,7 @@ const Nav = () => {
                   <img
                     src={`${baseUrl}/profile/getimage/?username=${username}`}
                     alt="image"
-                    style={{borderRadius:"50%"}}
+                    style={{ borderRadius: "50%" }}
                     className="Nav2_Avatar"
                   />
                 </Button>
@@ -669,8 +785,7 @@ const Nav = () => {
                     className="Nav_img"
                     src={Logo}
                     alt="Signuppicture"
-                    style={{
-                    }}
+                    style={{}}
                   />
                 </Grid>
 
@@ -700,6 +815,8 @@ const Nav = () => {
                   </IconButton>
                 </Grid>
               </Grid>
+              <OurNiceBadge />
+
               <Grid sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
                   style={{ display: "flex", justifyContent: "center" }}
@@ -708,7 +825,7 @@ const Nav = () => {
                   <img
                     alt="Image"
                     src={`${baseUrl}/profile/getimage/?username=${username}`}
-                    style={{borderRadius:"50%"}}
+                    style={{ borderRadius: "50%" }}
                     className="Nav2_Avatar"
                   />
                 </Button>
@@ -719,6 +836,7 @@ const Nav = () => {
       </AppBar>
       {showbox}
       {oppro}
+      <OurNiceModal />
     </Box>
   );
 };

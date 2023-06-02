@@ -17,7 +17,7 @@ import {
 import ChangeNav from "./../Navbar/changeNav";
 import Pagination from "@mui/material/Pagination";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import AdvancedSearch from "../AdvancedSearch/AdvancedSearch";
 const theme = createTheme({
   direction: "rtl",
 });
@@ -25,7 +25,17 @@ const theme = createTheme({
 const Searchbook = () => {
   const location = useLocation();
   const search = location.search;
+  const writer = location.writer;
+  const stars = location.stars;
+  const ganre = location.ganre;
+  const publisher = location.publisher;
   const searchUrlParam = new URLSearchParams(search).get("q");
+  //new
+  const searchUrlParamwriter = new URLSearchParams(writer).get("w");
+  const searchUrlParamstars = new URLSearchParams(stars).get("s");
+  const searchUrlParampublisher = new URLSearchParams(publisher).get("pb");
+  const searchUrlParamganre = new URLSearchParams(ganre).get("g");
+  //end of new
   const searchUrlParamPage = new URLSearchParams(search).get("page");
   const [apiLoading, setApiLoading] = useState(false);
   const [bookinfo, setbookinfo] = useState([]);
@@ -48,20 +58,20 @@ const Searchbook = () => {
     }
 
     axios({
-      url: `${baseUrl}/search/?q=${searchUrlParam}&page=page_count`,
+      url: `${baseUrl}/search/?q=${searchUrlParam}?s=${searchUrlParamstars}?w=${searchUrlParamwriter}?pb=${searchUrlParampublisher}?g=${searchUrlParamganre}&page=page_count`,
     }).then((response) => {
       setnumpage2(response.data);
       console.log(response.data);
     });
     axios({
       url: searchUrlParamPage
-        ? `${baseUrl}/search/?q=${searchUrlParam}&page=${pagenum2}`
-        : `${baseUrl}/search/?q=${searchUrlParam}`,
+        ? `${baseUrl}/search/?q=${searchUrlParam}?s=${searchUrlParamstars}?w=${searchUrlParamwriter}?pb=${searchUrlParampublisher}?g=${searchUrlParamganre}&page=${pagenum2}`
+        : `${baseUrl}/search/?q=${searchUrlParam}?s=${searchUrlParamstars}?w=${searchUrlParamwriter}?pb=${searchUrlParampublisher}?g=${searchUrlParamganre}`,
     }).then((response) => {
       setbookinfo(response.data);
       setApiLoading(false);
     });
-  }, [search]);
+  }, [search,writer,stars,publisher,ganre]);
 
   const handlePagination2 = (e, p) => {
     setpagenum2(p);
@@ -75,6 +85,7 @@ const Searchbook = () => {
   return (
     <div style={{direction:"rtl"}} className="showbookall_fa">
       <ChangeNav />
+      <AdvancedSearch />
       <div style={{ marginTop: "6%" }}>
         {apiLoading && (
           <div
