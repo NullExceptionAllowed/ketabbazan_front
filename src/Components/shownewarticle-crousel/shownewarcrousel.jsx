@@ -24,6 +24,7 @@ import CreateIcon from "@mui/icons-material/Create";
 const ShownewArcrousel = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const [articleinfo, setarticleinfo] = useState([]);
+
   useEffect(() => {
     setApiLoading(true);
     axios.get(`${baseUrl}/write_article/newest_articles/`).then((response) => {
@@ -32,10 +33,13 @@ const ShownewArcrousel = () => {
       setApiLoading(false);
     });
   }, []);
-
   const { height, width } = useWindowDimensions();
+<<<<<<< HEAD
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down(480));
+=======
+
+>>>>>>> parent of edb1167 (fix hompage)
   SwiperCore.use([Navigation, Pagination]);
   return (
     <div style={{ marginTop: "60px" }}>
@@ -99,6 +103,7 @@ const ShownewArcrousel = () => {
                 justifyContent: "center",
               }}
             >
+<<<<<<< HEAD
               <Swiper
                 spaceBetween={0}
                 slidesPerView={isMatch ? (width * (89 / 100) ) / 270:(width * (87 / 100) - 70) / 293}
@@ -123,6 +128,31 @@ const ShownewArcrousel = () => {
                         backgroundColor: "white",
                         borderRadius: "5px",
                         marginBottom: "70px",
+=======
+              {articleinfo.map((info, index) => (
+                <SwiperSlide key={index}>
+                  <Paper
+                    key={index}
+                    className="shownewarticlecro-Paper"
+                    sx={{
+                      direction: "rtl",
+                    }}
+                    style={{
+                      marginTop: "10px",
+                      textDecoration: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      backgroundColor: "white",
+                      borderRadius: "5px",
+                      marginBottom: "70px",
+                      width: "293px",
+                      height: "350px",
+                    }}
+                  >
+                    <Link
+                      to={{
+                        pathname: `/articleinfo/${info.id}`,
+>>>>>>> parent of edb1167 (fix hompage)
                       }}
                     >
                       <Link
@@ -207,11 +237,73 @@ const ShownewArcrousel = () => {
                           {info.owner}
                         </Link> */}
                       </div>
+<<<<<<< HEAD
                     </Paper>
                   </SwiperSlide>
                 ))}
               </Swiper>
             </div>
+=======
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          marginTop: "20px",
+                          marginRight: "10px",
+                          color: "black",
+                        }}
+                      >
+                        {info.title}
+                      </div>
+                    </Link>
+                    <div
+                      style={{
+                        marginRight: "10px",
+                        marginLeft: "10px",
+                        color: "#757C86",
+                        fontSize: "15px",
+                        overflow: "Hidden",
+                        whiteSpace: "normal",
+                        textOverflow: "ellipsis",
+                      }}
+                      className="showarticlecro-summary"
+                    >
+                      {info.summary}
+                    </div>
+                    <Divider style={{ marginTop: "20px" }} />
+                    <div
+                      style={{
+                        display: "flex",
+                        marginTop: "15px",
+                        marginLeft: "10px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      <div style={{ flex: 1, marginRight: "10px" }}></div>
+                      <Link to={`/ShowProfileuser/${info.owner_id}`}>
+                        <Avatar
+                          alt="Remy Sharp"
+                          src={image}
+                          sx={{ width: 20, height: 20 }}
+                        />
+                      </Link>
+                      <Link
+                        style={{
+                          marginRight: "5px",
+                          fontSize: "13px",
+                          color: "#0057D9",
+                          textDecoration: "none",
+                        }}
+                        to={`/ShowProfileuser/${info.owner_id}`}
+                      >
+                        {info.owner}
+                      </Link>
+                    </div>
+                  </Paper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+>>>>>>> parent of edb1167 (fix hompage)
           </div>
         </>
       )}

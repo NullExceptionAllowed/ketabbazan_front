@@ -380,7 +380,7 @@ const Nav = () => {
                   >
                     خانه
                   </Typography>
-                  <Typography
+                  {/* <Typography
                     component={Link}
                     to={`/AboutUs`}
                     sx={{
@@ -392,7 +392,7 @@ const Nav = () => {
                     onMouseOut={MouseOut}
                   >
                     درباره ما
-                  </Typography>
+                  </Typography> */}
                   <Typography
                     component={Link}
                     to={`/login`}

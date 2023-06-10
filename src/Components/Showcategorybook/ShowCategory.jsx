@@ -32,18 +32,17 @@ const theme = createTheme({
 });
 
 const Showbookcategory = () => {
-  const params = useParams();
-  const id = params.id;
-
-  const [apiLoading, setApiLoading] = useState(false);
-  const [bookinfo, setbookinfo] = useState([]);
+const params = useParams();
+const id = params.id;
+const [apiLoading, setApiLoading] = useState(false);
+const [bookinfo, setbookinfo] = useState([]);
 
   useEffect(() => {
-    document.body.style.background = "#F5F5F5";
-    return () => {
-      document.body.style.background = "white";
+    document.body.style.background="#F5F5F5";
+    return()=>{
+      document.body.style.background="white";
     };
-  }, [id]);
+  },[]);
 
   const MouseOver = (event) => {
     event.target.style.color = "#1565C0";
@@ -55,23 +54,13 @@ const Showbookcategory = () => {
   const history = useHistory();
   useEffect(() => {
     setApiLoading(true);
-    if (id === "جامعه") {
-      console.log("**")
-      axios({
-        url: `https://api.ketabbazan.ml/read_book/genre/جامعه%E2%80%8Cشناسی`,
-      }).then((response) => {
-        setbookinfo(response.data);
-        setApiLoading(false);
-      });
-    } else {
-      axios({
-        url: `${baseUrl}/read_book/genre/${id}`,
-      }).then((response) => {
-        setbookinfo(response.data);
-        setApiLoading(false);
-      });
-    }
-  }, [id]);
+    axios({
+      url: `${baseUrl}/read_book/genre/${id}`,
+    }).then((response) => {
+      setbookinfo(response.data);
+      setApiLoading(false);
+    });
+  }, []);
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -81,7 +70,7 @@ const Showbookcategory = () => {
   // console.log(bookinfo.length);
 
   return (
-    <div style={{ direction: "rtl" }} className="showbookall_fa">
+    <div style={{direction:"rtl"}} className="showbookall_fa">
       <ChangeNav />
       <CacheProvider value={cacheRtl}>
         <div style={{ marginTop: "6%" }}>

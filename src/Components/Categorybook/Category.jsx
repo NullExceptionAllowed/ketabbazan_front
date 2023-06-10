@@ -12,17 +12,14 @@ import {
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { borderRadius } from "@mui/system";
+import { borderRadius } from '@mui/system';
+
 
 const Categories = () => {
   const history = useHistory();
-  const handleshowbookcategory = (category, id) => {
-    if (id === 5) {
-      history.push(`/showbook/جامعه`);
-    } else {
-      history.push(`/showbook/${category}`);
-    }
-  };
+  const handleshowbookcategory=(category)=>{
+    history.push(`/showbook/${category}`)
+  }
   return (
     <div className="categories-section">
       <Typography
@@ -36,21 +33,21 @@ const Categories = () => {
       >
         چه موضوعاتی داریم؟
       </Typography>
-      <div className="categories-section__items" style={{ marginTop: "-20px" }}>
+      <div
+        className="categories-section__items"
+        style={{ marginTop: "-20px" }}
+      >
         {categoryData.map((category) => (
           <div style={{ marginTop: "30px" }}>
             <button
-              key={category.key}
-              className="Catgory_button"
-              onClick={() =>
-                handleshowbookcategory(category.title, category.id)
-              }
+            className="Catgory_button"
+            onClick={()=>handleshowbookcategory(category.title)}
               variant="contained"
               style={{
                 backgroundColor: category.color,
-                borderRadius: "10px",
-                color: "white",
-                borderColor: category.color,
+                borderRadius:"10px",
+                color:"white",
+                borderColor:category.color
               }}
             >
               {category.title}

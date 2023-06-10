@@ -23,7 +23,6 @@ const ArticleInfo = () => {
   const id = params.id;
   const [articleinfo, setarticleinfo] = useState([]);
   const [body, setbody] = useState("");
-  const[summary,setsummary]=useState("");
   const [apiLoading, setApiLoading] = useState(false);
 
   useEffect(() => {
@@ -31,11 +30,6 @@ const ArticleInfo = () => {
     axios.get(`${baseUrl}/write_article/${id}`).then((response) => {
       console.log();
       setarticleinfo(response.data);
-      setsummary(response.data.summary);
-      if(response.data.summary.length>160)
-      {
-        setsummary(response.data.summary.slice(0,157)+"...")
-      }    
       setbody(parse(response.data.body));
       console.log(response.data);
       setApiLoading(false);
@@ -146,7 +140,7 @@ const ArticleInfo = () => {
                       textOverflow: "ellipsis",
                     }}
                   >
-                    {summary}
+                    {articleinfo.summary}
                   </div>
                   <div style={{ marginTop: "2%", display: "flex" }}>
                     <Link to={`/ShowProfileuser/${articleinfo.owner_id}`}>
@@ -182,7 +176,7 @@ const ArticleInfo = () => {
                 style={{
                   display: "flex",
                   margin: "auto",
-                  height: "500px",
+                  height: "430px",
                   width: "100%",
                   backgroundColor: "#EFEFEF",
                   justifyContent: "center",
@@ -215,8 +209,13 @@ const ArticleInfo = () => {
                   </h3>
                   <div
                     style={{
+<<<<<<< HEAD
                       marginTop: "5px",
                       height: "30%",
+=======
+                      marginTop: "0.7%",
+                      height: "25%",
+>>>>>>> parent of edb1167 (fix hompage)
                       marginLeft: "10px",
                       overflow: "Hidden",
                       whiteSpace: "normal",
@@ -227,7 +226,7 @@ const ArticleInfo = () => {
                       lineHeight:"2"
                     }}
                   >
-                    {summary}
+                    {articleinfo.summary}
                   </div>
                   <div style={{ marginTop: "0.7%", display: "flex", alignItems:"center" }}>
                     <Link to={`/ShowProfileuser/${articleinfo.owner_id}`}>

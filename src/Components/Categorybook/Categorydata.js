@@ -23,7 +23,7 @@ export const categoryData = [
     id: 4,
   },
   {
-    title: 'جامعه شناسی',
+    title: ' جامعه شناسی ',
     color: '#cf7911',
     id: 5,
   },
