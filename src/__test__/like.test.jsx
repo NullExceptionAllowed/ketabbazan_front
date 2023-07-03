@@ -1,11 +1,16 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import Enzyme,{shallow} from 'enzyme';
-import Comment from "../Components/Comment/Comment";
-import React from 'react';
+// import { render, screen, fireEvent } from "@testing-library/react";
+// import "@testing-library/jest-dom";
+// import Enzyme,{shallow} from 'enzyme';
+// import Comment from "../Components/Comment/Comment";
+// import React from 'react';
+// import Adapter from '@cfaester/enzyme-adapter-react-18';
+
+import Enzyme from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-     Enzyme.configure({ adapter: new Adapter()});
+import { shallow } from 'enzyme';
+
+   
 
 
      const setup = () => {
