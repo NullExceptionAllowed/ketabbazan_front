@@ -418,6 +418,7 @@ import OptionProfile from "./OPtionProfile";
 import axios, { post } from "axios";
 import { baseUrl } from "./../../Variable";
 import GiftCard from "../GiftNotification/GiftCard";
+import MainChatDialog from "../Chat/mainChatDialog";
 
 const Nav = () => {
   const theme = useTheme();
@@ -583,12 +584,14 @@ const Nav = () => {
 
   const OurNiceBadge = () => {
     return (
-      <div>
+      <div style={{display:"flex", flexDirection:"row-reverse", alignItems:"center"}}>
         <IconButton onClick={bazKonandeyeDialog}>
           <Badge color="primary" variant="dot" invisible={invisible}>
             <EmailIcon color="black" style={{ color: "black" }} />
           </Badge>
         </IconButton>
+
+        <MainChatDialog />
       </div>
     );
   };
